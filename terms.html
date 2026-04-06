@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0e0f">
+    <meta name="description" content="Terms of Service for AutoDiary.">
+    <meta property="og:title" content="AutoDiary — Terms of Service">
+    <title>AutoDiary — Terms of Service</title>
+    
+    <!-- Preconnect to Fontshare -->
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root, [data-theme="light"] {
+            --color-bg: #f4f4f2;
+            --color-surface: #f9f9f7;
+            --color-surface-2: #ffffff;
+            --color-surface-offset: #ececea;
+            --color-divider: #d1d1ce;
+            --color-border: #c8c8c4;
+            --color-text: #141414;
+            --color-text-muted: #616160;
+            --color-text-faint: #a8a8a6;
+            --color-primary: #0a7c8a;
+            --color-primary-hover: #085f6b;
+            --color-primary-transparent: rgba(10, 124, 138, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --color-bg: #0d0e0f;
+            --color-surface: #131416;
+            --color-surface-2: #181a1c;
+            --color-surface-offset: #1c1e21;
+            --color-divider: #2a2b2e;
+            --color-border: #333538;
+            --color-text: #e8e9ea;
+            --color-text-muted: #7a7b7d;
+            --color-text-faint: #4a4b4d;
+            --color-primary: #2ab8c8;
+            --color-primary-hover: #1a9aaa;
+            --color-primary-transparent: rgba(42, 184, 200, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Satoshi', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, .clash { font-family: 'Clash Display', sans-serif; font-weight: 600; line-height: 1.2; }
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1.5rem; border-left: 3px solid var(--color-primary); padding-left: 1rem; scroll-margin-top: 100px; }
+        p { margin-bottom: 1.5rem; color: var(--color-text-muted); }
+        ul { margin-bottom: 1.5rem; padding-left: 1.5rem; color: var(--color-text-muted); }
+        li { margin-bottom: 0.5rem; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        
+        /* Nav */
+        header { padding: 20px 0; border-bottom: 1px solid var(--color-divider); position: sticky; top: 0; background: var(--color-bg); z-index: 1000; }
+        nav { display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 700; font-family: 'Clash Display', sans-serif; text-decoration: none; color: inherit; }
+        .logo-svg { width: 32px; height: 32px; stroke: currentColor; fill: none; stroke-width: 2; }
+        
+        .theme-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text); cursor: pointer; transition: 0.3s; }
+        .theme-toggle:hover { transform: rotate(15deg); }
+
+        /* Layout */
+        .legal-layout { display: grid; grid-template-columns: 280px 1fr; gap: 4rem; padding: 80px 0; }
+        
+        aside { position: sticky; top: 120px; height: fit-content; }
+        aside h4 { margin-bottom: 1.5rem; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-faint); }
+        .toc-links { list-style: none; padding: 0; }
+        .toc-links a { display: block; padding: 0.5rem 0; color: var(--color-text-muted); text-decoration: none; font-size: 0.9375rem; transition: 0.2s; }
+        .toc-links a:hover { color: var(--color-primary); }
+        .toc-links a.active { color: var(--color-primary); font-weight: 600; }
+
+        .content { max-width: 640px; }
+        .last-updated { font-size: 0.875rem; color: var(--color-text-faint); margin-bottom: 4rem; }
+
+        footer { padding: 60px 0; border-top: 1px solid var(--color-divider); margin-top: 80px; }
+        .footer-bottom { display: flex; justify-content: space-between; color: var(--color-text-faint); font-size: 0.875rem; }
+
+        @media (max-width: 1024px) {
+            .legal-layout { grid-template-columns: 1fr; }
+            aside { display: none; }
+            .content { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="./autodiary.html" class="logo">
+                    <svg class="logo-svg" viewBox="0 0 40 40">
+                        <path d="M5 25h30l-3-8h-24l-3 8zM8 25v5h4v-5M28 25v5h4v-5M15 17l2-5h6l2 5M10 30a2 2 0 100-4 2 2 0 000 4zM30 30a2 2 0 100-4 2 2 0 000 4z" />
+                        <path d="M22 10l3 3m-3 0l3-3" stroke-linecap="round"/>
+                    </svg>
+                    <span>AutoDiary</span>
+                </a>
+                <button class="theme-toggle" id="lang-toggle" onclick="toggleLanguage()" aria-label="Switch Language" style="font-weight: 700; font-size: 0.8rem; margin-right: 1rem;">EN</button>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+                    <i data-lucide="moon" id="theme-icon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="legal-layout">
+            <aside>
+                <h4 data-i18n="toc_title">Contents</h4>
+                <ul class="toc-links">
+                    <li><a href="#acceptance" data-i18n="toc_1">1. Acceptance of Terms</a></li>
+                    <li><a href="#service" data-i18n="toc_2">2. Description of Service</a></li>
+                    <li><a href="#accounts" data-i18n="toc_3">3. User Accounts</a></li>
+                    <li><a href="#use-policy" data-i18n="toc_4">4. Acceptable Use Policy</a></li>
+                    <li><a href="#content" data-i18n="toc_5">5. User Content</a></li>
+                    <li><a href="#ip" data-i18n="toc_6">6. Intellectual Property</a></li>
+                    <li><a href="#purchases" data-i18n="toc_7">7. In-App Purchases</a></li>
+                    <li><a href="#privacy" data-i18n="toc_8">8. Privacy</a></li>
+                    <li><a href="#disclaimers" data-i18n="toc_9">9. Disclaimers</a></li>
+                    <li><a href="#indemnification" data-i18n="toc_10">10. Indemnification</a></li>
+                    <li><a href="#changes" data-i18n="toc_11">11. Changes to Terms</a></li>
+                    <li><a href="#termination" data-i18n="toc_12">12. Termination</a></li>
+                    <li><a href="#law" data-i18n="toc_13">13. Governing Law</a></li>
+                    <li><a href="#apple" data-i18n="toc_14">14. Apple Provisions</a></li>
+                    <li><a href="#contact" data-i18n="toc_15">15. Contact Information</a></li>
+                </ul>
+            </aside>
+
+            <article class="content">
+                <h1 data-i18n="terms_title">Terms of Service</h1>
+                <p class="last-updated" data-i18n="last_updated">Last updated: April 2026</p>
+
+                <h2 id="acceptance" data-i18n="acceptance_title">1. Acceptance of Terms</h2>
+                <p data-i18n="acceptance_text">Welcome to AutoDiary. By accessing or using our mobile application or website, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the service. You must be at least 13 years of age to use AutoDiary.</p>
+
+                <h2 id="service" data-i18n="service_title">2. Description of Service</h2>
+                <p data-i18n="service_text">AutoDiary is a vehicle logbook application available on iOS and Android platforms. The service allows users to track vehicle maintenance, fuel consumption, expenses, and trip history. To provide these services, the app may require certain device permissions as explained in our Privacy Policy.</p>
+
+                <h2 id="accounts" data-i18n="accounts_title">3. User Accounts</h2>
+                <p data-i18n="accounts_text">You may use AutoDiary without an account for local tracking. However, certain features like cloud synchronization may require account registration. You are responsible for maintaining the security of your account and notify us immediately of any unauthorized use.</p>
+
+                <h2 id="use-policy" data-i18n="use_policy_title">4. Acceptable Use Policy</h2>
+                <p data-i18n="use_policy_intro">AutoDiary is provided for your personal, non-commercial use. You agree NOT to:</p>
+                <ul>
+                    <li data-i18n="use_policy_list_1">Reverse engineer or attempt to extract source code of the app.</li>
+                    <li data-i18n="use_policy_list_2">Use the app for any illegal or unauthorized purpose.</li>
+                    <li data-i18n="use_policy_list_3">Interfere with or disrupt the integrity or performance of the service.</li>
+                    <li data-i18n="use_policy_list_4">Upload or transmit any malware or malicious code.</li>
+                </ul>
+
+                <h2 id="content" data-i18n="content_title">5. User Content</h2>
+                <p data-i18n="content_text">You retain full ownership of all data you input into AutoDiary. By using cloud sync features, you grant AutoDiary a limited license to host and backup your data. You are solely responsible for the accuracy of the information you log.</p>
+
+                <h2 id="ip" data-i18n="ip_title">6. Intellectual Property</h2>
+                <p data-i18n="ip_text">The AutoDiary brand, logo, and app interface are the exclusive property of AutoDiary. The software is licensed, not sold, to you for personal use under a limited, non-exclusive, non-transferable license.</p>
+
+                <h2 id="purchases" data-i18n="purchases_title">7. In-App Purchases & Subscriptions</h2>
+                <p data-i18n="purchases_text">All in-app purchases and subscriptions are processed through the Apple App Store or Google Play Store. Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period. You can manage your subscriptions in your device account settings.</p>
+
+                <h2 id="privacy" data-i18n="privacy_link_title">8. Privacy</h2>
+                <p data-i18n="privacy_link_text">Your privacy is important to us. Please refer to our <a href="./privacy.html" style="color: var(--color-primary);" data-i18n="privacy_link">Privacy Policy</a> for information on how we collect and use your data.</p>
+
+                <h2 id="disclaimers" data-i18n="disclaimers_title">9. Disclaimers & Limitation of Liability</h2>
+                <p data-i18n="disclaimers_text">AutoDiary is provided "AS IS" without warranties of any kind. We do not guarantee 100% uptime or that the service will be free of errors. Our liability is capped at the amount paid by you for the service in the last 12 months or $10, whichever is higher.</p>
+
+                <h2 id="indemnification" data-i18n="indemnification_title">10. Indemnification</h2>
+                <p data-i18n="indemnification_text">You agree to indemnify and hold AutoDiary harmless from any claims, losses, or damages arising out of your use of the service or violation of these Terms.</p>
+
+                <h2 id="changes" data-i18n="changes_title">11. Changes to Terms</h2>
+                <p data-i18n="changes_text">We may update these Terms at any time. Continued use of the service after changes are posted constitutes your acceptance of the new Terms. We will notify users of any material changes via in-app notifications.</p>
+
+                <h2 id="termination" data-i18n="termination_title">12. Termination</h2>
+                <p data-i18n="termination_text">AutoDiary reserves the right to terminate or suspend your access to the service for violations of these Terms. You may stop using the service at any time by deleting the app from your device.</p>
+
+                <h2 id="law" data-i18n="law_title">13. Governing Law</h2>
+                <p data-i18n="law_text">These terms shall be governed by and construed in accordance with the laws of [Developer's Jurisdiction].</p>
+
+                <h2 id="apple" data-i18n="apple_title">14. Apple-Specific Provisions</h2>
+                <ul>
+                    <li data-i18n="apple_list_1">AutoDiary, not Apple, is solely responsible for the app and its content.</li>
+                    <li data-i18n="apple_list_2">Apple has no obligation to provide maintenance or support services for AutoDiary.</li>
+                    <li data-i18n="apple_list_3">In case of warranty failure, you may notify Apple for a refund of the purchase price; Apple has no further warranty obligation.</li>
+                    <li data-i18n="apple_list_4">Apple is not responsible for product liability or consumer protection claims.</li>
+                    <li data-i18n="apple_list_5">Apple and its subsidiaries are third-party beneficiaries of these Terms and may enforce them against you.</li>
+                </ul>
+
+                <h2 id="contact" data-i18n="contact_title">15. Contact Information</h2>
+                <p data-i18n="contact_intro">If you have any questions about these Terms, please contact us at:</p>
+                <p>
+                    <strong data-i18n="contact_email">Email:</strong> support@autodiary.app<br>
+                    <strong data-i18n="contact_dev">Developer:</strong> [Developer Name — Placeholder]<br>
+                    <strong data-i18n="contact_addr">Address:</strong> [Address — Placeholder]
+                </p>
+            </article>
+        </div>
+    </main>
+
+    <footer class="container">
+        <div class="footer-bottom">
+            <p>&copy; 2026 AutoDiary. All rights reserved.</p>
+            <div style="display: flex; gap: 2rem;">
+                <a href="./autodiary.html" data-i18n="footer_home">Home</a>
+                <a href="./privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                toc_title: "Contents",
+                toc_1: "1. Acceptance of Terms",
+                toc_2: "2. Description of Service",
+                toc_3: "3. User Accounts",
+                toc_4: "4. Acceptable Use Policy",
+                toc_5: "5. User Content",
+                toc_6: "6. Intellectual Property",
+                toc_7: "7. In-App Purchases",
+                toc_8: "8. Privacy",
+                toc_9: "9. Disclaimers",
+                toc_10: "10. Indemnification",
+                toc_11: "11. Changes to Terms",
+                toc_12: "12. Termination",
+                toc_13: "13. Governing Law",
+                toc_14: "14. Apple Provisions",
+                toc_15: "15. Contact Information",
+                terms_title: "Terms of Service",
+                last_updated: "Last updated: April 2026",
+                acceptance_title: "1. Acceptance of Terms",
+                acceptance_text: "Welcome to AutoDiary. By accessing or using our mobile application or website, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the service. You must be at least 13 years of age to use AutoDiary.",
+                service_title: "2. Description of Service",
+                service_text: "AutoDiary is a vehicle logbook application available on iOS and Android platforms. The service allows users to track vehicle maintenance, fuel consumption, expenses, and trip history. To provide these services, the app may require certain device permissions as explained in our Privacy Policy.",
+                accounts_title: "3. User Accounts",
+                accounts_text: "You may use AutoDiary without an account for local tracking. However, certain features like cloud synchronization may require account registration. You are responsible for maintaining the security of your account and notify us immediately of any unauthorized use.",
+                use_policy_title: "4. Acceptable Use Policy",
+                use_policy_intro: "AutoDiary is provided for your personal, non-commercial use. You agree NOT to:",
+                use_policy_list_1: "Reverse engineer or attempt to extract source code of the app.",
+                use_policy_list_2: "Use the app for any illegal or unauthorized purpose.",
+                use_policy_list_3: "Interfere with or disrupt the integrity or performance of the service.",
+                use_policy_list_4: "Upload or transmit any malware or malicious code.",
+                content_title: "5. User Content",
+                content_text: "You retain full ownership of all data you input into AutoDiary. By using cloud sync features, you grant AutoDiary a limited license to host and backup your data. You are solely responsible for the accuracy of the information you log.",
+                ip_title: "6. Intellectual Property",
+                ip_text: "The AutoDiary brand, logo, and app interface are the exclusive property of AutoDiary. The software is licensed, not sold, to you for personal use under a limited, non-exclusive, non-transferable license.",
+                purchases_title: "7. In-App Purchases & Subscriptions",
+                purchases_text: "All in-app purchases and subscriptions are processed through the Apple App Store or Google Play Store. Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period. You can manage your subscriptions in your device account settings.",
+                privacy_link_title: "8. Privacy",
+                privacy_link_text: 'Your privacy is important to us. Please refer to our <a href="./privacy.html" style="color: var(--color-primary);" data-i18n="privacy_link">Privacy Policy</a> for information on how we collect and use your data.',
+                privacy_link: "Privacy Policy",
+                disclaimers_title: "9. Disclaimers & Limitation of Liability",
+                disclaimers_text: 'AutoDiary is provided "AS IS" without warranties of any kind. We do not guarantee 100% uptime or that the service will be free of errors. Our liability is capped at the amount paid by you for the service in the last 12 months or $10, whichever is higher.',
+                indemnification_title: "10. Indemnification",
+                indemnification_text: "You agree to indemnify and hold AutoDiary harmless from any claims, losses, or damages arising out of your use of the service or violation of these Terms.",
+                changes_title: "11. Changes to Terms",
+                changes_text: "We may update these Terms at any time. Continued use of the service after changes are posted constitutes your acceptance of the new Terms. We will notify users of any material changes via in-app notifications.",
+                termination_title: "12. Termination",
+                termination_text: "AutoDiary reserves the right to terminate or suspend your access to the service for violations of these Terms. You may stop using the service at any time by deleting the app from your device.",
+                law_title: "13. Governing Law",
+                law_text: "These terms shall be governed by and construed in accordance with the laws of [Developer's Jurisdiction].",
+                apple_title: "14. Apple-Specific Provisions",
+                apple_list_1: "AutoDiary, not Apple, is solely responsible for the app and its content.",
+                apple_list_2: "Apple has no obligation to provide maintenance or support services for AutoDiary.",
+                apple_list_3: "In case of warranty failure, you may notify Apple for a refund of the purchase price; Apple has no further warranty obligation.",
+                apple_list_4: "Apple is not responsible for product liability or consumer protection claims.",
+                apple_list_5: "Apple and its subsidiaries are third-party beneficiaries of these Terms and may enforce them against you.",
+                contact_title: "15. Contact Information",
+                contact_intro: "If you have any questions about these Terms, please contact us at:",
+                contact_email: "Email",
+                contact_dev: "Developer",
+                contact_addr: "Address",
+                footer_home: "Home",
+                footer_privacy: "Privacy Policy"
+            },
+            sr: {
+                toc_title: "Sadržaj",
+                toc_1: "1. Prihvatanje uslova",
+                toc_2: "2. Opis usluge",
+                toc_3: "3. Korisnički nalozi",
+                toc_4: "4. Politika prihvatljivog korišćenja",
+                toc_5: "5. Korisnički sadržaj",
+                toc_6: "6. Intelektualna svojina",
+                toc_7: "7. Kupovine u aplikaciji",
+                toc_8: "8. Privatnost",
+                toc_9: "9. Odricanja",
+                toc_10: "10. Obeštećenje",
+                toc_11: "11. Izmene uslova",
+                toc_12: "12. Prekid",
+                toc_13: "13. Merodavno pravo",
+                toc_14: "14. Odredbe specifične za Apple",
+                toc_15: "15. Kontakt informacije",
+                terms_title: "Uslovi korišćenja",
+                last_updated: "Poslednje ažurirano: April 2026",
+                acceptance_title: "1. Prihvatanje uslova",
+                acceptance_text: "Dobrodošli u AutoDiary. Pristupanjem ili korišćenjem naše mobilne aplikacije ili veb stranice, slažete se da budete obavezani ovim Uslovima korišćenja. Ako se ne slažete sa ovim uslovima, molimo vas da ne koristite uslugu. Morate imati najmanje 13 godina da biste koristili AutoDiary.",
+                service_title: "2. Opis usluge",
+                service_text: "AutoDiary je aplikacija za evidenciju vozila dostupna na iOS i Android platformama. Usluga omogućava korisnicima da prate održavanje vozila, potrošnju goriva, troškove i istoriju putovanja. Za pružanje ovih usluga, aplikacija može zahtevati određene dozvole uređaja kao što je objašnjeno u našoj Polisi privatnosti.",
+                accounts_title: "3. Korisnički nalozi",
+                accounts_text: "Možete koristiti AutoDiary bez naloga za lokalno praćenje. Međutim, određene funkcije poput sinhronizacije u oblaku mogu zahtevati registraciju naloga. Odgovorni ste za održavanje bezbednosti vašeg naloga i obavezni ste da nas odmah obavestite o bilo kakvom neovlašćenom korišćenju.",
+                use_policy_title: "4. Politika prihvatljivog korišćenja",
+                use_policy_intro: "AutoDiary je obezbeđen za vašu ličnu, nekomercijalnu upotrebu. Slažete se da NEĆETE:",
+                use_policy_list_1: "Vršiti obrnuti inženjering ili pokušavati da izdvojite izvorni kod aplikacije.",
+                use_policy_list_2: "Koristiti aplikaciju u bilo koje nezakonite ili neovlašćene svrhe.",
+                use_policy_list_3: "Ometati ili narušavati integritet ili performanse usluge.",
+                use_policy_list_4: "Otpremati ili prenositi bilo kakav zlonamerni softver ili kod.",
+                content_title: "5. Korisnički sadržaj",
+                content_text: "Zadržavate puno vlasništvo nad svim podacima koje unesete u AutoDiary. Korišćenjem funkcija sinhronizacije u oblaku, dajete AutoDiary-u ograničenu licencu za hostovanje i pravljenje rezervnih kopija vaših podataka. Isključivo ste odgovorni za tačnost informacija koje beležite.",
+                ip_title: "6. Intelektualna svojina",
+                ip_text: "Brend AutoDiary, logotip i interfejs aplikacije su isključivo vlasništvo AutoDiary-a. Softver vam je licenciran, a ne prodat, za ličnu upotrebu pod ograničenom, neekskluzivnom, neprenosivom licencom.",
+                purchases_title: "7. Kupovine u aplikaciji i pretplate",
+                purchases_text: "Sve kupovine u aplikaciji i pretplate se obrađuju putem Apple App Store-a ili Google Play Store-a. Pretplate se automatski obnavljaju osim ako se ne otkažu najmanje 24 sata pre kraja tekućeg perioda. Svojim pretplatama možete upravljati u podešavanjima naloga na vašem uređaju.",
+                privacy_link_title: "8. Privatnost",
+                privacy_link_text: 'Vaša privatnost nam je važna. Molimo vas da pogledate našu <a href="./privacy.html" style="color: var(--color-primary);" data-i18n="privacy_link">Polisu privatnosti</a> za informacije o tome kako prikupljamo i koristimo vaše podatke.',
+                privacy_link: "Polisu privatnosti",
+                disclaimers_title: "9. Odricanje od odgovornosti i ograničenje odgovornosti",
+                disclaimers_text: 'AutoDiary se pruža „U VIĐENOM STANJU“ bez ikakvih garancija. Ne garantujemo 100% dostupnost niti da će usluga biti bez grešaka. Naša odgovornost je ograničena na iznos koji ste platili za uslugu u poslednjih 12 meseci ili 10 dolara, šta god je veće.',
+                indemnification_title: "10. Obeštećenje",
+                indemnification_text: "Slažete se da ćete obeštetiti i zaštititi AutoDiary od bilo kakvih potraživanja, gubitaka ili šteta proisteklih iz vašeg korišćenja usluge ili kršenja ovih Uslova.",
+                changes_title: "11. Izmene uslova",
+                changes_text: "Možemo ažurirati ove uslove u bilo kom trenutku. Nastavak korišćenja usluge nakon objavljivanja izmena predstavlja vaše prihvatanje novih uslova. Korisnike ćemo obavestiti o svim materijalnim promenama putem obaveštenja u aplikaciji.",
+                termination_title: "12. Prekid",
+                termination_text: "AutoDiary zadržava pravo da prekine ili suspenduje vaš pristup usluzi zbog kršenja ovih Uslova. Možete prestati da koristite uslugu u bilo kom trenutku brisanjem aplikacije sa svog uređaju.",
+                law_title: "13. Merodavno pravo",
+                law_text: "Ovi uslovi će biti regulisani i tumačeni u skladu sa zakonima [Jurisdikcija programera].",
+                apple_title: "14. Odredbe specifične za Apple",
+                apple_list_1: "AutoDiary, a ne Apple, je isključivo odgovoran za aplikaciju i njen sadržaj.",
+                apple_list_2: "Apple nema nikakvu obavezu da pruža usluge održavanja ili podrške za AutoDiary.",
+                apple_list_3: "U slučaju neispunjavanja garancije, možete obavestiti Apple radi povraćaja kupovne cene; Apple nema daljih obaveza po osnovu garancije.",
+                apple_list_4: "Apple nije odgovoran za zahteve u vezi sa odgovornošću za proizvod ili zaštitu potrošača.",
+                apple_list_5: "Apple i njegova zavisna preduzeća su treće strane korisnici ovih Uslova i mogu ih primeniti protiv vas.",
+                contact_title: "15. Kontakt informacije",
+                contact_intro: "Ako imate bilo kakvih pitanja o ovim Uslovima, kontaktirajte nas na:",
+                contact_email: "Email",
+                contact_dev: "Programer",
+                contact_addr: "Adresa",
+                footer_home: "Početna",
+                footer_privacy: "Politika privatnosti"
+            }
+        };
+
+        let currentLang = localStorage.getItem('preferredLang') || 'en';
+
+        function updateLanguage(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            document.getElementById('lang-toggle').innerText = lang === 'en' ? 'SR' : 'EN';
+            localStorage.setItem('preferredLang', lang);
+            currentLang = lang;
+        }
+
+        function toggleLanguage() {
+            const nextLang = currentLang === 'en' ? 'sr' : 'en';
+            updateLanguage(nextLang);
+        }
+
+        // Initialize language
+        updateLanguage(currentLang);
+
+        // Active link highlighting on scroll
+        const sections = document.querySelectorAll('h2[id]');
+        const tocLinks = document.querySelectorAll('.toc-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 120) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
