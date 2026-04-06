@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0e0f">
+    <meta name="description" content="CarFlo is the ultimate vehicle logbook app. Track fuel, maintenance, expenses, and trips — all in one place.">
+    <meta property="og:title" content="CarFlo — Your Car. Every Mile. Perfectly Tracked.">
+    <title>CarFlo — Your Car. Every Mile. Perfectly Tracked.</title>
+    
+    <!-- Preconnect to Fontshare -->
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root, [data-theme="light"] {
+            --color-bg: #f4f4f2;
+            --color-surface: #f9f9f7;
+            --color-surface-2: #ffffff;
+            --color-surface-offset: #ececea;
+            --color-divider: #d1d1ce;
+            --color-border: #c8c8c4;
+            --color-text: #141414;
+            --color-text-muted: #616160;
+            --color-text-faint: #a8a8a6;
+            --color-primary: #0a7c8a;
+            --color-primary-hover: #085f6b;
+            --color-primary-transparent: rgba(10, 124, 138, 0.1);
+            
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --color-bg: #0d0e0f;
+            --color-surface: #131416;
+            --color-surface-2: #181a1c;
+            --color-surface-offset: #1c1e21;
+            --color-divider: #2a2b2e;
+            --color-border: #333538;
+            --color-text: #e8e9ea;
+            --color-text-muted: #7a7b7d;
+            --color-text-faint: #4a4b4d;
+            --color-primary: #2ab8c8;
+            --color-primary-hover: #1a9aaa;
+            --color-primary-transparent: rgba(42, 184, 200, 0.1);
+            
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4), 0 2px 4px -1px rgba(0,0,0,0.2);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5), 0 4px 6px -2px rgba(0,0,0,0.3);
+        }
+
+        /* Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Satoshi', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.5;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, .clash {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 600;
+            line-height: 1.1;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 60px 0;
+            }
+        }
+
+        /* Utilities */
+        .text-center { text-align: center; }
+        .text-muted { color: var(--color-text-muted); }
+        .text-primary { color: var(--color-primary); }
+        
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-4 { gap: 1rem; }
+        .gap-8 { gap: 2rem; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.75rem;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: var(--transition);
+            gap: 0.75rem;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--color-primary-transparent);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--color-border);
+            color: var(--color-text);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-surface-offset);
+            border-color: var(--color-text-muted);
+            transform: translateY(-2px);
+        }
+
+        /* Nav */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+
+        header.scrolled {
+            background: rgba(var(--color-bg-rgb), 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-divider);
+            padding: 12px 0;
+        }
+
+        header:not(.scrolled) {
+            padding: 24px 0;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: 'Clash Display', sans-serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            transition: var(--transition);
+            user-select: none;
+        }
+
+        .theme-toggle:hover {
+            background: var(--color-surface-offset);
+            transform: rotate(15deg);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--color-text);
+        }
+
+        /* Mobile Drawer */
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100vh;
+            background: var(--color-surface);
+            z-index: 2000;
+            padding: 40px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .mobile-drawer.active {
+            right: 0;
+        }
+
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100dvh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at 70% 30%, var(--color-primary-transparent), transparent 70%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .hero-content {
+            z-index: 10;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtext {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 540px;
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 40px;
+            transform: rotate(-5deg) translateY(20px);
+            box-shadow: -20px 40px 80px rgba(0,0,0,0.5);
+            animation: heroFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: rotate(-5deg) translateY(20px); }
+            50% { transform: rotate(-3deg) translateY(-10px); }
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-divider);
+            border-bottom: 1px solid var(--color-divider);
+            padding: 3rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            position: relative;
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -1rem;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: var(--color-divider);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Clash Display', sans-serif;
+            margin-bottom: 0.25rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Features Bento */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(280px, auto);
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: 2rem;
+            border-radius: 24px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-primary);
+        }
+
+        .feature-icon {
+            color: var(--color-primary);
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+        }
+
+        /* Asymmetric Layout */
+        .card-lg { grid-column: span 2; grid-row: span 1; }
+        .card-wide { grid-column: span 4; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 2rem;}
+        .card-md { grid-column: span 1; }
+
+        /* How It Works */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .step-item {
+            position: relative;
+        }
+
+        .step-num {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 4rem;
+            color: var(--color-primary);
+            opacity: 0.2;
+            line-height: 1;
+            margin-bottom: -1.5rem;
+        }
+
+        .step-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        /* Screenshots */
+        .screenshots-row {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 2rem 1.5rem 4rem;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .screenshots-row::-webkit-scrollbar { display: none; }
+
+        .screen-mockup {
+            flex: 0 0 280px;
+            text-align: center;
+        }
+
+        .phone-frame {
+            background: #1a1a1a;
+            border-radius: 44px;
+            padding: 12px;
+            border: 6px solid #333;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            margin-bottom: 1.5rem;
+            aspect-ratio: 9/19.5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 32px;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--color-surface);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--color-border);
+        }
+
+        .stars {
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .quote {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .author {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-name {
+            font-weight: 700;
+        }
+
+        .author-car {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Download Section */
+        .download-cta {
+            background: linear-gradient(135deg, #131416 0%, #0d0e0f 100%);
+            color: white;
+            padding: 120px 0;
+            border-radius: 40px;
+            margin: 40px 1.5rem;
+            text-align: center;
+        }
+
+        .download-cta h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .download-cta p {
+            color: #7a7b7d;
+            margin-bottom: 3rem;
+        }
+
+        .store-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Badge Styling */
+        .badge {
+            background: #000;
+            border: 1px solid #333;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-align: left;
+            transition: var(--transition);
+        }
+
+        .badge:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        .badge-text span {
+            font-size: 0.7rem;
+            display: block;
+            opacity: 0.7;
+        }
+
+        .badge-text strong {
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--color-divider);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 60px;
+        }
+
+        .footer-tagline {
+            margin-top: 1rem;
+            color: var(--color-text-muted);
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--color-text);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col a {
+            color: var(--color-text-muted);
+        }
+
+        .footer-col a:hover {
+            color: var(--color-primary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--color-divider);
+            color: var(--color-text-faint);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+            .hero-subtext { margin-inline: auto; }
+            .hero-image img { transform: rotate(0) translateY(0); margin-inline: auto; height: 500px; width: auto; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .card-lg, .card-wide { grid-column: span 2; }
+            .card-wide { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            nav .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-item:nth-child(2n)::after { display: none; }
+            .steps-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-tagline { margin-inline: auto; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Logo SVG */
+        .logo-svg {
+            width: 32px;
+            height: 32px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="drawer-overlay" id="overlay"></div>
+    <div class="mobile-drawer" id="drawer">
+        <div class="flex justify-between items-center">
+            <div class="logo">
+                <svg class="logo-svg" viewBox="0 0 40 40">
+                    <path d="M5 25h30l-3-8h-24l-3 8zM8 25v5h4v-5M28 25v5h4v-5M15 17l2-5h6l2 5M10 30a2 2 0 100-4 2 2 0 000 4zM30 30a2 2 0 100-4 2 2 0 000 4z" />
+                    <path d="M22 10l3 3m-3 0l3-3" stroke-linecap="round"/>
+                </svg>
+                <span>CarFlo</span>
+            </div>
+            <button class="mobile-close" onclick="toggleMenu()"><i data-lucide="x"></i></button>
+        </div>
+        <ul class="flex flex-col gap-8" style="margin-top: 40px;">
+            <li><a href="#features" onclick="toggleMenu()" data-i18n="nav_features">Features</a></li>
+            <li><a href="#how-it-works" onclick="toggleMenu()" data-i18n="nav_how_it_works">How It Works</a></li>
+            <li><a href="#download" onclick="toggleMenu()" data-i18n="nav_download">Download</a></li>
+        </ul>
+    </div>
+
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="./index.html" class="logo">
+                    <svg class="logo-svg" viewBox="0 0 40 40">
+                        <path d="M5 25h30l-3-8h-24l-3 8zM8 25v5h4v-5M28 25v5h4v-5M15 17l2-5h6l2 5M10 30a2 2 0 100-4 2 2 0 000 4zM30 30a2 2 0 100-4 2 2 0 000 4z" />
+                        <path d="M22 10l3 3m-3 0l3-3" stroke-linecap="round"/>
+                    </svg>
+                    <span>CarFlo</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#features" data-i18n="nav_features">Features</a></li>
+                    <li><a href="#how-it-works" data-i18n="nav_how_it_works">How It Works</a></li>
+                    <li><a href="#download" data-i18n="nav_download">Download</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="lang-toggle" onclick="toggleLanguage()" aria-label="Switch Language" style="font-weight: 700; font-size: 0.8rem;">EN</button>
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+                        <i data-lucide="moon" id="theme-icon"></i>
+                    </button>
+                    <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Menu">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content reveal">
+                        <h1 class="hero-title" data-i18n="hero_title">Your Car. Every Mile. Perfectly Tracked.</h1>
+                        <p class="hero-subtext" data-i18n="hero_subtext">CarFlo is the ultimate vehicle logbook app. Log fuel, maintenance, expenses, and trips — all in one place.</p>
+                        <div class="flex gap-4">
+                            <a href="#download" class="btn btn-primary" data-i18n="hero_btn_ios">Download on the App Store</a>
+                            <a href="#download" class="btn btn-outline" data-i18n="hero_btn_android">Get it on Google Play</a>
+                        </div>
+                    </div>
+                    <div class="hero-image reveal">
+                        <img src="./hero.png" alt="CarFlo App Mockup" width="400" height="800">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-bar">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" data-target="50000">0</div>
+                        <div class="stat-label" data-i18n="stat_vehicles">Vehicles Tracked</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" data-target="2000000">0</div>
+                        <div class="stat-label" data-i18n="stat_entries">Log Entries</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">4.8★</div>
+                        <div class="stat-label" data-i18n="stat_rating">App Rating</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">iOS & Android</div>
+                        <div class="stat-label" data-i18n="stat_availability">Availability</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="container section-padding">
+            <div class="text-center" style="margin-bottom: 60px;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;" data-i18n="features_heading">Everything You Need</h2>
+                <p class="text-muted" data-i18n="features_subtext">Tracking your vehicle has never been this simple.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card card-lg reveal">
+                    <i data-lucide="fuel" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_fuel_title">Fuel & Cost Tracking</h3>
+                    <p data-i18n="feat_fuel_text">Keep a detailed record of every refill. Monitor fuel economy and total spending with beautiful, intuitive charts.</p>
+                </div>
+                <div class="feature-card card-md reveal">
+                    <i data-lucide="bell" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_reminders_title">Reminders</h3>
+                    <p data-i18n="feat_reminders_text">Never miss an oil change or insurance renewal again.</p>
+                </div>
+                <div class="feature-card card-md reveal">
+                    <i data-lucide="map-pin" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_trips_title">Trip History</h3>
+                    <p data-i18n="feat_trips_text">Log your business or personal trips with ease.</p>
+                </div>
+                <div class="feature-card card-wide reveal">
+                    <div>
+                        <i data-lucide="file-text" class="feature-icon" size="28"></i>
+                        <h3 data-i18n="feat_export_title">Export Reports (PDF/CSV)</h3>
+                        <p data-i18n="feat_export_text">Generate professional reports for tax returns, business expenses, or when selling your vehicle.</p>
+                    </div>
+                    <div>
+                        <i data-lucide="cloud-off" class="feature-icon" size="28" style="position: relative; top: 0; left: 0; margin-bottom: 1rem;"></i>
+                        <h3 data-i18n="feat_offline_title">Offline-First</h3>
+                        <p data-i18n="feat_offline_text">No internet? No problem. All your data is saved locally and synced when you're back online.</p>
+                    </div>
+                </div>
+                <div class="feature-card card-md reveal">
+                    <i data-lucide="car" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_multi_title">Multi-Vehicle</h3>
+                    <p data-i18n="feat_multi_text">Manage your entire family's garage in one app.</p>
+                </div>
+                <div class="feature-card card-md reveal">
+                    <i data-lucide="shield" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_secure_title">Secure & Private</h3>
+                    <p data-i18n="feat_secure_text">Your data stays on your device. We value your privacy.</p>
+                </div>
+                <div class="feature-card card-lg reveal">
+                    <i data-lucide="bar-chart-3" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_analytics_title">Advanced Analytics</h3>
+                    <p data-i18n="feat_analytics_text">Visualize your vehicle's health and spending patterns over time with deep insights.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="container section-padding">
+            <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 80px;" data-i18n="how_it_works_heading">Start in 60 Seconds</h2>
+            <div class="steps-grid">
+                <div class="step-item reveal">
+                    <div class="step-num">1</div>
+                    <h3 data-i18n="step1_title">Add Your Car</h3>
+                    <p class="text-muted" data-i18n="step1_text">Enter your car's make, model, year, and current mileage to set up your digital logbook.</p>
+                </div>
+                <div class="step-item reveal">
+                    <div class="step-num">2</div>
+                    <h3 data-i18n="step2_title">Log Any Event</h3>
+                    <p class="text-muted" data-i18n="step2_text">Whether it's a fuel refill, a service at the mechanic, or a quick trip to the store, log it in seconds.</p>
+                </div>
+                <div class="step-item reveal">
+                    <div class="step-num">3</div>
+                    <h3 data-i18n="step3_title">Stay Informed</h3>
+                    <p class="text-muted" data-i18n="step3_text">Receive timely reminders for maintenance and view detailed analytics of your vehicle's history.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding" style="background: var(--color-surface-offset);">
+            <div class="container">
+                <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px;" data-i18n="screenshots_heading">Beautifully Simple</h2>
+                <p class="text-center text-muted" style="margin-bottom: 60px;" data-i18n="screenshots_subtext">The interface designed for drivers, by drivers.</p>
+                
+                <div class="screenshots-row">
+                    <div class="screen-mockup reveal">
+                        <div class="phone-frame">
+                            <img src="./screen-dashboard.png" alt="Dashboard" loading="lazy">
+                        </div>
+                        <p class="clash" data-i18n="screen_dashboard">Dashboard</p>
+                    </div>
+                    <div class="screen-mockup reveal">
+                        <div class="phone-frame">
+                            <img src="./screen-fuel.png" alt="Add Fuel" loading="lazy">
+                        </div>
+                        <p class="clash" data-i18n="screen_fuel">Log Refills</p>
+                    </div>
+                    <div class="screen-mockup reveal">
+                        <div class="phone-frame">
+                            <img src="./screen-vehicle.png" alt="Vehicle Overview" loading="lazy">
+                        </div>
+                        <p class="clash" data-i18n="screen_vehicle">Vehicle List</p>
+                    </div>
+                    <div class="screen-mockup reveal">
+                        <div class="phone-frame">
+                            <img src="./screen-dashboard.png" alt="Analytics" loading="lazy">
+                        </div>
+                        <p class="clash" data-i18n="screen_analysis">Analysis</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container section-padding">
+            <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 80px;" data-i18n="testimonials_heading">Drivers Love CarFlo</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote" data-i18n="test1_quote">"Konačno aplikacija koja ne pokušava da mi proda osiguranje na svakom koraku. Čista, brza i veoma korisna."</p>
+                    <div class="author">
+                        <span class="author-name">Marko Petrović</span>
+                        <span class="author-car">Volkswagen Golf 7</span>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote" data-i18n="test2_quote">"Kao neko ko vodi firmu, PDF izveštaji su mi spasili sate i sate ručnog računanja troškova goriva."</p>
+                    <div class="author">
+                        <span class="author-name">Ana Kovačević</span>
+                        <span class="author-car">Skoda Octavia</span>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote" data-i18n="test3_quote">"Podsetnici za servis rade savršeno. Više ne moram da lepim nalepnice na unutrašnju stranu vrata."</p>
+                    <div class="author">
+                        <span class="author-name">Stefan Jovanović</span>
+                        <span class="author-car">Audi A4</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="container">
+            <div class="download-cta reveal">
+                <h2 data-i18n="download_heading">Track Every Mile, Starting Today</h2>
+                <p data-i18n="download_subtext">Free to download. No account required to start tracking your vehicle.</p>
+                <div class="store-badges">
+                    <a href="#" class="badge">
+                        <i data-lucide="apple" size="32"></i>
+                        <div class="badge-text">
+                            <span data-i18n="badge_appstore_span">Download on the</span>
+                            <strong>App Store</strong>
+                        </div>
+                    </a>
+                    <a href="#" class="badge">
+                        <i data-lucide="play" size="32"></i>
+                        <div class="badge-text">
+                            <span data-i18n="badge_googleplay_span">Get it on</span>
+                            <strong>Google Play</strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="logo">
+                        <svg class="logo-svg" viewBox="0 0 40 40">
+                            <path d="M5 25h30l-3-8h-24l-3 8zM8 25v5h4v-5M28 25v5h4v-5M15 17l2-5h6l2 5M10 30a2 2 0 100-4 2 2 0 000 4zM30 30a2 2 0 100-4 2 2 0 000 4z" />
+                            <path d="M22 10l3 3m-3 0l3-3" stroke-linecap="round"/>
+                        </svg>
+                        <span>CarFlo</span>
+                    </div>
+                    <p class="footer-tagline" data-i18n="footer_tagline">Simplifying vehicle management for drivers worldwide.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_product">Product</h4>
+                    <ul>
+                        <li><a href="#features" data-i18n="nav_features">Features</a></li>
+                        <li><a href="#how-it-works" data-i18n="nav_how_it_works">How It Works</a></li>
+                        <li><a href="#download" data-i18n="nav_download">Download</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_legal">Legal</h4>
+                    <ul>
+                        <li><a href="./privacy.html" data-i18n="footer_privacy">Privacy Policy</a></li>
+                        <li><a href="./terms.html" data-i18n="footer_terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_contact">Contact</h4>
+                    <ul>
+                        <li><a href="mailto:support@autodiary.app">support@autodiary.app</a></li>
+                        <li><span>&copy; 2026 CarFlo</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer_bottom_text">Designed for the road ahead.</p>
+                <div class="flex gap-4">
+                    <i data-lucide="twitter" size="18"></i>
+                    <i data-lucide="instagram" size="18"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Lucide icons initialization
+        lucide.createIcons();
+
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            
+            const icon = document.getElementById('theme-icon');
+            icon.setAttribute('data-lucide', newTheme === 'dark' ? 'moon' : 'sun');
+            lucide.createIcons();
+            
+            // Meta theme color update
+            document.querySelector("meta[name='theme-color']").setAttribute("content", newTheme === 'dark' ? "#0d0e0f" : "#f4f4f2");
+        }
+
+        // Stick Header & Scroll progress
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+            drawer.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Reveals
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Initial check
+
+        // Stats Animation
+        const stats = document.querySelectorAll('.stat-value[data-target]');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCount(entry.target);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        stats.forEach(stat => statsObserver.observe(stat));
+
+        function animateCount(el) {
+            const target = parseInt(el.getAttribute('data-target'));
+            let current = 0;
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            
+            function update() {
+                current += increment;
+                if (current < target) {
+                    el.innerText = Math.floor(current).toLocaleString() + (target > 1000000 ? '+' : '+');
+                    requestAnimationFrame(update);
+                } else {
+                    el.innerText = target.toLocaleString() + '+';
+                }
+            }
+            update();
+        }
+
+        // --- Multi-language Support ---
+        const translations = {
+            en: {
+                nav_features: "Features",
+                nav_how_it_works: "How It Works",
+                nav_download: "Download",
+                hero_title: "Your Car. Every Mile. Perfectly Tracked.",
+                hero_subtext: "CarFlo is the ultimate vehicle logbook app. Log fuel, maintenance, expenses, and trips — all in one place.",
+                hero_btn_ios: "Download on the App Store",
+                hero_btn_android: "Get it on Google Play",
+                stat_vehicles: "Vehicles Tracked",
+                stat_entries: "Log Entries",
+                stat_rating: "App Rating",
+                stat_availability: "Availability",
+                features_heading: "Everything You Need",
+                features_subtext: "Tracking your vehicle has never been this simple.",
+                feat_fuel_title: "Fuel & Cost Tracking",
+                feat_fuel_text: "Keep a detailed record of every refill. Monitor fuel economy and total spending with beautiful, intuitive charts.",
+                feat_reminders_title: "Reminders",
+                feat_reminders_text: "Never miss an oil change or insurance renewal again.",
+                feat_trips_title: "Trip History",
+                feat_trips_text: "Log your business or personal trips with ease.",
+                feat_export_title: "Export Reports (PDF/CSV)",
+                feat_export_text: "Generate professional reports for tax returns, business expenses, or when selling your vehicle.",
+                feat_offline_title: "Offline-First",
+                feat_offline_text: "No internet? No problem. All your data is saved locally and synced when you're back online.",
+                feat_multi_title: "Multi-Vehicle",
+                feat_multi_text: "Manage your entire family's garage in one app.",
+                feat_secure_title: "Secure & Private",
+                feat_secure_text: "Your data stays on your device. We value your privacy.",
+                feat_analytics_title: "Advanced Analytics",
+                feat_analytics_text: "Visualize your vehicle's health and spending patterns over time with deep insights.",
+                how_it_works_heading: "Start in 60 Seconds",
+                step1_title: "Add Your Car",
+                step1_text: "Enter your car's make, model, year, and current mileage to set up your digital logbook.",
+                step2_title: "Log Any Event",
+                step2_text: "Whether it's a fuel refill, a service at the mechanic, or a quick trip to the store, log it in seconds.",
+                step3_title: "Stay Informed",
+                step3_text: "Receive timely reminders for maintenance and view detailed analytics of your vehicle's history.",
+                screenshots_heading: "Beautifully Simple",
+                screenshots_subtext: "The interface designed for drivers, by drivers.",
+                screen_dashboard: "Dashboard",
+                screen_fuel: "Log Refills",
+                screen_vehicle: "Vehicle List",
+                screen_analysis: "Analysis",
+                testimonials_heading: "Drivers Love CarFlo",
+                test1_quote: '"Finally an app that doesn\'t try to sell me insurance at every step. Clean, fast and very useful."',
+                test2_quote: '"As someone who runs a company, PDF reports saved me hours and hours of manual fuel expense calculations."',
+                test3_quote: '"Service reminders work perfectly. I no longer have to stick stickers on the inside of the door."',
+                download_heading: "Track Every Mile, Starting Today",
+                download_subtext: "Free to download. No account required to start tracking your vehicle.",
+                badge_appstore_span: "Download on the",
+                badge_googleplay_span: "Get it on",
+                footer_tagline: "Simplifying vehicle management for drivers worldwide.",
+                footer_product: "Product",
+                footer_legal: "Legal",
+                footer_contact: "Contact",
+                footer_privacy: "Privacy Policy",
+                footer_terms: "Terms of Service",
+                footer_bottom_text: "Designed for the road ahead."
+            },
+            sr: {
+                nav_features: "Funkcije",
+                nav_how_it_works: "Kako radi",
+                nav_download: "Preuzimanje",
+                hero_title: "Vaš auto. Svaki kilometar. Savršeno ispraćen.",
+                hero_subtext: "CarFlo je vrhunska aplikacija za evidenciju vozila. Pratite gorivo, održavanje, troškove i putovanja — sve na jednom mestu.",
+                hero_btn_ios: "Preuzmi sa App Store-a",
+                hero_btn_android: "Preuzmi sa Google Play-a",
+                stat_vehicles: "Praćenih vozila",
+                stat_entries: "Unosa u dnevnik",
+                stat_rating: "Ocena aplikacije",
+                stat_availability: "Dostupnost",
+                features_heading: "Sve što vam treba",
+                features_subtext: "Praćenje vašeg vozila nikada nije bilo ovako jednostavno.",
+                feat_fuel_title: "Gorivo i troškovi",
+                feat_fuel_text: "Vodite detaljnu evidenciju svakog točenja. Pratite potrošnju i ukupne troškove uz lepe, intuitivne grafikone.",
+                feat_reminders_title: "Podsetnici",
+                feat_reminders_text: "Nikada više ne zaboravite zamenu ulja ili registraciju.",
+                feat_trips_title: "Istorija putovanja",
+                feat_trips_text: "Lako beležite poslovna ili privatna putovanja.",
+                feat_export_title: "Izveštaji (PDF/CSV)",
+                feat_export_text: "Generišite profesionalne izveštaje za porez, poslovne troškove ili prodaju vozila.",
+                feat_offline_title: "Rad bez interneta",
+                feat_offline_text: "Nema interneta? Nema problema. Svi podaci se čuvaju lokalno i sinhronizuju čim se povežete.",
+                feat_multi_title: "Više vozila",
+                feat_multi_text: "Upravljajte garažom cele porodice u jednoj aplikaciji.",
+                feat_secure_title: "Sigurno i privatno",
+                feat_secure_text: "Vaši podaci ostaju na vašem uređaju. Cenimo vašu privatnost.",
+                feat_analytics_title: "Napredna analitika",
+                feat_analytics_text: "Vizualizujte zdravlje vozila i obrasce trošenja kroz vreme uz duboke uvide.",
+                how_it_works_heading: "Počnite za 60 sekundi",
+                step1_title: "Dodajte auto",
+                step1_text: "Unesite marku, model, godište i kilometražu da podesite svoj digitalni dnevnik.",
+                step2_title: "Zabeležite bilo šta",
+                step2_text: "Bilo da je to sipanje goriva, servis ili kratak put, zabeležite to u sekundi.",
+                step3_title: "Budite informisani",
+                step3_text: "Dobijajte pravovremene podsetnike za servis i gledajte detaljnu analitiku vozila.",
+                screenshots_heading: "Prelepo i jednostavno",
+                screenshots_subtext: "Interfejs dizajniran od strane vozača, za vozače.",
+                screen_dashboard: "Kontrolna tabla",
+                screen_fuel: "Točenje goriva",
+                screen_vehicle: "Lista vozila",
+                screen_analysis: "Analiza",
+                testimonials_heading: "Vožači vole CarFlo",
+                test1_quote: '"Konačno aplikacija koja ne pokušava da mi proda osiguranje na svakom koraku. Čista, brza i veoma korisna."',
+                test2_quote: '"Kao neko ko vodi firmu, PDF izveštaji su mi spasili sate i sate ručnog računanja troškova goriva."',
+                test3_quote: '"Podsetnici za servis rade savršeno. Više ne moram da lepim nalepnice na unutrašnju stranu vrata."',
+                download_heading: "Pratite svaki kilometar od danas",
+                download_subtext: "Besplatno preuzimanje. Registracija nije potrebna.",
+                badge_appstore_span: "Preuzmi sa",
+                badge_googleplay_span: "Preuzmi sa",
+                footer_tagline: "Pojednostavljeno upravljanje vozilima za vozače širom sveta.",
+                footer_product: "Proizvod",
+                footer_legal: "Pravno",
+                footer_contact: "Kontakt",
+                footer_privacy: "Politika privatnosti",
+                footer_terms: "Uslovi korišćenja",
+                footer_bottom_text: "Dizajnirano za put pred vama."
+            }
+        };
+
+        let currentLang = localStorage.getItem('preferredLang') || 'en';
+
+        function updateLanguage(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.innerText = translations[lang][key];
+                }
+            });
+            document.getElementById('lang-toggle').innerText = lang === 'en' ? 'SR' : 'EN';
+            localStorage.setItem('preferredLang', lang);
+            currentLang = lang;
+        }
+
+        function toggleLanguage() {
+            const nextLang = currentLang === 'en' ? 'sr' : 'en';
+            updateLanguage(nextLang);
+        }
+
+        // Initialize language
+        if (currentLang === 'sr') {
+            updateLanguage('sr');
+        }
+    </script>
+</body>
+</html>
