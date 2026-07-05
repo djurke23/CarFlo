@@ -2,13 +2,33 @@
 <html lang="en" data-theme="dark">
 
 <head>
+    <script>
+        // Redirect Supabase auth callback parameters to the correct auth handler pages
+        (function() {
+            const search = window.location.search;
+            const hash = window.location.hash;
+            const params = search + hash;
+            
+            if (params.includes('type=recovery') || params.includes('type=password_reset')) {
+                window.location.replace('./auth/reset/' + search + hash);
+            } else if (
+                params.includes('type=signup') || 
+                params.includes('type=invite') || 
+                params.includes('type=email_change') || 
+                params.includes('type=magiclink') ||
+                (search.includes('code=') && !search.includes('type='))
+            ) {
+                window.location.replace('./auth/confirm/' + search + hash);
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0d0e0f">
     <meta name="description"
-        content="CarFlo is the ultimate vehicle logbook app. Track fuel, maintenance, expenses, and trips — all in one place.">
-    <meta property="og:title" content="CarFlo — Your Car. Every Mile. Perfectly Tracked.">
-    <title>CarFlo — Your Car. Every Mile. Perfectly Tracked.</title>
+        content="carFlo is the ultimate vehicle logbook app. Track fuel, maintenance, expenses, and trips — all in one place.">
+    <meta property="og:title" content="carFlo — Your Car. Every Mile. Perfectly Tracked.">
+    <title>carFlo — Your Car. Every Mile. Perfectly Tracked.</title>
 
     <!-- Preconnect to Fontshare -->
     <link rel="preconnect" href="https://api.fontshare.com">
@@ -77,6 +97,10 @@
             line-height: 1.5;
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         h1,
@@ -173,6 +197,7 @@
         .btn-primary {
             background-color: var(--color-primary);
             color: white;
+            border: 2px solid transparent;
         }
 
         .btn-primary:hover {
@@ -182,7 +207,8 @@
         }
 
         .hero-buttons .btn {
-            min-width: 260px;
+            width: 280px;
+            max-width: 100%;
         }
 
         @media (max-width: 600px) {
@@ -489,8 +515,14 @@
             grid-column: span 4;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            align-items: center;
+            align-items: flex-start;
             gap: 2rem;
+        }
+
+        .card-wide .feature-icon-inline {
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            display: block;
         }
 
         .card-md {
@@ -524,60 +556,176 @@
         }
 
         /* Screenshots */
-        .screenshots-row {
-            display: flex;
-            gap: 2rem;
-            overflow-x: auto;
-            padding: 2rem 1.5rem 4rem;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            cursor: grab;
+        .screenshots-showcase {
+            position: relative;
+            display: grid;
+            place-items: center;
+            min-height: 840px;
+            padding: 2rem 4.5rem 4rem;
+            overflow: hidden;
+            border-radius: 32px;
+            background:
+                radial-gradient(circle at 50% 36%, rgba(42, 184, 200, 0.18), transparent 32%),
+                linear-gradient(180deg, var(--color-surface), var(--color-surface-offset));
+            border: 1px solid var(--color-border);
         }
 
-        .screenshots-row:active {
-            cursor: grabbing;
-        }
-
-        .screenshots-row::-webkit-scrollbar {
-            display: none;
+        .screenshots-stage {
+            position: relative;
+            width: min(320px, 70vw);
+            height: 760px;
+            touch-action: pan-y;
         }
 
         .screen-mockup {
-            flex: 0 0 280px;
-            text-align: center;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+            opacity: 0;
+            transform: translateX(42%) scale(0.9);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .screen-mockup.active {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            pointer-events: auto;
+            z-index: 10;
+        }
+
+        .screen-mockup.previous {
+            opacity: 1;
+            transform: translateX(-58%) scale(0.86);
+            z-index: 5;
+        }
+
+        .screen-mockup.next {
+            opacity: 1;
+            transform: translateX(58%) scale(0.86);
+            z-index: 5;
         }
 
         .phone-frame {
-            background: #1a1a1a;
-            border-radius: 44px;
-            padding: 12px;
-            border: 6px solid #333;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(145deg, #282828, #080808);
+            border-radius: 46px;
+            padding: 10px;
+            border: 7px solid #151515;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
             margin-bottom: 1.5rem;
-            aspect-ratio: 9/19.5;
+            aspect-ratio: 944/2048;
             position: relative;
             overflow: hidden;
+            width: 100%;
+        }
+
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 9px;
+            left: 50%;
+            z-index: 2;
+            width: 28%;
+            height: 18px;
+            transform: translateX(-50%);
+            border-radius: 0 0 14px 14px;
+            background: #050505;
         }
 
         .phone-frame img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            display: block;
+            background: #0d0e0f;
             border-radius: 32px;
         }
 
-        /* Testimonials */
-        .testimonials-grid {
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            z-index: 5;
+            width: 52px;
+            height: 52px;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-50%);
+            transition: var(--transition);
+        }
+
+        .carousel-button:hover {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            transform: translateY(-50%) scale(1.04);
+        }
+
+        .carousel-button.prev {
+            left: 1.5rem;
+        }
+
+        .carousel-button.next {
+            right: 1.5rem;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            left: 50%;
+            bottom: 1.5rem;
+            display: flex;
+            gap: 0.6rem;
+            transform: translateX(-50%);
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--color-text-faint);
+            opacity: 0.55;
+            transition: var(--transition);
+        }
+
+        .carousel-dot.active {
+            width: 28px;
+            border-radius: 999px;
+            background: var(--color-primary);
+            opacity: 1;
+        }
+
+        /* Testimonials */
+        .testimonials-carousel {
+            position: relative;
+            padding: 0 4.5rem 3.5rem;
+            overflow: hidden;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .testimonials-track {
+            display: flex;
+            gap: 24px;
+            transition: transform 0.45s ease;
         }
 
         .testimonial-card {
+            flex: 0 0 100%;
             background: var(--color-surface);
             padding: 2.5rem;
             border-radius: 20px;
             border: 1px solid var(--color-border);
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .stars {
@@ -636,32 +784,49 @@
             background: #000;
             border: 1px solid #333;
             color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 10px;
+            width: 214px;
+            min-height: 68px;
+            padding: 0.62rem 1.1rem;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             gap: 0.75rem;
             text-align: left;
             transition: var(--transition);
+            cursor: default;
         }
 
-        .badge:hover {
+        .badge.active-link {
+            cursor: pointer;
+        }
+
+        .badge.active-link:hover {
             border-color: var(--color-primary);
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
         .store-badges .badge {
-            min-width: 190px;
+            min-width: 214px;
         }
 
         .badge-text span {
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             display: block;
             opacity: 0.7;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
         }
 
         .badge-text strong {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            line-height: 1.25;
+            white-space: nowrap;
+        }
+
+        .badge svg {
+            flex: 0 0 32px;
         }
 
         /* Back to top */
@@ -697,6 +862,142 @@
         .back-to-top:hover {
             background: var(--color-primary-hover);
             transform: translateY(-5px);
+        }
+
+        /* Pricing Section */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                max-width: 400px;
+            }
+        }
+
+        .pricing-card {
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 24px;
+            padding: 3rem 2rem 2.5rem;
+            text-align: center;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--color-primary);
+            transform: scale(1.03);
+        }
+
+        .pricing-card.popular:hover {
+            transform: scale(1.03) translateY(-8px);
+        }
+
+        @media (max-width: 768px) {
+            .pricing-card.popular {
+                transform: none;
+            }
+
+            .pricing-card.popular:hover {
+                transform: translateY(-8px);
+            }
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price {
+            margin: 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .price .amount {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.1;
+        }
+
+        .price .period {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .pricing-features-box {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--color-surface-offset);
+            border: 1px solid var(--color-border);
+            border-radius: 24px;
+            padding: 3rem;
+        }
+
+        .features-list-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .features-list-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        .feature-item-list {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .feature-item-list .check-icon {
+            color: var(--color-primary);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .feature-item-list span {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            line-height: 1.4;
         }
 
         /* Footer */
@@ -837,8 +1138,13 @@
                 gap: 2.5rem;
             }
 
-            .testimonials-grid {
-                grid-template-columns: 1fr;
+            .screenshots-showcase {
+                min-height: 760px;
+                padding-inline: 3.25rem;
+            }
+
+            .testimonials-carousel {
+                padding-inline: 3.25rem;
             }
 
             .footer-grid {
@@ -863,6 +1169,46 @@
 
             .footer-bottom .flex {
                 justify-content: center !important;
+            }
+
+            .carousel-button {
+                width: 44px;
+                height: 44px;
+            }
+
+            .carousel-button.prev {
+                left: 0.75rem;
+            }
+
+            .carousel-button.next {
+                right: 0.75rem;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .screenshots-showcase {
+                min-height: 680px;
+                padding: 1.5rem 2.25rem 4rem;
+                border-radius: 24px;
+            }
+
+            .screenshots-stage {
+                width: min(270px, 74vw);
+                height: 640px;
+            }
+
+            .screen-mockup.previous,
+            .screen-mockup.next {
+                opacity: 0;
+            }
+
+            .testimonials-carousel {
+                padding: 0 2.25rem 3.5rem;
+            }
+
+            .testimonial-card {
+                padding: 1.75rem;
+                min-height: 300px;
             }
         }
 
@@ -1010,13 +1356,14 @@
     <div class="mobile-drawer" id="drawer">
         <div class="flex justify-between items-center">
             <div class="logo">
-                <img src="./logo.png" alt="CarFlo Logo">
+                <img src="./logo.png" alt="carFlo Logo">
             </div>
             <button class="mobile-close" onclick="toggleMenu()"><i data-lucide="x"></i></button>
         </div>
         <ul class="flex flex-col gap-8" style="margin-top: 40px;">
             <li><a href="#features" onclick="toggleMenu()" data-i18n="nav_features">Features</a></li>
             <li><a href="#how-it-works" onclick="toggleMenu()" data-i18n="nav_how_it_works">How It Works</a></li>
+            <li><a href="#pricing" onclick="toggleMenu()" data-i18n="nav_pricing">Pricing</a></li>
             <li><a href="#support" onclick="toggleMenu()" data-i18n="nav_faq">FAQ</a></li>
             <li><a href="#download" onclick="toggleMenu()" data-i18n="nav_download">Download</a></li>
         </ul>
@@ -1026,11 +1373,12 @@
         <div class="container">
             <nav>
                 <a href="./index.html" class="logo">
-                    <img src="./logo.svg" alt="CarFlo Logo">
+                    <img src="./logo.svg" alt="carFlo Logo">
                 </a>
                 <ul class="nav-links">
                     <li><a href="#features" data-i18n="nav_features">Features</a></li>
                     <li><a href="#how-it-works" data-i18n="nav_how_it_works">How It Works</a></li>
+                    <li><a href="#pricing" data-i18n="nav_pricing">Pricing</a></li>
                     <li><a href="#support" data-i18n="nav_faq">FAQ</a></li>
                     <li><a href="#download" data-i18n="nav_download">Download</a></li>
                 </ul>
@@ -1054,44 +1402,24 @@
                 <div class="hero-grid">
                     <div class="hero-content reveal">
                         <h1 class="hero-title" data-i18n="hero_title">Your Car. Every Mile. Perfectly Tracked.</h1>
-                        <p class="hero-subtext" data-i18n="hero_subtext">CarFlo is the ultimate vehicle logbook app. Log
+                        <p class="hero-subtext" data-i18n="hero_subtext">carFlo is the ultimate vehicle logbook app. Log
                             fuel, maintenance, expenses, and trips — all in one place.</p>
                         <div class="flex gap-4 hero-buttons" style="flex-wrap: wrap;">
-                            <a href="#download" class="btn btn-primary"><i data-lucide="apple"></i> <span
-                                    data-i18n="hero_btn_ios">Download on the App Store</span></a>
+                            <a href="https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970"
+                                target="_blank" class="btn btn-primary"><i data-lucide="apple"></i> <span
+                                    data-i18n="hero_btn_ios">Download on App Store</span></a>
                             <a href="#download" class="btn btn-outline"><i data-lucide="play"></i> <span
-                                    data-i18n="hero_btn_android">Get it on Google Play</span></a>
+                                    data-i18n="hero_btn_android">Google Play Coming Soon</span></a>
                         </div>
                     </div>
                     <div class="hero-image reveal">
-                        <img src="./hero.png" alt="CarFlo App Mockup" width="400" height="800">
+                        <img src="./hero.png" alt="carFlo App Mockup" width="400" height="800">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="stats-bar">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-value" data-target="50000">0</div>
-                        <div class="stat-label" data-i18n="stat_vehicles">Vehicles Tracked</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" data-target="2000000">0</div>
-                        <div class="stat-label" data-i18n="stat_entries">Log Entries</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">4.8★</div>
-                        <div class="stat-label" data-i18n="stat_rating">App Rating</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">iOS & Android</div>
-                        <div class="stat-label" data-i18n="stat_availability">Availability</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 
         <section id="features" class="container section-padding">
             <div class="text-center" style="margin-bottom: 60px;">
@@ -1119,14 +1447,13 @@
                 </div>
                 <div class="feature-card card-wide reveal">
                     <div>
-                        <i data-lucide="file-text" class="feature-icon" size="28"></i>
+                        <i data-lucide="file-text" class="feature-icon-inline" size="28"></i>
                         <h3 data-i18n="feat_export_title">Export Reports (PDF/CSV)</h3>
                         <p data-i18n="feat_export_text">Generate professional reports for tax returns, business
                             expenses, or when selling your vehicle.</p>
                     </div>
                     <div>
-                        <i data-lucide="cloud-off" class="feature-icon" size="28"
-                            style="position: relative; top: 0; left: 0; margin-bottom: 1rem;"></i>
+                        <i data-lucide="cloud-off" class="feature-icon-inline" size="28"></i>
                         <h3 data-i18n="feat_offline_title">Offline-First</h3>
                         <p data-i18n="feat_offline_text">No internet? No problem. All your data is saved locally and
                             synced when you're back online.</p>
@@ -1147,6 +1474,104 @@
                     <h3 data-i18n="feat_analytics_title">Advanced Analytics</h3>
                     <p data-i18n="feat_analytics_text">Visualize your vehicle's health and spending patterns over time
                         with deep insights.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="section-padding" style="background: var(--color-surface-offset);">
+            <div class="container">
+                <div class="text-center" style="margin-bottom: 60px;">
+                    <h2 class="clash" style="font-size: 2.5rem; margin-bottom: 1rem;" data-i18n="pricing_heading">
+                        Jednostavne i transparentne cene</h2>
+                    <p class="text-muted" data-i18n="pricing_subtext">Otključajte punu snagu carFlo aplikacije i
+                        preuzmite kontrolu nad troškovima.</p>
+                </div>
+
+                <!-- Pricing Grid -->
+                <div class="pricing-grid">
+                    <!-- Monthly -->
+                    <div class="pricing-card">
+                        <div>
+                            <div class="pricing-badge" style="opacity: 0; pointer-events: none;">Monthly</div>
+                            <h3 class="clash" data-i18n="pricing_monthly_title">Mesečno</h3>
+                            <div class="price">
+                                <span class="amount" data-i18n="pricing_monthly_price">2,99 €</span>
+                                <span class="period" data-i18n="pricing_monthly_period">/ mesečno</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" style="width: 100%; margin-top: 1.5rem;"
+                            data-i18n="pricing_cta">Otključaj Pro Plan</button>
+                    </div>
+
+                    <!-- Yearly -->
+                    <div class="pricing-card popular">
+                        <div>
+                            <div class="pricing-badge" data-i18n="pricing_yearly_save">Ušteda ~30%</div>
+                            <h3 class="clash" data-i18n="pricing_yearly_title">Godišnje</h3>
+                            <div class="price">
+                                <span class="amount" data-i18n="pricing_yearly_price">24,99 €</span>
+                                <span class="period" data-i18n="pricing_yearly_period">/ godišnje</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;"
+                            data-i18n="pricing_cta">Otključaj Pro Plan</button>
+                    </div>
+
+                    <!-- Lifetime -->
+                    <div class="pricing-card">
+                        <div>
+                            <div class="pricing-badge" style="background: var(--color-text-muted);"
+                                data-i18n="pricing_lifetime_badge">Uskoro</div>
+                            <h3 class="clash" data-i18n="pricing_lifetime_title">Doživotno</h3>
+                            <div class="price">
+                                <span class="amount" data-i18n="pricing_lifetime_price">Uskoro</span>
+                                <span class="period" data-i18n="pricing_lifetime_period">za odabrane</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline"
+                            style="width: 100%; margin-top: 1.5rem; opacity: 0.6; cursor: not-allowed;" disabled
+                            data-i18n="pricing_lifetime_btn">Uskoro</button>
+                    </div>
+                </div>
+
+                <!-- Features Included -->
+                <div class="pricing-features-box">
+                    <h3 class="text-center clash" style="margin-bottom: 2.5rem; font-size: 1.75rem;"
+                        data-i18n="pricing_pro_features_title">Šta sve dobijate uz Pro Plan:</h3>
+                    <div class="features-list-grid">
+                        <div class="feature-item-list">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <span data-i18n="pricing_pro_feature_unlimited_vehicles">Neograničen broj vozila...</span>
+                        </div>
+                        <div class="feature-item-list">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <span data-i18n="pricing_pro_feature_unlimited_entries">Neograničeni unosi...</span>
+                        </div>
+                        <div class="feature-item-list">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <span data-i18n="pricing_pro_feature_stats">Napredna statistika...</span>
+                        </div>
+                        <div class="feature-item-list">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <span data-i18n="pricing_pro_feature_attachments">Slike i dokumenti...</span>
+                        </div>
+                        <div class="feature-item-list">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <span data-i18n="pricing_pro_feature_sync">Cloud backup...</span>
+                        </div>
+                        <div class="feature-item-list">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <span data-i18n="pricing_pro_feature_import">Jednostavan uvoz...</span>
+                        </div>
+                        <div class="feature-item-list">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <span data-i18n="pricing_pro_feature_trips">Poslovna putovanja...</span>
+                        </div>
+                        <div class="feature-item-list">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <span data-i18n="pricing_pro_feature_customization">Personalizacija...</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1183,71 +1608,112 @@
                 <p class="text-center text-muted" style="margin-bottom: 60px;" data-i18n="screenshots_subtext">The
                     interface designed for drivers, by drivers.</p>
 
-                <div class="screenshots-row">
-                    <div class="screen-mockup reveal">
-                        <div class="phone-frame">
-                            <img src="./screen-dashboard.png" alt="Dashboard" loading="lazy">
+                <div class="screenshots-showcase reveal" data-carousel="screenshots">
+                    <button class="carousel-button prev" type="button" data-carousel-prev="screenshots"
+                        aria-label="Previous screenshot"><i data-lucide="chevron-left"></i></button>
+                    <div class="screenshots-stage">
+                        <div class="screen-mockup active">
+                            <div class="phone-frame">
+                                <img src="./screen-dashboard-new.png" alt="Dashboard screen" loading="lazy">
+                            </div>
+                            <p class="clash" data-i18n="screen_dashboard">Dashboard</p>
                         </div>
-                        <p class="clash" data-i18n="screen_dashboard">Dashboard</p>
-                    </div>
-                    <div class="screen-mockup reveal">
-                        <div class="phone-frame">
-                            <img src="./screen-fuel.png" alt="Add Fuel" loading="lazy">
+                        <div class="screen-mockup next">
+                            <div class="phone-frame">
+                                <img src="./screen-logbook-new.png" alt="Logbook screen" loading="lazy">
+                            </div>
+                            <p class="clash" data-i18n="screen_logbook">Logbook</p>
                         </div>
-                        <p class="clash" data-i18n="screen_fuel">Log Refills</p>
-                    </div>
-                    <div class="screen-mockup reveal">
-                        <div class="phone-frame">
-                            <img src="./screen-vehicle.png" alt="Vehicle Overview" loading="lazy">
+                        <div class="screen-mockup">
+                            <div class="phone-frame">
+                                <img src="./screen-stats-new.png" alt="Statistics screen" loading="lazy">
+                            </div>
+                            <p class="clash" data-i18n="screen_stats">Statistics</p>
                         </div>
-                        <p class="clash" data-i18n="screen_vehicle">Vehicle List</p>
-                    </div>
-                    <div class="screen-mockup reveal">
-                        <div class="phone-frame">
-                            <img src="./screen-dashboard.png" alt="Analytics" loading="lazy">
+                        <div class="screen-mockup previous">
+                            <div class="phone-frame">
+                                <img src="./screen-reminders-new.png" alt="Reminders screen" loading="lazy">
+                            </div>
+                            <p class="clash" data-i18n="screen_reminders">Reminders</p>
                         </div>
-                        <p class="clash" data-i18n="screen_analysis">Analysis</p>
                     </div>
-                </div>
-                <div class="flex items-center justify-center gap-2 text-muted"
-                    style="margin-top: 1rem; animation: pulse 2s infinite;">
-                    <i data-lucide="arrow-left-right" size="20"></i> <span data-i18n="swipe_hint">Swipe
-                        left/right</span>
+                    <button class="carousel-button next" type="button" data-carousel-next="screenshots"
+                        aria-label="Next screenshot"><i data-lucide="chevron-right"></i></button>
+                    <div class="carousel-dots" data-carousel-dots="screenshots" aria-hidden="true"></div>
                 </div>
             </div>
         </section>
 
         <section class="container section-padding">
             <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 80px;" data-i18n="testimonials_heading">
-                Drivers Love CarFlo</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card reveal">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote" data-i18n="test1_quote">"Konačno aplikacija koja ne pokušava da mi proda osiguranje
-                        na svakom koraku. Čista, brza i veoma korisna."</p>
-                    <div class="author">
-                        <span class="author-name">Marko Petrović</span>
-                        <span class="author-car">Volkswagen Golf 7</span>
+                Drivers Love carFlo</h2>
+            <div class="testimonials-carousel reveal" data-review-carousel>
+                <button class="carousel-button prev" type="button" data-review-prev aria-label="Previous review">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="testimonials-track">
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote" data-i18n="test1_quote">"Konačno aplikacija koja ne pokušava da mi proda
+                            osiguranje
+                            na svakom koraku. Čista, brza i veoma korisna."</p>
+                        <div class="author">
+                            <span class="author-name">Marko Petrović</span>
+                            <span class="author-car">Volkswagen Golf 7</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote" data-i18n="test2_quote">"Kao neko ko vodi firmu, PDF izveštaji su mi spasili
+                            sate i
+                            sate ručnog računanja troškova goriva."</p>
+                        <div class="author">
+                            <span class="author-name">Ana Kovačević</span>
+                            <span class="author-car">Skoda Octavia</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote" data-i18n="test3_quote">"Podsetnici za servis rade savršeno. Više ne moram da
+                            lepim
+                            nalepnice na unutrašnju stranu vrata."</p>
+                        <div class="author">
+                            <span class="author-name">Stefan Jovanović</span>
+                            <span class="author-car">Audi A4</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote" data-i18n="test4_quote">"Everything about my car is finally in one place.
+                            Registration and service reminders help the most."</p>
+                        <div class="author">
+                            <span class="author-name">Nikola Ilić</span>
+                            <span class="author-car">Audi A1</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote" data-i18n="test5_quote">"The logbook is really fast. I open it, enter mileage
+                            or a cost, and I am done in seconds."</p>
+                        <div class="author">
+                            <span class="author-name">Milica Savić</span>
+                            <span class="author-car">Toyota Yaris</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote" data-i18n="test6_quote">"Great for tracking costs. Once you see the stats, you
+                            know what your car really costs."</p>
+                        <div class="author">
+                            <span class="author-name">Petar Novaković</span>
+                            <span class="author-car">BMW 320d</span>
+                        </div>
                     </div>
                 </div>
-                <div class="testimonial-card reveal">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote" data-i18n="test2_quote">"Kao neko ko vodi firmu, PDF izveštaji su mi spasili sate i
-                        sate ručnog računanja troškova goriva."</p>
-                    <div class="author">
-                        <span class="author-name">Ana Kovačević</span>
-                        <span class="author-car">Skoda Octavia</span>
-                    </div>
-                </div>
-                <div class="testimonial-card reveal">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote" data-i18n="test3_quote">"Podsetnici za servis rade savršeno. Više ne moram da lepim
-                        nalepnice na unutrašnju stranu vrata."</p>
-                    <div class="author">
-                        <span class="author-name">Stefan Jovanović</span>
-                        <span class="author-car">Audi A4</span>
-                    </div>
-                </div>
+                <button class="carousel-button next" type="button" data-review-next aria-label="Next review">
+                    <i data-lucide="chevron-right"></i>
+                </button>
+                <div class="carousel-dots" data-review-dots aria-hidden="true"></div>
             </div>
         </section>
 
@@ -1257,126 +1723,133 @@
                 <p data-i18n="download_subtext">Free to download. No account required to start tracking your vehicle.
                 </p>
                 <div class="store-badges">
-                    <a href="#" class="badge">
+                    <a href="https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970" target="_blank"
+                        class="badge active-link" aria-label="Download on App Store">
                         <i data-lucide="apple" size="32"></i>
                         <div class="badge-text">
-                            <span data-i18n="badge_appstore_span">Download on the</span>
+                            <span data-i18n="badge_appstore_span">Coming Soon</span>
                             <strong>App Store</strong>
                         </div>
                     </a>
-                    <a href="#" class="badge">
+                    <a href="#download" class="badge" aria-label="Google Play coming soon">
                         <i data-lucide="play" size="32"></i>
                         <div class="badge-text">
-                            <span data-i18n="badge_googleplay_span">Get it on</span>
+                            <span data-i18n="badge_googleplay_span">Coming Soon</span>
                             <strong>Google Play</strong>
                         </div>
                     </a>
                 </div>
             </div>
         </section>
-    </main>
 
-    <button id="backToTop" class="back-to-top" aria-label="Back to top"
-        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-        <i data-lucide="arrow-up"></i>
-    </button>
+        <button id="backToTop" class="back-to-top" aria-label="Back to top"
+            onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <i data-lucide="arrow-up"></i>
+        </button>
 
-    <section id="support" class="section-padding">
-        <div class="container">
-            <div class="text-center" style="margin-bottom: 4rem;">
-                <h2 class="clash" style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem;"
-                    data-i18n="faq_heading">Frequently Asked Questions</h2>
-                <p class="text-muted" data-i18n="faq_subtext">Everything you need to know about CarFlo.</p>
+        <section id="support" class="section-padding">
+            <div class="container">
+                <div class="text-center" style="margin-bottom: 4rem;">
+                    <h2 class="clash" style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem;"
+                        data-i18n="faq_heading">Frequently Asked Questions</h2>
+                    <p class="text-muted" data-i18n="faq_subtext">Everything you need to know about carFlo.</p>
+                </div>
+
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span data-i18n="faq_q1">How do I add a new vehicle?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p data-i18n="faq_a1">Simply tap the "+" icon on the Vehicles screen and enter your car's
+                                make,
+                                model, year, and current mileage.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span data-i18n="faq_q2">Can I track multiple vehicles?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p data-i18n="faq_a2">Yes! carFlo supports tracking multiple vehicles in your professional
+                                digital garage.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span data-i18n="faq_q3">What's included in the free plan?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p data-i18n="faq_a3">You can track one vehicle, log fuel refills, and view basic analytics
+                                at
+                                no cost, with no accounts required.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span data-i18n="faq_q4">How do I upgrade to Premium?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p data-i18n="faq_a4">Tap on Settings and select "Upgrade to Premium" to unlock
+                                multi-vehicle
+                                support, advanced analytics, and PDF exports.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span data-i18n="faq_q5">How do I cancel my subscription?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p data-i18n="faq_a5">Subscriptions are managed via the App Store or Google Play Store
+                                settings.
+                                You can cancel anytime with one click.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span data-i18n="faq_q6">Is my data safe and backed up?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p data-i18n="faq_a6">Your data is stored locally on your device for maximum privacy.
+                                Premium
+                                users enjoy secure encrypted cloud backups.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span data-i18n="faq_q7">Does the app work offline?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p data-i18n="faq_a7">Absolutely! carFlo is offline-first. Your data is saved locally and
+                                syncs
+                                automatically when you're back online.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="support-card reveal">
+                    <h3 class="clash" data-i18n="support_heading">Still need help?</h3>
+                    <p data-i18n="support_text">Can't find the answer you're looking for? Reach out to our friendly
+                        team.
+                    </p>
+                    <a href="mailto:support@carflo.app" class="support-email">support@carflo.app</a>
+                    <p class="support-note" data-i18n="support_note">We typically respond within 48 hours.</p>
+                </div>
             </div>
-
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span data-i18n="faq_q1">How do I add a new vehicle?</span>
-                        <i data-lucide="chevron-down" class="faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_a1">Simply tap the "+" icon on the Vehicles screen and enter your car's make,
-                            model, year, and current mileage.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span data-i18n="faq_q2">Can I track multiple vehicles?</span>
-                        <i data-lucide="chevron-down" class="faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_a2">Yes! CarFlo supports tracking multiple vehicles in your professional
-                            digital garage.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span data-i18n="faq_q3">What's included in the free plan?</span>
-                        <i data-lucide="chevron-down" class="faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_a3">You can track one vehicle, log fuel refills, and view basic analytics at
-                            no cost, with no accounts required.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span data-i18n="faq_q4">How do I upgrade to Premium?</span>
-                        <i data-lucide="chevron-down" class="faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_a4">Tap on Settings and select "Upgrade to Premium" to unlock multi-vehicle
-                            support, advanced analytics, and PDF exports.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span data-i18n="faq_q5">How do I cancel my subscription?</span>
-                        <i data-lucide="chevron-down" class="faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_a5">Subscriptions are managed via the App Store or Google Play Store settings.
-                            You can cancel anytime with one click.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span data-i18n="faq_q6">Is my data safe and backed up?</span>
-                        <i data-lucide="chevron-down" class="faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_a6">Your data is stored locally on your device for maximum privacy. Premium
-                            users enjoy secure encrypted cloud backups.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span data-i18n="faq_q7">Does the app work offline?</span>
-                        <i data-lucide="chevron-down" class="faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_a7">Absolutely! CarFlo is offline-first. Your data is saved locally and syncs
-                            automatically when you're back online.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="support-card reveal">
-                <h3 class="clash" data-i18n="support_heading">Still need help?</h3>
-                <p data-i18n="support_text">Can't find the answer you're looking for? Reach out to our friendly team.
-                </p>
-                <a href="mailto:support@carflo.app" class="support-email">support@carflo.app</a>
-                <p class="support-note" data-i18n="support_note">We typically respond within 48 hours.</p>
-            </div>
-        </div>
-    </section>
+        </section>
     </main>
 
     <footer>
@@ -1384,7 +1857,7 @@
             <div class="footer-grid">
                 <div class="footer-info">
                     <div class="logo">
-                        <span>CarFlo</span>
+                        <span>carFlo</span>
                     </div>
                     <p class="footer-tagline" data-i18n="footer_tagline">Simplifying vehicle management for drivers
                         worldwide.</p>
@@ -1394,6 +1867,7 @@
                     <ul>
                         <li><a href="#features" data-i18n="nav_features">Features</a></li>
                         <li><a href="#how-it-works" data-i18n="nav_how_it_works">How It Works</a></li>
+                        <li><a href="#pricing" data-i18n="nav_pricing">Pricing</a></li>
                         <li><a href="#support" data-i18n="nav_faq">FAQ</a></li>
                         <li><a href="#download" data-i18n="nav_download">Download</a></li>
                     </ul>
@@ -1415,7 +1889,11 @@
             </div>
             <div class="footer-bottom">
                 <div style="display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
-                    <span data-i18n="footer_copyright">&copy; 2026 CarFlo. All rights reserved.</span>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <img src="./logo.svg" alt="carFlo Logo"
+                            style="height: 18px; width: auto; opacity: 0.8; vertical-align: middle;">
+                        <span data-i18n="footer_copyright">© 2026 carFlo. All rights reserved.</span>
+                    </div>
                     <span data-i18n="footer_made_by" style="color: var(--color-text-faint); font-size: 0.75rem;">Made by
                         <a href="https://djurke23.github.io/portfolio/" target="_blank"
                             class="footer-credit-link">Djurke23</a></span>
@@ -1482,30 +1960,102 @@
             }
         });
 
-        // Carousel Dragging
-        const slider = document.querySelector('.screenshots-row');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
+        function createDots(container, count, onSelect) {
+            container.innerHTML = '';
+            return Array.from({ length: count }, (_, index) => {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'carousel-dot';
+                dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                dot.addEventListener('click', () => onSelect(index));
+                container.appendChild(dot);
+                return dot;
+            });
+        }
 
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-        });
-        slider.addEventListener('mouseleave', () => {
-            isDown = false;
-        });
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-        });
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 1.5;
-            slider.scrollLeft = scrollLeft - walk;
-        });
+        function attachSwipe(element, onPrevious, onNext) {
+            let startX = 0;
+            let startY = 0;
+
+            element.addEventListener('pointerdown', event => {
+                startX = event.clientX;
+                startY = event.clientY;
+            });
+
+            element.addEventListener('pointerup', event => {
+                const deltaX = event.clientX - startX;
+                const deltaY = event.clientY - startY;
+
+                if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+                deltaX > 0 ? onPrevious() : onNext();
+            });
+        }
+
+        function initScreenshotCarousel() {
+            const carousel = document.querySelector('[data-carousel="screenshots"]');
+            if (!carousel) return;
+
+            const slides = Array.from(carousel.querySelectorAll('.screen-mockup'));
+            const dots = createDots(carousel.querySelector('[data-carousel-dots="screenshots"]'), slides.length, setActive);
+            let activeIndex = 0;
+            let timer;
+
+            function setActive(nextIndex) {
+                activeIndex = (nextIndex + slides.length) % slides.length;
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === activeIndex);
+                    slide.classList.toggle('previous', index === (activeIndex - 1 + slides.length) % slides.length);
+                    slide.classList.toggle('next', index === (activeIndex + 1) % slides.length);
+                });
+                dots.forEach((dot, index) => dot.classList.toggle('active', index === activeIndex));
+                resetTimer();
+            }
+
+            function resetTimer() {
+                clearInterval(timer);
+                timer = setInterval(() => {
+                    setActive(activeIndex + 1);
+                }, 4000);
+            }
+
+            carousel.querySelector('[data-carousel-prev="screenshots"]').addEventListener('click', () => setActive(activeIndex - 1));
+            carousel.querySelector('[data-carousel-next="screenshots"]').addEventListener('click', () => setActive(activeIndex + 1));
+            attachSwipe(carousel.querySelector('.screenshots-stage'), () => setActive(activeIndex - 1), () => setActive(activeIndex + 1));
+            setActive(0);
+        }
+
+        function initReviewCarousel() {
+            const carousel = document.querySelector('[data-review-carousel]');
+            if (!carousel) return;
+
+            const track = carousel.querySelector('.testimonials-track');
+            const slides = Array.from(carousel.querySelectorAll('.testimonial-card'));
+            const dots = createDots(carousel.querySelector('[data-review-dots]'), slides.length, setActive);
+            let activeIndex = 0;
+            let timer;
+
+            function setActive(nextIndex) {
+                activeIndex = (nextIndex + slides.length) % slides.length;
+                track.style.transform = `translateX(calc(-${activeIndex} * (100% + 24px)))`;
+                dots.forEach((dot, index) => dot.classList.toggle('active', index === activeIndex));
+                resetTimer();
+            }
+
+            function resetTimer() {
+                clearInterval(timer);
+                timer = setInterval(() => {
+                    setActive(activeIndex + 1);
+                }, 5000);
+            }
+
+            carousel.querySelector('[data-review-prev]').addEventListener('click', () => setActive(activeIndex - 1));
+            carousel.querySelector('[data-review-next]').addEventListener('click', () => setActive(activeIndex + 1));
+            attachSwipe(carousel, () => setActive(activeIndex - 1), () => setActive(activeIndex + 1));
+            setActive(0);
+        }
+
+        initScreenshotCarousel();
+        initReviewCarousel();
 
         // Mobile Menu Toggle
         function toggleMenu() {
@@ -1514,6 +2064,25 @@
             drawer.classList.toggle('active');
             overlay.classList.toggle('active');
         }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', event => {
+                const targetId = anchor.getAttribute('href');
+                if (!targetId || targetId === '#') return;
+
+                const target = document.querySelector(targetId);
+                if (!target) return;
+
+                event.preventDefault();
+                const headerOffset = document.getElementById('header').offsetHeight + 18;
+                const targetTop = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+                window.scrollTo({
+                    top: targetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
 
         // Reveals
         function reveal() {
@@ -1566,12 +2135,13 @@
             en: {
                 nav_features: "Features",
                 nav_how_it_works: "How It Works",
+                nav_pricing: "Pricing",
                 nav_faq: "FAQ",
                 nav_download: "Download",
                 hero_title: "Your Car. Every Mile. Perfectly Tracked.",
-                hero_subtext: "CarFlo is the ultimate vehicle logbook app. Log fuel, maintenance, expenses, and trips — all in one place.",
-                hero_btn_ios: "Download on the App Store",
-                hero_btn_android: "Get it on Google Play",
+                hero_subtext: "carFlo is the ultimate vehicle logbook app. Log fuel, maintenance, expenses, and trips — all in one place.",
+                hero_btn_ios: "Download on App Store",
+                hero_btn_android: "Google Play Coming Soon",
                 stat_vehicles: "Vehicles Tracked",
                 stat_entries: "Log Entries",
                 stat_rating: "App Rating",
@@ -1604,17 +2174,23 @@
                 screenshots_heading: "Beautifully Simple",
                 screenshots_subtext: "The interface designed for drivers, by drivers.",
                 screen_dashboard: "Dashboard",
+                screen_logbook: "Logbook",
+                screen_stats: "Statistics",
+                screen_reminders: "Reminders",
                 screen_fuel: "Log Refills",
                 screen_vehicle: "Vehicle List",
                 screen_analysis: "Analysis",
-                testimonials_heading: "Drivers Love CarFlo",
+                testimonials_heading: "Drivers Love carFlo",
                 test1_quote: '"Finally an app that doesn\'t try to sell me insurance at every step. Clean, fast and very useful."',
                 test2_quote: '"As someone who runs a company, PDF reports saved me hours and hours of manual fuel expense calculations."',
                 test3_quote: '"Service reminders work perfectly. I no longer have to stick stickers on the inside of the door."',
+                test4_quote: '"Everything about my car is finally in one place. Registration and service reminders help the most."',
+                test5_quote: '"The logbook is really fast. I open it, enter mileage or a cost, and I am done in seconds."',
+                test6_quote: '"Great for tracking costs. Once you see the stats, you know what your car really costs."',
                 download_heading: "Track Every Mile, Starting Today",
                 download_subtext: "Free to download. No account required to start tracking your vehicle.",
-                badge_appstore_span: "Download on the",
-                badge_googleplay_span: "Get it on",
+                badge_appstore_span: "Download on",
+                badge_googleplay_span: "Coming Soon",
                 footer_tagline: "Simplifying vehicle management for drivers worldwide.",
                 footer_product: "Product",
                 footer_legal: "Legal",
@@ -1622,16 +2198,16 @@
                 footer_privacy: "Privacy Policy",
                 footer_terms: "Terms of Service",
                 footer_delete: "Delete Account",
-                footer_copyright: "&copy; 2026 CarFlo. All rights reserved.",
+                footer_copyright: "© 2026 carFlo. All rights reserved.",
                 footer_made_by: 'Made by <a href="https://djurke23.github.io/portfolio/" target="_blank" class="footer-credit-link">Djurke23</a>',
                 footer_socials: "Follow us on social media:",
                 swipe_hint: "Swipe left/right",
                 faq_heading: "Frequently Asked Questions",
-                faq_subtext: "Everything you need to know about CarFlo.",
+                faq_subtext: "Everything you need to know about carFlo.",
                 faq_q1: "How do I add a new vehicle?",
                 faq_a1: "Simply tap the \"+\" icon on the Vehicles screen and enter your car's details.",
                 faq_q2: "Can I track multiple vehicles?",
-                faq_a2: "Yes! CarFlo supports unlimited vehicles in your virtual garage.",
+                faq_a2: "Yes! carFlo supports unlimited vehicles in your virtual garage.",
                 faq_q3: "What's included in the free plan?",
                 faq_a3: "You can track one vehicle, log fuel refills, and view basic analytics at no cost.",
                 faq_q4: "How do I upgrade to Premium?",
@@ -1641,10 +2217,34 @@
                 faq_q6: "Is my data safe and backed up?",
                 faq_a6: "Your data is saved locally on your device. Premium users enjoy secure cloud backups.",
                 faq_q7: "Does the app work offline?",
-                faq_a7: "Absolutely! CarFlo works fully offline and syncs your data when you're back online.",
+                faq_a7: "Absolutely! carFlo works fully offline and syncs your data when you're back online.",
                 support_heading: "Still need help?",
                 support_text: "Invite us to help you with anything else you might need.",
-                support_note: "Responses are typically within 24-48 hours."
+                support_note: "Responses are typically within 24-48 hours.",
+                pricing_heading: "Simple, Transparent Pricing",
+                pricing_subtext: "Unlock the full power of carFlo and take control of your vehicle expenses.",
+                pricing_monthly_title: "Monthly",
+                pricing_monthly_price: "2.99 €",
+                pricing_monthly_period: "/ month",
+                pricing_yearly_title: "Yearly",
+                pricing_yearly_price: "24.99 €",
+                pricing_yearly_period: "/ year",
+                pricing_yearly_save: "Save ~30%",
+                pricing_lifetime_title: "Lifetime",
+                pricing_lifetime_price: "Coming Soon",
+                pricing_lifetime_period: "for selected users",
+                pricing_lifetime_badge: "Soon",
+                pricing_lifetime_btn: "Soon",
+                pricing_pro_features_title: "Pro Plan (Professional Package)",
+                pricing_pro_feature_unlimited_vehicles: "Unlimited vehicles: Add and track as many cars as you want.",
+                pricing_pro_feature_unlimited_entries: "Unlimited entries for fuel, maintenance, and reminders.",
+                pricing_pro_feature_stats: "Advanced statistics & data export: Detailed charts and export to PDF/CSV/Excel formats.",
+                pricing_pro_feature_attachments: "Photos & documents: Add car photos and service receipts directly to entries.",
+                pricing_pro_feature_sync: "Cloud backup & sync: Secure cloud backup and data sync between devices.",
+                pricing_pro_feature_import: "Data import: Easily import your existing vehicle data.",
+                pricing_pro_feature_trips: "Business trips: Track and export business trips and mileage for taxes or reports.",
+                pricing_pro_feature_customization: "Personalization: Change accent colors and app styling to your taste.",
+                pricing_cta: "Get Pro Plan"
             },
             sr: {
                 nav_features: "Funkcije",
@@ -1652,9 +2252,9 @@
                 nav_faq: "FAQ",
                 nav_download: "Preuzimanje",
                 hero_title: "Vaš auto. Svaki kilometar. Savršeno ispraćen.",
-                hero_subtext: "CarFlo je vrhunska aplikacija za evidenciju vozila. Pratite gorivo, održavanje, troškove i putovanja — sve na jednom mestu.",
-                hero_btn_ios: "Preuzmi sa App Store-a",
-                hero_btn_android: "Preuzmi sa Google Play-a",
+                hero_subtext: "carFlo je vrhunska aplikacija za evidenciju vozila. Pratite gorivo, održavanje, troškove i putovanja — sve na jednom mestu.",
+                hero_btn_ios: "Preuzmi na App Store",
+                hero_btn_android: "Google Play uskoro",
                 stat_vehicles: "Praćenih vozila",
                 stat_entries: "Unosa u dnevnik",
                 stat_rating: "Ocena aplikacije",
@@ -1687,17 +2287,23 @@
                 screenshots_heading: "Prelepo i jednostavno",
                 screenshots_subtext: "Interfejs dizajniran od strane vozača, za vozače.",
                 screen_dashboard: "Kontrolna tabla",
+                screen_logbook: "Dnevnik",
+                screen_stats: "Statistika",
+                screen_reminders: "Podsetnici",
                 screen_fuel: "Točenje goriva",
                 screen_vehicle: "Lista vozila",
                 screen_analysis: "Analiza",
-                testimonials_heading: "Vožači vole CarFlo",
+                testimonials_heading: "Vožači vole carFlo",
                 test1_quote: '"Konačno aplikacija koja ne pokušava da mi proda osiguranje na svakom koraku. Čista, brza i veoma korisna."',
                 test2_quote: '"Kao neko ko vodi firmu, PDF izveštaji su mi spasili sate i sate ručnog računanja troškova goriva."',
                 test3_quote: '"Podsetnici za servis rade savršeno. Više ne moram da lepim nalepnice na unutrašnju stranu vrata."',
+                test4_quote: '"Sve oko auta mi je konačno na jednom mestu. Najviše mi znače podsetnici za registraciju i servis."',
+                test5_quote: '"Dnevnik je baš brz. Otvorim, unesem kilometražu ili trošak i gotovo za par sekundi."',
+                test6_quote: '"Odlično za praćenje troškova. Tek kad vidiš statistiku, znaš koliko te auto stvarno košta."',
                 download_heading: "Pratite svaki kilometar od danas",
                 download_subtext: "Besplatno preuzimanje. Registracija nije potrebna.",
-                badge_appstore_span: "Preuzmi sa",
-                badge_googleplay_span: "Preuzmi sa",
+                badge_appstore_span: "Preuzmi na",
+                badge_googleplay_span: "Uskoro",
                 footer_tagline: "Pojednostavljeno upravljanje vozilima za vozače širom sveta.",
                 footer_product: "Proizvod",
                 footer_legal: "Pravno",
@@ -1705,16 +2311,16 @@
                 footer_privacy: "Politika privatnosti",
                 footer_terms: "Uslovi korišćenja",
                 footer_delete: "Brisanje naloga",
-                footer_copyright: "&copy; 2026 CarFlo. Sva prava zadržana.",
+                footer_copyright: "© 2026 carFlo. Sva prava zadržana.",
                 footer_made_by: 'Autor: <a href="https://djurke23.github.io/portfolio/" target="_blank" class="footer-credit-link">Djurke23</a>',
                 footer_socials: "Zapratite nas na društvenim mrežama:",
                 swipe_hint: "Prevuci levo/desno",
                 faq_heading: "Često postavljana pitanja",
-                faq_subtext: "Sve što treba da znate o CarFlo aplikaciji.",
+                faq_subtext: "Sve što treba da znate o carFlo aplikaciji.",
                 faq_q1: "Kako da dodam novo vozilo?",
                 faq_a1: "Jednostavno dodirnite \"+\" ikonicu na ekranu vozila i unesite podatke o svom automobilu.",
                 faq_q2: "Mogu li da pratim više vozila?",
-                faq_a2: "Da! CarFlo podržava neograničen broj vozila u vašoj virtuelnoj garaži.",
+                faq_a2: "Da! carFlo podržava neograničen broj vozila u vašoj virtuelnoj garaži.",
                 faq_q3: "Šta je uključeno u besplatni plan?",
                 faq_a3: "Možete pratiti jedno vozilo, beležiti točenja goriva i gledati osnovnu analitiku besplatno.",
                 faq_q4: "Kako da pređem na Premium?",
@@ -1724,10 +2330,35 @@
                 faq_q6: "Da li su moji podaci bezbedni?",
                 faq_a6: "Vaši podaci se čuvaju lokalno na vašem uređaju. Premium korisnici imaju sigurnosne kopije na klaudu.",
                 faq_q7: "Da li aplikacija radi bez interneta?",
-                faq_a7: "Apsolutno! CarFlo radi potpuno oflajn i sinhronizuje podatke kada se ponovo povežete.",
+                faq_a7: "Apsolutno! carFlo radi potpuno oflajn i sinhronizuje podatke kada se ponovo povežete.",
                 support_heading: "I dalje vam treba pomoć?",
                 support_text: "Pišite nam ako imate bilo kakvih dodatnih pitanja ili nedoumica.",
-                support_note: "Odgovaramo u roku od 24-48 sati."
+                support_note: "Odgovaramo u roku od 24-48 sati.",
+                nav_pricing: "Cene",
+                pricing_heading: "Jednostavne i transparentne cene",
+                pricing_subtext: "Otključajte punu snagu carFlo aplikacije i preuzmite kontrolu nad troškovima.",
+                pricing_monthly_title: "Mesečno",
+                pricing_monthly_price: "2,99 €",
+                pricing_monthly_period: "/ mesečno",
+                pricing_yearly_title: "Godišnje",
+                pricing_yearly_price: "24,99 €",
+                pricing_yearly_period: "/ godišnje",
+                pricing_yearly_save: "Ušteda ~30%",
+                pricing_lifetime_title: "Doživotno",
+                pricing_lifetime_price: "Uskoro",
+                pricing_lifetime_period: "za odabrane",
+                pricing_lifetime_badge: "Uskoro",
+                pricing_lifetime_btn: "Uskoro",
+                pricing_pro_features_title: "Pro Plan (Profesionalni paket)",
+                pricing_pro_feature_unlimited_vehicles: "Neograničen broj vozila (dodajte i pratite koliko god želite automobila).",
+                pricing_pro_feature_unlimited_entries: "Unosi za gorivo, servise i podsetnike (bez ikakvih limita).",
+                pricing_pro_feature_stats: "Napredna statistika i izvoz podataka: Detaljni grafikoni i izvoz podataka u PDF/CSV/Excel formate.",
+                pricing_pro_feature_attachments: "Slike i dokumenti (Prilozi): Mogućnost dodavanja fotografija automobila i računa za servise direktno uz unose.",
+                pricing_pro_feature_sync: "Cloud Backup i Sinhronizacija: Sigurnosna kopija u oblaku i sinhronizacija podataka između uređaja.",
+                pricing_pro_feature_import: "Uvoz podataka: Jednostavan uvoz postojećih podataka o vozilima.",
+                pricing_pro_feature_trips: "Poslovna putovanja: Praćenje i izvoz poslovnih putovanja i kilometraže za porez ili izveštaje.",
+                pricing_pro_feature_customization: "Personalizacija: Promena akcentovane boje i izgleda aplikacije po vašem ukusu.",
+                pricing_cta: "Otključaj Pro Plan"
             }
         };
 
@@ -1771,9 +2402,7 @@
         });
 
         // Initialize language
-        if (currentLang === 'sr') {
-            updateLanguage('sr');
-        }
+        updateLanguage(currentLang);
     </script>
 </body>
 
