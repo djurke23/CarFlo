@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0e0f">
+    <meta name="description" content="Pratite sve nove funkcije i poboljšanja u carFlo aplikaciji.">
+    <meta property="og:title" content="carFlo — Changelog">
+    <title>Changelog - What's New in carFlo</title>
+    
+    <!-- Preconnect to Fontshare -->
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "carFlo",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "iOS, Android",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <style>
+        :root, [data-theme="light"] {
+            --color-bg: #f4f4f2;
+            --color-surface: #f9f9f7;
+            --color-surface-2: #ffffff;
+            --color-surface-offset: #ececea;
+            --color-divider: #d1d1ce;
+            --color-border: #c8c8c4;
+            --color-text: #141414;
+            --color-text-muted: #616160;
+            --color-text-faint: #a8a8a6;
+            --color-primary: #0a7c8a;
+            --color-primary-hover: #085f6b;
+            --color-primary-transparent: rgba(10, 124, 138, 0.1);
+            
+            --badge-new-bg: rgba(16, 185, 129, 0.15);
+            --badge-new-text: #059669;
+            --badge-improved-bg: rgba(59, 130, 246, 0.15);
+            --badge-improved-text: #2563eb;
+            --badge-fixed-bg: rgba(107, 114, 128, 0.15);
+            --badge-fixed-text: #4b5563;
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --color-bg: #0d0e0f;
+            --color-surface: #131416;
+            --color-surface-2: #181a1c;
+            --color-surface-offset: #1c1e21;
+            --color-divider: #2a2b2e;
+            --color-border: #333538;
+            --color-text: #e8e9ea;
+            --color-text-muted: #7a7b7d;
+            --color-text-faint: #4a4b4d;
+            --color-primary: #2ab8c8;
+            --color-primary-hover: #1a9aaa;
+            --color-primary-transparent: rgba(42, 184, 200, 0.1);
+            
+            --badge-new-bg: rgba(52, 211, 153, 0.15);
+            --badge-new-text: #34d399;
+            --badge-improved-bg: rgba(96, 165, 250, 0.15);
+            --badge-improved-text: #60a5fa;
+            --badge-fixed-bg: rgba(156, 163, 175, 0.15);
+            --badge-fixed-text: #9ca3af;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Satoshi', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, .clash { font-family: 'Clash Display', sans-serif; font-weight: 600; line-height: 1.2; }
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; text-align: center; }
+        .subtitle { text-align: center; color: var(--color-text-muted); margin-bottom: 4rem; font-size: 1.125rem; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        
+        /* Nav */
+        header { padding: 20px 0; border-bottom: 1px solid var(--color-divider); position: sticky; top: 0; background: var(--color-bg); z-index: 1000; }
+        nav { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;}
+        .logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 700; font-family: 'Clash Display', sans-serif; text-decoration: none; color: inherit; }
+        .logo-svg { width: 32px; height: 32px; stroke: currentColor; fill: none; stroke-width: 2; }
+        
+        .theme-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text); cursor: pointer; transition: 0.3s; }
+        .theme-toggle:hover { transform: rotate(15deg); }
+
+        /* Timeline */
+        .changelog-container { padding: 60px 0; }
+        
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-meta {
+            text-align: right;
+        }
+
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            background: var(--color-primary-transparent);
+            color: var(--color-primary);
+            border-radius: 999px;
+            font-weight: 600;
+            font-family: 'Clash Display', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+        
+        .version-latest {
+            background: var(--badge-new-bg);
+            color: var(--badge-new-text);
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            padding: 0.15rem 0.5rem;
+        }
+
+        .timeline-date {
+            color: var(--color-text-faint);
+            font-size: 0.875rem;
+        }
+
+        .timeline-content {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .change-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .change-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .change-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .change-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            min-width: 110px;
+            text-align: center;
+            margin-top: 0.2rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .badge-new { background: var(--badge-new-bg); color: var(--badge-new-text); }
+        .badge-improved { background: var(--badge-improved-bg); color: var(--badge-improved-text); }
+        .badge-fixed { background: var(--badge-fixed-bg); color: var(--badge-fixed-text); }
+
+        .change-text {
+            color: var(--color-text-muted);
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .timeline-meta {
+                text-align: left;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+            .version-badge { margin-bottom: 0; }
+        }
+
+        footer { padding: 60px 0; border-top: 1px solid var(--color-divider); margin-top: 80px; }
+        .footer-bottom { display: flex; justify-content: space-between; color: var(--color-text-faint); font-size: 0.875rem; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;}
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="./index.html" class="logo">
+                <span>carFlo</span>
+            </a>
+            <div style="display: flex; align-items: center;">
+                <button class="theme-toggle" id="lang-toggle" onclick="toggleLanguage()" aria-label="Switch Language" style="font-weight: 700; font-size: 0.8rem; margin-right: 1rem;">EN</button>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+                    <i data-lucide="moon" id="theme-icon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container changelog-container">
+        <h1 data-i18n="changelog_title">Changelog - What's New</h1>
+        <p class="subtitle" data-i18n="changelog_subtitle">Pratite sve nove funkcije i poboljšanja</p>
+
+        <div id="timeline">
+            <!-- Rendered by JS -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <p data-i18n="footer_copyright">© 2026 carFlo. All rights reserved.</p>
+                <p data-i18n="footer_made_by" style="color: var(--color-text-faint); font-size: 0.75rem;">Made by Djurke23</p>
+            </div>
+            <div class="footer-links" style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                <a href="./index.html" data-i18n="footer_home">Home</a>
+                <a href="./terms.html" data-i18n="footer_terms">Terms of Service</a>
+                <a href="./privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            
+            const icon = document.getElementById('theme-icon');
+            icon.setAttribute('data-lucide', newTheme === 'dark' ? 'moon' : 'sun');
+            lucide.createIcons();
+            
+            document.querySelector("meta[name='theme-color']").setAttribute("content", newTheme === 'dark' ? "#0d0e0f" : "#f4f4f2");
+        }
+
+        const translations = {
+            en: {
+                changelog_title: "Changelog - What's New",
+                changelog_subtitle: "Track all new features and improvements",
+                footer_home: "Home",
+                footer_terms: "Terms of Service",
+                footer_privacy: "Privacy Policy",
+                footer_copyright: "© 2026 carFlo. All rights reserved.",
+                footer_made_by: "Made by Djurke23",
+                badge_new: "NEW",
+                badge_improved: "IMPROVED",
+                badge_fixed: "FIXED",
+                latest: "Latest"
+            },
+            sr: {
+                changelog_title: "Istorija promena",
+                changelog_subtitle: "Pratite sve nove funkcije i poboljšanja",
+                footer_home: "Početna",
+                footer_terms: "Uslovi korišćenja",
+                footer_privacy: "Politika privatnosti",
+                footer_copyright: "© 2026 carFlo. Sva prava zadržana.",
+                footer_made_by: "Autor: Djurke23",
+                badge_new: "NOVO",
+                badge_improved: "POBOLJŠANO",
+                badge_fixed: "POPRAVLJENO",
+                latest: "Najnovije"
+            }
+        };
+
+        let currentLang = localStorage.getItem('preferredLang') || 'en';
+        let changelogData = [];
+
+        function updateLanguage(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            document.getElementById('lang-toggle').innerText = lang === 'en' ? 'SR' : 'EN';
+            localStorage.setItem('preferredLang', lang);
+            currentLang = lang;
+            if (changelogData.length > 0) renderChangelog();
+        }
+
+        function toggleLanguage() {
+            const nextLang = currentLang === 'en' ? 'sr' : 'en';
+            updateLanguage(nextLang);
+        }
+
+        function renderChangelog() {
+            const container = document.getElementById('timeline');
+            container.innerHTML = '';
+
+            changelogData.forEach((release, index) => {
+                const isLatest = index === 0;
+                
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item';
+                
+                let changesHtml = release.changes.map(change => {
+                    const text = typeof change.text === 'object' ? (change.text[currentLang] || change.text['en']) : change.text;
+                    return `
+                        <li class="change-item">
+                            <span class="change-badge badge-${change.type}">
+                                ${translations[currentLang]['badge_' + change.type]}
+                            </span>
+                            <span class="change-text">${text}</span>
+                        </li>
+                    `;
+                }).join('');
+
+                const latestBadge = isLatest ? `<span class="version-badge version-latest">${translations[currentLang].latest}</span>` : '';
+                const title = typeof release.title === 'object' ? (release.title[currentLang] || release.title['en']) : release.title;
+
+                timelineItem.innerHTML = `
+                    <div class="timeline-meta">
+                        <div>
+                            <span class="version-badge">v${release.version}</span>
+                            ${latestBadge}
+                        </div>
+                        <div class="timeline-date">${new Date(release.date).toLocaleDateString(currentLang === 'en' ? 'en-US' : 'sr-RS', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>${title}</h3>
+                        <ul class="change-list">
+                            ${changesHtml}
+                        </ul>
+                    </div>
+                `;
+                
+                container.appendChild(timelineItem);
+            });
+        }
+
+        const fallbackData = [
+          {
+            "version": "1.1.1",
+            "date": "2026-07-12",
+            "title": {
+              "en": "Login & Privacy Improvements",
+              "sr": "Poboljšanja prijave i privatnosti"
+            },
+            "changes": [
+              { "type": "fixed", "text": { "en": "Fixed password reset redirection", "sr": "Popravljeno preusmeravanje nakon resetovanja lozinke" } },
+              { "type": "improved", "text": { "en": "Redesigned landing page with Login, Guest, and Register", "sr": "Redizajnirana početna stranica sa opcijama za prijavu, gosta i registraciju" } },
+              { "type": "improved", "text": { "en": "Improved account deletion (no longer case-sensitive)", "sr": "Poboljšano brisanje naloga (više ne razlikuje mala i velika slova)" } },
+              { "type": "new", "text": { "en": "Added password visibility toggle on login and sign-up", "sr": "Dodata opcija za prikazivanje lozinke prilikom prijave i registracije" } },
+              { "type": "improved", "text": { "en": "Skip vehicle setup automatically if your account already has cars synced", "sr": "Automatsko preskakanje podešavanja vozila ako vaš nalog već ima sinhronizovane automobile" } },
+              { "type": "new", "text": { "en": "Email confirmation required before first login after sign-up", "sr": "Potrebna potvrda e-pošte pre prve prijave nakon registracije" } },
+              { "type": "improved", "text": { "en": "Your data now loads instantly when logging back in — no more starting from scratch", "sr": "Vaši podaci se sada učitavaju trenutno prilikom ponovne prijave — nema više kretanja od nule" } },
+              { "type": "improved", "text": { "en": "Logging out now fully clears your session data for better privacy between accounts", "sr": "Odjavljivanje sada potpuno briše podatke vaše sesije radi bolje privatnosti između naloga" } }
+            ]
+          },
+          {
+            "version": "1.1",
+            "date": "2026-07-07",
+            "title": {
+              "en": "Parking Log, PDF Export & More",
+              "sr": "Dnevnik parkiranja, PDF izvoz i više"
+            },
+            "changes": [
+              { "type": "new", "text": { "en": "Parking Log – Track parking expenses with zone, cost, and SMS details", "sr": "Dnevnik parkiranja – Pratite troškove parkiranja sa zonom, cenom i detaljima SMS-a" } },
+              { "type": "new", "text": { "en": "Unlimited Fuel Entries – Removed the 10-entry limit", "sr": "Neograničeni unosi goriva – Uklonjeno ograničenje od 10 unosa" } },
+              { "type": "improved", "text": { "en": "Free Statistics – First chart now available for all users", "sr": "Besplatna statistika – Prvi grafikon je sada dostupan svim korisnicima" } },
+              { "type": "new", "text": { "en": "PDF Export – Download your vehicle logs and expense history", "sr": "PDF izvoz – Preuzmite dnevnike vašeg vozila i istoriju troškova" } },
+              { "type": "new", "text": { "en": "Distance Units – Choose between kilometers and miles", "sr": "Jedinice udaljenosti – Izaberite između kilometara i milja" } },
+              { "type": "new", "text": { "en": "New App Icons – Exclusive icons for Pro users", "sr": "Nove ikonice aplikacije – Ekskluzivne ikonice za Pro korisnike" } },
+              { "type": "new", "text": { "en": "More Cars – Added new car brands and models", "sr": "Više automobila – Dodati novi brendovi i modeli automobila" } }
+            ]
+          },
+          {
+            "version": "1.0",
+            "date": "2026-07-02",
+            "title": {
+              "en": "App Released",
+              "sr": "Aplikacija je objavljena"
+            },
+            "changes": [
+              { "type": "new", "text": { "en": "carFlo is officially released! Track fuel, maintenance, and expenses seamlessly.", "sr": "carFlo je zvanično objavljen! Pratite gorivo, održavanje i troškove bez napora." } }
+            ]
+          }
+        ];
+
+        async function loadChangelog() {
+            try {
+                const response = await fetch('./data/changelog.json');
+                if (!response.ok) throw new Error("HTTP error " + response.status);
+                changelogData = await response.json();
+            } catch (error) {
+                console.warn("Using local fallback data (CORS block on file:// protocol):", error);
+                changelogData = fallbackData;
+            }
+            renderChangelog();
+        }
+
+        // Initialize
+        updateLanguage(currentLang);
+        loadChangelog();
+    </script>
+</body>
+</html>
