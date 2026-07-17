@@ -93,95 +93,211 @@
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
         
         /* Nav */
-        header { padding: 20px 0; border-bottom: 1px solid var(--color-divider); position: sticky; top: 0; background: var(--color-bg); z-index: 1000; }
+        header { padding: 20px 0; border-bottom: 1px solid var(--color-divider); position: sticky; top: 0; background: var(--color-bg); z-index: 1000; backdrop-filter: blur(12px); }
         nav { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;}
         .logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 700; font-family: 'Clash Display', sans-serif; text-decoration: none; color: inherit; }
-        .logo-svg { width: 32px; height: 32px; stroke: currentColor; fill: none; stroke-width: 2; }
         
         .theme-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text); cursor: pointer; transition: 0.3s; }
         .theme-toggle:hover { transform: rotate(15deg); }
 
-        /* Timeline */
-        .changelog-container { padding: 60px 0; }
-        
-        .timeline-item {
-            display: grid;
-            grid-template-columns: 200px 1fr;
-            gap: 2rem;
-            margin-bottom: 4rem;
-            position: relative;
+        /* Language Dropdown */
+        .lang-dropdown { position: relative; }
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            height: 40px;
+            padding: 0 0.85rem;
+            border-radius: 12px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+            font-family: 'Satoshi', sans-serif;
+        }
+        .lang-btn:hover { background: var(--color-surface-offset); border-color: var(--color-primary); }
+        .lang-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            overflow: hidden;
+            min-width: 150px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            z-index: 200;
+        }
+        .lang-dropdown.open .lang-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .lang-option {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.75rem 1.1rem;
+            font-size: 0.875rem;
+            font-family: 'Satoshi', sans-serif;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text);
+            text-align: left;
+            transition: background 0.15s;
+        }
+        .lang-option:hover { background: var(--color-surface-offset); }
+        .lang-option.active { color: var(--color-primary); font-weight: 600; }
+        .lang-option .flag { font-size: 1.2rem; line-height: 1; }
+
+        /* Changelog Accordion */
+        .changelog-container { padding: 60px 0 80px; }
+
+        .release-item {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .timeline-meta {
-            text-align: right;
+        .release-item:hover {
+            border-color: var(--color-primary);
         }
 
-        .version-badge {
+        .release-item.open {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 1px var(--color-primary-transparent), 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .release-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 1.5rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            font-family: inherit;
+            color: var(--color-text);
+            transition: background 0.2s ease;
+        }
+
+        .release-header:hover {
+            background: var(--color-surface-offset);
+        }
+
+        .release-item.open .release-header {
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .version-pill {
             display: inline-flex;
             align-items: center;
-            padding: 0.25rem 0.75rem;
+            padding: 0.3rem 0.85rem;
             background: var(--color-primary-transparent);
             color: var(--color-primary);
             border-radius: 999px;
-            font-weight: 600;
+            font-weight: 700;
             font-family: 'Clash Display', sans-serif;
-            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
-        
-        .version-latest {
+
+        .version-latest-tag {
             background: var(--badge-new-bg);
             color: var(--badge-new-text);
-            font-size: 0.75rem;
-            margin-left: 0.5rem;
-            padding: 0.15rem 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            flex-shrink: 0;
         }
 
-        .timeline-date {
+        .release-title-group {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .release-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .release-date {
+            font-size: 0.825rem;
             color: var(--color-text-faint);
-            font-size: 0.875rem;
+            margin-top: 0.15rem;
         }
 
-        .timeline-content {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 16px;
-            padding: 2rem;
-            position: relative;
+        .release-chevron {
+            color: var(--color-primary);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
         }
 
-        .timeline-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
+        .release-item.open .release-chevron {
+            transform: rotate(180deg);
+        }
+
+        .release-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .release-body-inner {
+            padding: 1.75rem 2rem 2rem;
         }
 
         .change-list {
             list-style: none;
             padding: 0;
             margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
         }
 
         .change-item {
             display: flex;
             align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .change-item:last-child {
-            margin-bottom: 0;
+            gap: 0.85rem;
         }
 
         .change-badge {
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-size: 0.7rem;
+            font-weight: 700;
             text-transform: uppercase;
-            padding: 0.15rem 0.5rem;
-            border-radius: 4px;
-            min-width: 110px;
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            min-width: 90px;
             text-align: center;
             margin-top: 0.2rem;
             white-space: nowrap;
             flex-shrink: 0;
+            letter-spacing: 0.04em;
         }
 
         .badge-new { background: var(--badge-new-bg); color: var(--badge-new-text); }
@@ -191,24 +307,21 @@
         .change-text {
             color: var(--color-text-muted);
             flex: 1;
+            line-height: 1.55;
         }
 
-        @media (max-width: 768px) {
-            .timeline-item {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            .timeline-meta {
-                text-align: left;
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-            }
-            .version-badge { margin-bottom: 0; }
+        @media (max-width: 600px) {
+            .release-header { padding: 1.25rem 1.25rem; gap: 0.85rem; }
+            .release-body-inner { padding: 1.25rem; }
+            .release-title { font-size: 0.975rem; }
+            .version-pill { font-size: 0.85rem; padding: 0.25rem 0.65rem; }
         }
 
-        footer { padding: 60px 0; border-top: 1px solid var(--color-divider); margin-top: 80px; }
-        .footer-bottom { display: flex; justify-content: space-between; color: var(--color-text-faint); font-size: 0.875rem; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;}
+        footer { padding: 60px 0; border-top: 1px solid var(--color-divider); margin-top: 40px; }
+        .footer-bottom { display: flex; justify-content: space-between; color: var(--color-text-faint); font-size: 0.875rem; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; flex-wrap: wrap; gap: 1rem; }
+        .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+        .footer-links a { color: var(--color-text-faint); text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--color-primary); }
     </style>
 </head>
 <body>
@@ -218,8 +331,22 @@
             <a href="./index.html" class="logo">
                 <span>carFlo</span>
             </a>
-            <div style="display: flex; align-items: center;">
-                <button class="theme-toggle" id="lang-toggle" onclick="toggleLanguage()" aria-label="Switch Language" style="font-weight: 700; font-size: 0.8rem; margin-right: 1rem;">EN</button>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div class="lang-dropdown" id="langDropdown">
+                    <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select Language">
+                        <span id="lang-flag" style="font-size:1.1rem;line-height:1;">&#127468;&#127463;</span>
+                        <span id="lang-code">EN</span>
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="lang-dropdown-menu" id="langMenu">
+                        <button class="lang-option active" id="opt-en" onclick="selectLanguage('en')">
+                            <span class="flag">&#127468;&#127463;</span> English
+                        </button>
+                        <button class="lang-option" id="opt-sr" onclick="selectLanguage('sr')">
+                            <span class="flag">&#127479;&#127480;</span> Srpski
+                        </button>
+                    </div>
+                </div>
                 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
                     <i data-lucide="moon" id="theme-icon"></i>
                 </button>
@@ -228,7 +355,7 @@
     </header>
 
     <main class="container changelog-container">
-        <h1 data-i18n="changelog_title">Changelog - What's New</h1>
+        <h1 data-i18n="changelog_title">Changelog — What's New</h1>
         <p class="subtitle" data-i18n="changelog_subtitle">Pratite sve nove funkcije i poboljšanja</p>
 
         <div id="timeline">
@@ -242,7 +369,7 @@
                 <p data-i18n="footer_copyright">© 2026 carFlo. All rights reserved.</p>
                 <p data-i18n="footer_made_by" style="color: var(--color-text-faint); font-size: 0.75rem;">Made by Djurke23</p>
             </div>
-            <div class="footer-links" style="display: flex; gap: 2rem; flex-wrap: wrap;">
+            <div class="footer-links">
                 <a href="./index.html" data-i18n="footer_home">Home</a>
                 <a href="./terms.html" data-i18n="footer_terms">Terms of Service</a>
                 <a href="./privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
@@ -268,7 +395,7 @@
 
         const translations = {
             en: {
-                changelog_title: "Changelog - What's New",
+                changelog_title: "Changelog — What's New",
                 changelog_subtitle: "Track all new features and improvements",
                 footer_home: "Home",
                 footer_terms: "Terms of Service",
@@ -301,19 +428,58 @@
         function updateLanguage(lang) {
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
-                if (translations[lang][key]) {
+                if (translations[lang] && translations[lang][key]) {
                     element.innerHTML = translations[lang][key];
                 }
             });
-            document.getElementById('lang-toggle').innerText = lang === 'en' ? 'SR' : 'EN';
             localStorage.setItem('preferredLang', lang);
             currentLang = lang;
+            // Update dropdown UI
+            const flagEl = document.getElementById('lang-flag');
+            const codeEl = document.getElementById('lang-code');
+            if (flagEl) flagEl.innerHTML = lang === 'en' ? '&#127468;&#127463;' : '&#127479;&#127480;';
+            if (codeEl) codeEl.textContent = lang.toUpperCase();
+            document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
+            const activeOpt = document.getElementById('opt-' + lang);
+            if (activeOpt) activeOpt.classList.add('active');
+            
             if (changelogData.length > 0) renderChangelog();
         }
+
+        function toggleLangDropdown() {
+            const dd = document.getElementById('langDropdown');
+            if (dd) dd.classList.toggle('open');
+        }
+
+        function selectLanguage(lang) {
+            const dd = document.getElementById('langDropdown');
+            if (dd) dd.classList.remove('open');
+            updateLanguage(lang);
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const dd = document.getElementById('langDropdown');
+            if (dd && !dd.contains(e.target)) dd.classList.remove('open');
+        });
 
         function toggleLanguage() {
             const nextLang = currentLang === 'en' ? 'sr' : 'en';
             updateLanguage(nextLang);
+        }
+
+        function toggleRelease(index) {
+            const item = document.getElementById('release-' + index);
+            const body = document.getElementById('body-' + index);
+            const isOpen = item.classList.contains('open');
+
+            if (isOpen) {
+                item.classList.remove('open');
+                body.style.maxHeight = '0';
+            } else {
+                item.classList.add('open');
+                body.style.maxHeight = body.scrollHeight + 'px';
+            }
         }
 
         function renderChangelog() {
@@ -322,9 +488,6 @@
 
             changelogData.forEach((release, index) => {
                 const isLatest = index === 0;
-                
-                const timelineItem = document.createElement('div');
-                timelineItem.className = 'timeline-item';
                 
                 let changesHtml = release.changes.map(change => {
                     const text = typeof change.text === 'object' ? (change.text[currentLang] || change.text['en']) : change.text;
@@ -338,30 +501,65 @@
                     `;
                 }).join('');
 
-                const latestBadge = isLatest ? `<span class="version-badge version-latest">${translations[currentLang].latest}</span>` : '';
+                const latestBadge = isLatest ? `<span class="version-latest-tag">${translations[currentLang].latest}</span>` : '';
                 const title = typeof release.title === 'object' ? (release.title[currentLang] || release.title['en']) : release.title;
+                const dateStr = new Date(release.date).toLocaleDateString(currentLang === 'en' ? 'en-US' : 'sr-RS', { month: 'short', day: 'numeric', year: 'numeric' });
 
-                timelineItem.innerHTML = `
-                    <div class="timeline-meta">
-                        <div>
-                            <span class="version-badge">v${release.version}</span>
-                            ${latestBadge}
+                const releaseEl = document.createElement('div');
+                releaseEl.className = 'release-item' + (isLatest ? ' open' : '');
+                releaseEl.id = 'release-' + index;
+
+                releaseEl.innerHTML = `
+                    <button class="release-header" onclick="toggleRelease(${index})" aria-expanded="${isLatest}">
+                        <span class="version-pill">v${release.version}</span>
+                        ${latestBadge}
+                        <div class="release-title-group">
+                            <div class="release-title">${title}</div>
+                            <div class="release-date">${dateStr}</div>
                         </div>
-                        <div class="timeline-date">${new Date(release.date).toLocaleDateString(currentLang === 'en' ? 'en-US' : 'sr-RS', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
-                    </div>
-                    <div class="timeline-content">
-                        <h3>${title}</h3>
-                        <ul class="change-list">
-                            ${changesHtml}
-                        </ul>
+                        <i data-lucide="chevron-down" class="release-chevron"></i>
+                    </button>
+                    <div class="release-body" id="body-${index}" style="${isLatest ? 'max-height: 9999px;' : 'max-height: 0;'}">
+                        <div class="release-body-inner">
+                            <ul class="change-list">
+                                ${changesHtml}
+                            </ul>
+                        </div>
                     </div>
                 `;
                 
-                container.appendChild(timelineItem);
+                container.appendChild(releaseEl);
             });
+
+            lucide.createIcons();
+
+            // After render, fix latest open height to actual scrollHeight
+            const latestBody = document.getElementById('body-0');
+            if (latestBody) {
+                latestBody.style.maxHeight = latestBody.scrollHeight + 'px';
+            }
         }
 
         const fallbackData = [
+          {
+            "version": "1.2",
+            "date": "2026-07-17",
+            "title": {
+              "en": "Car Wash Logbook, EV Charging, Tolls & More",
+              "sr": "Dnevnik pranja, EV punjenje, putarine i više"
+            },
+            "changes": [
+              { "type": "new", "text": { "en": "Car Wash Logbook — Track every car wash in detail with categories including deep cleaning, detailing, interior, exterior, full wash, and self-service. Log location, duration, cost, and trip type (personal/business).", "sr": "Dnevnik pranja automobila — Pratite svako pranje u detalje sa kategorijama: duboko čišćenje, detailing, enterijer, eksterijer, kompletno pranje i samo-uslugo. Unesite lokaciju, trajanje, cenu i vrstu puta (lični/poslovni)." } },
+              { "type": "new", "text": { "en": "Toll Tracking — New Logbook tab for road tolls. Log date, route (e.g. Belgrade–Novi Sad), amount, and notes, with total toll spend visible at a glance.", "sr": "Praćenje putarina — Nova kartica u dnevniku za putarine. Unesite datum, rutu (npr. Beograd–Novi Sad), iznos i napomene, sa ukupnom potrošnjom na prvi pogled." } },
+              { "type": "new", "text": { "en": "EV Charging Log — Full electric and hybrid vehicle charging tracker: energy added (kWh), cost, charge duration, battery start/end percentage, and charging station name and location.", "sr": "Evidencija punjenja EV — Kompletni trekер punjenja za električna i hibridna vozila: dodata energija (kWh), cena, trajanje punjenja, početni/krajnji procenat baterije i naziv i lokacija punjača." } },
+              { "type": "improved", "text": { "en": "Enhanced Statistics — Car wash logs, tolls, charging sessions, and custom expenses are now fully integrated into total spend KPIs, monthly breakdowns, and spend charts (bar & donut).", "sr": "Poboljšana statistika — Dnevnici pranja, putarine, sesije punjenja i prilagođeni troškovi su sada potpuno integrisani u ukupne KPI-ove, mesečne preglede i grafikone trošenja (stubičasti i krofna)." } },
+              { "type": "improved", "text": { "en": "Unified Currency — Choose once (RSD or EUR) and it applies consistently across all expense categories throughout the app.", "sr": "Jedinstvena valuta — Izaberite jednom (RSD ili EUR) i primenjuje se konzistentno na sve kategorije troškova u celoj aplikaciji." } },
+              { "type": "new", "text": { "en": "Expanded Vehicle Database — Added 80+ new car brands, including Yugo, Zastava, BYD, NIO, Xpeng, Cupra, Omoda, Polestar, Genesis, Lucid, Rivian, Chery, DFSK, and more.", "sr": "Proširena baza vozila — Dodato 80+ novih brendova automobila, uključujući Yugo, Zastavu, BYD, NIO, Xpeng, Cupra, Omoda, Polestar, Genesis, Lucid, Rivian, Chery, DFSK i više." } },
+              { "type": "improved", "text": { "en": "Settings Redesign — Cleaner settings page with smooth collapsible menus for app icon and accent color customization.", "sr": "Redizajn podešavanja — Čistija stranica podešavanja sa glatkim padajućim menijima za prilagođavanje ikonice aplikacije i boje naglaska." } },
+              { "type": "improved", "text": { "en": "Cloud Sync & Stability — Improved backup reliability for new data categories, and resolved bundle validation issues for a smoother experience.", "sr": "Sinhronizacija i stabilnost — Poboljšana pouzdanost rezervne kopije za nove kategorije podataka i rešeni problemi validacije paketa za glatkije iskustvo." } },
+              { "type": "fixed", "text": { "en": "Bug Fixes — Fixed category title display in expense management dialog.", "sr": "Ispravke grešaka — Ispravljen prikaz naslova kategorije u dijalogu upravljanja troškovima." } }
+            ]
+          },
           {
             "version": "1.1.1",
             "date": "2026-07-12",

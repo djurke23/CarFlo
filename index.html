@@ -274,8 +274,9 @@
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 1.25rem;
             align-items: center;
+            font-size: 0.9rem;
         }
 
         .nav-links a:hover {
@@ -306,6 +307,73 @@
             background: var(--color-surface-offset);
             transform: rotate(15deg);
         }
+
+        /* Language Dropdown */
+        .lang-dropdown { position: relative; }
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            height: 40px;
+            padding: 0 0.85rem;
+            border-radius: 12px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-family: 'Satoshi', sans-serif;
+        }
+        .lang-btn:hover { background: var(--color-surface-offset); border-color: var(--color-primary); }
+        .lang-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            overflow: hidden;
+            min-width: 150px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            z-index: 200;
+        }
+        .lang-dropdown.open .lang-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .lang-option {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.75rem 1.1rem;
+            font-size: 0.875rem;
+            font-family: 'Satoshi', sans-serif;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text);
+            text-align: left;
+            transition: background 0.15s;
+        }
+        .lang-option:hover { background: var(--color-surface-offset); }
+        .lang-option.active { color: var(--color-primary); font-weight: 600; }
+        .lang-option .flag { font-size: 1.2rem; line-height: 1; }
+
+        /* Official Store Badges */
+        .store-badges { display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+        .official-store-badge { display: inline-block; transition: var(--transition); border-radius: 10px; }
+        .official-store-badge img { height: 54px; width: auto; display: block; border-radius: 10px; }
+        .official-store-badge:hover { transform: translateY(-3px); filter: brightness(1.05); }
+        .official-store-badge.unavailable { opacity: 0.45; cursor: default; pointer-events: none; }
 
         .mobile-menu-btn {
             display: none;
@@ -358,12 +426,14 @@
 
         /* Hero */
         .hero {
-            height: 100dvh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
             background: radial-gradient(circle at 70% 30%, var(--color-primary-transparent), transparent 70%);
+            padding-top: 140px;
+            padding-bottom: 80px;
         }
 
         .hero-grid {
@@ -394,27 +464,29 @@
             position: relative;
             display: flex;
             justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            background: radial-gradient(circle, var(--color-primary-transparent), transparent 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
         }
 
         .hero-image img {
-            max-width: 100%;
+            position: relative;
+            z-index: 1;
+            max-width: 360px;
+            width: 100%;
             height: auto;
-            border-radius: 40px;
-            transform: rotate(-5deg) translateY(20px);
-            box-shadow: -20px 40px 80px rgba(0, 0, 0, 0.5);
-            animation: heroFloat 6s ease-in-out infinite;
-        }
-
-        @keyframes heroFloat {
-
-            0%,
-            100% {
-                transform: rotate(-5deg) translateY(20px);
-            }
-
-            50% {
-                transform: rotate(-3deg) translateY(-10px);
-            }
+            border-radius: 36px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255,255,255,0.05);
+            display: block;
         }
 
         /* Stats Bar */
@@ -1069,10 +1141,8 @@
             }
 
             .hero-image img {
-                transform: rotate(0) translateY(0);
+                max-width: 300px;
                 margin-inline: auto;
-                height: 500px;
-                width: auto;
             }
 
             .features-grid {
@@ -1385,8 +1455,21 @@
                     <li><a href="#download" data-i18n="nav_download">Download</a></li>
                 </ul>
                 <div class="nav-actions">
-                    <button class="theme-toggle" id="lang-toggle" onclick="toggleLanguage()"
-                        aria-label="Switch Language" style="font-weight: 700; font-size: 0.8rem;">EN</button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select Language">
+                            <span id="lang-flag" style="font-size:1.1rem;line-height:1;">&#127468;&#127463;</span>
+                            <span id="lang-code">EN</span>
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+                        <div class="lang-dropdown-menu" id="langMenu">
+                            <button class="lang-option active" id="opt-en" onclick="selectLanguage('en')">
+                                <span class="flag">&#127468;&#127463;</span> English
+                            </button>
+                            <button class="lang-option" id="opt-sr" onclick="selectLanguage('sr')">
+                                <span class="flag">&#127479;&#127480;</span> Srpski
+                            </button>
+                        </div>
+                    </div>
                     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
                         <i data-lucide="moon" id="theme-icon"></i>
                     </button>
@@ -1406,12 +1489,14 @@
                         <h1 class="hero-title" data-i18n="hero_title">Your Car. Every Mile. Perfectly Tracked.</h1>
                         <p class="hero-subtext" data-i18n="hero_subtext">carFlo is the ultimate vehicle logbook app. Log
                             fuel, maintenance, expenses, and trips — all in one place.</p>
-                        <div class="flex gap-4 hero-buttons" style="flex-wrap: wrap;">
+                        <div class="flex gap-4 hero-buttons" style="flex-wrap: wrap; align-items: center;">
                             <a href="https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970"
-                                target="_blank" class="btn btn-primary"><i data-lucide="apple"></i> <span
-                                    data-i18n="hero_btn_ios">Download on App Store</span></a>
-                            <a href="#download" class="btn btn-outline"><i data-lucide="play"></i> <span
-                                    data-i18n="hero_btn_android">Google Play Coming Soon</span></a>
+                                target="_blank" class="official-store-badge" aria-label="Download on the App Store">
+                                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height: 52px; width: auto;">
+                            </a>
+                            <a class="official-store-badge unavailable" aria-label="Google Play Coming Soon">
+                                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Google Play Coming Soon" style="height: 52px; width: auto;">
+                            </a>
                         </div>
                     </div>
                     <div class="hero-image reveal">
@@ -1543,35 +1628,43 @@
                     <div class="features-list-grid">
                         <div class="feature-item-list">
                             <i data-lucide="check" class="check-icon"></i>
-                            <span data-i18n="pricing_pro_feature_unlimited_vehicles">Neograničen broj vozila...</span>
+                            <span data-i18n="pricing_pro_feature_unlimited_vehicles">Neograničen broj vozila — dodaj i prati koliko god automobila želiš</span>
                         </div>
                         <div class="feature-item-list">
                             <i data-lucide="check" class="check-icon"></i>
-                            <span data-i18n="pricing_pro_feature_unlimited_entries">Neograničeni unosi...</span>
+                            <span data-i18n="pricing_pro_feature_unlimited_entries">Neograničeni unosi — bez ograničenja na servise i podsetnike</span>
                         </div>
                         <div class="feature-item-list">
                             <i data-lucide="check" class="check-icon"></i>
-                            <span data-i18n="pricing_pro_feature_stats">Napredna statistika...</span>
+                            <span data-i18n="pricing_pro_feature_stats">Napredna statistika i izvoz — detaljni uvidi, grafikoni i CSV/Excel/PDF izvoz</span>
                         </div>
                         <div class="feature-item-list">
                             <i data-lucide="check" class="check-icon"></i>
-                            <span data-i18n="pricing_pro_feature_attachments">Slike i dokumenti...</span>
+                            <span data-i18n="pricing_pro_feature_attachments">Slike i dokumenti — dodaj račune za popravke i fotografije automobila</span>
                         </div>
                         <div class="feature-item-list">
                             <i data-lucide="check" class="check-icon"></i>
-                            <span data-i18n="pricing_pro_feature_sync">Cloud backup...</span>
+                            <span data-i18n="pricing_pro_feature_themes">Prilagođene teme i ikonice — promeni boje i ikonicu aplikacije po svom ukusu</span>
                         </div>
                         <div class="feature-item-list">
                             <i data-lucide="check" class="check-icon"></i>
-                            <span data-i18n="pricing_pro_feature_import">Jednostavan uvoz...</span>
+                            <span data-i18n="pricing_pro_feature_sync">Cloud backup i sinhronizacija — tvoji podaci su bezbedni i dostupni na svim uređajima</span>
                         </div>
                         <div class="feature-item-list">
                             <i data-lucide="check" class="check-icon"></i>
-                            <span data-i18n="pricing_pro_feature_trips">Poslovna putovanja...</span>
+                            <span data-i18n="pricing_pro_feature_import">Upravljanje podacima — jednostavan uvoz i upravljanje podacima</span>
                         </div>
                         <div class="feature-item-list">
                             <i data-lucide="check" class="check-icon"></i>
-                            <span data-i18n="pricing_pro_feature_customization">Personalizacija...</span>
+                            <span data-i18n="pricing_pro_feature_trips">Poslovna putovanja — prati i izvozi poslovna putovanja za poreze i izveštaje</span>
+                        </div>
+                        <div class="feature-item-list">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <span data-i18n="pricing_pro_feature_categories">Custom Categories — Create unlimited custom expense categories for complete tracking flexibility.</span>
+                        </div>
+                        <div class="feature-item-list">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <span data-i18n="pricing_pro_feature_support">Priority Support — Get prioritized responses and dedicated help from our support team.</span>
                         </div>
                     </div>
                 </div>
@@ -1726,19 +1819,13 @@
                 </p>
                 <div class="store-badges">
                     <a href="https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970" target="_blank"
-                        class="badge active-link" aria-label="Download on App Store">
-                        <i data-lucide="apple" size="32"></i>
-                        <div class="badge-text">
-                            <span data-i18n="badge_appstore_span">Coming Soon</span>
-                            <strong>App Store</strong>
-                        </div>
+                        class="official-store-badge" aria-label="Download on the App Store">
+                        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
+                             alt="Download on the App Store" loading="lazy">
                     </a>
-                    <a href="#download" class="badge" aria-label="Google Play coming soon">
-                        <i data-lucide="play" size="32"></i>
-                        <div class="badge-text">
-                            <span data-i18n="badge_googleplay_span">Coming Soon</span>
-                            <strong>Google Play</strong>
-                        </div>
+                    <a class="official-store-badge unavailable" aria-label="Get it on Google Play - Coming Soon">
+                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                             alt="Get it on Google Play" loading="lazy">
                     </a>
                 </div>
             </div>
@@ -2239,15 +2326,17 @@
                 pricing_lifetime_period: "for selected users",
                 pricing_lifetime_badge: "Soon",
                 pricing_lifetime_btn: "Soon",
-                pricing_pro_features_title: "Pro Plan (Professional Package)",
-                pricing_pro_feature_unlimited_vehicles: "Unlimited vehicles: Add and track as many cars as you want.",
-                pricing_pro_feature_unlimited_entries: "Unlimited entries for fuel, maintenance, and reminders.",
-                pricing_pro_feature_stats: "Advanced statistics & data export: Detailed charts and export to PDF/CSV/Excel formats.",
-                pricing_pro_feature_attachments: "Photos & documents: Add car photos and service receipts directly to entries.",
-                pricing_pro_feature_sync: "Cloud backup & sync: Secure cloud backup and data sync between devices.",
-                pricing_pro_feature_import: "Data import: Easily import your existing vehicle data.",
-                pricing_pro_feature_trips: "Business trips: Track and export business trips and mileage for taxes or reports.",
-                pricing_pro_feature_customization: "Personalization: Change accent colors and app styling to your taste.",
+                pricing_pro_features_title: "Pro Plan — Professional Package",
+                pricing_pro_feature_unlimited_vehicles: "Unlimited Vehicles — Add and track as many cars as you need.",
+                pricing_pro_feature_unlimited_entries: "Unlimited Entries — No limits on fuel, service, or reminder logs.",
+                pricing_pro_feature_stats: "Advanced Stats & Export — Detailed insights, charts, and CSV/Excel/PDF export.",
+                pricing_pro_feature_attachments: "Photos & Attachments — Attach repair invoices and car photos to every entry.",
+                pricing_pro_feature_themes: "Custom Themes & App Icons — Change app colors and icons to match your style.",
+                pricing_pro_feature_sync: "Cloud Backup & Sync — Your data is safe and synced across all your devices.",
+                pricing_pro_feature_import: "Data Management — Import and manage your existing vehicle data with ease.",
+                pricing_pro_feature_trips: "Business Trips — Track and export business trips for tax & reporting.",
+                pricing_pro_feature_categories: "Custom Categories — Create unlimited custom expense categories.",
+                pricing_pro_feature_support: "Priority Support — Get prioritized help from our dedicated support team.",
                 pricing_cta: "Get Pro Plan"
             },
             sr: {
@@ -2354,15 +2443,17 @@
                 pricing_lifetime_period: "za odabrane",
                 pricing_lifetime_badge: "Uskoro",
                 pricing_lifetime_btn: "Uskoro",
-                pricing_pro_features_title: "Pro Plan (Profesionalni paket)",
-                pricing_pro_feature_unlimited_vehicles: "Neograničen broj vozila (dodajte i pratite koliko god želite automobila).",
-                pricing_pro_feature_unlimited_entries: "Unosi za gorivo, servise i podsetnike (bez ikakvih limita).",
-                pricing_pro_feature_stats: "Napredna statistika i izvoz podataka: Detaljni grafikoni i izvoz podataka u PDF/CSV/Excel formate.",
-                pricing_pro_feature_attachments: "Slike i dokumenti (Prilozi): Mogućnost dodavanja fotografija automobila i računa za servise direktno uz unose.",
-                pricing_pro_feature_sync: "Cloud Backup i Sinhronizacija: Sigurnosna kopija u oblaku i sinhronizacija podataka između uređaja.",
-                pricing_pro_feature_import: "Uvoz podataka: Jednostavan uvoz postojećih podataka o vozilima.",
-                pricing_pro_feature_trips: "Poslovna putovanja: Praćenje i izvoz poslovnih putovanja i kilometraže za porez ili izveštaje.",
-                pricing_pro_feature_customization: "Personalizacija: Promena akcentovane boje i izgleda aplikacije po vašem ukusu.",
+                pricing_pro_features_title: "Pro Plan — Profesionalni paket",
+                pricing_pro_feature_unlimited_vehicles: "Neograničen broj vozila — Dodajte i pratite koliko god automobila želite.",
+                pricing_pro_feature_unlimited_entries: "Neograničeni unosi — Bez limita za gorivo, servise i podsetnike.",
+                pricing_pro_feature_stats: "Napredna statistika i izvoz — Detaljni uvidi, grafikoni i izvoz u CSV/Excel/PDF format.",
+                pricing_pro_feature_attachments: "Slike i dokumenti — Dodajte račune za popravke i fotografije automobila uz svaki unos.",
+                pricing_pro_feature_themes: "Prilagođene teme i ikonice — Promenite boje i ikonicu aplikacije po svom ukusu.",
+                pricing_pro_feature_sync: "Cloud backup i sinhronizacija — Vaši podaci su bezbedni i dostupni na svim uređajima.",
+                pricing_pro_feature_import: "Upravljanje podacima — Jednostavan uvoz i upravljanje postojećim podacima o vozilima.",
+                pricing_pro_feature_trips: "Poslovna putovanja — Pratite i izvozite poslovna putovanja za poreze i izveštaje.",
+                pricing_pro_feature_categories: "Prilagođene kategorije — Kreirajte neograničen broj kategorija troškova.",
+                pricing_pro_feature_support: "Prioritetna podrška — Dobijte prioritetnu pomoć od naše ekipe za podršku.",
                 pricing_cta: "Otključaj Pro Plan"
             }
         };
@@ -2372,7 +2463,7 @@
         function updateLanguage(lang) {
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
-                if (translations[lang][key]) {
+                if (translations[lang] && translations[lang][key]) {
                     if (key === 'footer_made_by') {
                         element.innerHTML = translations[lang][key];
                     } else {
@@ -2380,10 +2471,34 @@
                     }
                 }
             });
-            document.getElementById('lang-toggle').innerText = lang === 'en' ? 'SR' : 'EN';
             localStorage.setItem('preferredLang', lang);
             currentLang = lang;
+            // Update dropdown UI
+            const flagEl = document.getElementById('lang-flag');
+            const codeEl = document.getElementById('lang-code');
+            if (flagEl) flagEl.innerHTML = lang === 'en' ? '&#127468;&#127463;' : '&#127479;&#127480;';
+            if (codeEl) codeEl.textContent = lang.toUpperCase();
+            document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
+            const activeOpt = document.getElementById('opt-' + lang);
+            if (activeOpt) activeOpt.classList.add('active');
         }
+
+        function toggleLangDropdown() {
+            const dd = document.getElementById('langDropdown');
+            if (dd) dd.classList.toggle('open');
+        }
+
+        function selectLanguage(lang) {
+            const dd = document.getElementById('langDropdown');
+            if (dd) dd.classList.remove('open');
+            updateLanguage(lang);
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const dd = document.getElementById('langDropdown');
+            if (dd && !dd.contains(e.target)) dd.classList.remove('open');
+        });
 
         function toggleLanguage() {
             const nextLang = currentLang === 'en' ? 'sr' : 'en';

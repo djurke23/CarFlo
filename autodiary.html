@@ -230,6 +230,66 @@
             transform: rotate(15deg);
         }
 
+        /* Language Dropdown */
+        .lang-dropdown { position: relative; }
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            height: 40px;
+            padding: 0 0.85rem;
+            border-radius: 12px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-family: 'Satoshi', sans-serif;
+        }
+        .lang-btn:hover { background: var(--color-surface-offset); border-color: var(--color-primary); }
+        .lang-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            overflow: hidden;
+            min-width: 150px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            z-index: 200;
+        }
+        .lang-dropdown.open .lang-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .lang-option {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.75rem 1.1rem;
+            font-size: 0.875rem;
+            font-family: 'Satoshi', sans-serif;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text);
+            text-align: left;
+            transition: background 0.15s;
+        }
+        .lang-option:hover { background: var(--color-surface-offset); }
+        .lang-option.active { color: var(--color-primary); font-weight: 600; }
+        .lang-option .flag { font-size: 1.2rem; line-height: 1; }
+
         .mobile-menu-btn {
             display: none;
             font-size: 1.5rem;
@@ -708,7 +768,21 @@
                     <li><a href="#download" data-i18n="nav_download">Download</a></li>
                 </ul>
                 <div class="nav-actions">
-                    <button class="theme-toggle" id="lang-toggle" onclick="toggleLanguage()" aria-label="Switch Language" style="font-weight: 700; font-size: 0.8rem;">EN</button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select Language">
+                            <span id="lang-flag" style="font-size:1.1rem;line-height:1;">&#127468;&#127463;</span>
+                            <span id="lang-code">EN</span>
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+                        <div class="lang-dropdown-menu" id="langMenu">
+                            <button class="lang-option active" id="opt-en" onclick="selectLanguage('en')">
+                                <span class="flag">&#127468;&#127463;</span> English
+                            </button>
+                            <button class="lang-option" id="opt-sr" onclick="selectLanguage('sr')">
+                                <span class="flag">&#127479;&#127480;</span> Srpski
+                            </button>
+                        </div>
+                    </div>
                     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
                         <i data-lucide="moon" id="theme-icon"></i>
                     </button>
@@ -1179,14 +1253,38 @@
         function updateLanguage(lang) {
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
-                if (translations[lang][key]) {
+                if (translations[lang] && translations[lang][key]) {
                     element.innerText = translations[lang][key];
                 }
             });
-            document.getElementById('lang-toggle').innerText = lang === 'en' ? 'SR' : 'EN';
             localStorage.setItem('preferredLang', lang);
             currentLang = lang;
+            // Update dropdown UI
+            const flagEl = document.getElementById('lang-flag');
+            const codeEl = document.getElementById('lang-code');
+            if (flagEl) flagEl.innerHTML = lang === 'en' ? '&#127468;&#127463;' : '&#127479;&#127480;';
+            if (codeEl) codeEl.textContent = lang.toUpperCase();
+            document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
+            const activeOpt = document.getElementById('opt-' + lang);
+            if (activeOpt) activeOpt.classList.add('active');
         }
+
+        function toggleLangDropdown() {
+            const dd = document.getElementById('langDropdown');
+            if (dd) dd.classList.toggle('open');
+        }
+
+        function selectLanguage(lang) {
+            const dd = document.getElementById('langDropdown');
+            if (dd) dd.classList.remove('open');
+            updateLanguage(lang);
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const dd = document.getElementById('langDropdown');
+            if (dd && !dd.contains(e.target)) dd.classList.remove('open');
+        });
 
         function toggleLanguage() {
             const nextLang = currentLang === 'en' ? 'sr' : 'en';
@@ -1194,9 +1292,7 @@
         }
 
         // Initialize language
-        if (currentLang === 'sr') {
-            updateLanguage('sr');
-        }
+        updateLanguage(currentLang);
     </script>
 </body>
 </html>
