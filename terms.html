@@ -132,7 +132,7 @@
         }
         .lang-option:hover { background: var(--color-surface-offset); }
         .lang-option.active { color: var(--color-primary); font-weight: 600; }
-        .lang-option .flag { font-size: 1.2rem; line-height: 1; }
+        .flag-icon { width: 1.2rem; height: 1.2rem; display: block; flex: 0 0 auto; object-fit: cover; }
 
         /* Layout */
         .legal-layout { display: grid; grid-template-columns: 280px 1fr; gap: 4rem; padding: 80px 0; }
@@ -168,16 +168,16 @@
                 <div style="display: flex; align-items: center; gap: 1rem;">
                     <div class="lang-dropdown" id="langDropdown">
                         <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select Language">
-                            <span id="lang-flag" style="font-size:1.1rem;line-height:1;">&#127468;&#127463;</span>
+                            <img id="lang-flag" class="flag-icon" src="./flags/us.svg" alt="">
                             <span id="lang-code">EN</span>
                             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                         </button>
                         <div class="lang-dropdown-menu" id="langMenu">
                             <button class="lang-option active" id="opt-en" onclick="selectLanguage('en')">
-                                <span class="flag">&#127468;&#127463;</span> English
+                                <img class="flag-icon" src="./flags/us.svg" alt=""> English
                             </button>
                             <button class="lang-option" id="opt-sr" onclick="selectLanguage('sr')">
-                                <span class="flag">&#127479;&#127480;</span> Srpski
+                                <img class="flag-icon" src="./flags/rs.svg" alt=""> Srpski
                             </button>
                         </div>
                     </div>
@@ -447,7 +447,7 @@
             // Update dropdown UI
             const flagEl = document.getElementById('lang-flag');
             const codeEl = document.getElementById('lang-code');
-            if (flagEl) flagEl.innerHTML = lang === 'en' ? '&#127468;&#127463;' : '&#127479;&#127480;';
+            if (flagEl) flagEl.src = './flags/' + (lang === 'en' ? 'us' : 'rs') + '.svg';
             if (codeEl) codeEl.textContent = lang.toUpperCase();
             document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
             const activeOpt = document.getElementById('opt-' + lang);

@@ -158,7 +158,7 @@
         }
         .lang-option:hover { background: var(--color-surface-offset); }
         .lang-option.active { color: var(--color-primary); font-weight: 600; }
-        .lang-option .flag { font-size: 1.2rem; line-height: 1; }
+        .flag-icon { width: 1.2rem; height: 1.2rem; display: block; flex: 0 0 auto; object-fit: cover; }
 
         /* Changelog Accordion */
         .changelog-container { padding: 60px 0 80px; }
@@ -334,16 +334,16 @@
             <div style="display: flex; align-items: center; gap: 1rem;">
                 <div class="lang-dropdown" id="langDropdown">
                     <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select Language">
-                        <span id="lang-flag" style="font-size:1.1rem;line-height:1;">&#127468;&#127463;</span>
+                        <img id="lang-flag" class="flag-icon" src="./flags/us.svg" alt="">
                         <span id="lang-code">EN</span>
                         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                     </button>
                     <div class="lang-dropdown-menu" id="langMenu">
                         <button class="lang-option active" id="opt-en" onclick="selectLanguage('en')">
-                            <span class="flag">&#127468;&#127463;</span> English
+                            <img class="flag-icon" src="./flags/us.svg" alt=""> English
                         </button>
                         <button class="lang-option" id="opt-sr" onclick="selectLanguage('sr')">
-                            <span class="flag">&#127479;&#127480;</span> Srpski
+                            <img class="flag-icon" src="./flags/rs.svg" alt=""> Srpski
                         </button>
                     </div>
                 </div>
@@ -437,7 +437,7 @@
             // Update dropdown UI
             const flagEl = document.getElementById('lang-flag');
             const codeEl = document.getElementById('lang-code');
-            if (flagEl) flagEl.innerHTML = lang === 'en' ? '&#127468;&#127463;' : '&#127479;&#127480;';
+            if (flagEl) flagEl.src = './flags/' + (lang === 'en' ? 'us' : 'rs') + '.svg';
             if (codeEl) codeEl.textContent = lang.toUpperCase();
             document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
             const activeOpt = document.getElementById('opt-' + lang);
@@ -541,6 +541,36 @@
         }
 
         const fallbackData = [
+          {
+            "version": "1.4.0",
+            "date": "2026-08-25",
+            "title": {
+              "en": "Parking Timer, Fines Logbook & Widgets",
+              "sr": "Tajmer za parking, dnevnik kazni i vidžeti"
+            },
+            "changes": [
+              { "type": "new", "text": { "en": "Parking Timer — Live countdown until parking expires with notifications and quick extensions", "sr": "Tajmer za parking — Odbrojavanje uživo do isteka parkinga, uz obaveštenja i brzo produženje" } },
+              { "type": "new", "text": { "en": "Fines Logbook — Track speeding, parking, red light and tow fines with status and photo receipts", "sr": "Dnevnik kazni — Pratite kazne za prekoračenje brzine, parkiranje, crveno svetlo i odnošenje vozila, uz status i fotografije računa" } },
+              { "type": "new", "text": { "en": "Interactive Widgets & Quick Access — Faster parking tracking and fine analytics", "sr": "Interaktivni vidžeti i brzi pristup — Brže praćenje parkinga i analitika kazni" } }
+            ]
+          },
+          {
+            "version": "1.3.0",
+            "date": "2026-08-18",
+            "title": {
+              "en": "Smart Consumption, Range & Haptics",
+              "sr": "Pametna potrošnja, domet i haptički odziv"
+            },
+            "changes": [
+              { "type": "new", "text": { "en": "Smart Consumption - automatic L/100km calculation visible on Home, Fuel Log and Stats", "sr": "Pametna potrošnja - automatski proračun L/100 km vidljiv na Početnoj, u dnevniku goriva i statistici" } },
+              { "type": "new", "text": { "en": "Tank Capacity & Range - set tank size and see estimated range with full tank", "sr": "Kapacitet rezervoara i domet - podesite veličinu rezervoara i pogledajte procenjeni domet sa punim rezervoarom" } },
+              { "type": "new", "text": { "en": "Scan Receipts - scan fuel receipts with camera, auto-fills liters and price [PRO]", "sr": "Skeniranje računa - skenirajte račune za gorivo kamerom, uz automatsko popunjavanje litara i cene [PRO]" } },
+              { "type": "new", "text": { "en": "VIN Decoder - auto-fill car data from VIN [PRO]", "sr": "VIN dekoder - automatsko popunjavanje podataka o vozilu iz VIN-a [PRO]" } },
+              { "type": "new", "text": { "en": "Haptic Feedback - native feel on taps, save and delete, with toggle in Appearance", "sr": "Haptički odziv - prirodan osećaj pri dodiru, čuvanju i brisanju, uz prekidač u izgledu aplikacije" } },
+              { "type": "improved", "text": { "en": "Vehicle Details - new editable field for fuel tank capacity with range helper", "sr": "Detalji vozila - novo polje za uređivanje kapaciteta rezervoara uz pomoćnik za domet" } },
+              { "type": "fixed", "text": { "en": "Performance improvements and bug fixes", "sr": "Poboljšanja performansi i ispravke grešaka" } }
+            ]
+          },
           {
             "version": "1.2",
             "date": "2026-07-17",

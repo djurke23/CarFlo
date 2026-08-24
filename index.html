@@ -366,7 +366,7 @@
         }
         .lang-option:hover { background: var(--color-surface-offset); }
         .lang-option.active { color: var(--color-primary); font-weight: 600; }
-        .lang-option .flag { font-size: 1.2rem; line-height: 1; }
+        .flag-icon { width: 1.2rem; height: 1.2rem; display: block; flex: 0 0 auto; object-fit: cover; }
 
         /* Official Store Badges */
         .store-badges { display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
@@ -426,26 +426,28 @@
 
         /* Hero */
         .hero {
-            min-height: 100dvh;
+            min-height: auto;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
             background: radial-gradient(circle at 70% 30%, var(--color-primary-transparent), transparent 70%);
-            padding-top: 140px;
-            padding-bottom: 80px;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 4rem;
+            padding-top: 180px;
+            padding-bottom: 120px;
         }
 
         .hero-content {
             z-index: 10;
         }
+
+        .hero-content-centered {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-content-centered .hero-subtext { margin-inline: auto; }
+        .hero-content-centered .hero-buttons { justify-content: center; }
 
         .hero-title {
             font-size: clamp(3rem, 6vw, 5rem);
@@ -458,35 +460,6 @@
             color: var(--color-text-muted);
             margin-bottom: 2.5rem;
             max-width: 540px;
-        }
-
-        .hero-image {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            width: 70%;
-            height: 70%;
-            background: radial-gradient(circle, var(--color-primary-transparent), transparent 70%);
-            border-radius: 50%;
-            filter: blur(40px);
-            z-index: 0;
-        }
-
-        .hero-image img {
-            position: relative;
-            z-index: 1;
-            max-width: 360px;
-            width: 100%;
-            height: auto;
-            border-radius: 36px;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255,255,255,0.05);
-            display: block;
         }
 
         /* Stats Bar */
@@ -1130,21 +1103,6 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 3rem;
-            }
-
-            .hero-subtext {
-                margin-inline: auto;
-            }
-
-            .hero-image img {
-                max-width: 300px;
-                margin-inline: auto;
-            }
-
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1176,8 +1134,8 @@
             .hero {
                 padding-top: 100px;
                 height: auto;
-                min-height: 100dvh;
-                padding-bottom: 40px;
+                min-height: auto;
+                padding-bottom: 72px;
             }
 
             .stats-grid {
@@ -1457,16 +1415,16 @@
                 <div class="nav-actions">
                     <div class="lang-dropdown" id="langDropdown">
                         <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select Language">
-                            <span id="lang-flag" style="font-size:1.1rem;line-height:1;">&#127468;&#127463;</span>
+                            <img id="lang-flag" class="flag-icon" src="./flags/us.svg" alt="">
                             <span id="lang-code">EN</span>
                             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                         </button>
                         <div class="lang-dropdown-menu" id="langMenu">
                             <button class="lang-option active" id="opt-en" onclick="selectLanguage('en')">
-                                <span class="flag">&#127468;&#127463;</span> English
+                                <img class="flag-icon" src="./flags/us.svg" alt=""> English
                             </button>
                             <button class="lang-option" id="opt-sr" onclick="selectLanguage('sr')">
-                                <span class="flag">&#127479;&#127480;</span> Srpski
+                                <img class="flag-icon" src="./flags/rs.svg" alt=""> Srpski
                             </button>
                         </div>
                     </div>
@@ -1484,24 +1442,20 @@
     <main>
         <section class="hero">
             <div class="container">
-                <div class="hero-grid">
-                    <div class="hero-content reveal">
-                        <h1 class="hero-title" data-i18n="hero_title">Your Car. Every Mile. Perfectly Tracked.</h1>
-                        <p class="hero-subtext" data-i18n="hero_subtext">carFlo is the ultimate vehicle logbook app. Log
-                            fuel, maintenance, expenses, and trips — all in one place.</p>
-                        <div class="flex gap-4 hero-buttons" style="flex-wrap: wrap; align-items: center;">
-                            <a href="https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970"
-                                target="_blank" class="official-store-badge" aria-label="Download on the App Store">
-                                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height: 52px; width: auto;">
-                            </a>
-                            <a class="official-store-badge unavailable" aria-label="Google Play Coming Soon">
-                                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Google Play Coming Soon" style="height: 52px; width: auto;">
-                            </a>
-                        </div>
+                <div class="hero-content hero-content-centered reveal">
+                    <h1 class="hero-title" data-i18n="hero_title">Your Car. Every Mile. Perfectly Tracked.</h1>
+                    <p class="hero-subtext" data-i18n="hero_subtext">carFlo is the ultimate vehicle logbook app. Log
+                        fuel, maintenance, expenses, and trips — all in one place.</p>
+                    <div class="flex gap-4 hero-buttons" style="flex-wrap: wrap; align-items: center;">
+                        <a href="https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970"
+                            target="_blank" class="official-store-badge" aria-label="Download on the App Store">
+                            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height: 52px; width: auto;">
+                        </a>
+                        <a class="official-store-badge unavailable" aria-label="Google Play Coming Soon">
+                            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Google Play Coming Soon" style="height: 52px; width: auto;">
+                        </a>
                     </div>
-                    <div class="hero-image reveal">
-                        <img src="./hero.png" alt="carFlo App Mockup" width="400" height="800">
-                    </div>
+                </div>
                 </div>
             </div>
         </section>
@@ -1532,19 +1486,17 @@
                     <h3 data-i18n="feat_trips_title">Trip History</h3>
                     <p data-i18n="feat_trips_text">Log your business or personal trips with ease.</p>
                 </div>
-                <div class="feature-card card-wide reveal">
-                    <div>
-                        <i data-lucide="file-text" class="feature-icon-inline" size="28"></i>
-                        <h3 data-i18n="feat_export_title">Export Reports (PDF/CSV)</h3>
-                        <p data-i18n="feat_export_text">Generate professional reports for tax returns, business
-                            expenses, or when selling your vehicle.</p>
-                    </div>
-                    <div>
-                        <i data-lucide="cloud-off" class="feature-icon-inline" size="28"></i>
-                        <h3 data-i18n="feat_offline_title">Offline-First</h3>
-                        <p data-i18n="feat_offline_text">No internet? No problem. All your data is saved locally and
-                            synced when you're back online.</p>
-                    </div>
+                <div class="feature-card card-md reveal">
+                    <i data-lucide="file-text" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_export_title">Export Reports (PDF/CSV)</h3>
+                    <p data-i18n="feat_export_text">Generate professional reports for tax returns, business
+                        expenses, or when selling your vehicle.</p>
+                </div>
+                <div class="feature-card card-md reveal">
+                    <i data-lucide="cloud-off" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_offline_title">Offline-First</h3>
+                    <p data-i18n="feat_offline_text">No internet? No problem. All your data is saved locally and
+                        synced when you're back online.</p>
                 </div>
                 <div class="feature-card card-md reveal">
                     <i data-lucide="car" class="feature-icon" size="28"></i>
@@ -1561,6 +1513,16 @@
                     <h3 data-i18n="feat_analytics_title">Advanced Analytics</h3>
                     <p data-i18n="feat_analytics_text">Visualize your vehicle's health and spending patterns over time
                         with deep insights.</p>
+                </div>
+                <div class="feature-card card-md reveal">
+                    <i data-lucide="timer" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_parking_fines_title">Parking &amp; Fines</h3>
+                    <p data-i18n="feat_parking_fines_text">Parking countdowns and fine tracking in one place.</p>
+                </div>
+                <div class="feature-card card-md reveal">
+                    <i data-lucide="plug-zap" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_ev_tolls_wash_title">EV &amp; Car Care</h3>
+                    <p data-i18n="feat_ev_tolls_wash_text">Charging, toll and car wash logs in one place.</p>
                 </div>
             </div>
         </section>
@@ -2255,6 +2217,10 @@
                 feat_secure_text: "Your data stays on your device. We value your privacy.",
                 feat_analytics_title: "Advanced Analytics",
                 feat_analytics_text: "Visualize your vehicle's health and spending patterns over time with deep insights.",
+                feat_parking_fines_title: "Parking & Fines",
+                feat_parking_fines_text: "Parking countdowns and fine tracking in one place.",
+                feat_ev_tolls_wash_title: "EV & Car Care",
+                feat_ev_tolls_wash_text: "Charging, toll and car wash logs in one place.",
                 how_it_works_heading: "Start in 60 Seconds",
                 step1_title: "Add Your Car",
                 step1_text: "Enter your car's make, model, year, and current mileage to set up your digital logbook.",
@@ -2371,6 +2337,10 @@
                 feat_secure_text: "Vaši podaci ostaju na vašem uređaju. Cenimo vašu privatnost.",
                 feat_analytics_title: "Napredna analitika",
                 feat_analytics_text: "Vizualizujte zdravlje vozila i obrasce trošenja kroz vreme uz duboke uvide.",
+                feat_parking_fines_title: "Parking i kazne",
+                feat_parking_fines_text: "Tajmer za parking i praćenje kazni na jednom mestu.",
+                feat_ev_tolls_wash_title: "EV i nega auta",
+                feat_ev_tolls_wash_text: "Punjenje, putarine i pranje auta na jednom mestu.",
                 how_it_works_heading: "Počnite za 60 sekundi",
                 step1_title: "Dodajte auto",
                 step1_text: "Unesite marku, model, godište i kilometražu da podesite svoj digitalni dnevnik.",
@@ -2476,7 +2446,7 @@
             // Update dropdown UI
             const flagEl = document.getElementById('lang-flag');
             const codeEl = document.getElementById('lang-code');
-            if (flagEl) flagEl.innerHTML = lang === 'en' ? '&#127468;&#127463;' : '&#127479;&#127480;';
+            if (flagEl) flagEl.src = './flags/' + (lang === 'en' ? 'us' : 'rs') + '.svg';
             if (codeEl) codeEl.textContent = lang.toUpperCase();
             document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
             const activeOpt = document.getElementById('opt-' + lang);
