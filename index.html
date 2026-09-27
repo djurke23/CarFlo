@@ -682,39 +682,227 @@
             z-index: 5;
         }
 
+        .screen-mockup p {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin: 0;
+            letter-spacing: 0.02em;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .screen-mockup:not(.active) p {
+            opacity: 0;
+            transform: translateY(6px);
+        }
+
+        .screen-mockup.active p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Photorealistic Modern Smartphone Mockup */
         .phone-frame {
-            background: linear-gradient(145deg, #282828, #080808);
-            border-radius: 46px;
-            padding: 10px;
-            border: 7px solid #151515;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-            margin-bottom: 1.5rem;
-            aspect-ratio: 944/2048;
             position: relative;
-            overflow: hidden;
             width: 100%;
+            max-width: 312px;
+            margin: 0 auto;
+            border-radius: 52px;
+            padding: 9px;
+            /* Aerospace Brushed Titanium Finish */
+            background: linear-gradient(140deg, 
+                #434449 0%, 
+                #232427 18%, 
+                #34353a 45%, 
+                #1b1c1e 75%, 
+                #38393e 100%
+            );
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.16),
+                inset 0 1px 1.5px rgba(255, 255, 255, 0.35),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.8),
+                0 12px 28px -4px rgba(0, 0, 0, 0.45),
+                0 32px 64px -8px rgba(0, 0, 0, 0.65);
+            transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s ease, filter 0.45s ease;
         }
 
-        .phone-frame::before {
-            content: '';
+        [data-theme="light"] .phone-frame {
+            /* Natural Silver Titanium Finish */
+            background: linear-gradient(140deg, 
+                #e8eaf0 0%, 
+                #c2c5cc 18%, 
+                #dedfe5 45%, 
+                #b0b3ba 75%, 
+                #d3d6dc 100%
+            );
+            box-shadow:
+                0 0 0 1px rgba(0, 0, 0, 0.12),
+                inset 0 1px 1.5px rgba(255, 255, 255, 0.95),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.25),
+                0 12px 24px -4px rgba(0, 0, 0, 0.12),
+                0 28px 56px -8px rgba(0, 0, 0, 0.22);
+        }
+
+        /* Active Phone Ambient Backlight Glow */
+        .screen-mockup.active .phone-frame {
+            filter: brightness(1);
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.22),
+                inset 0 1px 1.5px rgba(255, 255, 255, 0.4),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.8),
+                0 15px 35px -4px rgba(0, 0, 0, 0.5),
+                0 36px 72px -8px rgba(0, 0, 0, 0.75),
+                0 0 55px -5px rgba(42, 184, 200, 0.28);
+        }
+
+        [data-theme="light"] .screen-mockup.active .phone-frame {
+            box-shadow:
+                0 0 0 1px rgba(0, 0, 0, 0.16),
+                inset 0 1px 1.5px rgba(255, 255, 255, 0.95),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.25),
+                0 15px 35px -4px rgba(0, 0, 0, 0.15),
+                0 35px 65px -8px rgba(0, 0, 0, 0.26),
+                0 0 50px -5px rgba(10, 124, 138, 0.22);
+        }
+
+        /* Secondary Phone Depth-of-Field */
+        .screen-mockup.previous .phone-frame,
+        .screen-mockup.next .phone-frame {
+            filter: brightness(0.68) contrast(0.92);
+            opacity: 0.88;
+        }
+
+        /* Physical Side Hardware Buttons */
+        .phone-btn {
             position: absolute;
-            top: 9px;
-            left: 50%;
-            z-index: 2;
-            width: 28%;
-            height: 18px;
-            transform: translateX(-50%);
-            border-radius: 0 0 14px 14px;
-            background: #050505;
+            background: linear-gradient(to bottom, #4a4b50, #222326, #36373c);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .phone-frame img {
+        [data-theme="light"] .phone-btn {
+            background: linear-gradient(to bottom, #d6d9df, #9ba0aa, #c2c5cc);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+        }
+
+        .phone-btn-action {
+            width: 3px;
+            height: 28px;
+            left: -3px;
+            top: 108px;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .phone-btn-vol-up {
+            width: 3px;
+            height: 52px;
+            left: -3px;
+            top: 148px;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .phone-btn-vol-down {
+            width: 3px;
+            height: 52px;
+            left: -3px;
+            top: 210px;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .phone-btn-power {
+            width: 3px;
+            height: 76px;
+            right: -3px;
+            top: 160px;
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* Earpiece Speaker Slit */
+        .phone-speaker {
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 42px;
+            height: 3px;
+            background: #0a0b0c;
+            border-radius: 2px;
+            box-shadow: inset 0 0.5px 1px rgba(0, 0, 0, 0.9);
+            z-index: 6;
+        }
+
+        /* Display Screen Container */
+        .phone-screen {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1320 / 2868;
+            border-radius: 43px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 0 0 1px #050505;
+            z-index: 1;
+        }
+
+        .phone-screen img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             display: block;
-            background: #0d0e0f;
-            border-radius: 32px;
+            border-radius: 43px;
+        }
+
+        /* Realistic Dynamic Island */
+        .dynamic-island {
+            position: absolute;
+            top: 1.15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28.5%;
+            height: 3.75%;
+            background: #000000;
+            border-radius: 9999px;
+            box-shadow: 0 0.5px 1.5px rgba(0, 0, 0, 0.85);
+            z-index: 8;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+        }
+
+        .island-sensor {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #090b10;
+        }
+
+        .island-camera {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #1c254d 15%, #0a0d1b 55%, #000 100%);
+            box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.45);
+            margin-left: auto;
+        }
+
+        /* Photorealistic Glass Glare / Diagonal Screen Sheen */
+        .phone-glass-glare {
+            position: absolute;
+            inset: 0;
+            border-radius: 43px;
+            pointer-events: none;
+            background: linear-gradient(
+                125deg,
+                rgba(255, 255, 255, 0.15) 0%,
+                rgba(255, 255, 255, 0.04) 20%,
+                transparent 34%,
+                transparent 66%,
+                rgba(255, 255, 255, 0.03) 86%,
+                rgba(255, 255, 255, 0.06) 100%
+            );
+            z-index: 5;
         }
 
         .carousel-button {
@@ -1272,6 +1460,42 @@
                 opacity: 0;
             }
 
+            .phone-frame {
+                border-radius: 46px;
+                padding: 7px;
+            }
+
+            .phone-screen,
+            .phone-screen img,
+            .phone-glass-glare {
+                border-radius: 39px;
+            }
+
+            .phone-btn-action {
+                height: 24px;
+                top: 92px;
+            }
+
+            .phone-btn-vol-up {
+                height: 44px;
+                top: 126px;
+            }
+
+            .phone-btn-vol-down {
+                height: 44px;
+                top: 180px;
+            }
+
+            .phone-btn-power {
+                height: 64px;
+                top: 136px;
+            }
+
+            .phone-speaker {
+                width: 36px;
+                height: 2.5px;
+            }
+
             .testimonials-carousel {
                 padding: 0 2.25rem 3.5rem;
             }
@@ -1709,25 +1933,73 @@
                     <div class="screenshots-stage">
                         <div class="screen-mockup active">
                             <div class="phone-frame">
-                                <img src="./screen-dashboard-new.png" alt="Dashboard screen" loading="lazy">
+                                <span class="phone-btn phone-btn-action" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-up" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-down" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
+                                <span class="phone-speaker" aria-hidden="true"></span>
+                                <div class="phone-screen">
+                                    <img src="./screen-dashboard-new.png" alt="Dashboard screen" loading="lazy">
+                                    <div class="dynamic-island" aria-hidden="true">
+                                        <span class="island-sensor"></span>
+                                        <span class="island-camera"></span>
+                                    </div>
+                                    <div class="phone-glass-glare" aria-hidden="true"></div>
+                                </div>
                             </div>
                             <p class="clash" data-i18n="screen_dashboard">Dashboard</p>
                         </div>
                         <div class="screen-mockup next">
                             <div class="phone-frame">
-                                <img src="./screen-logbook-new.png" alt="Logbook screen" loading="lazy">
+                                <span class="phone-btn phone-btn-action" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-up" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-down" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
+                                <span class="phone-speaker" aria-hidden="true"></span>
+                                <div class="phone-screen">
+                                    <img src="./screen-logbook-new.png" alt="Logbook screen" loading="lazy">
+                                    <div class="dynamic-island" aria-hidden="true">
+                                        <span class="island-sensor"></span>
+                                        <span class="island-camera"></span>
+                                    </div>
+                                    <div class="phone-glass-glare" aria-hidden="true"></div>
+                                </div>
                             </div>
                             <p class="clash" data-i18n="screen_logbook">Logbook</p>
                         </div>
                         <div class="screen-mockup">
                             <div class="phone-frame">
-                                <img src="./screen-stats-new.png" alt="Statistics screen" loading="lazy">
+                                <span class="phone-btn phone-btn-action" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-up" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-down" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
+                                <span class="phone-speaker" aria-hidden="true"></span>
+                                <div class="phone-screen">
+                                    <img src="./screen-stats-new.png" alt="Statistics screen" loading="lazy">
+                                    <div class="dynamic-island" aria-hidden="true">
+                                        <span class="island-sensor"></span>
+                                        <span class="island-camera"></span>
+                                    </div>
+                                    <div class="phone-glass-glare" aria-hidden="true"></div>
+                                </div>
                             </div>
                             <p class="clash" data-i18n="screen_stats">Statistics</p>
                         </div>
                         <div class="screen-mockup previous">
                             <div class="phone-frame">
-                                <img src="./screen-reminders-new.png" alt="Reminders screen" loading="lazy">
+                                <span class="phone-btn phone-btn-action" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-up" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-down" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
+                                <span class="phone-speaker" aria-hidden="true"></span>
+                                <div class="phone-screen">
+                                    <img src="./screen-reminders-new.png" alt="Reminders screen" loading="lazy">
+                                    <div class="dynamic-island" aria-hidden="true">
+                                        <span class="island-sensor"></span>
+                                        <span class="island-camera"></span>
+                                    </div>
+                                    <div class="phone-glass-glare" aria-hidden="true"></div>
+                                </div>
                             </div>
                             <p class="clash" data-i18n="screen_reminders">Reminders</p>
                         </div>
