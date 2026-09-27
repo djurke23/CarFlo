@@ -371,9 +371,72 @@
         /* Official Store Badges */
         .store-badges { display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
         .official-store-badge { display: inline-block; transition: var(--transition); border-radius: 10px; }
-        .official-store-badge img { height: 54px; width: auto; display: block; border-radius: 10px; }
-        .official-store-badge:hover { transform: translateY(-3px); filter: brightness(1.05); }
-        .official-store-badge.unavailable { opacity: 0.45; cursor: default; pointer-events: none; }
+        .official-store-badge img { height: 52px; width: auto; display: block; border-radius: 10px; }
+        .official-store-badge:hover { transform: translateY(-2px); filter: brightness(1.05); }
+
+        .google-play-badge-custom {
+            height: 52px;
+            background: #000000;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0 1rem;
+            box-sizing: border-box;
+            user-select: none;
+            cursor: default;
+            transition: var(--transition);
+        }
+
+        .google-play-badge-custom:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .google-play-svg {
+            width: 22px;
+            height: 24px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .google-play-texts {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            line-height: 1.1;
+        }
+
+        .gp-tag {
+            font-size: 0.58rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            color: rgba(255, 255, 255, 0.75);
+            text-transform: uppercase;
+        }
+
+        .gp-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #ffffff;
+            font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        .gp-pill {
+            background: rgba(42, 184, 200, 0.16);
+            color: var(--color-primary);
+            border: 1px solid rgba(42, 184, 200, 0.35);
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.22rem 0.6rem;
+            border-radius: 999px;
+            white-space: nowrap;
+            margin-left: 0.25rem;
+        }
 
         .mobile-menu-btn {
             display: none;
@@ -426,67 +489,51 @@
 
         /* Hero */
         .hero {
-            min-height: 100dvh;
+            min-height: calc(85vh - 80px);
             display: flex;
             align-items: center;
+            justify-content: center;
             position: relative;
             overflow: hidden;
-            background: radial-gradient(circle at 70% 30%, var(--color-primary-transparent), transparent 70%);
+            background: radial-gradient(circle at 50% 38%, var(--color-primary-transparent), transparent 65%);
             padding-top: 140px;
-            padding-bottom: 80px;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 4rem;
+            padding-bottom: 70px;
+            text-align: center;
         }
 
         .hero-content {
+            max-width: 820px;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             z-index: 10;
         }
 
         .hero-title {
-            font-size: clamp(3rem, 6vw, 5rem);
+            font-size: clamp(2.8rem, 5.5vw, 4.6rem);
             margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
+            line-height: 1.15;
+            text-align: center;
         }
 
         .hero-subtext {
             font-size: 1.25rem;
             color: var(--color-text-muted);
             margin-bottom: 2.5rem;
-            max-width: 540px;
+            max-width: 620px;
+            margin-inline: auto;
+            text-align: center;
         }
 
-        .hero-image {
-            position: relative;
+        .hero-buttons {
             display: flex;
-            justify-content: center;
             align-items: center;
-        }
-
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            width: 70%;
-            height: 70%;
-            background: radial-gradient(circle, var(--color-primary-transparent), transparent 70%);
-            border-radius: 50%;
-            filter: blur(40px);
-            z-index: 0;
-        }
-
-        .hero-image img {
-            position: relative;
-            z-index: 1;
-            max-width: 360px;
-            width: 100%;
-            height: auto;
-            border-radius: 36px;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255,255,255,0.05);
-            display: block;
+            justify-content: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
         }
 
         /* Stats Bar */
@@ -1318,18 +1365,7 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 3rem;
-            }
-
             .hero-subtext {
-                margin-inline: auto;
-            }
-
-            .hero-image img {
-                max-width: 300px;
                 margin-inline: auto;
             }
 
@@ -1362,10 +1398,10 @@
             }
 
             .hero {
-                padding-top: 100px;
+                padding-top: 110px;
                 height: auto;
-                min-height: 100dvh;
-                padding-bottom: 40px;
+                min-height: 65vh;
+                padding-bottom: 50px;
             }
 
             .stats-grid {
@@ -1708,23 +1744,34 @@
     <main>
         <section class="hero">
             <div class="container">
-                <div class="hero-grid">
-                    <div class="hero-content reveal">
-                        <h1 class="hero-title" data-i18n="hero_title">Your Car. Every Mile. Perfectly Tracked.</h1>
-                        <p class="hero-subtext" data-i18n="hero_subtext">carFlo is the ultimate vehicle logbook app. Log
-                            fuel, maintenance, expenses, and trips — all in one place.</p>
-                        <div class="flex gap-4 hero-buttons" style="flex-wrap: wrap; align-items: center;">
-                            <a href="https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970"
-                                target="_blank" class="official-store-badge" aria-label="Download on the App Store">
-                                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height: 52px; width: auto;">
-                            </a>
-                            <a class="official-store-badge unavailable" aria-label="Google Play Coming Soon">
-                                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Google Play Coming Soon" style="height: 52px; width: auto;">
-                            </a>
+                <div class="hero-content reveal">
+                    <h1 class="hero-title" data-i18n="hero_title">Your Car. Every Mile. Perfectly Tracked.</h1>
+                    <p class="hero-subtext" data-i18n="hero_subtext">carFlo is the ultimate vehicle logbook app. Log
+                        fuel, maintenance, expenses, and trips — all in one place.</p>
+                    <div class="hero-buttons">
+                        <a href="https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970"
+                            target="_blank" class="official-store-badge" aria-label="Download on the App Store">
+                            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height: 52px; width: auto;">
+                        </a>
+                        <div class="google-play-badge-custom" aria-label="Google Play Coming Soon">
+                            <svg class="google-play-svg" width="22" height="24" viewBox="0 0 22 24" fill="none">
+                                <path d="M1.3 0.6C1 0.9 0.8 1.4 0.8 2.1V21.9C0.8 22.6 1 23.1 1.3 23.4L1.4 23.5L12.5 12.4V12.1L1.4 0.5L1.3 0.6Z" fill="url(#gp_g1)"/>
+                                <path d="M16.2 16.1L12.5 12.4V12.1L16.2 8.4L16.3 8.5L20.7 11C22 11.7 22 12.8 20.7 13.5L16.3 16L16.2 16.1Z" fill="url(#gp_g2)"/>
+                                <path d="M16.3 16L12.5 12.2L1.3 23.4C1.7 23.8 2.5 23.9 3.3 23.4L16.3 16Z" fill="url(#gp_g3)"/>
+                                <path d="M16.3 8.5L3.3 1.1C2.5 0.6 1.7 0.7 1.3 1.1L12.5 12.3L16.3 8.5Z" fill="url(#gp_g4)"/>
+                                <defs>
+                                    <linearGradient id="gp_g1" x1="11.4" y1="1.7" x2="-4.2" y2="17.3" gradientUnits="userSpaceOnUse"><stop stop-color="#00A0FF"/><stop offset="0.007" stop-color="#00A1FF"/><stop offset="0.26" stop-color="#00BEFF"/><stop offset="0.51" stop-color="#00D2FF"/><stop offset="0.76" stop-color="#00DFFF"/><stop offset="1" stop-color="#00E3FF"/></linearGradient>
+                                    <linearGradient id="gp_g2" x1="22.5" y1="12.2" x2="-0.4" y2="12.2" gradientUnits="userSpaceOnUse"><stop stop-color="#FFE000"/><stop offset="0.41" stop-color="#FFBD00"/><stop offset="0.78" stop-color="#FFA500"/><stop offset="1" stop-color="#FF9C00"/></linearGradient>
+                                    <linearGradient id="gp_g3" x1="14.4" y1="14.2" x2="-7.6" y2="36.2" gradientUnits="userSpaceOnUse"><stop stop-color="#FF3A44"/><stop offset="1" stop-color="#C31162"/></linearGradient>
+                                    <linearGradient id="gp_g4" x1="-2.4" y1="-8.4" x2="7.8" y2="1.8" gradientUnits="userSpaceOnUse"><stop stop-color="#00E676"/><stop offset="1" stop-color="#00B0FF"/></linearGradient>
+                                </defs>
+                            </svg>
+                            <div class="google-play-texts">
+                                <span class="gp-tag">GET IT ON</span>
+                                <span class="gp-name">Google Play</span>
+                            </div>
+                            <span class="gp-pill" data-i18n="badge_googleplay_span">Coming Soon</span>
                         </div>
-                    </div>
-                    <div class="hero-image reveal">
-                        <img src="./hero.png" alt="carFlo App Mockup" width="400" height="800">
                     </div>
                 </div>
             </div>
@@ -2095,10 +2142,25 @@
                         <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
                              alt="Download on the App Store" loading="lazy">
                     </a>
-                    <a class="official-store-badge unavailable" aria-label="Get it on Google Play - Coming Soon">
-                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-                             alt="Get it on Google Play" loading="lazy">
-                    </a>
+                    <div class="google-play-badge-custom" aria-label="Google Play Coming Soon">
+                        <svg class="google-play-svg" width="22" height="24" viewBox="0 0 22 24" fill="none">
+                            <path d="M1.3 0.6C1 0.9 0.8 1.4 0.8 2.1V21.9C0.8 22.6 1 23.1 1.3 23.4L1.4 23.5L12.5 12.4V12.1L1.4 0.5L1.3 0.6Z" fill="url(#gp_g1_dl)"/>
+                            <path d="M16.2 16.1L12.5 12.4V12.1L16.2 8.4L16.3 8.5L20.7 11C22 11.7 22 12.8 20.7 13.5L16.3 16L16.2 16.1Z" fill="url(#gp_g2_dl)"/>
+                            <path d="M16.3 16L12.5 12.2L1.3 23.4C1.7 23.8 2.5 23.9 3.3 23.4L16.3 16Z" fill="url(#gp_g3_dl)"/>
+                            <path d="M16.3 8.5L3.3 1.1C2.5 0.6 1.7 0.7 1.3 1.1L12.5 12.3L16.3 8.5Z" fill="url(#gp_g4_dl)"/>
+                            <defs>
+                                <linearGradient id="gp_g1_dl" x1="11.4" y1="1.7" x2="-4.2" y2="17.3" gradientUnits="userSpaceOnUse"><stop stop-color="#00A0FF"/><stop offset="0.007" stop-color="#00A1FF"/><stop offset="0.26" stop-color="#00BEFF"/><stop offset="0.51" stop-color="#00D2FF"/><stop offset="0.76" stop-color="#00DFFF"/><stop offset="1" stop-color="#00E3FF"/></linearGradient>
+                                <linearGradient id="gp_g2_dl" x1="22.5" y1="12.2" x2="-0.4" y2="12.2" gradientUnits="userSpaceOnUse"><stop stop-color="#FFE000"/><stop offset="0.41" stop-color="#FFBD00"/><stop offset="0.78" stop-color="#FFA500"/><stop offset="1" stop-color="#FF9C00"/></linearGradient>
+                                <linearGradient id="gp_g3_dl" x1="14.4" y1="14.2" x2="-7.6" y2="36.2" gradientUnits="userSpaceOnUse"><stop stop-color="#FF3A44"/><stop offset="1" stop-color="#C31162"/></linearGradient>
+                                <linearGradient id="gp_g4_dl" x1="-2.4" y1="-8.4" x2="7.8" y2="1.8" gradientUnits="userSpaceOnUse"><stop stop-color="#00E676"/><stop offset="1" stop-color="#00B0FF"/></linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="google-play-texts">
+                            <span class="gp-tag">GET IT ON</span>
+                            <span class="gp-name">Google Play</span>
+                        </div>
+                        <span class="gp-pill" data-i18n="badge_googleplay_span">Coming Soon</span>
+                    </div>
                 </div>
             </div>
         </section>
