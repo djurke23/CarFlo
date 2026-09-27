@@ -1,0 +1,352 @@
+[
+  {
+    "version": "1.4.1",
+    "date": "2026-09-27",
+    "title": {
+      "en": "Bug Fixes & iOS Stability",
+      "sr": "Ispravke grešaka i iOS stabilnost"
+    },
+    "changes": [
+      {
+        "type": "fixed",
+        "text": {
+          "en": "Fixed iOS Startup Crash — Resolved a critical issue where the app crashed immediately upon opening and prevented users from entering the app.",
+          "sr": "Popravljeno rušenje na iOS-u — Rešen je kritičan problem gde se aplikacija rušila odmah pri otvaranju i nije htela da uđe u aplikaciju."
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Launch Stability & Performance — Enhanced startup reliability and resolved background launch exceptions.",
+          "sr": "Stabilnost i brzina pokretanja — Poboljšana pouzdanost pri inicijalnom otvaranju aplikacije i rešeni pozadinski problemi."
+        }
+      }
+    ]
+  },
+  {
+    "version": "1.4",
+    "date": "2026-09-25",
+    "title": {
+      "en": "Smart Parking Tools & Enhanced Expense Tracking",
+      "sr": "Pametno parkiranje i napredno praćenje troškova"
+    },
+    "changes": [
+      {
+        "type": "new",
+        "text": {
+          "en": "Auto SMS Parking (Serbia) — Pay for parking with a single tap. Automatically fills your license plate and selected city zone [PRO].",
+          "sr": "Automatsko SMS parkiranje (Srbija) — Platite parking jednim dodirom. Automatski popunjava vašu registarsku oznaku i izabranu zonu grada [PRO]."
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "Parking Timer & Live Alerts — Keep track of your active parking session with countdown alerts (15m and 5m before expiration) and quick 1-hour extensions.",
+          "sr": "Tajmer za parking i obaveštenja uživo — Pratite aktivnu sesiju parkiranja uz odbrojavanje i upozorenja (15 i 5 min pre isteka) i brzo produženje za 1 sat."
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Verified Parking Zones — Updated zones, SMS codes, rates, and operating hours across Serbian cities.",
+          "sr": "Verifikovane parking zone — Ažurirane zone, SMS kodovi, cene i radno vreme širom gradova u Srbiji."
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "Fines Logbook — Track parking, speeding, red light, and tow fines with payment status and photo receipts.",
+          "sr": "Evidencija kazni — Pratite kazne za parkiranje, prekoračenje brzine, crveno svetlo i pauka uz status plaćanja i fotografije računa."
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Streamlined Statistics — Added an \"All Time\" overview filter, cleaner expense breakdown, and de-duplicated metrics.",
+          "sr": "Pojednostavljena statistika — Dodat pregled „Sve vreme” (All Time), pregledniji prikaz troškova i uklonjeni duplikati metrika."
+        }
+      },
+      {
+        "type": "fixed",
+        "text": {
+          "en": "Performance improvements and bug fixes.",
+          "sr": "Poboljšanja performansi i ispravke sitnih grešaka."
+        }
+      }
+    ]
+  },
+  {
+    "version": "1.3",
+    "date": "2026-08-18",
+    "title": {
+      "en": "Smart Consumption, Range & Haptics",
+      "sr": "Pametna potrošnja, domet i haptika"
+    },
+    "changes": [
+      {
+        "type": "new",
+        "text": {
+          "en": "Smart Consumption — Automatic L/100km calculation visible on Home, Fuel Log and Stats.",
+          "sr": "Pametna potrošnja — Automatski proračun L/100km vidljiv na početnom ekranu, dnevniku goriva i statistici."
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "Tank Capacity & Range — Set tank size and see estimated range with a full tank.",
+          "sr": "Kapacitet rezervoara i domet — Podesite veličinu rezervoara i pogledajte procenjeni domet sa punim rezervoarom."
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "Scan Receipts — Scan fuel receipts with camera, auto-fills liters and price [PRO].",
+          "sr": "Skeniranje računa — Skenirajte račune za gorivo kamerom, automatski popunjava količinu u litrima i cenu [PRO]."
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "VIN Decoder — Auto-fill car data from VIN [PRO].",
+          "sr": "VIN Dekoder — Automatsko popunjavanje podataka o vozilu preko VIN broja [PRO]."
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "Haptic Feedback — Native feel on taps, save and delete, with toggle in Appearance.",
+          "sr": "Haptički odziv — Prirodan osećaj pri dodirima, čuvanju i brisanju, sa prekidačem u podešavanjima izgleda."
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Vehicle Details — New editable field for fuel tank capacity with range helper.",
+          "sr": "Detalji o vozilu — Novo polje za unos kapaciteta rezervoara sa kalkulatorom dometa."
+        }
+      },
+      {
+        "type": "fixed",
+        "text": {
+          "en": "Performance improvements and bug fixes.",
+          "sr": "Poboljšanja performansi i ispravke sitnih grešaka."
+        }
+      }
+    ]
+  },
+  {
+    "version": "1.2",
+    "date": "2026-07-17",
+    "title": {
+      "en": "Car Wash Logbook, EV Charging, Tolls & More",
+      "sr": "Dnevnik pranja, EV punjenje, putarine i više"
+    },
+    "changes": [
+      {
+        "type": "new",
+        "text": {
+          "en": "Car Wash Logbook — Track every car wash in detail with categories including deep cleaning, detailing, interior, exterior, full wash, and self-service. Log location, duration, cost, and trip type (personal/business).",
+          "sr": "Dnevnik pranja automobila — Pratite svako pranje u detalje sa kategorijama: duboko čišćenje, detailing, enterijer, eksterijer, kompletno pranje i samo-uslugo. Unesite lokaciju, trajanje, cenu i vrstu puta (lični/poslovni)."
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "Toll Tracking — New Logbook tab for road tolls. Log date, route (e.g. Belgrade–Novi Sad), amount, and notes, with total toll spend visible at a glance.",
+          "sr": "Praćenje putarina — Nova kartica u dnevniku za putarine. Unesite datum, rutu (npr. Beograd–Novi Sad), iznos i napomene, sa ukupnom potrošnjom na prvi pogled."
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "EV Charging Log — Full electric and hybrid vehicle charging tracker: energy added (kWh), cost, charge duration, battery start/end percentage, and charging station name and location.",
+          "sr": "Evidencija punjenja EV — Kompletni trekер punjenja za električna i hibridna vozila: dodata energija (kWh), cena, trajanje punjenja, početni/krajnji procenat baterije i naziv i lokacija punjača."
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Enhanced Statistics — Car wash logs, tolls, charging sessions, and custom expenses are now fully integrated into total spend KPIs, monthly breakdowns, and spend charts (bar & donut).",
+          "sr": "Poboljšana statistika — Dnevnici pranja, putarine, sesije punjenja i prilagođeni troškovi su sada potpuno integrisani u ukupne KPI-ove, mesečne preglede i grafikone trošenja (stubičasti i krofna)."
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Unified Currency — Choose once (RSD or EUR) and it applies consistently across all expense categories throughout the app.",
+          "sr": "Jedinstvena valuta — Izaberite jednom (RSD ili EUR) i primenjuje se konzistentno na sve kategorije troškova u celoj aplikaciji."
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "Expanded Vehicle Database — Added 80+ new car brands, including Yugo, Zastava, BYD, NIO, Xpeng, Cupra, Omoda, Polestar, Genesis, Lucid, Rivian, Chery, DFSK, and more.",
+          "sr": "Proširena baza vozila — Dodato 80+ novih brendova automobila, uključujući Yugo, Zastavu, BYD, NIO, Xpeng, Cupra, Omoda, Polestar, Genesis, Lucid, Rivian, Chery, DFSK i više."
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Settings Redesign — Cleaner settings page with smooth collapsible menus for app icon and accent color customization.",
+          "sr": "Redizajn podešavanja — Čistija stranica podešavanja sa glatkim padajućim menijima za prilagođavanje ikonice aplikacije i boje naglaska."
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Cloud Sync & Stability — Improved backup reliability for new data categories, and resolved bundle validation issues for a smoother experience.",
+          "sr": "Sinhronizacija i stabilnost — Poboljšana pouzdanost rezervne kopije za nove kategorije podataka i rešeni problemi validacije paketa za glatkije iskustvo."
+        }
+      },
+      {
+        "type": "fixed",
+        "text": {
+          "en": "Bug Fixes — Fixed category title display in expense management dialog.",
+          "sr": "Ispravke grešaka — Ispravljen prikaz naslova kategorije u dijalogu upravljanja troškovima."
+        }
+      }
+    ]
+  },
+  {
+    "version": "1.1.1",
+    "date": "2026-07-12",
+    "title": {
+      "en": "Login & Privacy Improvements",
+      "sr": "Poboljšanja prijave i privatnosti"
+    },
+    "changes": [
+      {
+        "type": "fixed",
+        "text": {
+          "en": "Fixed password reset redirection",
+          "sr": "Popravljeno preusmeravanje nakon resetovanja lozinke"
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Redesigned landing page with Login, Guest, and Register",
+          "sr": "Redizajnirana početna stranica sa opcijama za prijavu, gosta i registraciju"
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Improved account deletion (no longer case-sensitive)",
+          "sr": "Poboljšano brisanje naloga (više ne razlikuje mala i velika slova)"
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "Added password visibility toggle on login and sign-up",
+          "sr": "Dodata opcija za prikazivanje lozinke prilikom prijave i registracije"
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Skip vehicle setup automatically if your account already has cars synced",
+          "sr": "Automatsko preskakanje podešavanja vozila ako vaš nalog već ima sinhronizovane automobile"
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "Email confirmation required before first login after sign-up",
+          "sr": "Potrebna potvrda e-pošte pre prve prijave nakon registracije"
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Your data now loads instantly when logging back in — no more starting from scratch",
+          "sr": "Vaši podaci se sada učitavaju trenutno prilikom ponovne prijave — nema više kretanja od nule"
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Logging out now fully clears your session data for better privacy between accounts",
+          "sr": "Odjavljivanje sada potpuno briše podatke vaše sesije radi bolje privatnosti između naloga"
+        }
+      }
+    ]
+  },
+  {
+    "version": "1.1",
+    "date": "2026-07-07",
+    "title": {
+      "en": "Parking Log, PDF Export & More",
+      "sr": "Dnevnik parkiranja, PDF izvoz i više"
+    },
+    "changes": [
+      {
+        "type": "new",
+        "text": {
+          "en": "Parking Log – Track parking expenses with zone, cost, and SMS details",
+          "sr": "Dnevnik parkiranja – Pratite troškove parkiranja sa zonom, cenom i detaljima SMS-a"
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "Unlimited Fuel Entries – Removed the 10-entry limit",
+          "sr": "Neograničeni unosi goriva – Uklonjeno ograničenje od 10 unosa"
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Free Statistics – First chart now available for all users",
+          "sr": "Besplatna statistika – Prvi grafikon je sada dostupan svim korisnicima"
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "PDF Export – Download your vehicle logs and expense history",
+          "sr": "PDF izvoz – Preuzmite dnevnike vašeg vozila i istoriju troškova"
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "Distance Units – Choose between kilometers and miles",
+          "sr": "Jedinice udaljenosti – Izaberite između kilometara i milja"
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "New App Icons – Exclusive icons for Pro users",
+          "sr": "Nove ikonice aplikacije – Ekskluzivne ikonice za Pro korisnike"
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "More Cars – Added new car brands and models",
+          "sr": "Više automobila – Dodati novi brendovi i modeli automobila"
+        }
+      }
+    ]
+  },
+  {
+    "version": "1.0",
+    "date": "2026-07-02",
+    "title": {
+      "en": "App Released",
+      "sr": "Aplikacija je objavljena"
+    },
+    "changes": [
+      {
+        "type": "new",
+        "text": {
+          "en": "carFlo is officially released! Track fuel, maintenance, and expenses seamlessly.",
+          "sr": "carFlo je zvanično objavljen! Pratite gorivo, održavanje i troškove bez napora."
+        }
+      }
+    ]
+  }
+]
