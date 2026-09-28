@@ -1061,22 +1061,48 @@
 
         /* Download Section */
         .download-cta {
-            background: linear-gradient(135deg, #131416 0%, #0d0e0f 100%);
-            color: white;
-            padding: 120px 0;
-            border-radius: 40px;
-            margin: 40px 1.5rem;
+            background: radial-gradient(circle at 50% 25%, var(--color-primary-transparent), transparent 75%), var(--color-surface);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            padding: 90px 2rem;
+            border-radius: 36px;
+            margin: 40px 0;
             text-align: center;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .download-cta:hover {
+            border-color: var(--color-primary);
         }
 
         .download-cta h2 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            margin-bottom: 1.25rem;
+            color: var(--color-text);
+            line-height: 1.15;
+            position: relative;
+            z-index: 1;
         }
 
         .download-cta p {
-            color: #7a7b7d;
-            margin-bottom: 3rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2.75rem;
+            font-size: 1.15rem;
+            max-width: 620px;
+            margin-inline: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .download-cta {
+                padding: 60px 1.5rem;
+                border-radius: 28px;
+                margin: 20px 0;
+            }
         }
 
         .store-badges {
@@ -1677,6 +1703,336 @@
             transform: translateY(-2px);
             text-shadow: 0 0 10px var(--color-primary-transparent);
         }
+
+        /* Value Proposition Cards */
+        .value-props-section {
+            padding: 30px 0 80px;
+        }
+
+        .value-props-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .value-props-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .value-prop-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 24px;
+            padding: 2.25rem 2rem;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .value-prop-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .value-prop-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .value-prop-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: var(--color-primary-transparent);
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .value-prop-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--color-primary);
+            background: var(--color-primary-transparent);
+            padding: 0.3rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid rgba(42, 184, 200, 0.25);
+        }
+
+        .value-prop-card h3 {
+            font-size: 1.35rem;
+            line-height: 1.3;
+            color: var(--color-text);
+        }
+
+        .value-prop-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--color-text-muted);
+        }
+
+        /* 14 Logbook Categories Grid */
+        .logbook-showcase {
+            margin-top: 5rem;
+            padding: 3.5rem 2.5rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 28px;
+            text-align: center;
+        }
+
+        .logbook-showcase-title {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .logbook-showcase-subtext {
+            color: var(--color-text-muted);
+            max-width: 680px;
+            margin: 0 auto 2.5rem;
+            font-size: 1rem;
+        }
+
+        .logbook-chips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .logbook-chip {
+            background: var(--color-surface-offset);
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            padding: 1rem 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .logbook-chip:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            background: var(--color-surface-2);
+        }
+
+        .logbook-chip-icon {
+            color: var(--color-primary);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logbook-chip-content h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 0.15rem;
+        }
+
+        .logbook-chip-content p {
+            font-size: 0.78rem;
+            color: var(--color-text-muted);
+            line-height: 1.3;
+        }
+
+        /* FREE vs PRO Comparison Table */
+        .comparison-table-wrapper {
+            margin-top: 4.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 24px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            box-shadow: var(--shadow-md);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 680px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.15rem 1.5rem;
+            border-bottom: 1px solid var(--color-divider);
+            vertical-align: middle;
+        }
+
+        .comparison-table th {
+            background: var(--color-surface-offset);
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--color-text);
+        }
+
+        .comparison-table th:first-child {
+            width: 46%;
+        }
+
+        .comparison-table th:nth-child(2) {
+            width: 27%;
+            text-align: center;
+        }
+
+        .comparison-table th:nth-child(3) {
+            width: 27%;
+            text-align: center;
+            background: rgba(42, 184, 200, 0.08);
+            color: var(--color-primary);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table td:nth-child(2) {
+            text-align: center;
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        .comparison-table td:nth-child(3) {
+            text-align: center;
+            font-weight: 600;
+            background: rgba(42, 184, 200, 0.04);
+            color: var(--color-text);
+        }
+
+        .table-feat-name {
+            font-weight: 600;
+            color: var(--color-text);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        .table-status-check {
+            color: #10b981;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.92rem;
+        }
+
+        .table-status-cross {
+            color: #ef4444;
+            opacity: 0.75;
+            font-size: 1.1rem;
+        }
+
+        .table-badge-free {
+            font-size: 0.78rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            background: var(--color-surface-offset);
+            color: var(--color-text-muted);
+            border: 1px solid var(--color-border);
+            font-weight: 500;
+        }
+
+        .table-badge-pro {
+            font-size: 0.78rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            background: rgba(42, 184, 200, 0.15);
+            color: var(--color-primary);
+            border: 1px solid rgba(42, 184, 200, 0.35);
+            font-weight: 700;
+        }
+
+        /* Roadmap / Coming Soon Section */
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .roadmap-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .roadmap-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .roadmap-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .roadmap-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .roadmap-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--color-primary-transparent);
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .roadmap-badge {
+            display: inline-block;
+            align-self: flex-start;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-primary);
+            background: var(--color-primary-transparent);
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+            border: 1px solid rgba(42, 184, 200, 0.3);
+        }
+
+        .roadmap-card h3 {
+            font-size: 1.15rem;
+            color: var(--color-text);
+        }
+
+        .roadmap-card p {
+            font-size: 0.88rem;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
     </style>
 </head>
 
@@ -1745,9 +2101,8 @@
         <section class="hero">
             <div class="container">
                 <div class="hero-content reveal">
-                    <h1 class="hero-title" data-i18n="hero_title">Your Car. Every Mile. Perfectly Tracked.</h1>
-                    <p class="hero-subtext" data-i18n="hero_subtext">carFlo is the ultimate vehicle logbook app. Log
-                        fuel, maintenance, expenses, and trips — all in one place.</p>
+                    <h1 class="hero-title" data-i18n="hero_title">The Smartest Companion for Your Vehicle.</h1>
+                    <p class="hero-subtext" data-i18n="hero_subtext">Your digital service book, real fuel consumption tracker, one-touch SMS parking, and total expense manager — all in one place.</p>
                     <div class="hero-buttons">
                         <a href="https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970"
                             target="_blank" class="official-store-badge" aria-label="Download on the App Store">
@@ -1777,61 +2132,202 @@
             </div>
         </section>
 
+        <!-- 3 Value Proposition Cards -->
+        <section class="value-props-section container">
+            <div class="value-props-grid">
+                <div class="value-prop-card reveal">
+                    <div class="value-prop-header">
+                        <div class="value-prop-icon">
+                            <i data-lucide="file-check-2" size="26"></i>
+                        </div>
+                        <span class="value-prop-tag" data-i18n="vp1_tag">Digitalna servisna knjižica</span>
+                    </div>
+                    <h3 data-i18n="vp1_title">Zaboravi na izgubljene račune i zaboravljene servise</h3>
+                    <p data-i18n="vp1_text">Digitalna servisna istorija na jednom mestu. Kada dođe vreme za prodaju auta, jednim klikom generiši profesionalnu PDF servisnu knjižicu koja dokazuje održavanje i podiže vrednost vozila.</p>
+                </div>
+
+                <div class="value-prop-card reveal">
+                    <div class="value-prop-header">
+                        <div class="value-prop-icon">
+                            <i data-lucide="message-square" size="26"></i>
+                        </div>
+                        <span class="value-prop-tag" data-i18n="vp2_tag">SMS Parking Srbija</span>
+                    </div>
+                    <h3 data-i18n="vp2_title">Brz SMS parking sa tajmerom uživo</h3>
+                    <p data-i18n="vp2_text">Nema više kucanja registracije i traženja zona po tablama. Izaberi zonu u 9 gradova u Srbiji i pošalji SMS jednim dodirom. Aplikacija te upozorava pre isteka uz +1h produženje na klik.</p>
+                </div>
+
+                <div class="value-prop-card reveal">
+                    <div class="value-prop-header">
+                        <div class="value-prop-icon">
+                            <i data-lucide="scan-line" size="26"></i>
+                        </div>
+                        <span class="value-prop-tag" data-i18n="vp3_tag">AI Skener & Potrošnja</span>
+                    </div>
+                    <h3 data-i18n="vp3_title">Stvarna potrošnja i stvarni troškovi</h3>
+                    <p data-i18n="vp3_text">Saznaj tačnu cenu svakog pređenog kilometra. Samo usmeri kameru na fiskalni račun sa pumpe — AI automatski očitava litre i cenu. Prati L/100km i domet sa punim rezervoarom.</p>
+                </div>
+            </div>
+        </section>
+
+
+
 
 
         <section id="features" class="container section-padding">
             <div class="text-center" style="margin-bottom: 60px;">
-                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;" data-i18n="features_heading">Everything You Need
-                </h2>
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;" data-i18n="features_heading">Everything You Need</h2>
                 <p class="text-muted" data-i18n="features_subtext">Tracking your vehicle has never been this simple.</p>
             </div>
 
             <div class="features-grid">
                 <div class="feature-card card-lg reveal">
-                    <i data-lucide="fuel" class="feature-icon" size="28"></i>
-                    <h3 data-i18n="feat_fuel_title">Fuel & Cost Tracking</h3>
-                    <p data-i18n="feat_fuel_text">Keep a detailed record of every refill. Monitor fuel economy and total
-                        spending with beautiful, intuitive charts.</p>
+                    <i data-lucide="scan-line" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_fuel_title">Smart Fuel Tracker & AI Skener</h3>
+                    <p data-i18n="feat_fuel_text">Automatski proračun L/100km i procena dometa. Usmeri kameru na fiskalni račun sa pumpe i AI sam očitava litre i cenu.</p>
+                </div>
+                <div class="feature-card card-md reveal">
+                    <i data-lucide="message-square" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_parking_title">1-Tap SMS Parking Srbija</h3>
+                    <p data-i18n="feat_parking_text">Beograd, Novi Sad, Niš i još 6 gradova. Zvanične zone, cene, uživo tajmer i +1h produženje na jedan klik.</p>
                 </div>
                 <div class="feature-card card-md reveal">
                     <i data-lucide="bell" class="feature-icon" size="28"></i>
-                    <h3 data-i18n="feat_reminders_title">Reminders</h3>
-                    <p data-i18n="feat_reminders_text">Never miss an oil change or insurance renewal again.</p>
-                </div>
-                <div class="feature-card card-md reveal">
-                    <i data-lucide="map-pin" class="feature-icon" size="28"></i>
-                    <h3 data-i18n="feat_trips_title">Trip History</h3>
-                    <p data-i18n="feat_trips_text">Log your business or personal trips with ease.</p>
+                    <h3 data-i18n="feat_reminders_title">Dvostruki pametni podsetnici</h3>
+                    <p data-i18n="feat_reminders_text">Podsetnici po datumu ILI kilometraži (npr. 1 god ili 10.000 km). Auto predlozi za mali servis, gume i registraciju.</p>
                 </div>
                 <div class="feature-card card-wide reveal">
                     <div>
-                        <i data-lucide="file-text" class="feature-icon-inline" size="28"></i>
-                        <h3 data-i18n="feat_export_title">Export Reports (PDF/CSV)</h3>
-                        <p data-i18n="feat_export_text">Generate professional reports for tax returns, business
-                            expenses, or when selling your vehicle.</p>
+                        <i data-lucide="file-check-2" class="feature-icon-inline" size="28"></i>
+                        <h3 data-i18n="feat_export_title">PDF Servisna knjižica & Excel</h3>
+                        <p data-i18n="feat_export_text">Generiši profesionalni PDF izveštaj o održavanju koji podiže cenu auta pri prodaji, uz kompletan Excel (.XLSX) izvoz.</p>
                     </div>
                     <div>
-                        <i data-lucide="cloud-off" class="feature-icon-inline" size="28"></i>
-                        <h3 data-i18n="feat_offline_title">Offline-First</h3>
-                        <p data-i18n="feat_offline_text">No internet? No problem. All your data is saved locally and
-                            synced when you're back online.</p>
+                        <i data-lucide="cloud" class="feature-icon-inline" size="28"></i>
+                        <h3 data-i18n="feat_offline_title">Offline-First & Cloud Sync</h3>
+                        <p data-i18n="feat_offline_text">Aplikacija radi 100% oflajn bez interneta, a automatski se i sigurno sinhronizuje preko Supabase klauda.</p>
                     </div>
                 </div>
                 <div class="feature-card card-md reveal">
                     <i data-lucide="car" class="feature-icon" size="28"></i>
-                    <h3 data-i18n="feat_multi_title">Multi-Vehicle</h3>
-                    <p data-i18n="feat_multi_text">Manage your entire family's garage in one app.</p>
+                    <h3 data-i18n="feat_garage_title">Garaža & Health Score</h3>
+                    <p data-i18n="feat_garage_text">Praćenje više vozila, VIN decoder sa 1-tap kopiranjem, odbrojavanje registracije i pametan indeks zdravlja vozila.</p>
                 </div>
                 <div class="feature-card card-md reveal">
-                    <i data-lucide="shield" class="feature-icon" size="28"></i>
-                    <h3 data-i18n="feat_secure_title">Secure & Private</h3>
-                    <p data-i18n="feat_secure_text">Your data stays on your device. We value your privacy.</p>
+                    <i data-lucide="layout-grid" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_widgets_title">iOS Widgeti & Zaključani ekran</h3>
+                    <p data-i18n="feat_widgets_text">Proveri preostali domet, prosečnu potrošnju ili tajmer parkinga direktno na Home Screen-u svog iPhone-a.</p>
                 </div>
                 <div class="feature-card card-lg reveal">
                     <i data-lucide="bar-chart-3" class="feature-icon" size="28"></i>
-                    <h3 data-i18n="feat_analytics_title">Advanced Analytics</h3>
-                    <p data-i18n="feat_analytics_text">Visualize your vehicle's health and spending patterns over time
-                        with deep insights.</p>
+                    <h3 data-i18n="feat_analytics_title">TCO & Analitika troškova</h3>
+                    <p data-i18n="feat_analytics_text">Saznaj tačnu cenu svakog pređenog kilometra, mesečne i godišnje troškove kroz pregledne interaktivne grafikone.</p>
+                </div>
+            </div>
+
+            <!-- 14 Logbook Categories Showcase -->
+            <div class="logbook-showcase reveal">
+                <h3 class="clash logbook-showcase-title" data-i18n="logbook_showcase_title">14 Specijalizovanih kategorija dnevnika</h3>
+                <p class="logbook-showcase-subtext" data-i18n="logbook_showcase_subtext">Od redovnog održavanja i guma do saobraćajnih kazni i punjenja — svaki detalj tvog vozila organizovan na jednom mestu.</p>
+                <div class="logbook-chips-grid">
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="fuel" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_fuel_title">Gorivo & Potrošnja</h4>
+                            <p data-i18n="chip_fuel_desc">Točenja, L/100km, cena/km i pumpe</p>
+                        </div>
+                    </div>
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="wrench" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_service_title">Servis & Održavanje</h4>
+                            <p data-i18n="chip_service_desc">Mali i veliki servis, ulje, kočnice, filteri</p>
+                        </div>
+                    </div>
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="map-pin" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_trips_title">Službena putovanja</h4>
+                            <p data-i18n="chip_trips_desc">Kilometraža i evidencija za refundaciju</p>
+                        </div>
+                    </div>
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="message-square" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_parking_title">SMS Parking & Istorija</h4>
+                            <p data-i18n="chip_parking_desc">Plaćene zone, troškovi i tajmer</p>
+                        </div>
+                    </div>
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="circle-dot" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_tires_title">Gume & DOT Broj</h4>
+                            <p data-i18n="chip_tires_desc">Sezonska zamena, dubina šare i stanje</p>
+                        </div>
+                    </div>
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="alert-triangle" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_fines_title">Dnevnik kazni</h4>
+                            <p data-i18n="chip_fines_desc">Prekršaji, status uplate i fotografija</p>
+                        </div>
+                    </div>
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="zap" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_charge_title">Punjenje EV & Hibrida</h4>
+                            <p data-i18n="chip_charge_desc">kWh, snaga, baterija i cena po kWh</p>
+                        </div>
+                    </div>
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="sparkles" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_wash_title">Pranje & Detailing</h4>
+                            <p data-i18n="chip_wash_desc">Dubinsko pranje, poliranje i voskiranje</p>
+                        </div>
+                    </div>
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="ticket" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_tolls_title">Putarine & Vinjete</h4>
+                            <p data-i18n="chip_tolls_desc">Domaće putarine i inostrane vinjete</p>
+                        </div>
+                    </div>
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="alert-octagon" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_faults_title">Kvarovi & OBD-II</h4>
+                            <p data-i18n="chip_faults_desc">Kodovi sa dijagnostike i beleške majstora</p>
+                        </div>
+                    </div>
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="file-text" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_docs_title">Dokumenta & Polise</h4>
+                            <p data-i18n="chip_docs_desc">Saobraćajna, osiguranje, zeleni karton</p>
+                        </div>
+                    </div>
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="cog" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_parts_title">Katalog delova</h4>
+                            <p data-i18n="chip_parts_desc">Šifre, proizvođači, cene i garancije</p>
+                        </div>
+                    </div>
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="book-open" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_diary_title">Dnevnik događaja</h4>
+                            <p data-i18n="chip_diary_desc">Slobodne beleške, modifikacije, utisci</p>
+                        </div>
+                    </div>
+                    <div class="logbook-chip">
+                        <div class="logbook-chip-icon"><i data-lucide="wallet" size="20"></i></div>
+                        <div class="logbook-chip-content">
+                            <h4 data-i18n="chip_expenses_title">Opšti troškovi</h4>
+                            <p data-i18n="chip_expenses_desc">Registracija, kozmetika i sitnice</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1938,6 +2434,96 @@
                             <span data-i18n="pricing_pro_feature_support">Priority Support — Get prioritized responses and dedicated help from our support team.</span>
                         </div>
                     </div>
+                </div>
+
+                <!-- FREE vs PRO Comparison Table -->
+                <div class="comparison-table-wrapper reveal">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="table_col_feature">Funkcionalnost</th>
+                                <th><span class="table-badge-free" data-i18n="table_col_free">Besplatna (FREE)</span></th>
+                                <th><span class="table-badge-pro" data-i18n="table_col_pro">PRO Verzija 👑</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="car" size="18"></i> <span data-i18n="t_row_vehicles">Broj vozila u garaži</span></span></td>
+                                <td data-i18n="t_val_free_vehicles">1 vozilo</td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_unlimited">Neograničeno</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="fuel" size="18"></i> <span data-i18n="t_row_fuel">Unosi goriva</span></span></td>
+                                <td data-i18n="t_val_free_fuel">Do 10 unosa</td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_unlimited">Neograničeno</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="wrench" size="18"></i> <span data-i18n="t_row_service">Servisni unosi</span></span></td>
+                                <td data-i18n="t_val_free_service">Do 5 unosa</td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_unlimited">Neograničeno</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="bell" size="18"></i> <span data-i18n="t_row_reminders">Podsetnici za servis i registraciju</span></span></td>
+                                <td data-i18n="t_val_free_reminders">Do 2 podsetnika</td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_unlimited">Neograničeno</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="tag" size="18"></i> <span data-i18n="t_row_categories">Kategorije troškova</span></span></td>
+                                <td data-i18n="t_val_free_cat">2 osnovne</td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_custom_cat">Neograničene custom</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="message-square" size="18"></i> <span data-i18n="t_row_parking">Jedan dodir SMS Parking (Srbija)</span></span></td>
+                                <td><span class="table-status-cross">✕</span></td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_included_9">Uključeno (svih 9 gradova)</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="scan-line" size="18"></i> <span data-i18n="t_row_ocr">AI Skener računa kamerom (OCR)</span></span></td>
+                                <td><span class="table-status-cross">✕</span></td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_auto_read">Automatsko očitavanje</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="file-check-2" size="18"></i> <span data-i18n="t_row_pdf">PDF Servisna knjižica (za prodaju auta)</span></span></td>
+                                <td><span class="table-status-cross">✕</span></td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_pdf_pro">Profesionalni PDF izveštaj</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="file-spreadsheet" size="18"></i> <span data-i18n="t_row_excel">Izvoz u Excel (.XLSX)</span></span></td>
+                                <td data-i18n="t_val_csv_only">Samo CSV</td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_xlsx_full">Kompletan XLSX izvoz</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="briefcase" size="18"></i> <span data-i18n="t_row_trips">Službena putovanja (Business Trips)</span></span></td>
+                                <td><span class="table-status-cross">✕</span></td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_trips_tax">Evidencija za porez i refundaciju</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="image" size="18"></i> <span data-i18n="t_row_photos">Slike računa i dokumenata (Attachments)</span></span></td>
+                                <td><span class="table-status-cross">✕</span></td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_unlimited">Neograničeno</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="cloud" size="18"></i> <span data-i18n="t_row_cloud">Cloud Backup i sinhronizacija</span></span></td>
+                                <td data-i18n="t_val_local_only">Samo lokalno</td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_cloud_safe">Siguran cloud backup</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="layout-grid" size="18"></i> <span data-i18n="t_row_widgets">iOS Home & Lock Screen Widgeti</span></span></td>
+                                <td><span class="table-status-cross">✕</span></td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_widgets_pro">Domet, potrošnja i parking</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="pie-chart" size="18"></i> <span data-i18n="t_row_tco">Detaljna TCO statistika i grafikoni</span></span></td>
+                                <td data-i18n="t_val_basic">Osnovna</td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_advanced">Napredna analitika i poređenja</span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="table-feat-name"><i data-lucide="palette" size="18"></i> <span data-i18n="t_row_themes">Prilagođene ikonice i boje teme</span></span></td>
+                                <td data-i18n="t_val_basic">Osnovno</td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_themes_6">6 unikatnih ikonica i sve teme</span></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
@@ -2131,6 +2717,51 @@
             </div>
         </section>
 
+        <!-- Roadmap / Coming Soon Section -->
+        <section id="roadmap" class="container section-padding">
+            <div class="text-center" style="margin-bottom: 50px;">
+                <h2 class="clash" style="font-size: 2.5rem; margin-bottom: 1rem;" data-i18n="roadmap_heading">Uskoro u CarFlo</h2>
+                <p class="text-muted" data-i18n="roadmap_subtext">Aktivno razvijamo nove funkcije koje će upravljanje tvojim automobilom učiniti još lakšim i intuitivnijim.</p>
+            </div>
+            <div class="roadmap-grid reveal">
+                <div class="roadmap-card">
+                    <div class="roadmap-icon">
+                        <i data-lucide="gauge" size="24"></i>
+                    </div>
+                    <span class="roadmap-badge" data-i18n="roadmap_status">U razvoju</span>
+                    <h3 data-i18n="roadmap_carplay_title">Apple CarPlay podrška</h3>
+                    <p data-i18n="roadmap_carplay_text">Prikaz tajmera za parking, preostalog dometa i brzih servisnih upozorenja direktno na ekranu u automobilu.</p>
+                </div>
+
+                <div class="roadmap-card">
+                    <div class="roadmap-icon">
+                        <i data-lucide="users" size="24"></i>
+                    </div>
+                    <span class="roadmap-badge" data-i18n="roadmap_status">U razvoju</span>
+                    <h3 data-i18n="roadmap_sharing_title">Family & Fleet Sharing</h3>
+                    <p data-i18n="roadmap_sharing_text">Zajednički pristup vozilu — omogući članovima porodice ili kolegama da unose troškove i prate isti automobil.</p>
+                </div>
+
+                <div class="roadmap-card">
+                    <div class="roadmap-icon">
+                        <i data-lucide="map-pin" size="24"></i>
+                    </div>
+                    <span class="roadmap-badge" data-i18n="roadmap_status">U razvoju</span>
+                    <h3 data-i18n="roadmap_gps_title">GPS Geo-fencing parking</h3>
+                    <p data-i18n="roadmap_gps_text">Automatsko prepoznavanje lokacije gde si parkirao i trenutni predlog tačne parking zone za slanje SMS-a.</p>
+                </div>
+
+                <div class="roadmap-card">
+                    <div class="roadmap-icon">
+                        <i data-lucide="smartphone" size="24"></i>
+                    </div>
+                    <span class="roadmap-badge" data-i18n="roadmap_status">U razvoju</span>
+                    <h3 data-i18n="roadmap_android_title">Google Play verzija</h3>
+                    <p data-i18n="roadmap_android_text">Kompletna verzija carFlo aplikacije za Android telefone stiže uskoro na Google Play prodavnicu.</p>
+                </div>
+            </div>
+        </section>
+
         <section id="download" class="container">
             <div class="download-cta reveal">
                 <h2 data-i18n="download_heading">Track Every Mile, Starting Today</h2>
@@ -2181,84 +2812,61 @@
                 <div class="faq-container">
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span data-i18n="faq_q1">How do I add a new vehicle?</span>
+                            <span data-i18n="faq_q_offline">Da li aplikacija radi bez interneta?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
                         </button>
                         <div class="faq-answer">
-                            <p data-i18n="faq_a1">Simply tap the "+" icon on the Vehicles screen and enter your car's
-                                make,
-                                model, year, and current mileage.</p>
+                            <p data-i18n="faq_a_offline">Da! CarFlo je građen po offline-first principu. Sve podatke (točenja, servise, troškove, beleške) možete unositi potpuno bez interneta, a oni se automatski i sigurno sinhronizuju čim se povežete na mrežu.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span data-i18n="faq_q2">Can I track multiple vehicles?</span>
+                            <span data-i18n="faq_q_parking">Za koje gradove važi SMS parking?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
                         </button>
                         <div class="faq-answer">
-                            <p data-i18n="faq_a2">Yes! carFlo supports tracking multiple vehicles in your professional
-                                digital garage.</p>
+                            <p data-i18n="faq_a_parking">Trenutno su podržani Beograd, Novi Sad, Niš, Kragujevac, Subotica, Čačak, Pančevo, Zrenjanin i Kruševac — sa svim zvaničnim zonama, radnim vremenom, SMS brojevima i ažurnim cenama.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span data-i18n="faq_q3">What's included in the free plan?</span>
+                            <span data-i18n="faq_q_newphone">Mogu li podatke preneti na novi telefon?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
                         </button>
                         <div class="faq-answer">
-                            <p data-i18n="faq_a3">You can track one vehicle, log fuel refills, and view basic analytics
-                                at
-                                no cost, with no accounts required.</p>
+                            <p data-i18n="faq_a_newphone">Naravno. Uz PRO nalog vaši podaci su bezbedno sačuvani u Cloud-u (Supabase) i dostupni na novom telefonu čim se ulogujete. Takođe, u svakom trenutku možete generisati Excel (.XLSX) ili CSV izvoz.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span data-i18n="faq_q4">How do I upgrade to Premium?</span>
+                            <span data-i18n="faq_q_multicar">Šta ako imam više od jednog automobila?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
                         </button>
                         <div class="faq-answer">
-                            <p data-i18n="faq_a4">Tap on Settings and select "Upgrade to Premium" to unlock
-                                multi-vehicle
-                                support, advanced analytics, and PDF exports.</p>
+                            <p data-i18n="faq_a_multicar">CarFlo PRO podržava neograničen broj vozila u virtuelnoj garaži. Možete lako prebacivati aktivno vozilo jednim dodirom na početnom ekranu aplikacije.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span data-i18n="faq_q5">How do I cancel my subscription?</span>
+                            <span data-i18n="faq_q_ocr">Kako funkcioniše AI skener računa?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
                         </button>
                         <div class="faq-answer">
-                            <p data-i18n="faq_a5">Subscriptions are managed via the App Store or Google Play Store
-                                settings.
-                                You can cancel anytime with one click.</p>
+                            <p data-i18n="faq_a_ocr">Samo usmerite kameru na fiskalni račun sa benzinske pumpe. Zahvaljujući naprednom on-device mašinskom učenju (MLKit OCR), aplikacija automatski prepoznaje i popunjava broj litara i iznos bez ručnog kucanja.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span data-i18n="faq_q6">Is my data safe and backed up?</span>
+                            <span data-i18n="faq_q_reminders">Kako funkcionišu dvostruki podsetnici?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
                         </button>
                         <div class="faq-answer">
-                            <p data-i18n="faq_a6">Your data is stored locally on your device for maximum privacy.
-                                Premium
-                                users enjoy secure encrypted cloud backups.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span data-i18n="faq_q7">Does the app work offline?</span>
-                            <i data-lucide="chevron-down" class="faq-icon"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p data-i18n="faq_a7">Absolutely! carFlo is offline-first. Your data is saved locally and
-                                syncs
-                                automatically when you're back online.</p>
+                            <p data-i18n="faq_a_reminders">Podsetnike možete postaviti prema datumu ILI prema pređenoj kilometraži (npr. mali servis za godinu dana ILI nakon 10.000 km). CarFlo prati oba parametra i šalje vam notifikaciju šta god pre nastupi.</p>
                         </div>
                     </div>
                 </div>
@@ -2563,32 +3171,77 @@
                 nav_faq: "FAQ",
                 nav_changelog: "Changelog",
                 nav_download: "Download",
-                hero_title: "Your Car. Every Mile. Perfectly Tracked.",
-                hero_subtext: "carFlo is the ultimate vehicle logbook app. Log fuel, maintenance, expenses, and trips — all in one place.",
+                hero_title: "The Smartest Companion for Your Vehicle.",
+                hero_subtext: "Your digital service book, real fuel consumption tracker, one-touch SMS parking, and total expense manager — all in one place.",
                 hero_btn_ios: "Download on App Store",
                 hero_btn_android: "Google Play Coming Soon",
-                stat_vehicles: "Vehicles Tracked",
-                stat_entries: "Log Entries",
-                stat_rating: "App Rating",
-                stat_availability: "Availability",
+                badge_appstore_span: "Download on",
+                badge_googleplay_span: "Coming Soon",
+                
+                // Value Propositions
+                vp1_tag: "Digital Service Book",
+                vp1_title: "Never Lose an Invoice or Miss a Service",
+                vp1_text: "Your entire vehicle service history in one verified place. When selling your car, generate a certified PDF service book with a single tap to boost resale value.",
+                vp2_tag: "SMS Parking Serbia",
+                vp2_title: "1-Tap SMS Parking with Live Countdown",
+                vp2_text: "No more typing license plates or memorizing zone codes. Pick a zone across 9 Serbian cities and send an SMS with one tap. Live countdown warns you 15 and 5 minutes before expiration.",
+                vp3_tag: "AI Scanner & Fuel",
+                vp3_title: "Real Consumption & True Running Costs",
+                vp3_text: "Know the exact cost of every kilometer driven. Just point your camera at fuel receipts — on-device AI automatically extracts liters and totals. Monitor true L/100km and estimated range.",
+
+                // Features
                 features_heading: "Everything You Need",
                 features_subtext: "Tracking your vehicle has never been this simple.",
-                feat_fuel_title: "Fuel & Cost Tracking",
-                feat_fuel_text: "Keep a detailed record of every refill. Monitor fuel economy and total spending with beautiful, intuitive charts.",
-                feat_reminders_title: "Reminders",
-                feat_reminders_text: "Never miss an oil change or insurance renewal again.",
-                feat_trips_title: "Trip History",
-                feat_trips_text: "Log your business or personal trips with ease.",
-                feat_export_title: "Export Reports (PDF/CSV)",
-                feat_export_text: "Generate professional reports for tax returns, business expenses, or when selling your vehicle.",
-                feat_offline_title: "Offline-First",
-                feat_offline_text: "No internet? No problem. All your data is saved locally and synced when you're back online.",
-                feat_multi_title: "Multi-Vehicle",
-                feat_multi_text: "Manage your entire family's garage in one app.",
-                feat_secure_title: "Secure & Private",
-                feat_secure_text: "Your data stays on your device. We value your privacy.",
-                feat_analytics_title: "Advanced Analytics",
-                feat_analytics_text: "Visualize your vehicle's health and spending patterns over time with deep insights.",
+                feat_fuel_title: "Smart Fuel Tracker & AI Scanner",
+                feat_fuel_text: "Automatic L/100km calculation and range estimator. Point camera at fuel receipts and AI instantly extracts liters and price.",
+                feat_parking_title: "1-Tap SMS Parking Serbia",
+                feat_parking_text: "Belgrade, Novi Sad, Nis, and 6 more cities. Official parking zones, prices, live countdown timer, and 1-tap extension.",
+                feat_reminders_title: "Dual Smart Reminders",
+                feat_reminders_text: "Set reminders by date OR mileage (e.g. 1 year or 10,000 km). Smart presets for oil change, tires, and vehicle registration.",
+                feat_export_title: "PDF Service Book & Excel Export",
+                feat_export_text: "Generate a certified PDF maintenance report that increases your car's resale value, plus full Excel (.XLSX) and CSV exports.",
+                feat_offline_title: "Offline-First & Cloud Sync",
+                feat_offline_text: "The app works 100% offline without internet. All your data automatically and securely syncs via Supabase cloud.",
+                feat_garage_title: "Garage & Health Score",
+                feat_garage_text: "Track multiple vehicles, copy VIN with one tap, see countdown to registration/insurance expiry, and monitor health score.",
+                feat_widgets_title: "iOS Widgets & Lock Screen",
+                feat_widgets_text: "Glance at your remaining range, average consumption, or active parking timer right on your iPhone Home & Lock Screen.",
+                feat_analytics_title: "TCO & Cost Analytics",
+                feat_analytics_text: "Discover the true cost of every single kilometer, monthly and yearly expenses with intuitive interactive charts.",
+
+                // Logbook Showcase
+                logbook_showcase_title: "14 Specialized Logbook Categories",
+                logbook_showcase_subtext: "From routine services and seasonal tire changes to parking fines and EV charging — every single detail of your vehicle organized.",
+                chip_fuel_title: "Fuel & Consumption",
+                chip_fuel_desc: "Refills, L/100km, cost/km, and fuel stations",
+                chip_service_title: "Service & Maintenance",
+                chip_service_desc: "Minor & major service, oil, brakes, filters",
+                chip_trips_title: "Business Trips",
+                chip_trips_desc: "Mileage log and tax refund tracking",
+                chip_parking_title: "SMS Parking & History",
+                chip_parking_desc: "Paid parking zones, costs, and timer",
+                chip_tires_title: "Tires & DOT Code",
+                chip_tires_desc: "Seasonal swaps, tread depth, and wear",
+                chip_fines_title: "Fines & Traffic Tickets",
+                chip_fines_desc: "Violations, payment status, and photo slip",
+                chip_charge_title: "EV & Hybrid Charging",
+                chip_charge_desc: "kWh, charging power, battery, and cost/kWh",
+                chip_wash_title: "Car Wash & Detailing",
+                chip_wash_desc: "Deep clean, polishing, waxing, and detailing",
+                chip_tolls_title: "Tolls & Vignettes",
+                chip_tolls_desc: "Highway tolls and international vignettes",
+                chip_faults_title: "Faults & OBD-II Codes",
+                chip_faults_desc: "Diagnostic fault codes and mechanic notes",
+                chip_docs_title: "Documents & Insurance",
+                chip_docs_desc: "Registration card, green card, inspection",
+                chip_parts_title: "Parts Inventory",
+                chip_parts_desc: "Part numbers, brands, prices, warranties",
+                chip_diary_title: "Vehicle Diary & Notes",
+                chip_diary_desc: "Custom logs, modifications, travel observations",
+                chip_expenses_title: "General Expenses",
+                chip_expenses_desc: "Registration fees, car cosmetics, accessories",
+
+                // How it works
                 how_it_works_heading: "Start in 60 Seconds",
                 step1_title: "Add Your Car",
                 step1_text: "Enter your car's make, model, year, and current mileage to set up your digital logbook.",
@@ -2596,15 +3249,16 @@
                 step2_text: "Whether it's a fuel refill, a service at the mechanic, or a quick trip to the store, log it in seconds.",
                 step3_title: "Stay Informed",
                 step3_text: "Receive timely reminders for maintenance and view detailed analytics of your vehicle's history.",
+
+                // Screenshots
                 screenshots_heading: "Beautifully Simple",
                 screenshots_subtext: "The interface designed for drivers, by drivers.",
                 screen_dashboard: "Dashboard",
                 screen_logbook: "Logbook",
                 screen_stats: "Statistics",
                 screen_reminders: "Reminders",
-                screen_fuel: "Log Refills",
-                screen_vehicle: "Vehicle List",
-                screen_analysis: "Analysis",
+
+                // Reviews
                 testimonials_heading: "Drivers Love carFlo",
                 test1_quote: '"Finally an app that doesn\'t try to sell me insurance at every step. Clean, fast and very useful."',
                 test2_quote: '"As someone who runs a company, PDF reports saved me hours and hours of manual fuel expense calculations."',
@@ -2612,40 +3266,8 @@
                 test4_quote: '"Everything about my car is finally in one place. Registration and service reminders help the most."',
                 test5_quote: '"The logbook is really fast. I open it, enter mileage or a cost, and I am done in seconds."',
                 test6_quote: '"Great for tracking costs. Once you see the stats, you know what your car really costs."',
-                download_heading: "Track Every Mile, Starting Today",
-                download_subtext: "Free to download. No account required to start tracking your vehicle.",
-                badge_appstore_span: "Download on",
-                badge_googleplay_span: "Coming Soon",
-                footer_tagline: "Simplifying vehicle management for drivers worldwide.",
-                footer_product: "Product",
-                footer_legal: "Legal",
-                footer_contact: "Contact",
-                footer_privacy: "Privacy Policy",
-                footer_terms: "Terms of Service",
-                footer_delete: "Delete Account",
-                footer_copyright: "© 2026 carFlo. All rights reserved.",
-                footer_made_by: 'Made by <a href="https://djurke23.github.io/portfolio/" target="_blank" class="footer-credit-link">Djurke23</a>',
-                footer_socials: "Follow us on social media:",
-                swipe_hint: "Swipe left/right",
-                faq_heading: "Frequently Asked Questions",
-                faq_subtext: "Everything you need to know about carFlo.",
-                faq_q1: "How do I add a new vehicle?",
-                faq_a1: "Simply tap the \"+\" icon on the Vehicles screen and enter your car's details.",
-                faq_q2: "Can I track multiple vehicles?",
-                faq_a2: "Yes! carFlo supports unlimited vehicles in your virtual garage.",
-                faq_q3: "What's included in the free plan?",
-                faq_a3: "You can track one vehicle, log fuel refills, and view basic analytics at no cost.",
-                faq_q4: "How do I upgrade to Premium?",
-                faq_a4: "Tap on \"Settings\" and select \"Upgrade to Premium\" to unlock multi-vehicle support and PDF exports.",
-                faq_q5: "How do I cancel my subscription?",
-                faq_a5: "You can manage your subscription directly through the App Store or Google Play Store settings.",
-                faq_q6: "Is my data safe and backed up?",
-                faq_a6: "Your data is saved locally on your device. Premium users enjoy secure cloud backups.",
-                faq_q7: "Does the app work offline?",
-                faq_a7: "Absolutely! carFlo works fully offline and syncs your data when you're back online.",
-                support_heading: "Still need help?",
-                support_text: "Invite us to help you with anything else you might need.",
-                support_note: "Responses are typically within 24-48 hours.",
+
+                // Pricing
                 pricing_heading: "Simple, Transparent Pricing",
                 pricing_subtext: "Unlock the full power of carFlo and take control of your vehicle expenses.",
                 pricing_monthly_title: "Monthly",
@@ -2671,40 +3293,173 @@
                 pricing_pro_feature_trips: "Business Trips — Track and export business trips for tax & reporting.",
                 pricing_pro_feature_categories: "Custom Categories — Create unlimited custom expense categories.",
                 pricing_pro_feature_support: "Priority Support — Get prioritized help from our dedicated support team.",
-                pricing_cta: "Get Pro Plan"
+                pricing_cta: "Get Pro Plan",
+
+                // Comparison Table
+                table_col_feature: "Feature",
+                table_col_free: "Free Version",
+                table_col_pro: "PRO Plan 👑",
+                t_row_vehicles: "Vehicles in Garage",
+                t_val_free_vehicles: "1 vehicle",
+                t_val_unlimited: "Unlimited",
+                t_row_fuel: "Fuel Refill Logs",
+                t_val_free_fuel: "Up to 10 entries",
+                t_row_service: "Service Logs",
+                t_val_free_service: "Up to 5 entries",
+                t_row_reminders: "Service & Registration Reminders",
+                t_val_free_reminders: "Up to 2 reminders",
+                t_row_categories: "Expense Categories",
+                t_val_free_cat: "2 basic categories",
+                t_val_custom_cat: "Unlimited custom",
+                t_row_parking: "1-Tap SMS Parking (Serbia)",
+                t_val_included_9: "Included (all 9 cities)",
+                t_row_ocr: "AI Receipt Scanner (OCR)",
+                t_val_auto_read: "Automatic OCR Scan",
+                t_row_pdf: "PDF Service Book (for car sale)",
+                t_val_pdf_pro: "Professional PDF Report",
+                t_row_excel: "Excel (.XLSX) Export",
+                t_val_csv_only: "CSV only",
+                t_val_xlsx_full: "Full Excel (.XLSX) Export",
+                t_row_trips: "Business Trips (Refunds)",
+                t_val_trips_tax: "Tax & Mileage tracking",
+                t_row_photos: "Invoices & Photos (Attachments)",
+                t_row_cloud: "Cloud Backup & Device Sync",
+                t_val_local_only: "Local only",
+                t_val_cloud_safe: "Secure Cloud Backup",
+                t_row_widgets: "iOS Home Screen Widgets",
+                t_val_widgets_pro: "Range, Consumption, Parking",
+                t_row_tco: "Detailed TCO & Charts",
+                t_val_basic: "Basic",
+                t_val_advanced: "Advanced TCO & Trends",
+                t_row_themes: "Custom Themes & App Icons",
+                t_val_themes_6: "6 unique icons & all accents",
+
+                // Roadmap
+                roadmap_heading: "Coming Soon to CarFlo",
+                roadmap_subtext: "We are actively developing exciting new capabilities to elevate your driving experience.",
+                roadmap_status: "In Development",
+                roadmap_carplay_title: "Apple CarPlay Support",
+                roadmap_carplay_text: "Glance at your active parking timer, remaining fuel range, and timely service warnings on your car's dashboard display.",
+                roadmap_sharing_title: "Family & Fleet Sharing",
+                roadmap_sharing_text: "Shared vehicle access — allow family members or coworkers to log expenses and view real-time vehicle status together.",
+                roadmap_gps_title: "GPS Geo-fencing Parking",
+                roadmap_gps_text: "Automatic location detection when you park, instantly suggesting the exact SMS parking zone for effortless 1-tap payment.",
+                roadmap_android_title: "Google Play Version",
+                roadmap_android_text: "A native version of carFlo for Android devices is coming soon to the Google Play Store.",
+
+                // Download CTA
+                download_heading: "Track Every Mile, Starting Today",
+                download_subtext: "Free to download. No account required to start tracking your vehicle.",
+
+                // FAQ
+                faq_heading: "Frequently Asked Questions",
+                faq_subtext: "Everything you need to know about carFlo.",
+                faq_q_offline: "Does the app work without internet?",
+                faq_a_offline: "Yes! carFlo is built with an offline-first architecture. You can log refills, services, and expenses without an internet connection. Everything syncs securely once you are back online.",
+                faq_q_parking: "Which cities are supported for SMS parking?",
+                faq_a_parking: "Currently supported cities in Serbia: Belgrade, Novi Sad, Nis, Kragujevac, Subotica, Cacak, Pancevo, Zrenjanin, and Krusevac — with official zones, operating hours, SMS numbers, and current tariffs.",
+                faq_q_newphone: "Can I transfer my data to a new phone?",
+                faq_a_newphone: "Absolutely. With a PRO account, your data is securely saved in the cloud (Supabase) and accessible from any device. You can also export everything to Excel (.XLSX) or CSV anytime.",
+                faq_q_multicar: "What if I own more than one vehicle?",
+                faq_a_multicar: "CarFlo PRO supports unlimited vehicles in your garage. You can effortlessly switch active cars with a single tap on your home screen.",
+                faq_q_ocr: "How does the AI receipt scanner work?",
+                faq_a_ocr: "Just point your camera at any fuel receipt. On-device machine learning (MLKit OCR) scans the receipt in real time and automatically fills in liters and total price without manual typing.",
+                faq_q_reminders: "How do dual reminders work?",
+                faq_a_reminders: "You can set maintenance reminders by date OR mileage (e.g. oil change in 1 year OR after 10,000 km). carFlo monitors both simultaneously and notifies you whichever threshold comes first.",
+
+                // Support & Footer
+                support_heading: "Still need help?",
+                support_text: "Can't find the answer you're looking for? Reach out to our friendly team.",
+                support_note: "We typically respond within 48 hours.",
+                footer_tagline: "Simplifying vehicle management for drivers worldwide.",
+                footer_product: "Product",
+                footer_legal: "Legal",
+                footer_contact: "Contact",
+                footer_privacy: "Privacy Policy",
+                footer_terms: "Terms of Service",
+                footer_delete: "Delete Account",
+                footer_copyright: "© 2026 carFlo. All rights reserved.",
+                footer_made_by: 'Made by <a href="https://djurke23.github.io/portfolio/" target="_blank" class="footer-credit-link">Djurke23</a>',
+                footer_socials: "Follow us on social media:"
             },
             sr: {
                 nav_features: "Funkcije",
                 nav_how_it_works: "Kako radi",
+                nav_pricing: "Cene",
                 nav_faq: "FAQ",
                 nav_changelog: "Istorija promena",
                 nav_download: "Preuzimanje",
-                hero_title: "Vaš auto. Svaki kilometar. Savršeno ispraćen.",
-                hero_subtext: "carFlo je vrhunska aplikacija za evidenciju vozila. Pratite gorivo, održavanje, troškove i putovanja — sve na jednom mestu.",
+                hero_title: "Pametan asistent za tvoj automobil.",
+                hero_subtext: "Vodi digitalnu servisnu knjižicu, prati stvarnu potrošnju goriva, plaćaj parking jednim dodirom i nikad više ne zaboravi registraciju ili mali servis.",
                 hero_btn_ios: "Preuzmi na App Store",
                 hero_btn_android: "Google Play uskoro",
-                stat_vehicles: "Praćenih vozila",
-                stat_entries: "Unosa u dnevnik",
-                stat_rating: "Ocena aplikacije",
-                stat_availability: "Dostupnost",
+                badge_appstore_span: "Preuzmi na",
+                badge_googleplay_span: "Uskoro",
+
+                // Value Propositions
+                vp1_tag: "Digitalna servisna knjižica",
+                vp1_title: "Zaboravi na izgubljene račune i zaboravljene servise",
+                vp1_text: "Kompletna servisna istorija na jednom mestu. Kada dođe vreme za prodaju auta, jednim klikom generiši profesionalnu PDF servisnu knjižicu koja dokazuje održavanje i podiže vrednost vozila.",
+                vp2_tag: "SMS Parking Srbija",
+                vp2_title: "Brz SMS parking sa tajmerom uživo",
+                vp2_text: "Nema više kucanja registracije i traženja zona po tablama. Izaberi zonu u 9 gradova u Srbiji i pošalji SMS jednim dodirom. Aplikacija te upozorava pre isteka uz +1h produženje na klik.",
+                vp3_tag: "AI Skener & Potrošnja",
+                vp3_title: "Stvarna potrošnja i stvarni troškovi",
+                vp3_text: "Saznaj tačnu cenu svakog pređenog kilometra. Samo usmeri kameru na fiskalni račun sa pumpe — AI automatski očitava litre i cenu. Prati L/100km i domet sa punim rezervoarom.",
+
+                // Features
                 features_heading: "Sve što vam treba",
                 features_subtext: "Praćenje vašeg vozila nikada nije bilo ovako jednostavno.",
-                feat_fuel_title: "Gorivo i troškovi",
-                feat_fuel_text: "Vodite detaljnu evidenciju svakog točenja. Pratite potrošnju i ukupne troškove uz lepe, intuitivne grafikone.",
-                feat_reminders_title: "Podsetnici",
-                feat_reminders_text: "Nikada više ne zaboravite zamenu ulja ili registraciju.",
-                feat_trips_title: "Istorija putovanja",
-                feat_trips_text: "Lako beležite poslovna ili privatna putovanja.",
-                feat_export_title: "Izveštaji (PDF/CSV)",
-                feat_export_text: "Generišite profesionalne izveštaje za porez, poslovne troškove ili prodaju vozila.",
-                feat_offline_title: "Rad bez interneta",
-                feat_offline_text: "Nema interneta? Nema problema. Svi podaci se čuvaju lokalno i sinhronizuju čim se povežete.",
-                feat_multi_title: "Više vozila",
-                feat_multi_text: "Upravljajte garažom cele porodice u jednoj aplikaciji.",
-                feat_secure_title: "Sigurno i privatno",
-                feat_secure_text: "Vaši podaci ostaju na vašem uređaju. Cenimo vašu privatnost.",
-                feat_analytics_title: "Napredna analitika",
-                feat_analytics_text: "Vizualizujte zdravlje vozila i obrasce trošenja kroz vreme uz duboke uvide.",
+                feat_fuel_title: "Smart Fuel Tracker & AI Skener",
+                feat_fuel_text: "Automatski proračun L/100km i procena dometa. Usmeri kameru na fiskalni račun sa pumpe i AI sam očitava litre i cenu.",
+                feat_parking_title: "1-Tap SMS Parking Srbija",
+                feat_parking_text: "Beograd, Novi Sad, Niš i još 6 gradova. Zvanične zone, cene, uživo tajmer i +1h produženje na jedan klik.",
+                feat_reminders_title: "Dvostruki pametni podsetnici",
+                feat_reminders_text: "Podsetnici po datumu ILI kilometraži (npr. 1 god ili 10.000 km). Auto predlozi za mali servis, gume i registraciju.",
+                feat_export_title: "PDF Servisna knjižica & Excel",
+                feat_export_text: "Generiši profesionalni PDF izveštaj o održavanju koji podiže cenu auta pri prodaji, uz kompletan Excel (.XLSX) izvoz.",
+                feat_offline_title: "Offline-First & Cloud Sync",
+                feat_offline_text: "Aplikacija radi 100% oflajn bez interneta, a automatski se i sigurno sinhronizuje preko Supabase klauda.",
+                feat_garage_title: "Garaža & Health Score",
+                feat_garage_text: "Praćenje više vozila, VIN decoder sa 1-tap kopiranjem, odbrojavanje registracije i pametan indeks zdravlja vozila.",
+                feat_widgets_title: "iOS Widgeti & Zaključani ekran",
+                feat_widgets_text: "Proveri preostali domet, prosečnu potrošnju ili tajmer parkinga direktno na Home Screen-u svog iPhone-a.",
+                feat_analytics_title: "TCO & Analitika troškova",
+                feat_analytics_text: "Saznaj tačnu cenu svakog pređenog kilometra, mesečne i godišnje troškove kroz pregledne interaktivne grafikone.",
+
+                // Logbook Showcase
+                logbook_showcase_title: "14 Specijalizovanih kategorija dnevnika",
+                logbook_showcase_subtext: "Od redovnog održavanja i guma do saobraćajnih kazni i punjenja — svaki detalj tvog vozila organizovan na jednom mestu.",
+                chip_fuel_title: "Gorivo & Potrošnja",
+                chip_fuel_desc: "Točenja, L/100km, cena/km i pumpe",
+                chip_service_title: "Servis & Održavanje",
+                chip_service_desc: "Mali i veliki servis, ulje, kočnice, filteri",
+                chip_trips_title: "Službena putovanja",
+                chip_trips_desc: "Kilometraža i evidencija za refundaciju",
+                chip_parking_title: "SMS Parking & Istorija",
+                chip_parking_desc: "Plaćene zone, troškovi i tajmer",
+                chip_tires_title: "Gume & DOT Broj",
+                chip_tires_desc: "Sezonska zamena, dubina šare i stanje",
+                chip_fines_title: "Dnevnik kazni",
+                chip_fines_desc: "Prekršaji, status uplate i fotografija",
+                chip_charge_title: "Punjenje EV & Hibrida",
+                chip_charge_desc: "kWh, snaga, baterija i cena po kWh",
+                chip_wash_title: "Pranje & Detailing",
+                chip_wash_desc: "Dubinsko pranje, poliranje i voskiranje",
+                chip_tolls_title: "Putarine & Vinjete",
+                chip_tolls_desc: "Domaće putarine i inostrane vinjete",
+                chip_faults_title: "Kvarovi & OBD-II",
+                chip_faults_desc: "Kodovi sa dijagnostike i beleške majstora",
+                chip_docs_title: "Dokumenta & Polise",
+                chip_docs_desc: "Saobraćajna, osiguranje, zeleni karton",
+                chip_parts_title: "Katalog delova",
+                chip_parts_desc: "Šifre, proizvođači, cene i garancije",
+                chip_diary_title: "Dnevnik događaja",
+                chip_diary_desc: "Slobodne beleške, modifikacije, utisci",
+                chip_expenses_title: "Opšti troškovi",
+                chip_expenses_desc: "Registracija, kozmetika i sitnice",
+
+                // How it works
                 how_it_works_heading: "Počnite za 60 sekundi",
                 step1_title: "Dodajte auto",
                 step1_text: "Unesite marku, model, godište i kilometražu da podesite svoj digitalni dnevnik.",
@@ -2712,15 +3467,16 @@
                 step2_text: "Bilo da je to sipanje goriva, servis ili kratak put, zabeležite to u sekundi.",
                 step3_title: "Budite informisani",
                 step3_text: "Dobijajte pravovremene podsetnike za servis i gledajte detaljnu analitiku vozila.",
+
+                // Screenshots
                 screenshots_heading: "Prelepo i jednostavno",
                 screenshots_subtext: "Interfejs dizajniran od strane vozača, za vozače.",
                 screen_dashboard: "Kontrolna tabla",
                 screen_logbook: "Dnevnik",
                 screen_stats: "Statistika",
                 screen_reminders: "Podsetnici",
-                screen_fuel: "Točenje goriva",
-                screen_vehicle: "Lista vozila",
-                screen_analysis: "Analiza",
+
+                // Reviews
                 testimonials_heading: "Vožači vole carFlo",
                 test1_quote: '"Konačno aplikacija koja ne pokušava da mi proda osiguranje na svakom koraku. Čista, brza i veoma korisna."',
                 test2_quote: '"Kao neko ko vodi firmu, PDF izveštaji su mi spasili sate i sate ručnog računanja troškova goriva."',
@@ -2728,41 +3484,8 @@
                 test4_quote: '"Sve oko auta mi je konačno na jednom mestu. Najviše mi znače podsetnici za registraciju i servis."',
                 test5_quote: '"Dnevnik je baš brz. Otvorim, unesem kilometražu ili trošak i gotovo za par sekundi."',
                 test6_quote: '"Odlično za praćenje troškova. Tek kad vidiš statistiku, znaš koliko te auto stvarno košta."',
-                download_heading: "Pratite svaki kilometar od danas",
-                download_subtext: "Besplatno preuzimanje. Registracija nije potrebna.",
-                badge_appstore_span: "Preuzmi na",
-                badge_googleplay_span: "Uskoro",
-                footer_tagline: "Pojednostavljeno upravljanje vozilima za vozače širom sveta.",
-                footer_product: "Proizvod",
-                footer_legal: "Pravno",
-                footer_contact: "Kontakt",
-                footer_privacy: "Politika privatnosti",
-                footer_terms: "Uslovi korišćenja",
-                footer_delete: "Brisanje naloga",
-                footer_copyright: "© 2026 carFlo. Sva prava zadržana.",
-                footer_made_by: 'Autor: <a href="https://djurke23.github.io/portfolio/" target="_blank" class="footer-credit-link">Djurke23</a>',
-                footer_socials: "Zapratite nas na društvenim mrežama:",
-                swipe_hint: "Prevuci levo/desno",
-                faq_heading: "Često postavljana pitanja",
-                faq_subtext: "Sve što treba da znate o carFlo aplikaciji.",
-                faq_q1: "Kako da dodam novo vozilo?",
-                faq_a1: "Jednostavno dodirnite \"+\" ikonicu na ekranu vozila i unesite podatke o svom automobilu.",
-                faq_q2: "Mogu li da pratim više vozila?",
-                faq_a2: "Da! carFlo podržava neograničen broj vozila u vašoj virtuelnoj garaži.",
-                faq_q3: "Šta je uključeno u besplatni plan?",
-                faq_a3: "Možete pratiti jedno vozilo, beležiti točenja goriva i gledati osnovnu analitiku besplatno.",
-                faq_q4: "Kako da pređem na Premium?",
-                faq_a4: "Idite na \"Podešavanja\" i izaberite \"Nadogradi na Premium\" da otključate više vozila i PDF izveštaje.",
-                faq_q5: "Kako da otkažem pretplatu?",
-                faq_a5: "Pretplatom možete upravljati direktno kroz podešavanja App Store-a ili Google Play prodavnice.",
-                faq_q6: "Da li su moji podaci bezbedni?",
-                faq_a6: "Vaši podaci se čuvaju lokalno na vašem uređaju. Premium korisnici imaju sigurnosne kopije na klaudu.",
-                faq_q7: "Da li aplikacija radi bez interneta?",
-                faq_a7: "Apsolutno! carFlo radi potpuno oflajn i sinhronizuje podatke kada se ponovo povežete.",
-                support_heading: "I dalje vam treba pomoć?",
-                support_text: "Pišite nam ako imate bilo kakvih dodatnih pitanja ili nedoumica.",
-                support_note: "Odgovaramo u roku od 24-48 sati.",
-                nav_pricing: "Cene",
+
+                // Pricing
                 pricing_heading: "Jednostavne i transparentne cene",
                 pricing_subtext: "Otključajte punu snagu carFlo aplikacije i preuzmite kontrolu nad troškovima.",
                 pricing_monthly_title: "Mesečno",
@@ -2788,7 +3511,94 @@
                 pricing_pro_feature_trips: "Poslovna putovanja — Pratite i izvozite poslovna putovanja za poreze i izveštaje.",
                 pricing_pro_feature_categories: "Prilagođene kategorije — Kreirajte neograničen broj kategorija troškova.",
                 pricing_pro_feature_support: "Prioritetna podrška — Dobijte prioritetnu pomoć od naše ekipe za podršku.",
-                pricing_cta: "Otključaj Pro Plan"
+                pricing_cta: "Otključaj Pro Plan",
+
+                // Comparison Table
+                table_col_feature: "Funkcionalnost",
+                table_col_free: "Besplatna (FREE)",
+                table_col_pro: "PRO Verzija 👑",
+                t_row_vehicles: "Broj vozila u garaži",
+                t_val_free_vehicles: "1 vozilo",
+                t_val_unlimited: "Neograničeno",
+                t_row_fuel: "Unosi goriva",
+                t_val_free_fuel: "Do 10 unosa",
+                t_row_service: "Servisni unosi",
+                t_val_free_service: "Do 5 unosa",
+                t_row_reminders: "Podsetnici za servis i registraciju",
+                t_val_free_reminders: "Do 2 podsetnika",
+                t_row_categories: "Kategorije troškova",
+                t_val_free_cat: "2 osnovne",
+                t_val_custom_cat: "Neograničene custom",
+                t_row_parking: "Jedan dodir SMS Parking (Srbija)",
+                t_val_included_9: "Uključeno (svih 9 gradova)",
+                t_row_ocr: "AI Skener računa kamerom (OCR)",
+                t_val_auto_read: "Automatsko očitavanje",
+                t_row_pdf: "PDF Servisna knjižica (za prodaju auta)",
+                t_val_pdf_pro: "Profesionalni PDF izveštaj",
+                t_row_excel: "Izvoz u Excel (.XLSX)",
+                t_val_csv_only: "Samo CSV",
+                t_val_xlsx_full: "Kompletan XLSX izvoz",
+                t_row_trips: "Službena putovanja (Business Trips)",
+                t_val_trips_tax: "Evidencija za porez i refundaciju",
+                t_row_photos: "Slike računa i dokumenata (Attachments)",
+                t_row_cloud: "Cloud Backup i sinhronizacija",
+                t_val_local_only: "Samo lokalno",
+                t_val_cloud_safe: "Siguran cloud backup",
+                t_row_widgets: "iOS Home & Lock Screen Widgeti",
+                t_val_widgets_pro: "Domet, potrošnja i parking",
+                t_row_tco: "Detaljna TCO statistika i grafikoni",
+                t_val_basic: "Osnovna",
+                t_val_advanced: "Napredna analitika i poređenja",
+                t_row_themes: "Prilagođene ikonice i boje teme",
+                t_val_themes_6: "6 unikatnih ikonica i sve teme",
+
+                // Roadmap
+                roadmap_heading: "Uskoro u CarFlo",
+                roadmap_subtext: "Aktivno razvijamo nove funkcije koje će upravljanje tvojim automobilom učiniti još lakšim i intuitivnijim.",
+                roadmap_status: "U razvoju",
+                roadmap_carplay_title: "Apple CarPlay podrška",
+                roadmap_carplay_text: "Prikaz tajmera za parking, preostalog dometa i brzih servisnih upozorenja direktno na ekranu u automobilu.",
+                roadmap_sharing_title: "Family & Fleet Sharing",
+                roadmap_sharing_text: "Zajednički pristup vozilu — omogući članovima porodice ili kolegama da unose troškove i prate isti automobil.",
+                roadmap_gps_title: "GPS Geo-fencing parking",
+                roadmap_gps_text: "Automatsko prepoznavanje lokacije gde si parkirao i trenutni predlog tačne parking zone za slanje SMS-a.",
+                roadmap_android_title: "Google Play verzija",
+                roadmap_android_text: "Kompletna verzija carFlo aplikacije za Android telefone stiže uskoro na Google Play prodavnicu.",
+
+                // Download CTA
+                download_heading: "Pratite svaki kilometar od danas",
+                download_subtext: "Besplatno preuzimanje. Registracija nije potrebna.",
+
+                // FAQ
+                faq_heading: "Često postavljana pitanja",
+                faq_subtext: "Sve što treba da znate o carFlo aplikaciji.",
+                faq_q_offline: "Da li aplikacija radi bez interneta?",
+                faq_a_offline: "Da! CarFlo je građen po offline-first principu. Sve podatke (točenja, servise, troškove, beleške) možete unositi potpuno bez interneta, a oni se automatski i sigurno sinhronizuju čim se povežete na mrežu.",
+                faq_q_parking: "Za koje gradove važi SMS parking?",
+                faq_a_parking: "Trenutno su podržani Beograd, Novi Sad, Niš, Kragujevac, Subotica, Čačak, Pančevo, Zrenjanin i Kruševac — sa svim zvaničnim zonama, radnim vremenom, SMS brojevima i ažurnim cenama.",
+                faq_q_newphone: "Mogu li podatke preneti na novi telefon?",
+                faq_a_newphone: "Naravno. Uz PRO nalog vaši podaci su bezbedno sačuvani u Cloud-u (Supabase) i dostupni na novom telefonu čim se ulogujete. Takođe, u svakom trenutku možete generisati Excel (.XLSX) ili CSV izvoz.",
+                faq_q_multicar: "Šta ako imam više od jednog automobila?",
+                faq_a_multicar: "CarFlo PRO podržava neograničen broj vozila u virtuelnoj garaži. Možete lako prebacivati aktivno vozilo jednim dodirom na početnom ekranu aplikacije.",
+                faq_q_ocr: "Kako funkcioniše AI skener računa?",
+                faq_a_ocr: "Samo usmerite kameru na fiskalni račun sa benzinske pumpe. Zahvaljujući naprednom on-device mašinskom učenju (MLKit OCR), aplikacija automatski prepoznaje i popunjava broj litara i iznos bez ručnog kucanja.",
+                faq_q_reminders: "Kako funkcionišu dvostruki podsetnici?",
+                faq_a_reminders: "Podsetnike možete postaviti prema datumu ILI prema pređenoj kilometraži (npr. mali servis za godinu dana ILI nakon 10.000 km). CarFlo prati oba parametra i šalje vam notifikaciju šta god pre nastupi.",
+
+                // Support & Footer
+                support_heading: "I dalje vam treba pomoć?",
+                support_text: "Pišite nam ako imate bilo kakvih dodatnih pitanja ili nedoumica.",
+                support_note: "Odgovaramo u roku od 24-48 sati.",
+                footer_tagline: "Pojednostavljeno upravljanje vozilima za vozače širom sveta.",
+                footer_product: "Proizvod",
+                footer_legal: "Pravno",
+                footer_contact: "Kontakt",
+                footer_privacy: "Politika privatnosti",
+                footer_terms: "Uslovi korišćenja",
+                footer_delete: "Brisanje naloga",
+                footer_copyright: "© 2026 carFlo. Sva prava zadržana.",
+                footer_made_by: 'Autor: <a href="https://djurke23.github.io/portfolio/" target="_blank" class="footer-credit-link">Djurke23</a>',
+                footer_socials: "Zapratite nas na društvenim mrežama:"
             }
         };
 
