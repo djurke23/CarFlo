@@ -1,5 +1,74 @@
 [
   {
+    "version": "1.4.3",
+    "date": "2026-10-03",
+    "title": {
+      "en": "Floating Glass Navigation & Launch Optimizations",
+      "sr": "Plutajuća staklena navigacija i ubrzano pokretanje"
+    },
+    "changes": [
+      {
+        "type": "new",
+        "text": {
+          "en": "Floating Glass Navigation — Modern floating pill bottom bar featuring elegant frosted glassmorphism.",
+          "sr": "Plutajuća staklena navigacija — Moderan plutajući navigacioni bar u obliku pilule sa elegantnim efektom zamagljenog stakla (glassmorphism)."
+        }
+      },
+      {
+        "type": "new",
+        "text": {
+          "en": "Fluid Spring Lens Indicator — Tactile lens indicator that smoothly tracks your active tab with native haptic feedback.",
+          "sr": "Fluidni animirani indikator — Precizni indikator koji glatko prati aktivnu karticu uz prijatan haptički odziv."
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Custom Dark Mode Splash Screen — Brand new high-contrast white logo tailored specifically for Dark Mode startup with zero-lag theme matching.",
+          "sr": "Prilagođeni tamni početni ekran — Novi beli logo visokog kontrasta za Dark Mode i trenutno prilagođavanje izabranoj temi."
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Zero-Flicker Launch & Performance — Asset preloading eliminates white screen flash on dark startup with a refined splash fade-out animation.",
+          "sr": "Pokretanje bez treperenja i performanse — Pred-učitavanje resursa eliminiše bljesak belog ekrana u noćnom režimu uz uglađenu animaciju ulaska u aplikaciju."
+        }
+      }
+    ]
+  },
+  {
+    "version": "1.4.2",
+    "date": "2026-10-01",
+    "title": {
+      "en": "Camera Document Scanner & Instant Navigation",
+      "sr": "Kamera skener dokumenata i brza navigacija"
+    },
+    "changes": [
+      {
+        "type": "new",
+        "text": {
+          "en": "Camera Document Scanner — Scan vehicle documents, registration cards, and insurance policies directly with camera and attach them to your car [PRO].",
+          "sr": "Kamera skener dokumenata — Skenirajte saobraćajne dozvole, polise osiguranja i servisne račune direktno kamerom i sačuvajte uz vozilo [PRO]."
+        }
+      },
+      {
+        "type": "improved",
+        "text": {
+          "en": "Instant Native Navigation — Eliminated transition lag and loading delays when switching between tabs and dashboard cards.",
+          "sr": "Trenutna navigacija — Uklonjeno kašnjenje i čekanje pri prebacivanju između kartica i kontrolne table."
+        }
+      },
+      {
+        "type": "fixed",
+        "text": {
+          "en": "Stability & Bug Fixes — Resolved edge-case crashes when saving attachments and improved overall memory efficiency.",
+          "sr": "Stabilnost i ispravke grešaka — Rešeni retki problemi pri čuvanju priloga i optimizovana potrošnja memorije."
+        }
+      }
+    ]
+  },
+  {
     "version": "1.4.1",
     "date": "2026-09-27",
     "title": {

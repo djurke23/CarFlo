@@ -27,8 +27,25 @@
     <meta name="theme-color" content="#0d0e0f">
     <meta name="description"
         content="carFlo is the ultimate vehicle logbook app. Track fuel, maintenance, expenses, and trips — all in one place.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://carflo.app/">
+    <meta property="og:site_name" content="carFlo">
     <meta property="og:title" content="carFlo — Your Car. Every Mile. Perfectly Tracked.">
+    <meta property="og:description"
+        content="The ultimate vehicle logbook & expense tracker. Smart fuel calculation, 1-tap SMS parking Serbia, digital service book, and dual reminders.">
+    <meta property="og:image" content="./hero.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="carFlo — Your Car. Every Mile. Perfectly Tracked.">
+    <meta name="twitter:description"
+        content="The ultimate vehicle logbook & expense tracker. Smart fuel calculation, 1-tap SMS parking Serbia, digital service book, and dual reminders.">
+    <meta name="twitter:image" content="./hero.png">
     <title>carFlo — Your Car. Every Mile. Perfectly Tracked.</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
 
     <!-- Preconnect to Fontshare -->
     <link rel="preconnect" href="https://api.fontshare.com">
@@ -272,15 +289,72 @@
             object-fit: contain;
         }
 
+        .logo-light {
+            display: block;
+        }
+        .logo-dark {
+            display: none !important;
+        }
+
+        [data-theme="dark"] .logo-light {
+            display: none !important;
+        }
+        [data-theme="dark"] .logo-dark {
+            display: block !important;
+        }
+
+        [data-theme="light"] .logo-dark {
+            display: none !important;
+        }
+        [data-theme="light"] .logo-light {
+            display: block !important;
+        }
+
+        .footer-logo.logo-light {
+            display: inline-block;
+        }
+        .footer-logo.logo-dark {
+            display: none !important;
+        }
+
+        [data-theme="dark"] .footer-logo.logo-light {
+            display: none !important;
+        }
+        [data-theme="dark"] .footer-logo.logo-dark {
+            display: inline-block !important;
+        }
+
+        [data-theme="light"] .footer-logo.logo-dark {
+            display: none !important;
+        }
+        [data-theme="light"] .footer-logo.logo-light {
+            display: inline-block !important;
+        }
+
         .nav-links {
             display: flex;
-            gap: 1.25rem;
+            gap: 0.6rem;
             align-items: center;
             font-size: 0.9rem;
         }
 
+        .nav-links a {
+            color: var(--color-text-muted);
+            padding: 0.4rem 0.85rem;
+            border-radius: 999px;
+            transition: color 0.2s ease, background 0.2s ease;
+            position: relative;
+        }
+
         .nav-links a:hover {
-            color: var(--color-primary);
+            color: var(--color-text);
+            background: var(--color-surface);
+        }
+
+        .nav-links a.active {
+            color: var(--color-primary) !important;
+            background: var(--color-primary-transparent);
+            font-weight: 600;
         }
 
         .nav-actions {
@@ -534,6 +608,198 @@
             justify-content: center;
             gap: 1.25rem;
             flex-wrap: wrap;
+        }
+
+        /* Hero Device Showcase */
+        .hero-mockup-container {
+            margin-top: 3.5rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 960px;
+            margin-inline: auto;
+            z-index: 5;
+        }
+
+        .hero-mockup-glow {
+            position: absolute;
+            width: 480px;
+            height: 480px;
+            background: radial-gradient(circle, var(--color-primary-transparent) 0%, transparent 68%);
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(50px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        .hero-phone-wrap {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-phone-wrap .phone-frame {
+            max-width: 295px;
+            transform: translateY(0);
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.18),
+                inset 0 1px 1.5px rgba(255, 255, 255, 0.4),
+                0 20px 48px -6px rgba(0, 0, 0, 0.55),
+                0 40px 80px -12px rgba(0, 0, 0, 0.75),
+                0 0 65px -10px var(--color-primary-transparent);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        [data-theme="light"] .hero-phone-wrap .phone-frame {
+            box-shadow:
+                0 0 0 1px rgba(0, 0, 0, 0.14),
+                inset 0 1px 1.5px rgba(255, 255, 255, 0.95),
+                0 18px 40px -6px rgba(0, 0, 0, 0.12),
+                0 36px 70px -12px rgba(0, 0, 0, 0.18),
+                0 0 50px -10px rgba(10, 124, 138, 0.25);
+        }
+
+        .hero-phone-wrap .phone-frame:hover {
+            transform: translateY(-6px);
+        }
+
+        /* Floating Cards */
+        .hero-float-card {
+            position: absolute;
+            z-index: 4;
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.85rem 1.2rem;
+            background: rgba(22, 23, 27, 0.78);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--color-border);
+            border-radius: 18px;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28), 0 0 20px var(--color-primary-transparent);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
+        }
+
+        [data-theme="light"] .hero-float-card {
+            background: rgba(255, 255, 255, 0.86);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.08), 0 0 16px rgba(10, 124, 138, 0.12);
+        }
+
+        .hero-float-card:hover {
+            transform: scale(1.04);
+            border-color: var(--color-primary);
+        }
+
+        .hero-card-service {
+            top: 22%;
+            left: calc(50% - 280px);
+            transform: translateX(-50%);
+            animation: floatBobA 5.5s ease-in-out infinite;
+        }
+
+        .hero-card-fuel {
+            top: 36%;
+            right: calc(50% - 285px);
+            transform: translateX(50%);
+            animation: floatBobB 6.2s ease-in-out infinite 0.6s;
+        }
+
+        .hero-card-parking {
+            bottom: 12%;
+            left: calc(50% - 250px);
+            transform: translateX(-50%);
+            animation: floatBobA 5.8s ease-in-out infinite 1.2s;
+        }
+
+        .h-badge-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .icon-service {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+        }
+
+        .icon-fuel {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+        }
+
+        .icon-parking {
+            background: var(--color-primary-transparent);
+            color: var(--color-primary);
+        }
+
+        .h-badge-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .h-badge-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-faint);
+            font-weight: 600;
+        }
+
+        .h-badge-val {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--color-text);
+            font-family: 'Clash Display', sans-serif;
+            letter-spacing: 0.01em;
+        }
+
+        .hero-mobile-badges {
+            display: none;
+            width: 100%;
+            margin-top: 1.5rem;
+            gap: 0.65rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 3;
+        }
+
+        @keyframes floatBobA {
+            0%, 100% { transform: translate(var(--tx, 0), 0); }
+            50% { transform: translate(var(--tx, 0), -10px); }
+        }
+
+        @keyframes floatBobB {
+            0%, 100% { transform: translate(var(--tx, 0), 0); }
+            50% { transform: translate(var(--tx, 0), 10px); }
+        }
+
+        @media (max-width: 860px) {
+            .hero-card-service { left: 4%; transform: none; --tx: 0; }
+            .hero-card-fuel { right: 4%; transform: none; --tx: 0; }
+            .hero-card-parking { display: none; }
+        }
+
+        @media (max-width: 680px) {
+            .hero-float-card { display: none; }
+            .hero-mobile-badges { display: flex; }
+            .hero-phone-wrap .phone-frame { max-width: 245px; }
+            .hero-mockup-container { margin-top: 2rem; }
+            .hero-mockup-glow { width: 320px; height: 320px; }
         }
 
         /* Stats Bar */
@@ -1335,7 +1601,7 @@
 
         /* Footer */
         footer {
-            padding: 80px 0 40px;
+            padding: 70px 0 35px;
             border-top: 1px solid var(--color-divider);
         }
 
@@ -1343,7 +1609,7 @@
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 4rem;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
         .footer-tagline {
@@ -1383,10 +1649,28 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 30px;
+            padding-top: 24px;
             border-top: 1px solid var(--color-divider);
             color: var(--color-text-faint);
-            font-size: 0.875rem;
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-separator {
+            color: var(--color-border);
+            user-select: none;
+        }
+
+        .footer-bottom-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
 
         /* Responsive */
@@ -2033,6 +2317,506 @@
             color: var(--color-text-muted);
             line-height: 1.5;
         }
+
+        /* --- Announcement Pill --- */
+        .announcement-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.35rem 0.95rem 0.35rem 0.45rem;
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            margin-bottom: 1.75rem;
+            font-size: 0.86rem;
+            color: var(--color-text);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            text-decoration: none;
+            max-width: 95%;
+        }
+        .announcement-pill:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px var(--color-primary-transparent);
+        }
+        .pill-tag {
+            background: var(--color-primary);
+            color: #ffffff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.22rem 0.6rem;
+            border-radius: 999px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        .pill-text {
+            font-weight: 500;
+            color: var(--color-text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .announcement-pill i {
+            color: var(--color-text-muted);
+            transition: transform 0.2s ease, color 0.2s ease;
+            flex-shrink: 0;
+        }
+        .announcement-pill:hover i {
+            color: var(--color-primary);
+            transform: translateX(3px);
+        }
+
+        /* --- Hero Trust Bar --- */
+        .hero-trust-bar {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.9rem;
+            margin-top: 1.75rem;
+            padding: 0.55rem 1.25rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            font-size: 0.83rem;
+            color: var(--color-text-muted);
+            flex-wrap: wrap;
+            box-shadow: var(--shadow-sm);
+        }
+        .trust-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-weight: 500;
+        }
+        .trust-item i {
+            color: var(--color-primary);
+        }
+        .stars-row {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+        }
+        .star-icon {
+            display: block;
+        }
+        .trust-score {
+            font-weight: 700;
+            color: var(--color-text);
+            margin-left: 2px;
+        }
+        .trust-divider {
+            color: var(--color-text-faint);
+            user-select: none;
+        }
+
+        /* --- QR Download Button --- */
+        .qr-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            height: 52px;
+            padding: 0 1.25rem;
+            border-radius: 12px;
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .qr-download-btn:hover {
+            border-color: var(--color-primary);
+            background: var(--color-surface-offset);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+        }
+        .qr-download-btn i {
+            color: var(--color-primary);
+        }
+
+        /* --- QR Modal --- */
+        .qr-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+        .qr-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .qr-modal-card {
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 24px;
+            padding: 2.25rem 2rem;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55);
+            transform: scale(0.92);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .qr-modal-overlay.active .qr-modal-card {
+            transform: scale(1);
+        }
+        .qr-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-surface);
+            color: var(--color-text-muted);
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+        .qr-modal-close:hover {
+            color: var(--color-text);
+            border-color: var(--color-text);
+        }
+        .qr-code-wrapper {
+            background: #ffffff;
+            padding: 1rem;
+            border-radius: 16px;
+            display: inline-block;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        .qr-image {
+            display: block;
+            width: 180px;
+            height: 180px;
+        }
+        .qr-modal-title {
+            font-size: 1.45rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+        .qr-modal-desc {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.25rem;
+            line-height: 1.45;
+        }
+        .qr-direct-link {
+            display: inline-block;
+            font-size: 0.88rem;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+        .qr-direct-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Calculator Section --- */
+        .calc-section {
+            position: relative;
+        }
+        .calc-header {
+            max-width: 680px;
+            margin: 0 auto 3rem auto;
+        }
+        .calc-pill {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--color-primary);
+            background: var(--color-primary-transparent);
+            padding: 0.3rem 0.85rem;
+            border-radius: 999px;
+            border: 1px solid rgba(42, 184, 200, 0.3);
+            margin-bottom: 1rem;
+        }
+        .calc-title {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            margin-bottom: 0.85rem;
+            line-height: 1.15;
+        }
+        .calc-subtitle {
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+        .calc-card-container {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 2rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 28px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+        @media (max-width: 900px) {
+            .calc-card-container {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+                gap: 1.75rem;
+            }
+        }
+        .calc-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        .calc-control-group {
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 18px;
+            padding: 1.25rem 1.4rem;
+            transition: var(--transition);
+        }
+        .calc-control-group:focus-within {
+            border-color: var(--color-primary);
+        }
+        .calc-label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.85rem;
+        }
+        .calc-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--color-text);
+        }
+        .calc-label i {
+            color: var(--color-primary);
+        }
+        .calc-val-badge {
+            background: var(--color-primary-transparent);
+            color: var(--color-primary);
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 0.22rem 0.75rem;
+            border-radius: 8px;
+            border: 1px solid rgba(42, 184, 200, 0.25);
+        }
+        .calc-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            background: var(--color-border);
+            border-radius: 999px;
+            outline: none;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .calc-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 12px rgba(42, 184, 200, 0.6), 0 2px 6px rgba(0, 0, 0, 0.35);
+            cursor: grab;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .calc-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.18);
+            box-shadow: 0 0 18px rgba(42, 184, 200, 0.8), 0 3px 8px rgba(0, 0, 0, 0.4);
+        }
+        .calc-slider:active::-webkit-slider-thumb {
+            cursor: grabbing;
+            transform: scale(1.25);
+            box-shadow: 0 0 24px rgba(42, 184, 200, 0.95), 0 4px 10px rgba(0, 0, 0, 0.45);
+        }
+        .calc-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 12px rgba(42, 184, 200, 0.6);
+            cursor: grab;
+        }
+        .calc-slider-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.45rem;
+            font-size: 0.75rem;
+            color: var(--color-text-faint);
+        }
+        .calc-results {
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            gap: 1.25rem;
+        }
+        .calc-results::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, var(--color-primary-transparent), transparent 70%);
+            pointer-events: none;
+        }
+        .calc-result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .result-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+        }
+        .result-live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            background: var(--color-primary-transparent);
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+        }
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            animation: pulseDot 2s infinite;
+        }
+        @keyframes pulseDot {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .calc-main-stat {
+            margin: 0.25rem 0;
+        }
+        .calc-stat-sub {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+        .calc-stat-amount {
+            font-family: 'Clash Display', sans-serif;
+            font-size: clamp(2rem, 3.8vw, 2.7rem);
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.1;
+            margin-bottom: 0.35rem;
+        }
+        .calc-stat-liters {
+            font-size: 0.88rem;
+            color: var(--color-primary);
+            font-weight: 500;
+        }
+        .calc-grid-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--color-divider);
+        }
+        .calc-mini-stat {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+        }
+        .stat-mini-label {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        .stat-mini-val {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        .calc-savings-box {
+            display: flex;
+            gap: 0.9rem;
+            background: var(--color-primary-transparent);
+            border: 1px solid rgba(42, 184, 200, 0.35);
+            border-radius: 16px;
+            padding: 1rem 1.2rem;
+            align-items: flex-start;
+            position: relative;
+            box-shadow: 0 0 25px -4px rgba(42, 184, 200, 0.25);
+            transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        .calc-savings-box.glow-active {
+            box-shadow: 0 0 32px rgba(42, 184, 200, 0.45);
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+        .savings-icon {
+            color: var(--color-primary);
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .savings-content {
+            flex: 1;
+        }
+        .savings-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+        .savings-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+        .savings-amount {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        .savings-desc {
+            font-size: 0.78rem;
+            color: var(--color-text-muted);
+            line-height: 1.4;
+        }
     </style>
 </head>
 
@@ -2042,13 +2826,14 @@
     <div class="mobile-drawer" id="drawer">
         <div class="flex justify-between items-center">
             <div class="logo">
-                <img src="./logo.svg" alt="carFlo Logo">
+                <img src="./logo.svg" alt="carFlo Logo" class="logo-light">
+                <img src="./colored-logo-dark.svg" alt="carFlo Logo" class="logo-dark">
             </div>
             <button class="mobile-close" onclick="toggleMenu()"><i data-lucide="x"></i></button>
         </div>
         <ul class="flex flex-col gap-8" style="margin-top: 40px;">
-            <li><a href="#features" onclick="toggleMenu()" data-i18n="nav_features">Features</a></li>
             <li><a href="#how-it-works" onclick="toggleMenu()" data-i18n="nav_how_it_works">How It Works</a></li>
+            <li><a href="#features" onclick="toggleMenu()" data-i18n="nav_features">Features</a></li>
             <li><a href="#pricing" onclick="toggleMenu()" data-i18n="nav_pricing">Pricing</a></li>
             <li><a href="#support" onclick="toggleMenu()" data-i18n="nav_faq">FAQ</a></li>
             <li><a href="./changelog.html" onclick="toggleMenu()" data-i18n="nav_changelog">Changelog</a></li>
@@ -2060,11 +2845,12 @@
         <div class="container">
             <nav>
                 <a href="./index.html" class="logo">
-                    <img src="./logo.svg" alt="carFlo Logo">
+                    <img src="./logo.svg" alt="carFlo Logo" class="logo-light">
+                    <img src="./colored-logo-dark.svg" alt="carFlo Logo" class="logo-dark">
                 </a>
                 <ul class="nav-links">
-                    <li><a href="#features" data-i18n="nav_features">Features</a></li>
                     <li><a href="#how-it-works" data-i18n="nav_how_it_works">How It Works</a></li>
+                    <li><a href="#features" data-i18n="nav_features">Features</a></li>
                     <li><a href="#pricing" data-i18n="nav_pricing">Pricing</a></li>
                     <li><a href="#support" data-i18n="nav_faq">FAQ</a></li>
                     <li><a href="./changelog.html" data-i18n="nav_changelog">Changelog</a></li>
@@ -2101,6 +2887,11 @@
         <section class="hero">
             <div class="container">
                 <div class="hero-content reveal">
+                    <a href="./changelog.html" class="announcement-pill" aria-label="What's new in version 1.4.3">
+                        <span class="pill-tag" data-i18n="announcement_tag">NEW v1.4.3</span>
+                        <span class="pill-text" data-i18n="announcement_text">Floating Glass Navigation & Document Scanner is live</span>
+                        <i data-lucide="chevron-right" size="14"></i>
+                    </a>
                     <h1 class="hero-title" data-i18n="hero_title">The Smartest Companion for Your Vehicle.</h1>
                     <p class="hero-subtext" data-i18n="hero_subtext">Your digital service book, real fuel consumption tracker, one-touch SMS parking, and total expense manager — all in one place.</p>
                     <div class="hero-buttons">
@@ -2108,6 +2899,10 @@
                             target="_blank" class="official-store-badge" aria-label="Download on the App Store">
                             <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height: 52px; width: auto;">
                         </a>
+                        <button type="button" class="qr-download-btn" onclick="openQrModal()" aria-label="QR Code Download">
+                            <i data-lucide="qr-code" size="18"></i>
+                            <span data-i18n="btn_qr_code">Scan for iPhone</span>
+                        </button>
                         <div class="google-play-badge-custom" aria-label="Google Play Coming Soon">
                             <svg class="google-play-svg" width="22" height="24" viewBox="0 0 22 24" fill="none">
                                 <path d="M1.3 0.6C1 0.9 0.8 1.4 0.8 2.1V21.9C0.8 22.6 1 23.1 1.3 23.4L1.4 23.5L12.5 12.4V12.1L1.4 0.5L1.3 0.6Z" fill="url(#gp_g1)"/>
@@ -2128,11 +2923,109 @@
                             <span class="gp-pill" data-i18n="badge_googleplay_span">Coming Soon</span>
                         </div>
                     </div>
+
+                    <!-- Trust Bar / Social Proof -->
+                    <div class="hero-trust-bar">
+                        <div class="trust-item trust-rating">
+                            <div class="stars-row" aria-label="5 stars rating">
+                                <svg class="star-icon" viewBox="0 0 24 24" width="13" height="13" fill="#f59e0b" stroke="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                <svg class="star-icon" viewBox="0 0 24 24" width="13" height="13" fill="#f59e0b" stroke="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                <svg class="star-icon" viewBox="0 0 24 24" width="13" height="13" fill="#f59e0b" stroke="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                <svg class="star-icon" viewBox="0 0 24 24" width="13" height="13" fill="#f59e0b" stroke="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                <svg class="star-icon" viewBox="0 0 24 24" width="13" height="13" fill="#f59e0b" stroke="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            </div>
+                            <span class="trust-score">5.0</span>
+                            <span class="trust-label" data-i18n="trust_appstore">App Store</span>
+                        </div>
+                        <span class="trust-divider">•</span>
+                        <div class="trust-item">
+                            <i data-lucide="shield-check" size="14"></i>
+                            <span data-i18n="trust_offline">100% Offline & Private</span>
+                        </div>
+                        <span class="trust-divider">•</span>
+                        <div class="trust-item">
+                            <span data-i18n="trust_noads">Zero Ads</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Device Showcase -->
+                <div class="hero-mockup-container reveal">
+                    <div class="hero-mockup-glow" aria-hidden="true"></div>
+
+                    <!-- Floating Badge: Regular Service -->
+                    <div class="hero-float-card hero-card-service">
+                        <div class="h-badge-icon icon-service">
+                            <i data-lucide="wrench" size="18"></i>
+                        </div>
+                        <div class="h-badge-info">
+                            <span class="h-badge-label" data-i18n="hero_card_service_label">Mali servis</span>
+                            <span class="h-badge-val" data-i18n="hero_card_service_val">za 450 km • Na vreme</span>
+                        </div>
+                    </div>
+
+                    <!-- Photorealistic Phone Frame -->
+                    <div class="hero-phone-wrap">
+                        <div class="phone-frame">
+                            <span class="phone-btn phone-btn-action" aria-hidden="true"></span>
+                            <span class="phone-btn phone-btn-vol-up" aria-hidden="true"></span>
+                            <span class="phone-btn phone-btn-vol-down" aria-hidden="true"></span>
+                            <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
+                            <span class="phone-speaker" aria-hidden="true"></span>
+                            <div class="phone-screen">
+                                <img src="./screen-dashboard-new.png" alt="carFlo App Dashboard" loading="eager">
+                                <div class="dynamic-island" aria-hidden="true">
+                                    <span class="island-sensor"></span>
+                                    <span class="island-camera"></span>
+                                </div>
+                                <div class="phone-glass-glare" aria-hidden="true"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge: Fuel Economy -->
+                    <div class="hero-float-card hero-card-fuel">
+                        <div class="h-badge-icon icon-fuel">
+                            <i data-lucide="fuel" size="18"></i>
+                        </div>
+                        <div class="h-badge-info">
+                            <span class="h-badge-label" data-i18n="hero_card_fuel_label">Prosečna potrošnja</span>
+                            <span class="h-badge-val" data-i18n="hero_card_fuel_val">6.2 L / 100km</span>
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge: SMS Parking -->
+                    <div class="hero-float-card hero-card-parking">
+                        <div class="h-badge-icon icon-parking">
+                            <i data-lucide="message-square" size="18"></i>
+                        </div>
+                        <div class="h-badge-info">
+                            <span class="h-badge-label" data-i18n="hero_card_parking_label">SMS Parking</span>
+                            <span class="h-badge-val" data-i18n="hero_card_parking_val">Zona 1 • 38 min</span>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Fallback Badges Row -->
+                    <div class="hero-mobile-badges">
+                        <div class="hero-float-card" style="position: static; display: flex; transform: none; animation: none;">
+                            <div class="h-badge-icon icon-service"><i data-lucide="wrench" size="16"></i></div>
+                            <div class="h-badge-info">
+                                <span class="h-badge-label" data-i18n="hero_card_service_label">Mali servis</span>
+                                <span class="h-badge-val" data-i18n="hero_card_service_val">za 450 km</span>
+                            </div>
+                        </div>
+                        <div class="hero-float-card" style="position: static; display: flex; transform: none; animation: none;">
+                            <div class="h-badge-icon icon-fuel"><i data-lucide="fuel" size="16"></i></div>
+                            <div class="h-badge-info">
+                                <span class="h-badge-label" data-i18n="hero_card_fuel_label">Potrošnja</span>
+                                <span class="h-badge-val" data-i18n="hero_card_fuel_val">6.2 L/100km</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 3 Value Proposition Cards -->
         <section class="value-props-section container">
             <div class="value-props-grid">
                 <div class="value-prop-card reveal">
@@ -2170,9 +3063,121 @@
             </div>
         </section>
 
+        <section id="how-it-works" class="container section-padding">
+            <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 80px;" data-i18n="how_it_works_heading">
+                Start in 60 Seconds</h2>
+            <div class="steps-grid">
+                <div class="step-item reveal">
+                    <div class="step-num">1</div>
+                    <h3 data-i18n="step1_title">Add Your Car</h3>
+                    <p class="text-muted" data-i18n="step1_text">Enter your car's make, model, year, and current mileage
+                        to set up your digital logbook.</p>
+                </div>
+                <div class="step-item reveal">
+                    <div class="step-num">2</div>
+                    <h3 data-i18n="step2_title">Log Any Event</h3>
+                    <p class="text-muted" data-i18n="step2_text">Whether it's a fuel refill, a service at the mechanic,
+                        or a quick trip to the store, log it in seconds.</p>
+                </div>
+                <div class="step-item reveal">
+                    <div class="step-num">3</div>
+                    <h3 data-i18n="step3_title">Stay Informed</h3>
+                    <p class="text-muted" data-i18n="step3_text">Receive timely reminders for maintenance and view
+                        detailed analytics of your vehicle's history.</p>
+                </div>
+            </div>
+        </section>
 
+        <section id="screenshots" class="section-padding" style="background: var(--color-surface-offset);">
+            <div class="container">
+                <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px;" data-i18n="screenshots_heading">
+                    Beautifully Simple</h2>
+                <p class="text-center text-muted" style="margin-bottom: 60px;" data-i18n="screenshots_subtext">The
+                    interface designed for drivers, by drivers.</p>
 
-
+                <div class="screenshots-showcase reveal" data-carousel="screenshots">
+                    <button class="carousel-button prev" type="button" data-carousel-prev="screenshots"
+                        aria-label="Previous screenshot"><i data-lucide="chevron-left"></i></button>
+                    <div class="screenshots-stage">
+                        <div class="screen-mockup active">
+                            <div class="phone-frame">
+                                <span class="phone-btn phone-btn-action" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-up" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-down" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
+                                <span class="phone-speaker" aria-hidden="true"></span>
+                                <div class="phone-screen">
+                                    <img src="./screen-dashboard-new.png" alt="Dashboard screen" loading="lazy">
+                                    <div class="dynamic-island" aria-hidden="true">
+                                        <span class="island-sensor"></span>
+                                        <span class="island-camera"></span>
+                                    </div>
+                                    <div class="phone-glass-glare" aria-hidden="true"></div>
+                                </div>
+                            </div>
+                            <p class="clash" data-i18n="screen_dashboard">Dashboard</p>
+                        </div>
+                        <div class="screen-mockup next">
+                            <div class="phone-frame">
+                                <span class="phone-btn phone-btn-action" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-up" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-down" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
+                                <span class="phone-speaker" aria-hidden="true"></span>
+                                <div class="phone-screen">
+                                    <img src="./screen-logbook-new.png" alt="Logbook screen" loading="lazy">
+                                    <div class="dynamic-island" aria-hidden="true">
+                                        <span class="island-sensor"></span>
+                                        <span class="island-camera"></span>
+                                    </div>
+                                    <div class="phone-glass-glare" aria-hidden="true"></div>
+                                </div>
+                            </div>
+                            <p class="clash" data-i18n="screen_logbook">Logbook</p>
+                        </div>
+                        <div class="screen-mockup">
+                            <div class="phone-frame">
+                                <span class="phone-btn phone-btn-action" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-up" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-down" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
+                                <span class="phone-speaker" aria-hidden="true"></span>
+                                <div class="phone-screen">
+                                    <img src="./screen-stats-new.png" alt="Statistics screen" loading="lazy">
+                                    <div class="dynamic-island" aria-hidden="true">
+                                        <span class="island-sensor"></span>
+                                        <span class="island-camera"></span>
+                                    </div>
+                                    <div class="phone-glass-glare" aria-hidden="true"></div>
+                                </div>
+                            </div>
+                            <p class="clash" data-i18n="screen_stats">Statistics</p>
+                        </div>
+                        <div class="screen-mockup previous">
+                            <div class="phone-frame">
+                                <span class="phone-btn phone-btn-action" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-up" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-vol-down" aria-hidden="true"></span>
+                                <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
+                                <span class="phone-speaker" aria-hidden="true"></span>
+                                <div class="phone-screen">
+                                    <img src="./screen-reminders-new.png" alt="Reminders screen" loading="lazy">
+                                    <div class="dynamic-island" aria-hidden="true">
+                                        <span class="island-sensor"></span>
+                                        <span class="island-camera"></span>
+                                    </div>
+                                    <div class="phone-glass-glare" aria-hidden="true"></div>
+                                </div>
+                            </div>
+                            <p class="clash" data-i18n="screen_reminders">Reminders</p>
+                        </div>
+                    </div>
+                    <button class="carousel-button next" type="button" data-carousel-next="screenshots"
+                        aria-label="Next screenshot"><i data-lucide="chevron-right"></i></button>
+                    <div class="carousel-dots" data-carousel-dots="screenshots" aria-hidden="true"></div>
+                </div>
+            </div>
+        </section>
 
         <section id="features" class="container section-padding">
             <div class="text-center" style="margin-bottom: 60px;">
@@ -2196,17 +3201,15 @@
                     <h3 data-i18n="feat_reminders_title">Dvostruki pametni podsetnici</h3>
                     <p data-i18n="feat_reminders_text">Podsetnici po datumu ILI kilometraži (npr. 1 god ili 10.000 km). Auto predlozi za mali servis, gume i registraciju.</p>
                 </div>
-                <div class="feature-card card-wide reveal">
-                    <div>
-                        <i data-lucide="file-check-2" class="feature-icon-inline" size="28"></i>
-                        <h3 data-i18n="feat_export_title">PDF Servisna knjižica & Excel</h3>
-                        <p data-i18n="feat_export_text">Generiši profesionalni PDF izveštaj o održavanju koji podiže cenu auta pri prodaji, uz kompletan Excel (.XLSX) izvoz.</p>
-                    </div>
-                    <div>
-                        <i data-lucide="cloud" class="feature-icon-inline" size="28"></i>
-                        <h3 data-i18n="feat_offline_title">Offline-First & Cloud Sync</h3>
-                        <p data-i18n="feat_offline_text">Aplikacija radi 100% oflajn bez interneta, a automatski se i sigurno sinhronizuje preko Supabase klauda.</p>
-                    </div>
+                <div class="feature-card card-lg reveal">
+                    <i data-lucide="file-check-2" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_export_title">PDF Service Book & Excel Export</h3>
+                    <p data-i18n="feat_export_text">Generate a certified PDF maintenance report that increases your car's resale value, plus full Excel (.XLSX) and CSV exports.</p>
+                </div>
+                <div class="feature-card card-lg reveal">
+                    <i data-lucide="cloud" class="feature-icon" size="28"></i>
+                    <h3 data-i18n="feat_offline_title">Offline-First & Cloud Sync</h3>
+                    <p data-i18n="feat_offline_text">The app works 100% offline without internet. All your data automatically and securely syncs via Supabase cloud.</p>
                 </div>
                 <div class="feature-card card-md reveal">
                     <i data-lucide="car" class="feature-icon" size="28"></i>
@@ -2332,6 +3335,168 @@
             </div>
         </section>
 
+        <section id="fuel-calculator" class="calc-section container section-padding">
+            <div class="calc-header text-center reveal">
+                <span class="calc-pill" data-i18n="calc_pill">Interaktivni simulator</span>
+                <h2 class="clash calc-title" data-i18n="calc_title">Izračunaj svoje godišnje troškove goriva</h2>
+                <p class="calc-subtitle text-muted" data-i18n="calc_subtitle">Pomeri klizače i saznaj koliko zaista trošiš po kilometru i koliko možeš uštedeti uz carFlo.</p>
+            </div>
+
+            <div class="calc-card-container reveal">
+                <div class="calc-controls">
+                    <!-- Slider 1: Annual Mileage -->
+                    <div class="calc-control-group">
+                        <div class="calc-label-row">
+                            <span class="calc-label"><i data-lucide="gauge" size="18"></i> <span data-i18n="calc_label_distance">Godišnja kilometraža:</span></span>
+                            <span class="calc-val-badge" id="valDistance">15.000 km</span>
+                        </div>
+                        <input type="range" class="calc-slider" id="sliderDistance" min="3000" max="50000" step="500" value="15000" aria-label="Annual Mileage">
+                        <div class="calc-slider-scale">
+                            <span>3.000 km</span>
+                            <span>25.000 km</span>
+                            <span>50.000 km</span>
+                        </div>
+                    </div>
+
+                    <!-- Slider 2: Fuel Consumption -->
+                    <div class="calc-control-group">
+                        <div class="calc-label-row">
+                            <span class="calc-label"><i data-lucide="fuel" size="18"></i> <span data-i18n="calc_label_consumption">Prosečna potrošnja (L/100km):</span></span>
+                            <span class="calc-val-badge" id="valConsumption">7.0 L/100km</span>
+                        </div>
+                        <input type="range" class="calc-slider" id="sliderConsumption" min="3.5" max="16.0" step="0.1" value="7.0" aria-label="Fuel Consumption">
+                        <div class="calc-slider-scale">
+                            <span>3.5 L</span>
+                            <span>9.5 L</span>
+                            <span>16.0 L</span>
+                        </div>
+                    </div>
+
+                    <!-- Slider 3: Fuel Price -->
+                    <div class="calc-control-group">
+                        <div class="calc-label-row">
+                            <span class="calc-label"><i data-lucide="coins" size="18"></i> <span data-i18n="calc_label_price">Cena goriva po litru:</span></span>
+                            <span class="calc-val-badge" id="valPrice">185 RSD</span>
+                        </div>
+                        <input type="range" class="calc-slider" id="sliderPrice" min="120" max="260" step="1" value="185" aria-label="Fuel Price per Liter">
+                        <div class="calc-slider-scale">
+                            <span id="scalePriceMin">120 RSD</span>
+                            <span id="scalePriceMid">185 RSD</span>
+                            <span id="scalePriceMax">260 RSD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-results">
+                    <div class="calc-result-header">
+                        <span class="result-badge" data-i18n="calc_result_badge">Procena troškova</span>
+                        <span class="result-live-indicator"><span class="live-dot"></span> Live</span>
+                    </div>
+
+                    <div class="calc-main-stat">
+                        <span class="calc-stat-sub" data-i18n="calc_annual_cost_title">Godišnji trošak goriva</span>
+                        <div class="calc-stat-amount" id="resAnnualCost">194.250 RSD</div>
+                        <span class="calc-stat-liters" id="resAnnualLiters">~1.050 litara goriva godišnje</span>
+                    </div>
+
+                    <div class="calc-grid-stats">
+                        <div class="calc-mini-stat">
+                            <span class="stat-mini-label" data-i18n="calc_cost_per_km">Trošak po 1 km</span>
+                            <span class="stat-mini-val" id="resCostPerKm">12,95 RSD</span>
+                        </div>
+                        <div class="calc-mini-stat">
+                            <span class="stat-mini-label" data-i18n="calc_monthly_cost">Mesečni prosek</span>
+                            <span class="stat-mini-val" id="resMonthlyCost">16.188 RSD</span>
+                        </div>
+                    </div>
+
+                    <div class="calc-savings-box">
+                        <div class="savings-icon"><i data-lucide="trending-down" size="22"></i></div>
+                        <div class="savings-content">
+                            <div class="savings-header-row">
+                                <span class="savings-title" data-i18n="calc_savings_title">Potencijalna ušteda uz carFlo (~15%)</span>
+                                <span class="savings-amount" id="resSavings">~29.138 RSD</span>
+                            </div>
+                            <p class="savings-desc" data-i18n="calc_savings_desc">Prepoznaj skokove potrošnje zbog zaprljanih filtera ili pritiska u gumama na vreme i smanji troškove.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="container section-padding">
+            <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 80px;" data-i18n="testimonials_heading">
+                Drivers Love carFlo</h2>
+            <div class="testimonials-carousel reveal" data-review-carousel>
+                <button class="carousel-button prev" type="button" data-review-prev aria-label="Previous review">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="testimonials-track">
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote" data-i18n="test1_quote">"Konačno aplikacija koja ne pokušava da mi proda
+                            osiguranje
+                            na svakom koraku. Čista, brza i veoma korisna."</p>
+                        <div class="author">
+                            <span class="author-name">Marko Petrović</span>
+                            <span class="author-car">Volkswagen Golf 7</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote" data-i18n="test2_quote">"Kao neko ko vodi firmu, PDF izveštaji su mi spasili
+                            sate i
+                            sate ručnog računanja troškova goriva."</p>
+                        <div class="author">
+                            <span class="author-name">Ana Kovačević</span>
+                            <span class="author-car">Skoda Octavia</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote" data-i18n="test3_quote">"Podsetnici za servis rade savršeno. Više ne moram da
+                            lepim
+                            nalepnice na unutrašnju stranu vrata."</p>
+                        <div class="author">
+                            <span class="author-name">Stefan Jovanović</span>
+                            <span class="author-car">Audi A4</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote" data-i18n="test4_quote">"Everything about my car is finally in one place.
+                            Registration and service reminders help the most."</p>
+                        <div class="author">
+                            <span class="author-name">Nikola Ilić</span>
+                            <span class="author-car">Audi A1</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote" data-i18n="test5_quote">"The logbook is really fast. I open it, enter mileage
+                            or a cost, and I am done in seconds."</p>
+                        <div class="author">
+                            <span class="author-name">Milica Savić</span>
+                            <span class="author-car">Toyota Yaris</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote" data-i18n="test6_quote">"Great for tracking costs. Once you see the stats, you
+                            know what your car really costs."</p>
+                        <div class="author">
+                            <span class="author-name">Petar Novaković</span>
+                            <span class="author-car">BMW 320d</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-button next" type="button" data-review-next aria-label="Next review">
+                    <i data-lucide="chevron-right"></i>
+                </button>
+                <div class="carousel-dots" data-review-dots aria-hidden="true"></div>
+            </div>
+        </section>
+
         <section id="pricing" class="section-padding" style="background: var(--color-surface-offset);">
             <div class="container">
                 <div class="text-center" style="margin-bottom: 60px;">
@@ -2353,8 +3518,8 @@
                                 <span class="period" data-i18n="pricing_monthly_period">/ mesečno</span>
                             </div>
                         </div>
-                        <button class="btn btn-outline" style="width: 100%; margin-top: 1.5rem;"
-                            data-i18n="pricing_cta">Otključaj Pro Plan</button>
+                        <button type="button" class="btn btn-outline" style="width: 100%; margin-top: 1.5rem;"
+                            onclick="handleProCta()" data-i18n="pricing_cta">Otključaj Pro Plan</button>
                     </div>
 
                     <!-- Yearly -->
@@ -2367,8 +3532,8 @@
                                 <span class="period" data-i18n="pricing_yearly_period">/ godišnje</span>
                             </div>
                         </div>
-                        <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;"
-                            data-i18n="pricing_cta">Otključaj Pro Plan</button>
+                        <button type="button" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;"
+                            onclick="handleProCta()" data-i18n="pricing_cta">Otključaj Pro Plan</button>
                     </div>
 
                     <!-- Lifetime -->
@@ -2443,7 +3608,7 @@
                             <tr>
                                 <th data-i18n="table_col_feature">Funkcionalnost</th>
                                 <th><span class="table-badge-free" data-i18n="table_col_free">Besplatna (FREE)</span></th>
-                                <th><span class="table-badge-pro" data-i18n="table_col_pro">PRO Verzija 👑</span></th>
+                                <th><span class="table-badge-pro" data-i18n="table_col_pro">PRO Verzija</span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -2454,7 +3619,7 @@
                             </tr>
                             <tr>
                                 <td><span class="table-feat-name"><i data-lucide="fuel" size="18"></i> <span data-i18n="t_row_fuel">Unosi goriva</span></span></td>
-                                <td data-i18n="t_val_free_fuel">Do 10 unosa</td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_free_fuel">Neograničeno</span></span></td>
                                 <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_unlimited">Neograničeno</span></span></td>
                             </tr>
                             <tr>
@@ -2528,196 +3693,6 @@
             </div>
         </section>
 
-        <section id="how-it-works" class="container section-padding">
-            <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 80px;" data-i18n="how_it_works_heading">
-                Start in 60 Seconds</h2>
-            <div class="steps-grid">
-                <div class="step-item reveal">
-                    <div class="step-num">1</div>
-                    <h3 data-i18n="step1_title">Add Your Car</h3>
-                    <p class="text-muted" data-i18n="step1_text">Enter your car's make, model, year, and current mileage
-                        to set up your digital logbook.</p>
-                </div>
-                <div class="step-item reveal">
-                    <div class="step-num">2</div>
-                    <h3 data-i18n="step2_title">Log Any Event</h3>
-                    <p class="text-muted" data-i18n="step2_text">Whether it's a fuel refill, a service at the mechanic,
-                        or a quick trip to the store, log it in seconds.</p>
-                </div>
-                <div class="step-item reveal">
-                    <div class="step-num">3</div>
-                    <h3 data-i18n="step3_title">Stay Informed</h3>
-                    <p class="text-muted" data-i18n="step3_text">Receive timely reminders for maintenance and view
-                        detailed analytics of your vehicle's history.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-padding" style="background: var(--color-surface-offset);">
-            <div class="container">
-                <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px;" data-i18n="screenshots_heading">
-                    Beautifully Simple</h2>
-                <p class="text-center text-muted" style="margin-bottom: 60px;" data-i18n="screenshots_subtext">The
-                    interface designed for drivers, by drivers.</p>
-
-                <div class="screenshots-showcase reveal" data-carousel="screenshots">
-                    <button class="carousel-button prev" type="button" data-carousel-prev="screenshots"
-                        aria-label="Previous screenshot"><i data-lucide="chevron-left"></i></button>
-                    <div class="screenshots-stage">
-                        <div class="screen-mockup active">
-                            <div class="phone-frame">
-                                <span class="phone-btn phone-btn-action" aria-hidden="true"></span>
-                                <span class="phone-btn phone-btn-vol-up" aria-hidden="true"></span>
-                                <span class="phone-btn phone-btn-vol-down" aria-hidden="true"></span>
-                                <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
-                                <span class="phone-speaker" aria-hidden="true"></span>
-                                <div class="phone-screen">
-                                    <img src="./screen-dashboard-new.png" alt="Dashboard screen" loading="lazy">
-                                    <div class="dynamic-island" aria-hidden="true">
-                                        <span class="island-sensor"></span>
-                                        <span class="island-camera"></span>
-                                    </div>
-                                    <div class="phone-glass-glare" aria-hidden="true"></div>
-                                </div>
-                            </div>
-                            <p class="clash" data-i18n="screen_dashboard">Dashboard</p>
-                        </div>
-                        <div class="screen-mockup next">
-                            <div class="phone-frame">
-                                <span class="phone-btn phone-btn-action" aria-hidden="true"></span>
-                                <span class="phone-btn phone-btn-vol-up" aria-hidden="true"></span>
-                                <span class="phone-btn phone-btn-vol-down" aria-hidden="true"></span>
-                                <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
-                                <span class="phone-speaker" aria-hidden="true"></span>
-                                <div class="phone-screen">
-                                    <img src="./screen-logbook-new.png" alt="Logbook screen" loading="lazy">
-                                    <div class="dynamic-island" aria-hidden="true">
-                                        <span class="island-sensor"></span>
-                                        <span class="island-camera"></span>
-                                    </div>
-                                    <div class="phone-glass-glare" aria-hidden="true"></div>
-                                </div>
-                            </div>
-                            <p class="clash" data-i18n="screen_logbook">Logbook</p>
-                        </div>
-                        <div class="screen-mockup">
-                            <div class="phone-frame">
-                                <span class="phone-btn phone-btn-action" aria-hidden="true"></span>
-                                <span class="phone-btn phone-btn-vol-up" aria-hidden="true"></span>
-                                <span class="phone-btn phone-btn-vol-down" aria-hidden="true"></span>
-                                <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
-                                <span class="phone-speaker" aria-hidden="true"></span>
-                                <div class="phone-screen">
-                                    <img src="./screen-stats-new.png" alt="Statistics screen" loading="lazy">
-                                    <div class="dynamic-island" aria-hidden="true">
-                                        <span class="island-sensor"></span>
-                                        <span class="island-camera"></span>
-                                    </div>
-                                    <div class="phone-glass-glare" aria-hidden="true"></div>
-                                </div>
-                            </div>
-                            <p class="clash" data-i18n="screen_stats">Statistics</p>
-                        </div>
-                        <div class="screen-mockup previous">
-                            <div class="phone-frame">
-                                <span class="phone-btn phone-btn-action" aria-hidden="true"></span>
-                                <span class="phone-btn phone-btn-vol-up" aria-hidden="true"></span>
-                                <span class="phone-btn phone-btn-vol-down" aria-hidden="true"></span>
-                                <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
-                                <span class="phone-speaker" aria-hidden="true"></span>
-                                <div class="phone-screen">
-                                    <img src="./screen-reminders-new.png" alt="Reminders screen" loading="lazy">
-                                    <div class="dynamic-island" aria-hidden="true">
-                                        <span class="island-sensor"></span>
-                                        <span class="island-camera"></span>
-                                    </div>
-                                    <div class="phone-glass-glare" aria-hidden="true"></div>
-                                </div>
-                            </div>
-                            <p class="clash" data-i18n="screen_reminders">Reminders</p>
-                        </div>
-                    </div>
-                    <button class="carousel-button next" type="button" data-carousel-next="screenshots"
-                        aria-label="Next screenshot"><i data-lucide="chevron-right"></i></button>
-                    <div class="carousel-dots" data-carousel-dots="screenshots" aria-hidden="true"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="container section-padding">
-            <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 80px;" data-i18n="testimonials_heading">
-                Drivers Love carFlo</h2>
-            <div class="testimonials-carousel reveal" data-review-carousel>
-                <button class="carousel-button prev" type="button" data-review-prev aria-label="Previous review">
-                    <i data-lucide="chevron-left"></i>
-                </button>
-                <div class="testimonials-track">
-                    <div class="testimonial-card">
-                        <div class="stars">★★★★★</div>
-                        <p class="quote" data-i18n="test1_quote">"Konačno aplikacija koja ne pokušava da mi proda
-                            osiguranje
-                            na svakom koraku. Čista, brza i veoma korisna."</p>
-                        <div class="author">
-                            <span class="author-name">Marko Petrović</span>
-                            <span class="author-car">Volkswagen Golf 7</span>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">★★★★★</div>
-                        <p class="quote" data-i18n="test2_quote">"Kao neko ko vodi firmu, PDF izveštaji su mi spasili
-                            sate i
-                            sate ručnog računanja troškova goriva."</p>
-                        <div class="author">
-                            <span class="author-name">Ana Kovačević</span>
-                            <span class="author-car">Skoda Octavia</span>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">★★★★★</div>
-                        <p class="quote" data-i18n="test3_quote">"Podsetnici za servis rade savršeno. Više ne moram da
-                            lepim
-                            nalepnice na unutrašnju stranu vrata."</p>
-                        <div class="author">
-                            <span class="author-name">Stefan Jovanović</span>
-                            <span class="author-car">Audi A4</span>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">★★★★★</div>
-                        <p class="quote" data-i18n="test4_quote">"Everything about my car is finally in one place.
-                            Registration and service reminders help the most."</p>
-                        <div class="author">
-                            <span class="author-name">Nikola Ilić</span>
-                            <span class="author-car">Audi A1</span>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">★★★★★</div>
-                        <p class="quote" data-i18n="test5_quote">"The logbook is really fast. I open it, enter mileage
-                            or a cost, and I am done in seconds."</p>
-                        <div class="author">
-                            <span class="author-name">Milica Savić</span>
-                            <span class="author-car">Toyota Yaris</span>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">★★★★★</div>
-                        <p class="quote" data-i18n="test6_quote">"Great for tracking costs. Once you see the stats, you
-                            know what your car really costs."</p>
-                        <div class="author">
-                            <span class="author-name">Petar Novaković</span>
-                            <span class="author-car">BMW 320d</span>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-button next" type="button" data-review-next aria-label="Next review">
-                    <i data-lucide="chevron-right"></i>
-                </button>
-                <div class="carousel-dots" data-review-dots aria-hidden="true"></div>
-            </div>
-        </section>
-
-        <!-- Roadmap / Coming Soon Section -->
         <section id="roadmap" class="container section-padding">
             <div class="text-center" style="margin-bottom: 50px;">
                 <h2 class="clash" style="font-size: 2.5rem; margin-bottom: 1rem;" data-i18n="roadmap_heading">Uskoro u CarFlo</h2>
@@ -2761,45 +3736,6 @@
                 </div>
             </div>
         </section>
-
-        <section id="download" class="container">
-            <div class="download-cta reveal">
-                <h2 data-i18n="download_heading">Track Every Mile, Starting Today</h2>
-                <p data-i18n="download_subtext">Free to download. No account required to start tracking your vehicle.
-                </p>
-                <div class="store-badges">
-                    <a href="https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970" target="_blank"
-                        class="official-store-badge" aria-label="Download on the App Store">
-                        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
-                             alt="Download on the App Store" loading="lazy">
-                    </a>
-                    <div class="google-play-badge-custom" aria-label="Google Play Coming Soon">
-                        <svg class="google-play-svg" width="22" height="24" viewBox="0 0 22 24" fill="none">
-                            <path d="M1.3 0.6C1 0.9 0.8 1.4 0.8 2.1V21.9C0.8 22.6 1 23.1 1.3 23.4L1.4 23.5L12.5 12.4V12.1L1.4 0.5L1.3 0.6Z" fill="url(#gp_g1_dl)"/>
-                            <path d="M16.2 16.1L12.5 12.4V12.1L16.2 8.4L16.3 8.5L20.7 11C22 11.7 22 12.8 20.7 13.5L16.3 16L16.2 16.1Z" fill="url(#gp_g2_dl)"/>
-                            <path d="M16.3 16L12.5 12.2L1.3 23.4C1.7 23.8 2.5 23.9 3.3 23.4L16.3 16Z" fill="url(#gp_g3_dl)"/>
-                            <path d="M16.3 8.5L3.3 1.1C2.5 0.6 1.7 0.7 1.3 1.1L12.5 12.3L16.3 8.5Z" fill="url(#gp_g4_dl)"/>
-                            <defs>
-                                <linearGradient id="gp_g1_dl" x1="11.4" y1="1.7" x2="-4.2" y2="17.3" gradientUnits="userSpaceOnUse"><stop stop-color="#00A0FF"/><stop offset="0.007" stop-color="#00A1FF"/><stop offset="0.26" stop-color="#00BEFF"/><stop offset="0.51" stop-color="#00D2FF"/><stop offset="0.76" stop-color="#00DFFF"/><stop offset="1" stop-color="#00E3FF"/></linearGradient>
-                                <linearGradient id="gp_g2_dl" x1="22.5" y1="12.2" x2="-0.4" y2="12.2" gradientUnits="userSpaceOnUse"><stop stop-color="#FFE000"/><stop offset="0.41" stop-color="#FFBD00"/><stop offset="0.78" stop-color="#FFA500"/><stop offset="1" stop-color="#FF9C00"/></linearGradient>
-                                <linearGradient id="gp_g3_dl" x1="14.4" y1="14.2" x2="-7.6" y2="36.2" gradientUnits="userSpaceOnUse"><stop stop-color="#FF3A44"/><stop offset="1" stop-color="#C31162"/></linearGradient>
-                                <linearGradient id="gp_g4_dl" x1="-2.4" y1="-8.4" x2="7.8" y2="1.8" gradientUnits="userSpaceOnUse"><stop stop-color="#00E676"/><stop offset="1" stop-color="#00B0FF"/></linearGradient>
-                            </defs>
-                        </svg>
-                        <div class="google-play-texts">
-                            <span class="gp-tag">GET IT ON</span>
-                            <span class="gp-name">Google Play</span>
-                        </div>
-                        <span class="gp-pill" data-i18n="badge_googleplay_span">Coming Soon</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <button id="backToTop" class="back-to-top" aria-label="Back to top"
-            onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-            <i data-lucide="arrow-up"></i>
-        </button>
 
         <section id="support" class="section-padding">
             <div class="container">
@@ -2881,6 +3817,45 @@
                 </div>
             </div>
         </section>
+
+        <section id="download" class="container">
+            <div class="download-cta reveal">
+                <h2 data-i18n="download_heading">Track Every Mile, Starting Today</h2>
+                <p data-i18n="download_subtext">Free to download. No account required to start tracking your vehicle.
+                </p>
+                <div class="store-badges">
+                    <a href="https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970" target="_blank"
+                        class="official-store-badge" aria-label="Download on the App Store">
+                        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
+                             alt="Download on the App Store" loading="lazy">
+                    </a>
+                    <div class="google-play-badge-custom" aria-label="Google Play Coming Soon">
+                        <svg class="google-play-svg" width="22" height="24" viewBox="0 0 22 24" fill="none">
+                            <path d="M1.3 0.6C1 0.9 0.8 1.4 0.8 2.1V21.9C0.8 22.6 1 23.1 1.3 23.4L1.4 23.5L12.5 12.4V12.1L1.4 0.5L1.3 0.6Z" fill="url(#gp_g1_dl)"/>
+                            <path d="M16.2 16.1L12.5 12.4V12.1L16.2 8.4L16.3 8.5L20.7 11C22 11.7 22 12.8 20.7 13.5L16.3 16L16.2 16.1Z" fill="url(#gp_g2_dl)"/>
+                            <path d="M16.3 16L12.5 12.2L1.3 23.4C1.7 23.8 2.5 23.9 3.3 23.4L16.3 16Z" fill="url(#gp_g3_dl)"/>
+                            <path d="M16.3 8.5L3.3 1.1C2.5 0.6 1.7 0.7 1.3 1.1L12.5 12.3L16.3 8.5Z" fill="url(#gp_g4_dl)"/>
+                            <defs>
+                                <linearGradient id="gp_g1_dl" x1="11.4" y1="1.7" x2="-4.2" y2="17.3" gradientUnits="userSpaceOnUse"><stop stop-color="#00A0FF"/><stop offset="0.007" stop-color="#00A1FF"/><stop offset="0.26" stop-color="#00BEFF"/><stop offset="0.51" stop-color="#00D2FF"/><stop offset="0.76" stop-color="#00DFFF"/><stop offset="1" stop-color="#00E3FF"/></linearGradient>
+                                <linearGradient id="gp_g2_dl" x1="22.5" y1="12.2" x2="-0.4" y2="12.2" gradientUnits="userSpaceOnUse"><stop stop-color="#FFE000"/><stop offset="0.41" stop-color="#FFBD00"/><stop offset="0.78" stop-color="#FFA500"/><stop offset="1" stop-color="#FF9C00"/></linearGradient>
+                                <linearGradient id="gp_g3_dl" x1="14.4" y1="14.2" x2="-7.6" y2="36.2" gradientUnits="userSpaceOnUse"><stop stop-color="#FF3A44"/><stop offset="1" stop-color="#C31162"/></linearGradient>
+                                <linearGradient id="gp_g4_dl" x1="-2.4" y1="-8.4" x2="7.8" y2="1.8" gradientUnits="userSpaceOnUse"><stop stop-color="#00E676"/><stop offset="1" stop-color="#00B0FF"/></linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="google-play-texts">
+                            <span class="gp-tag">GET IT ON</span>
+                            <span class="gp-name">Google Play</span>
+                        </div>
+                        <span class="gp-pill" data-i18n="badge_googleplay_span">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <button id="backToTop" class="back-to-top" aria-label="Back to top"
+            onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <i data-lucide="arrow-up"></i>
+        </button>
     </main>
 
     <footer>
@@ -2888,7 +3863,8 @@
             <div class="footer-grid">
                 <div class="footer-info">
                     <div class="logo">
-                        <span>carFlo</span>
+                        <img src="./logo.svg" alt="carFlo Logo" class="logo-light" style="height: 32px; width: auto;">
+                        <img src="./colored-logo-dark.svg" alt="carFlo Logo" class="logo-dark" style="height: 32px; width: auto;">
                     </div>
                     <p class="footer-tagline" data-i18n="footer_tagline">Simplifying vehicle management for drivers
                         worldwide.</p>
@@ -2896,8 +3872,8 @@
                 <div class="footer-col">
                     <h4 data-i18n="footer_product">Product</h4>
                     <ul>
-                        <li><a href="#features" data-i18n="nav_features">Features</a></li>
                         <li><a href="#how-it-works" data-i18n="nav_how_it_works">How It Works</a></li>
+                        <li><a href="#features" data-i18n="nav_features">Features</a></li>
                         <li><a href="#pricing" data-i18n="nav_pricing">Pricing</a></li>
                         <li><a href="#support" data-i18n="nav_faq">FAQ</a></li>
                         <li><a href="./changelog.html" data-i18n="nav_changelog">Changelog</a></li>
@@ -2920,22 +3896,19 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <div style="display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <img src="./logo.svg" alt="carFlo Logo"
-                            style="height: 18px; width: auto; opacity: 0.8; vertical-align: middle;">
-                        <span data-i18n="footer_copyright">© 2026 carFlo. All rights reserved.</span>
-                    </div>
-                    <span data-i18n="footer_made_by" style="color: var(--color-text-faint); font-size: 0.75rem;">Made by
+                <div class="footer-bottom-left">
+                    <span data-i18n="footer_copyright">© 2026 carFlo. All rights reserved.</span>
+                    <span class="footer-separator">•</span>
+                    <span data-i18n="footer_made_by" style="color: var(--color-text-faint); font-size: 0.8rem;">Made by
                         <a href="https://djurke23.github.io/portfolio/" target="_blank"
                             class="footer-credit-link">Djurke23</a></span>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end;">
-                    <span data-i18n="footer_socials">Follow us on social media:</span>
-                    <div class="flex gap-4">
+                <div class="footer-bottom-right">
+                    <span data-i18n="footer_socials">Follow us:</span>
+                    <div style="display: flex; gap: 0.75rem; align-items: center;">
                         <a href="https://www.instagram.com/carflo.app/" target="_blank" aria-label="Instagram"
                             class="social-link">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -2944,7 +3917,7 @@
                         </a>
                         <a href="https://www.tiktok.com/@carflo.app" target="_blank" aria-label="TikTok"
                             class="social-link">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                                 <path
                                     d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
                             </svg>
@@ -2955,24 +3928,56 @@
         </div>
     </footer>
 
+    <!-- Desktop QR Code Download Modal -->
+    <div class="qr-modal-overlay" id="qrModalOverlay" onclick="closeQrModal(event)">
+        <div class="qr-modal-card" onclick="event.stopPropagation()">
+            <button type="button" class="qr-modal-close" onclick="closeQrModal()" aria-label="Close QR Modal">
+                <i data-lucide="x" size="20"></i>
+            </button>
+            <div class="qr-code-wrapper">
+                <img src="./qr-code.svg" alt="carFlo App Store QR Code" class="qr-image" width="180" height="180">
+            </div>
+            <h3 class="clash qr-modal-title" data-i18n="qr_modal_title">Preuzmi na iPhone-u</h3>
+            <p class="qr-modal-desc" data-i18n="qr_modal_desc">Usmjeri kameru telefona prema QR kodu da direktno otvoriš carFlo na App Store-u.</p>
+            <a href="https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970" target="_blank" class="qr-direct-link" data-i18n="qr_modal_link">Ili otvori link direktno →</a>
+        </div>
+    </div>
+
     <script>
         // Lucide icons initialization
         lucide.createIcons();
 
-        // Theme Toggle
-        function toggleTheme() {
+        // Theme Management
+        function setTheme(theme) {
             const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
+            html.setAttribute('data-theme', theme);
+            try { localStorage.setItem('site_theme', theme); } catch (e) {}
 
             const icon = document.getElementById('theme-icon');
-            icon.setAttribute('data-lucide', newTheme === 'dark' ? 'moon' : 'sun');
-            lucide.createIcons();
+            if (icon) {
+                icon.setAttribute('data-lucide', theme === 'dark' ? 'moon' : 'sun');
+                lucide.createIcons();
+            }
 
             // Meta theme color update
-            document.querySelector("meta[name='theme-color']").setAttribute("content", newTheme === 'dark' ? "#0d0e0f" : "#f4f4f2");
+            const metaTheme = document.querySelector("meta[name='theme-color']");
+            if (metaTheme) {
+                metaTheme.setAttribute("content", theme === 'dark' ? "#0d0e0f" : "#f4f4f2");
+            }
         }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme') || 'dark';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+
+        // Initialize theme from storage if present
+        try {
+            const savedTheme = localStorage.getItem('site_theme');
+            if (savedTheme) setTheme(savedTheme);
+        } catch (e) {}
 
         // Stick Header & Scroll progress
         window.addEventListener('scroll', () => {
@@ -3178,6 +4183,41 @@
                 badge_appstore_span: "Download on",
                 badge_googleplay_span: "Coming Soon",
                 
+                // Announcement & Trust
+                announcement_tag: "NEW v1.4.3",
+                announcement_text: "Floating Glass Navigation & Document Scanner is live",
+                btn_qr_code: "Scan for iPhone",
+                trust_appstore: "App Store",
+                trust_offline: "100% Offline & Private",
+                trust_noads: "Zero Ads",
+
+                // Hero Floating Cards
+                hero_card_service_label: "Regular Service",
+                hero_card_service_val: "in 450 km • On track",
+                hero_card_fuel_label: "Avg. Consumption",
+                hero_card_fuel_val: "6.2 L / 100km",
+                hero_card_parking_label: "SMS Parking",
+                hero_card_parking_val: "Zone 1 • 38 min left",
+
+                // QR Modal
+                qr_modal_title: "Download on iPhone",
+                qr_modal_desc: "Point your iPhone camera at the QR code to open carFlo directly on the App Store.",
+                qr_modal_link: "Or open directly on the App Store →",
+
+                // Interactive Fuel Calculator
+                calc_pill: "Live Simulator",
+                calc_title: "Calculate Your Annual Fuel Costs",
+                calc_subtitle: "Adjust the sliders to see what driving really costs you and how much carFlo can help you save.",
+                calc_label_distance: "Annual Mileage",
+                calc_label_consumption: "Avg. Consumption",
+                calc_label_price: "Fuel Price per Liter",
+                calc_result_badge: "Cost Breakdown",
+                calc_annual_cost_title: "Annual Fuel Expenditure",
+                calc_cost_per_km: "Cost per 1 km",
+                calc_monthly_cost: "Monthly Average",
+                calc_savings_title: "Potential Savings with carFlo (~15%)",
+                calc_savings_desc: "Detect abnormal consumption spikes early (dirty filters, tire pressure, leaks) and optimize every drive.",
+                
                 // Value Propositions
                 vp1_tag: "Digital Service Book",
                 vp1_title: "Never Lose an Invoice or Miss a Service",
@@ -3298,12 +4338,12 @@
                 // Comparison Table
                 table_col_feature: "Feature",
                 table_col_free: "Free Version",
-                table_col_pro: "PRO Plan 👑",
+                table_col_pro: "PRO Plan",
                 t_row_vehicles: "Vehicles in Garage",
                 t_val_free_vehicles: "1 vehicle",
                 t_val_unlimited: "Unlimited",
                 t_row_fuel: "Fuel Refill Logs",
-                t_val_free_fuel: "Up to 10 entries",
+                t_val_free_fuel: "Unlimited",
                 t_row_service: "Service Logs",
                 t_val_free_service: "Up to 5 entries",
                 t_row_reminders: "Service & Registration Reminders",
@@ -3380,7 +4420,7 @@
                 footer_delete: "Delete Account",
                 footer_copyright: "© 2026 carFlo. All rights reserved.",
                 footer_made_by: 'Made by <a href="https://djurke23.github.io/portfolio/" target="_blank" class="footer-credit-link">Djurke23</a>',
-                footer_socials: "Follow us on social media:"
+                footer_socials: "Follow us:"
             },
             sr: {
                 nav_features: "Funkcije",
@@ -3395,6 +4435,41 @@
                 hero_btn_android: "Google Play uskoro",
                 badge_appstore_span: "Preuzmi na",
                 badge_googleplay_span: "Uskoro",
+
+                // Announcement & Trust
+                announcement_tag: "NOVO v1.4.3",
+                announcement_text: "Plutajuća staklena navigacija i skener dokumenata",
+                btn_qr_code: "Skeniraj za iPhone",
+                trust_appstore: "App Store",
+                trust_offline: "100% Offline i privatno",
+                trust_noads: "Bez reklama",
+
+                // Hero Floating Cards
+                hero_card_service_label: "Mali servis",
+                hero_card_service_val: "za 450 km • Na vreme",
+                hero_card_fuel_label: "Prosečna potrošnja",
+                hero_card_fuel_val: "6.2 L / 100km",
+                hero_card_parking_label: "SMS Parking",
+                hero_card_parking_val: "Zona 1 • 38 min",
+
+                // QR Modal
+                qr_modal_title: "Preuzmi na iPhone-u",
+                qr_modal_desc: "Usmjeri kameru telefona prema QR kodu da direktno otvoriš carFlo na App Store-u.",
+                qr_modal_link: "Ili otvori direktno na App Store-u →",
+
+                // Interactive Fuel Calculator
+                calc_pill: "Interaktivni simulator",
+                calc_title: "Izračunaj svoje godišnje troškove goriva",
+                calc_subtitle: "Pomeri klizače i saznaj koliko zaista trošiš po kilometru i koliko možeš uštedeti uz carFlo.",
+                calc_label_distance: "Godišnja kilometraža:",
+                calc_label_consumption: "Prosečna potrošnja (L/100km):",
+                calc_label_price: "Cena goriva po litru:",
+                calc_result_badge: "Procena troškova",
+                calc_annual_cost_title: "Godišnji trošak goriva",
+                calc_cost_per_km: "Trošak po 1 km",
+                calc_monthly_cost: "Mesečni prosek",
+                calc_savings_title: "Potencijalna ušteda uz carFlo (~15%)",
+                calc_savings_desc: "Prepoznaj skokove potrošnje zbog zaprljanih filtera ili pritiska u gumama na vreme i smanji troškove.",
 
                 // Value Propositions
                 vp1_tag: "Digitalna servisna knjižica",
@@ -3516,12 +4591,12 @@
                 // Comparison Table
                 table_col_feature: "Funkcionalnost",
                 table_col_free: "Besplatna (FREE)",
-                table_col_pro: "PRO Verzija 👑",
+                table_col_pro: "PRO Verzija",
                 t_row_vehicles: "Broj vozila u garaži",
                 t_val_free_vehicles: "1 vozilo",
                 t_val_unlimited: "Neograničeno",
                 t_row_fuel: "Unosi goriva",
-                t_val_free_fuel: "Do 10 unosa",
+                t_val_free_fuel: "Neograničeno",
                 t_row_service: "Servisni unosi",
                 t_val_free_service: "Do 5 unosa",
                 t_row_reminders: "Podsetnici za servis i registraciju",
@@ -3598,7 +4673,7 @@
                 footer_delete: "Brisanje naloga",
                 footer_copyright: "© 2026 carFlo. Sva prava zadržana.",
                 footer_made_by: 'Autor: <a href="https://djurke23.github.io/portfolio/" target="_blank" class="footer-credit-link">Djurke23</a>',
-                footer_socials: "Zapratite nas na društvenim mrežama:"
+                footer_socials: "Zapratite nas:"
             }
         };
 
@@ -3625,6 +4700,12 @@
             document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
             const activeOpt = document.getElementById('opt-' + lang);
             if (activeOpt) activeOpt.classList.add('active');
+
+            // Sync calculator language and currency
+            if (window.syncCalculatorLanguage) {
+                window.syncCalculatorLanguage();
+            }
+            lucide.createIcons();
         }
 
         function toggleLangDropdown() {
@@ -3664,6 +4745,196 @@
                 faqItem.classList.toggle('active');
             });
         });
+
+        // --- QR Modal Logic & Pro CTA ---
+        function openQrModal() {
+            const modal = document.getElementById('qrModalOverlay');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeQrModal(e) {
+            if (e && e.target && e.target.id !== 'qrModalOverlay' && !e.target.closest('.qr-modal-close')) return;
+            const modal = document.getElementById('qrModalOverlay');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function handleProCta() {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            if (isIOS) {
+                window.open("https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970", "_blank");
+            } else {
+                openQrModal();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('qrModalOverlay');
+                if (modal && modal.classList.contains('active')) {
+                    closeQrModal();
+                }
+            }
+        });
+
+        // --- Interactive Fuel Calculator Logic ---
+        function initFuelCalculator() {
+            const sliderDistance = document.getElementById('sliderDistance');
+            const sliderConsumption = document.getElementById('sliderConsumption');
+            const sliderPrice = document.getElementById('sliderPrice');
+
+            if (!sliderDistance || !sliderConsumption || !sliderPrice) return;
+
+            function formatNumber(num) {
+                return num.toLocaleString(currentLang === 'sr' ? 'sr-RS' : 'en-US');
+            }
+
+            function updateSliderFill(slider) {
+                const min = parseFloat(slider.min) || 0;
+                const max = parseFloat(slider.max) || 100;
+                const val = parseFloat(slider.value) || min;
+                const pct = ((val - min) / (max - min)) * 100;
+                slider.style.background = `linear-gradient(to right, var(--color-primary) ${pct}%, var(--color-border) ${pct}%)`;
+            }
+
+            function calculate() {
+                const km = parseFloat(sliderDistance.value) || 15000;
+                const l100 = parseFloat(sliderConsumption.value) || 7.0;
+                const price = parseFloat(sliderPrice.value) || 185;
+
+                const totalLiters = (km / 100) * l100;
+                const totalCost = totalLiters * price;
+                const costPerKm = totalCost / km;
+                const monthlyCost = totalCost / 12;
+                const savings = totalCost * 0.15;
+
+                updateSliderFill(sliderDistance);
+                updateSliderFill(sliderConsumption);
+                updateSliderFill(sliderPrice);
+
+                const savingsBox = document.querySelector('.calc-savings-box');
+                if (savingsBox) {
+                    savingsBox.classList.add('glow-active');
+                    clearTimeout(savingsBox._glowTimer);
+                    savingsBox._glowTimer = setTimeout(() => savingsBox.classList.remove('glow-active'), 550);
+                }
+
+                const isSr = currentLang === 'sr';
+
+                const elDist = document.getElementById('valDistance');
+                const elCons = document.getElementById('valConsumption');
+                const elPrice = document.getElementById('valPrice');
+                const elAnnCost = document.getElementById('resAnnualCost');
+                const elAnnLiters = document.getElementById('resAnnualLiters');
+                const elCostKm = document.getElementById('resCostPerKm');
+                const elMonCost = document.getElementById('resMonthlyCost');
+                const elSavings = document.getElementById('resSavings');
+
+                if (elDist) elDist.textContent = `${formatNumber(km)} km`;
+                if (elCons) elCons.textContent = `${l100.toFixed(1)} L/100km`;
+
+                if (isSr) {
+                    if (elPrice) elPrice.textContent = `${Math.round(price)} RSD`;
+                    if (elAnnCost) elAnnCost.textContent = `${formatNumber(Math.round(totalCost))} RSD`;
+                    if (elAnnLiters) elAnnLiters.textContent = `~${formatNumber(Math.round(totalLiters))} litara goriva godišnje`;
+                    if (elCostKm) elCostKm.textContent = `${costPerKm.toFixed(2).replace('.', ',')} RSD`;
+                    if (elMonCost) elMonCost.textContent = `${formatNumber(Math.round(monthlyCost))} RSD`;
+                    if (elSavings) elSavings.textContent = `~${formatNumber(Math.round(savings))} RSD`;
+                } else {
+                    if (elPrice) elPrice.textContent = `${price.toFixed(2)} €`;
+                    if (elAnnCost) elAnnCost.textContent = `${formatNumber(Math.round(totalCost))} €`;
+                    if (elAnnLiters) elAnnLiters.textContent = `~${formatNumber(Math.round(totalLiters))} liters of fuel per year`;
+                    if (elCostKm) elCostKm.textContent = `${costPerKm.toFixed(2)} €`;
+                    if (elMonCost) elMonCost.textContent = `${formatNumber(Math.round(monthlyCost))} €`;
+                    if (elSavings) elSavings.textContent = `~${formatNumber(Math.round(savings))} €`;
+                }
+            }
+
+            function syncPriceScaleForLang() {
+                const isSr = currentLang === 'sr';
+                const minScale = document.getElementById('scalePriceMin');
+                const midScale = document.getElementById('scalePriceMid');
+                const maxScale = document.getElementById('scalePriceMax');
+
+                if (isSr) {
+                    sliderPrice.min = "120";
+                    sliderPrice.max = "260";
+                    sliderPrice.step = "1";
+                    if (parseFloat(sliderPrice.value) < 50) sliderPrice.value = "185";
+                    if (minScale) minScale.textContent = "120 RSD";
+                    if (midScale) midScale.textContent = "185 RSD";
+                    if (maxScale) maxScale.textContent = "260 RSD";
+                } else {
+                    sliderPrice.min = "1.00";
+                    sliderPrice.max = "2.50";
+                    sliderPrice.step = "0.05";
+                    if (parseFloat(sliderPrice.value) > 10) sliderPrice.value = "1.65";
+                    if (minScale) minScale.textContent = "1.00 €";
+                    if (midScale) midScale.textContent = "1.65 €";
+                    if (maxScale) maxScale.textContent = "2.50 €";
+                }
+                calculate();
+            }
+
+            sliderDistance.addEventListener('input', calculate);
+            sliderConsumption.addEventListener('input', calculate);
+            sliderPrice.addEventListener('input', calculate);
+
+            window.syncCalculatorLanguage = syncPriceScaleForLang;
+            syncPriceScaleForLang();
+        }
+
+        // --- ScrollSpy: Active Navigation Link Indicator ---
+        function initScrollSpy() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const drawerLinks = document.querySelectorAll('.mobile-drawer a');
+
+            function onScroll() {
+                const scrollY = window.pageYOffset;
+                let currentId = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 160;
+                    const sectionHeight = section.offsetHeight;
+                    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                        currentId = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href === '#' + currentId) {
+                        link.classList.add('active');
+                    } else if (href && href.startsWith('#')) {
+                        link.classList.remove('active');
+                    }
+                });
+
+                drawerLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href === '#' + currentId) {
+                        link.classList.add('active');
+                    } else if (href && href.startsWith('#')) {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        }
+
+        // Initialize calculator
+        initFuelCalculator();
+
+        // Initialize scrollspy
+        initScrollSpy();
 
         // Initialize language
         updateLanguage(currentLang);

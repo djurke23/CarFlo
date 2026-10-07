@@ -5,8 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0d0e0f">
     <meta name="description" content="Pratite sve nove funkcije i poboljšanja u carFlo aplikaciji.">
-    <meta property="og:title" content="carFlo — Changelog">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://carflo.app/changelog.html">
+    <meta property="og:site_name" content="carFlo">
+    <meta property="og:title" content="carFlo — Changelog & What's New">
+    <meta property="og:description" content="Explore latest features, updates, and improvements in carFlo.">
+    <meta property="og:image" content="./hero.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="carFlo — Changelog & What's New">
+    <meta name="twitter:description" content="Explore latest features, updates, and improvements in carFlo.">
+    <meta name="twitter:image" content="./hero.png">
     <title>Changelog - What's New in carFlo</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     
     <!-- Preconnect to Fontshare -->
     <link rel="preconnect" href="https://api.fontshare.com">
@@ -96,6 +111,20 @@
         header { padding: 20px 0; border-bottom: 1px solid var(--color-divider); position: sticky; top: 0; background: var(--color-bg); z-index: 1000; backdrop-filter: blur(12px); }
         nav { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;}
         .logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 700; font-family: 'Clash Display', sans-serif; text-decoration: none; color: inherit; }
+        .logo img { height: 34px; width: auto; display: block; object-fit: contain; }
+        .logo-light { display: block; }
+        .logo-dark { display: none !important; }
+        [data-theme="dark"] .logo-light { display: none !important; }
+        [data-theme="dark"] .logo-dark { display: block !important; }
+        [data-theme="light"] .logo-dark { display: none !important; }
+        [data-theme="light"] .logo-light { display: block !important; }
+
+        .footer-logo.logo-light { display: inline-block; }
+        .footer-logo.logo-dark { display: none !important; }
+        [data-theme="dark"] .footer-logo.logo-light { display: none !important; }
+        [data-theme="dark"] .footer-logo.logo-dark { display: inline-block !important; }
+        [data-theme="light"] .footer-logo.logo-dark { display: none !important; }
+        [data-theme="light"] .footer-logo.logo-light { display: inline-block !important; }
         
         .theme-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text); cursor: pointer; transition: 0.3s; }
         .theme-toggle:hover { transform: rotate(15deg); }
@@ -317,11 +346,115 @@
             .version-pill { font-size: 0.85rem; padding: 0.25rem 0.65rem; }
         }
 
-        footer { padding: 60px 0; border-top: 1px solid var(--color-divider); margin-top: 40px; }
-        .footer-bottom { display: flex; justify-content: space-between; color: var(--color-text-faint); font-size: 0.875rem; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; flex-wrap: wrap; gap: 1rem; }
-        .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
-        .footer-links a { color: var(--color-text-faint); text-decoration: none; transition: color 0.2s; }
-        .footer-links a:hover { color: var(--color-primary); }
+        /* Footer */
+        footer {
+            padding: 70px 0 35px;
+            border-top: 1px solid var(--color-divider);
+            margin-top: 80px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 40px;
+        }
+        .footer-tagline {
+            margin-top: 1rem;
+            color: var(--color-text-muted);
+            max-width: 300px;
+            font-size: 0.95rem;
+        }
+        .footer-col h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--color-text);
+        }
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-col ul li {
+            margin-bottom: 0.75rem;
+        }
+        .footer-col a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .footer-col a:hover {
+            color: var(--color-primary);
+        }
+        .social-link {
+            color: var(--color-text-muted);
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .social-link:hover {
+            color: var(--color-primary);
+        }
+        .footer-credit-link {
+            color: inherit;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+            text-decoration: none;
+        }
+        .footer-credit-link:hover {
+            color: var(--color-text) !important;
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--color-primary-transparent);
+        }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--color-divider);
+            color: var(--color-text-faint);
+            font-size: 0.85rem;
+        }
+        .footer-bottom-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .footer-separator {
+            color: var(--color-border);
+            user-select: none;
+        }
+        .footer-bottom-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-tagline {
+                margin-inline: auto;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.25rem;
+                text-align: center;
+            }
+            .footer-bottom-left, .footer-bottom-right {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -329,7 +462,8 @@
     <header>
         <nav>
             <a href="./index.html" class="logo">
-                <span>carFlo</span>
+                <img src="./logo.svg" alt="carFlo Logo" class="logo-light">
+                <img src="./colored-logo-dark.svg" alt="carFlo Logo" class="logo-dark">
             </a>
             <div style="display: flex; align-items: center; gap: 1rem;">
                 <div class="lang-dropdown" id="langDropdown">
@@ -364,15 +498,68 @@
     </main>
 
     <footer>
-        <div class="footer-bottom">
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                <p data-i18n="footer_copyright">© 2026 carFlo. All rights reserved.</p>
-                <p data-i18n="footer_made_by" style="color: var(--color-text-faint); font-size: 0.75rem;">Made by Djurke23</p>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="logo">
+                        <img src="./logo.svg" alt="carFlo Logo" class="logo-light" style="height: 32px; width: auto;">
+                        <img src="./colored-logo-dark.svg" alt="carFlo Logo" class="logo-dark" style="height: 32px; width: auto;">
+                    </div>
+                    <p class="footer-tagline" data-i18n="footer_tagline">Simplifying vehicle management for drivers worldwide.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_product">Product</h4>
+                    <ul>
+                        <li><a href="./index.html#features" data-i18n="nav_features">Features</a></li>
+                        <li><a href="./index.html#how-it-works" data-i18n="nav_how_it_works">How It Works</a></li>
+                        <li><a href="./index.html#pricing" data-i18n="nav_pricing">Pricing</a></li>
+                        <li><a href="./index.html#support" data-i18n="nav_faq">FAQ</a></li>
+                        <li><a href="./changelog.html" data-i18n="nav_changelog">Changelog</a></li>
+                        <li><a href="./index.html#download" data-i18n="nav_download">Download</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_legal">Legal</h4>
+                    <ul>
+                        <li><a href="./privacy.html" data-i18n="footer_privacy">Privacy Policy</a></li>
+                        <li><a href="./terms.html" data-i18n="footer_terms">Terms of Service</a></li>
+                        <li><a href="./delete.html" data-i18n="footer_delete">Delete Account</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_contact">Contact</h4>
+                    <ul>
+                        <li><a href="mailto:support@carflo.app">support@carflo.app</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-links">
-                <a href="./index.html" data-i18n="footer_home">Home</a>
-                <a href="./terms.html" data-i18n="footer_terms">Terms of Service</a>
-                <a href="./privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <span data-i18n="footer_copyright">© 2026 carFlo. All rights reserved.</span>
+                    <span class="footer-separator">•</span>
+                    <span data-i18n="footer_made_by" style="color: var(--color-text-faint); font-size: 0.8rem;">Made by <a href="https://djurke23.github.io/portfolio/" target="_blank" class="footer-credit-link">Djurke23</a></span>
+                </div>
+                <div class="footer-bottom-right">
+                    <span data-i18n="footer_socials">Follow us:</span>
+                    <div style="display: flex; gap: 0.75rem; align-items: center;">
+                        <a href="https://www.instagram.com/carflo.app/" target="_blank" aria-label="Instagram"
+                            class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@carflo.app" target="_blank" aria-label="TikTok"
+                            class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
@@ -380,28 +567,56 @@
     <script>
         lucide.createIcons();
 
+        function setTheme(theme) {
+            const html = document.documentElement;
+            html.setAttribute('data-theme', theme);
+            try { localStorage.setItem('site_theme', theme); } catch (e) {}
+
+            const icon = document.getElementById('theme-icon');
+            if (icon) {
+                icon.setAttribute('data-lucide', theme === 'dark' ? 'moon' : 'sun');
+                lucide.createIcons();
+            }
+
+            const metaTheme = document.querySelector("meta[name='theme-color']");
+            if (metaTheme) {
+                metaTheme.setAttribute("content", theme === 'dark' ? "#0d0e0f" : "#f4f4f2");
+            }
+        }
+
         function toggleTheme() {
             const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
+            const currentTheme = html.getAttribute('data-theme') || 'dark';
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-            
-            const icon = document.getElementById('theme-icon');
-            icon.setAttribute('data-lucide', newTheme === 'dark' ? 'moon' : 'sun');
-            lucide.createIcons();
-            
-            document.querySelector("meta[name='theme-color']").setAttribute("content", newTheme === 'dark' ? "#0d0e0f" : "#f4f4f2");
+            setTheme(newTheme);
         }
+
+        try {
+            const savedTheme = localStorage.getItem('site_theme');
+            if (savedTheme) setTheme(savedTheme);
+        } catch (e) {}
 
         const translations = {
             en: {
                 changelog_title: "Changelog — What's New",
                 changelog_subtitle: "Track all new features and improvements",
+                nav_features: "Features",
+                nav_how_it_works: "How It Works",
+                nav_pricing: "Pricing",
+                nav_faq: "FAQ",
+                nav_changelog: "Changelog",
+                nav_download: "Download",
+                footer_tagline: "Simplifying vehicle management for drivers worldwide.",
+                footer_product: "Product",
+                footer_legal: "Legal",
+                footer_contact: "Contact",
                 footer_home: "Home",
                 footer_terms: "Terms of Service",
                 footer_privacy: "Privacy Policy",
+                footer_delete: "Delete Account",
                 footer_copyright: "© 2026 carFlo. All rights reserved.",
-                footer_made_by: "Made by Djurke23",
+                footer_made_by: 'Made by <a href="https://djurke23.github.io/portfolio/" target="_blank" class="footer-credit-link">Djurke23</a>',
+                footer_socials: "Follow us:",
                 badge_new: "NEW",
                 badge_improved: "IMPROVED",
                 badge_fixed: "FIXED",
@@ -410,11 +625,23 @@
             sr: {
                 changelog_title: "Istorija promena",
                 changelog_subtitle: "Pratite sve nove funkcije i poboljšanja",
+                nav_features: "Funkcije",
+                nav_how_it_works: "Kako radi",
+                nav_pricing: "Cene",
+                nav_faq: "Česta pitanja",
+                nav_changelog: "Šta je novo",
+                nav_download: "Preuzmi",
+                footer_tagline: "Pojednostavljeno upravljanje vozilima za vozače širom sveta.",
+                footer_product: "Proizvod",
+                footer_legal: "Pravno",
+                footer_contact: "Kontakt",
                 footer_home: "Početna",
                 footer_terms: "Uslovi korišćenja",
                 footer_privacy: "Politika privatnosti",
+                footer_delete: "Brisanje naloga",
                 footer_copyright: "© 2026 carFlo. Sva prava zadržana.",
-                footer_made_by: "Autor: Djurke23",
+                footer_made_by: 'Autor: <a href="https://djurke23.github.io/portfolio/" target="_blank" class="footer-credit-link">Djurke23</a>',
+                footer_socials: "Zapratite nas:",
                 badge_new: "NOVO",
                 badge_improved: "POBOLJŠANO",
                 badge_fixed: "POPRAVLJENO",
@@ -541,6 +768,33 @@
         }
 
         const fallbackData = [
+          {
+            "version": "1.4.3",
+            "date": "2026-10-03",
+            "title": {
+              "en": "Floating Glass Navigation & Launch Optimizations",
+              "sr": "Plutajuća staklena navigacija i ubrzano pokretanje"
+            },
+            "changes": [
+              { "type": "new", "text": { "en": "Floating Glass Navigation — Modern floating pill bottom bar featuring elegant frosted glassmorphism.", "sr": "Plutajuća staklena navigacija — Moderan plutajući navigacioni bar u obliku pilule sa elegantnim efektom zamagljenog stakla (glassmorphism)." } },
+              { "type": "new", "text": { "en": "Fluid Spring Lens Indicator — Tactile lens indicator that smoothly tracks your active tab with native haptic feedback.", "sr": "Fluidni animirani indikator — Precizni indikator koji glatko prati aktivnu karticu uz prijatan haptički odziv." } },
+              { "type": "improved", "text": { "en": "Custom Dark Mode Splash Screen — Brand new high-contrast white logo tailored specifically for Dark Mode startup with zero-lag theme matching.", "sr": "Prilagođeni tamni početni ekran — Novi beli logo visokog kontrasta za Dark Mode i trenutno prilagođavanje izabranoj temi." } },
+              { "type": "improved", "text": { "en": "Zero-Flicker Launch & Performance — Asset preloading eliminates white screen flash on dark startup with a refined splash fade-out animation.", "sr": "Pokretanje bez treperenja i performanse — Pred-učitavanje resursa eliminiše bljesak belog ekrana u noćnom režimu uz uglađenu animaciju ulaska u aplikaciju." } }
+            ]
+          },
+          {
+            "version": "1.4.2",
+            "date": "2026-10-01",
+            "title": {
+              "en": "Camera Document Scanner & Instant Navigation",
+              "sr": "Kamera skener dokumenata i brza navigacija"
+            },
+            "changes": [
+              { "type": "new", "text": { "en": "Camera Document Scanner — Scan vehicle documents, registration cards, and insurance policies directly with camera and attach them to your car [PRO].", "sr": "Kamera skener dokumenata — Skenirajte saobraćajne dozvole, polise osiguranja i servisne račune direktno kamerom i sačuvajte uz vozilo [PRO]." } },
+              { "type": "improved", "text": { "en": "Instant Native Navigation — Eliminated transition lag and loading delays when switching between tabs and dashboard cards.", "sr": "Trenutna navigacija — Uklonjeno kašnjenje i čekanje pri prebacivanju između kartica i kontrolne table." } },
+              { "type": "fixed", "text": { "en": "Stability & Bug Fixes — Resolved edge-case crashes when saving attachments and improved overall memory efficiency.", "sr": "Stabilnost i ispravke grešaka — Rešeni retki problemi pri čuvanju priloga i optimizovana potrošnja memorije." } }
+            ]
+          },
           {
             "version": "1.4.1",
             "date": "2026-09-27",
