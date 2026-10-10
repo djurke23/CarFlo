@@ -1756,6 +1756,18 @@
                 text-align: center;
             }
 
+            .footer-info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-info .logo {
+                justify-content: center;
+                margin-inline: auto;
+            }
+
             .footer-tagline {
                 margin-inline: auto;
             }
@@ -2369,6 +2381,44 @@
             transform: translateX(3px);
         }
 
+        @media (max-width: 768px) {
+            .announcement-pill {
+                max-width: 100%;
+                padding: 0.35rem 0.75rem 0.35rem 0.45rem;
+                gap: 0.5rem;
+                font-size: 0.82rem;
+            }
+            .pill-tag {
+                font-size: 0.68rem;
+                padding: 0.2rem 0.55rem;
+                flex-shrink: 0;
+            }
+            .pill-text {
+                white-space: normal;
+                overflow: visible;
+                text-overflow: unset;
+                line-height: 1.35;
+                text-align: left;
+                flex: 1;
+                min-width: 0;
+            }
+            .announcement-pill i {
+                flex-shrink: 0;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .announcement-pill {
+                font-size: 0.78rem;
+                padding: 0.3rem 0.65rem 0.3rem 0.35rem;
+                gap: 0.4rem;
+            }
+            .pill-tag {
+                font-size: 0.64rem;
+                padding: 0.18rem 0.45rem;
+            }
+        }
+
         /* --- Hero Trust Bar --- */
         .hero-trust-bar {
             display: inline-flex;
@@ -2889,7 +2939,7 @@
                 <div class="hero-content reveal">
                     <a href="./changelog.html" class="announcement-pill" aria-label="What's new in version 1.4.3">
                         <span class="pill-tag" data-i18n="announcement_tag">NEW v1.4.3</span>
-                        <span class="pill-text" data-i18n="announcement_text">Floating Glass Navigation & Document Scanner is live</span>
+                        <span class="pill-text" data-i18n="announcement_text">Floating Glass Navigation & Document Scanner</span>
                         <i data-lucide="chevron-right" size="14"></i>
                     </a>
                     <h1 class="hero-title" data-i18n="hero_title">The Smartest Companion for Your Vehicle.</h1>
@@ -4185,7 +4235,7 @@
                 
                 // Announcement & Trust
                 announcement_tag: "NEW v1.4.3",
-                announcement_text: "Floating Glass Navigation & Document Scanner is live",
+                announcement_text: "Floating Glass Navigation & Document Scanner",
                 btn_qr_code: "Scan for iPhone",
                 trust_appstore: "App Store",
                 trust_offline: "100% Offline & Private",
