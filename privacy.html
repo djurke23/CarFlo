@@ -5,7 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0d0e0f">
     <meta name="description" content="Privacy Policy for carFlo.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://carflo.app/privacy.html">
+    <meta property="og:site_name" content="carFlo">
     <meta property="og:title" content="carFlo — Privacy Policy">
+    <meta property="og:description" content="Privacy Policy for carFlo.">
+    <meta property="og:image" content="https://carflo.app/hero.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="carFlo — Privacy Policy">
+    <meta name="twitter:description" content="Privacy Policy for carFlo.">
+    <meta name="twitter:image" content="https://carflo.app/hero.png">
+    <link rel="canonical" href="https://carflo.app/privacy.html">
     <title>carFlo — Privacy Policy</title>
     
     <!-- Favicon -->
@@ -24,6 +34,7 @@
     <style>
         :root, [data-theme="light"] {
             --color-bg: #f4f4f2;
+            --color-bg-rgb: 244, 244, 242;
             --color-surface: #f9f9f7;
             --color-surface-2: #ffffff;
             --color-surface-offset: #ececea;
@@ -40,6 +51,7 @@
 
         [data-theme="dark"] {
             --color-bg: #0d0e0f;
+            --color-bg-rgb: 13, 14, 15;
             --color-surface: #131416;
             --color-surface-2: #181a1c;
             --color-surface-offset: #1c1e21;
@@ -91,6 +103,27 @@
         [data-theme="light"] .footer-logo.logo-dark { display: none !important; }
         [data-theme="light"] .footer-logo.logo-light { display: inline-block !important; }
         
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.38rem 0.85rem;
+            border-radius: 999px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .back-home-btn:hover {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            background: var(--color-surface-offset);
+            transform: translateX(-2px);
+        }
+
         .theme-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text); cursor: pointer; transition: 0.3s; }
         .theme-toggle:hover { transform: rotate(15deg); }
 
@@ -298,10 +331,16 @@
     <header>
         <div class="container">
             <nav>
-                <a href="./index.html" class="logo">
-                    <img src="./logo.svg" alt="carFlo Logo" class="logo-light">
-                    <img src="./colored-logo-dark.svg" alt="carFlo Logo" class="logo-dark">
-                </a>
+                <div style="display: flex; align-items: center; gap: 1.25rem;">
+                    <a href="./index.html" class="logo">
+                        <img src="./logo.svg" alt="carFlo Logo" class="logo-light">
+                        <img src="./colored-logo-dark.svg" alt="carFlo Logo" class="logo-dark">
+                    </a>
+                    <a href="./index.html" class="back-home-btn" data-i18n="nav_back_home">
+                        <i data-lucide="arrow-left" size="14"></i>
+                        <span>Home</span>
+                    </a>
+                </div>
                 <div style="display: flex; align-items: center; gap: 1rem;">
                     <div class="lang-dropdown" id="langDropdown">
                         <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select Language">
@@ -376,7 +415,7 @@
                 <ul>
                     <li data-i18n="sharing_list_1"><strong>We do NOT sell your personal data.</strong></li>
                     <li data-i18n="sharing_list_2"><strong>We do NOT share your vehicle data with insurance companies or dealerships.</strong></li>
-                    <li data-i18n="sharing_list_3">Service Providers: We use [Provider — placeholder] for cloud hosting and analytics, bound by strict data processing agreements.</li>
+                    <li data-i18n="sharing_list_3">Service Providers: We use Supabase for encrypted cloud hosting and database synchronization, and Apple/Google for store distribution, bound by strict data processing agreements.</li>
                     <li data-i18n="sharing_list_4">Legal Requirements: We may disclose data if required by law or to protect our rights.</li>
                 </ul>
 
@@ -525,11 +564,16 @@
 
         try {
             const savedTheme = localStorage.getItem('site_theme');
-            if (savedTheme) setTheme(savedTheme);
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                setTheme('light');
+            }
         } catch (e) {}
 
         const translations = {
             en: {
+                nav_back_home: "← Home",
                 toc_title: "Contents",
                 toc_1: "1. Information We Collect",
                 toc_2: "2. How We Use It",
@@ -563,7 +607,7 @@
                 sharing_title: "4. Data Sharing & Third Parties",
                 sharing_list_1: "<strong>We do NOT sell your personal data.</strong>",
                 sharing_list_2: "<strong>We do NOT share your vehicle data with insurance companies or dealerships.</strong>",
-                sharing_list_3: "Service Providers: We use [Provider — placeholder] for cloud hosting and analytics, bound by strict data processing agreements.",
+                sharing_list_3: "Service Providers: We use Supabase for encrypted cloud hosting and database synchronization, and Apple/Google for store distribution, bound by strict data processing agreements.",
                 sharing_list_4: "Legal Requirements: We may disclose data if required by law or to protect our rights.",
                 payments_title: "5. In-App Purchases & Payment Data",
                 payments_text: "Purchases are processed entirely by the Apple App Store or Google Play. carFlo <strong>does not collect, store, or process</strong> your payment card information.",
@@ -611,6 +655,7 @@
                 footer_socials: "Follow us:"
             },
             sr: {
+                nav_back_home: "← Početna",
                 toc_title: "Sadržaj",
                 toc_1: "1. Informacije koje prikupljamo",
                 toc_2: "2. Kako ih koristimo",
@@ -644,7 +689,7 @@
                 sharing_title: "4. Deljenje podataka i treće strane",
                 sharing_list_1: "<strong>NE prodajemo vaše lične podatke.</strong>",
                 sharing_list_2: "<strong>NE delimo vaše podatke o vozilu sa osiguravajućim kućama ili dilerima.</strong>",
-                sharing_list_3: "Pružaoci usluga: Koristimo [Provider — placeholder] za cloud hosting i analitiku, obavezane strogim ugovorima o obradi podataka.",
+                sharing_list_3: "Pružaoci usluga: Koristimo Supabase za šifrovano cloud čuvanje i sinhronizaciju baze podataka, kao i Apple/Google za distribuciju, obavezane strogim ugovorima o obradi podataka.",
                 sharing_list_4: "Pravni zahtevi: Možemo otkriti podatke ako to zakon nalaže ili radi zaštite naših prava.",
                 payments_title: "5. Kupovine u aplikaciji i podaci o plaćanju",
                 payments_text: "Kupovine se obrađuju isključivo putem Apple App Store-a ili Google Play-a. carFlo NE prikuplja, ne čuva i ne obrađuje informacije o vašoj platnoj kartici.",

@@ -10,11 +10,12 @@
     <meta property="og:site_name" content="carFlo">
     <meta property="og:title" content="carFlo — Changelog & What's New">
     <meta property="og:description" content="Explore latest features, updates, and improvements in carFlo.">
-    <meta property="og:image" content="./hero.png">
+    <meta property="og:image" content="https://carflo.app/hero.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="carFlo — Changelog & What's New">
     <meta name="twitter:description" content="Explore latest features, updates, and improvements in carFlo.">
-    <meta name="twitter:image" content="./hero.png">
+    <meta name="twitter:image" content="https://carflo.app/hero.png">
+    <link rel="canonical" href="https://carflo.app/changelog.html">
     <title>Changelog - What's New in carFlo</title>
     
     <!-- Favicon -->
@@ -48,6 +49,7 @@
     <style>
         :root, [data-theme="light"] {
             --color-bg: #f4f4f2;
+            --color-bg-rgb: 244, 244, 242;
             --color-surface: #f9f9f7;
             --color-surface-2: #ffffff;
             --color-surface-offset: #ececea;
@@ -72,6 +74,7 @@
 
         [data-theme="dark"] {
             --color-bg: #0d0e0f;
+            --color-bg-rgb: 13, 14, 15;
             --color-surface: #131416;
             --color-surface-2: #181a1c;
             --color-surface-offset: #1c1e21;
@@ -126,6 +129,27 @@
         [data-theme="light"] .footer-logo.logo-dark { display: none !important; }
         [data-theme="light"] .footer-logo.logo-light { display: inline-block !important; }
         
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.38rem 0.85rem;
+            border-radius: 999px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .back-home-btn:hover {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            background: var(--color-surface-offset);
+            transform: translateX(-2px);
+        }
+
         .theme-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text); cursor: pointer; transition: 0.3s; }
         .theme-toggle:hover { transform: rotate(15deg); }
 
@@ -471,10 +495,16 @@
 
     <header>
         <nav>
-            <a href="./index.html" class="logo">
-                <img src="./logo.svg" alt="carFlo Logo" class="logo-light">
-                <img src="./colored-logo-dark.svg" alt="carFlo Logo" class="logo-dark">
-            </a>
+            <div style="display: flex; align-items: center; gap: 1.25rem;">
+                <a href="./index.html" class="logo">
+                    <img src="./logo.svg" alt="carFlo Logo" class="logo-light">
+                    <img src="./colored-logo-dark.svg" alt="carFlo Logo" class="logo-dark">
+                </a>
+                <a href="./index.html" class="back-home-btn" data-i18n="nav_back_home">
+                    <i data-lucide="arrow-left" size="14"></i>
+                    <span>Home</span>
+                </a>
+            </div>
             <div style="display: flex; align-items: center; gap: 1rem;">
                 <div class="lang-dropdown" id="langDropdown">
                     <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select Language">
@@ -603,11 +633,16 @@
 
         try {
             const savedTheme = localStorage.getItem('site_theme');
-            if (savedTheme) setTheme(savedTheme);
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                setTheme('light');
+            }
         } catch (e) {}
 
         const translations = {
             en: {
+                nav_back_home: "← Home",
                 changelog_title: "Changelog — What's New",
                 changelog_subtitle: "Track all new features and improvements",
                 nav_features: "Features",
@@ -633,6 +668,7 @@
                 latest: "Latest"
             },
             sr: {
+                nav_back_home: "← Početna",
                 changelog_title: "Istorija promena",
                 changelog_subtitle: "Pratite sve nove funkcije i poboljšanja",
                 nav_features: "Funkcije",

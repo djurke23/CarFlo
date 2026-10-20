@@ -5,7 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0d0e0f">
     <meta name="description" content="Terms of Service for carFlo.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://carflo.app/terms.html">
+    <meta property="og:site_name" content="carFlo">
     <meta property="og:title" content="carFlo — Terms of Service">
+    <meta property="og:description" content="Terms of Service for carFlo.">
+    <meta property="og:image" content="https://carflo.app/hero.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="carFlo — Terms of Service">
+    <meta name="twitter:description" content="Terms of Service for carFlo.">
+    <meta name="twitter:image" content="https://carflo.app/hero.png">
+    <link rel="canonical" href="https://carflo.app/terms.html">
     <title>carFlo — Terms of Service</title>
     
     <!-- Favicon -->
@@ -24,6 +34,7 @@
     <style>
         :root, [data-theme="light"] {
             --color-bg: #f4f4f2;
+            --color-bg-rgb: 244, 244, 242;
             --color-surface: #f9f9f7;
             --color-surface-2: #ffffff;
             --color-surface-offset: #ececea;
@@ -40,6 +51,7 @@
 
         [data-theme="dark"] {
             --color-bg: #0d0e0f;
+            --color-bg-rgb: 13, 14, 15;
             --color-surface: #131416;
             --color-surface-2: #181a1c;
             --color-surface-offset: #1c1e21;
@@ -90,6 +102,27 @@
         [data-theme="light"] .footer-logo.logo-dark { display: none !important; }
         [data-theme="light"] .footer-logo.logo-light { display: inline-block !important; }
         
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.38rem 0.85rem;
+            border-radius: 999px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .back-home-btn:hover {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            background: var(--color-surface-offset);
+            transform: translateX(-2px);
+        }
+
         .theme-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text); cursor: pointer; transition: 0.3s; }
         .theme-toggle:hover { transform: rotate(15deg); }
 
@@ -294,10 +327,16 @@
     <header>
         <div class="container">
             <nav>
-                <a href="./index.html" class="logo">
-                    <img src="./logo.svg" alt="carFlo Logo" class="logo-light">
-                    <img src="./colored-logo-dark.svg" alt="carFlo Logo" class="logo-dark">
-                </a>
+                <div style="display: flex; align-items: center; gap: 1.25rem;">
+                    <a href="./index.html" class="logo">
+                        <img src="./logo.svg" alt="carFlo Logo" class="logo-light">
+                        <img src="./colored-logo-dark.svg" alt="carFlo Logo" class="logo-dark">
+                    </a>
+                    <a href="./index.html" class="back-home-btn" data-i18n="nav_back_home">
+                        <i data-lucide="arrow-left" size="14"></i>
+                        <span>Home</span>
+                    </a>
+                </div>
                 <div style="display: flex; align-items: center; gap: 1rem;">
                     <div class="lang-dropdown" id="langDropdown">
                         <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select Language">
@@ -392,7 +431,7 @@
                 <p data-i18n="termination_text">carFlo reserves the right to terminate or suspend your access to the service for violations of these Terms. You may stop using the service at any time by deleting the app from your device.</p>
 
                 <h2 id="law" data-i18n="law_title">13. Governing Law</h2>
-                <p data-i18n="law_text">These terms shall be governed by and construed in accordance with the laws of [Developer's Jurisdiction].</p>
+                <p data-i18n="law_text">These terms shall be governed by and construed in accordance with the laws of the Republic of Serbia.</p>
 
                 <h2 id="apple" data-i18n="apple_title">14. Apple-Specific Provisions</h2>
                 <ul>
@@ -486,6 +525,7 @@
     <script>
         const translations = {
             en: {
+                nav_back_home: "← Home",
                 toc_title: "Contents",
                 toc_1: "1. Acceptance of Terms",
                 toc_2: "2. Description of Service",
@@ -534,7 +574,7 @@
                 termination_title: "12. Termination",
                 termination_text: "carFlo reserves the right to terminate or suspend your access to the service for violations of these Terms. You may stop using the service at any time by deleting the app from your device.",
                 law_title: "13. Governing Law",
-                law_text: "These terms shall be governed by and construed in accordance with the laws of [Developer's Jurisdiction].",
+                law_text: "These terms shall be governed by and construed in accordance with the laws of the Republic of Serbia.",
                 apple_title: "14. Apple-Specific Provisions",
                 apple_list_1: "carFlo, not Apple, is solely responsible for the app and its content.",
                 apple_list_2: "Apple has no obligation to provide maintenance or support services for carFlo.",
@@ -565,6 +605,7 @@
                 footer_socials: "Follow us:"
             },
             sr: {
+                nav_back_home: "← Početna",
                 toc_title: "Sadržaj",
                 toc_1: "1. Prihvatanje uslova",
                 toc_2: "2. Opis usluge",
@@ -613,7 +654,7 @@
                 termination_title: "12. Prekid",
                 termination_text: "carFlo zadržava pravo da prekine ili suspenduje vaš pristup usluzi zbog kršenja ovih Uslova. Možete prestati da koristite uslugu u bilo kom trenutku brisanjem aplikacije sa svog uređaju.",
                 law_title: "13. Merodavno pravo",
-                law_text: "Ovi uslovi će biti regulisani i tumačeni u skladu sa zakonima [Jurisdikcija programera].",
+                law_text: "Ovi uslovi će biti regulisani i tumačeni u skladu sa zakonima Republike Srbije.",
                 apple_title: "14. Odredbe specifične za Apple",
                 apple_list_1: "carFlo, a ne Apple, je isključivo odgovoran za aplikaciju i njen sadržaj.",
                 apple_list_2: "Apple nema nikakvu obavezu da pruža usluge održavanja ili podrške za carFlo.",
@@ -673,7 +714,11 @@
 
         try {
             const savedTheme = localStorage.getItem('site_theme');
-            if (savedTheme) setTheme(savedTheme);
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                setTheme('light');
+            }
         } catch (e) {}
 
         let currentLang = localStorage.getItem('preferredLang') || 'en';

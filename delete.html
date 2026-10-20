@@ -5,7 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0d0e0f">
     <meta name="description" content="Request deletion of your carFlo account and personal data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://carflo.app/delete.html">
+    <meta property="og:site_name" content="carFlo">
     <meta property="og:title" content="carFlo — Delete Account & Data">
+    <meta property="og:description" content="Request deletion of your carFlo account and personal data.">
+    <meta property="og:image" content="https://carflo.app/hero.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="carFlo — Delete Account & Data">
+    <meta name="twitter:description" content="Request deletion of your carFlo account and personal data.">
+    <meta name="twitter:image" content="https://carflo.app/hero.png">
+    <link rel="canonical" href="https://carflo.app/delete.html">
     <title>carFlo — Delete Account & Data</title>
     
     <!-- Favicon -->
@@ -24,6 +34,7 @@
     <style>
         :root, [data-theme="light"] {
             --color-bg: #f4f4f2;
+            --color-bg-rgb: 244, 244, 242;
             --color-surface: #f9f9f7;
             --color-surface-2: #ffffff;
             --color-surface-offset: #ececea;
@@ -40,6 +51,7 @@
 
         [data-theme="dark"] {
             --color-bg: #0d0e0f;
+            --color-bg-rgb: 13, 14, 15;
             --color-surface: #131416;
             --color-surface-2: #181a1c;
             --color-surface-offset: #1c1e21;
@@ -92,6 +104,27 @@
         [data-theme="light"] .footer-logo.logo-dark { display: none !important; }
         [data-theme="light"] .footer-logo.logo-light { display: inline-block !important; }
         
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.38rem 0.85rem;
+            border-radius: 999px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .back-home-btn:hover {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            background: var(--color-surface-offset);
+            transform: translateX(-2px);
+        }
+
         .theme-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text); cursor: pointer; transition: 0.3s; }
         .theme-toggle:hover { transform: rotate(15deg); }
 
@@ -300,10 +333,16 @@
     <header>
         <div class="container">
             <nav>
-                <a href="./index.html" class="logo">
-                    <img src="./logo.svg" alt="carFlo Logo" class="logo-light">
-                    <img src="./colored-logo-dark.svg" alt="carFlo Logo" class="logo-dark">
-                </a>
+                <div style="display: flex; align-items: center; gap: 1.25rem;">
+                    <a href="./index.html" class="logo">
+                        <img src="./logo.svg" alt="carFlo Logo" class="logo-light">
+                        <img src="./colored-logo-dark.svg" alt="carFlo Logo" class="logo-dark">
+                    </a>
+                    <a href="./index.html" class="back-home-btn" data-i18n="nav_back_home">
+                        <i data-lucide="arrow-left" size="14"></i>
+                        <span>Home</span>
+                    </a>
+                </div>
                 <div style="display: flex; align-items: center; gap: 1rem;">
                     <div class="lang-dropdown" id="langDropdown">
                         <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select Language">
@@ -350,7 +389,7 @@
                 <p data-i18n="account_how_steps">Open the <strong>carFlo app</strong> → Go to <strong>Settings</strong> → Tap on <strong>Account</strong> → Tap on <strong>Delete Account</strong> → Tap <strong>Confirm</strong>.</p>
                 
                 <h3 data-i18n="account_alt_title">Alternative Request:</h3>
-                <p data-i18n="account_alt_text">If you no longer have the app installed, you can send an email to <a href="mailto:lukadjuricdjurke@pm.me" style="color: var(--color-primary); text-decoration: none;">lukadjuricdjurke@pm.me</a> with the subject <strong>"Delete carFlo Account"</strong>. Please make sure to send the email from the address associated with your carFlo account, or include the email address of the account you want to delete.</p>
+                <p data-i18n="account_alt_text">If you no longer have the app installed, you can send an email to <a href="mailto:support@carflo.app" style="color: var(--color-primary); text-decoration: none;">support@carflo.app</a> with the subject <strong>"Delete carFlo Account"</strong>. Please make sure to send the email from the address associated with your carFlo account, or include the email address of the account you want to delete.</p>
 
                 <div class="callout-box">
                     <h3 data-i18n="account_deleted_title">What is deleted (within 7 days):</h3>
@@ -381,7 +420,7 @@
                 <p data-i18n="contact_intro">For any privacy questions or manually requested deletions, you can reach out directly:</p>
                 <p>
                     <strong data-i18n="contact_dev">Developer:</strong> Luka Đurić<br>
-                    <strong>Email:</strong> <a href="mailto:lukadjuricdjurke@pm.me" style="color: var(--color-primary); text-decoration: none;">lukadjuricdjurke@pm.me</a>
+                    <strong>Email:</strong> <a href="mailto:support@carflo.app" style="color: var(--color-primary); text-decoration: none;">support@carflo.app</a>
                 </p>
             </article>
         </div>
@@ -483,11 +522,16 @@
 
         try {
             const savedTheme = localStorage.getItem('site_theme');
-            if (savedTheme) setTheme(savedTheme);
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                setTheme('light');
+            }
         } catch (e) {}
 
         const translations = {
             en: {
+                nav_back_home: "← Home",
                 toc_title: "Contents",
                 toc_1: "1. Delete Account",
                 toc_2: "2. Delete Data",
@@ -499,7 +543,7 @@
                 account_how_title: "How to delete your account:",
                 account_how_steps: "Open the <strong>carFlo app</strong> → Go to <strong>Settings</strong> → Tap on <strong>Account</strong> → Tap on <strong>Delete Account</strong> → Tap <strong>Confirm</strong>.",
                 account_alt_title: "Alternative Request:",
-                account_alt_text: 'If you no longer have the app installed, you can send an email to <a href="mailto:lukadjuricdjurke@pm.me" style="color: var(--color-primary); text-decoration: none;">lukadjuricdjurke@pm.me</a> with the subject <strong>"Delete carFlo Account"</strong>. Please make sure to send the email from the address associated with your carFlo account, or include the email address of the account you want to delete.',
+                account_alt_text: 'If you no longer have the app installed, you can send an email to <a href="mailto:support@carflo.app" style="color: var(--color-primary); text-decoration: none;">support@carflo.app</a> with the subject <strong>"Delete carFlo Account"</strong>. Please make sure to send the email from the address associated with your carFlo account, or include the email address of the account you want to delete.',
                 account_deleted_title: "What is deleted (within 7 days):",
                 account_deleted_intro: "Upon your deletion request, the following information will be permanently removed from our databases:",
                 account_deleted_list_1: "Your email address and user ID",
@@ -536,6 +580,7 @@
                 footer_socials: "Follow us:"
             },
             sr: {
+                nav_back_home: "← Početna",
                 toc_title: "Sadržaj",
                 toc_1: "1. Obriši Nalog",
                 toc_2: "2. Obriši Podatke",
@@ -547,7 +592,7 @@
                 account_how_title: "Kako:",
                 account_how_steps: "Otvori <strong>carFlo app</strong> → <strong>Settings</strong> → <strong>Account</strong> → <strong>Delete Account</strong> → <strong>Confirm</strong>",
                 account_alt_title: "Alternativa:",
-                account_alt_text: 'Pošalji email na <a href="mailto:lukadjuricdjurke@pm.me" style="color: var(--color-primary); text-decoration: none;">lukadjuricdjurke@pm.me</a> sa subject-om <strong>"Delete carFlo Account"</strong> i email adresom naloga.',
+                account_alt_text: 'Pošalji email na <a href="mailto:support@carflo.app" style="color: var(--color-primary); text-decoration: none;">support@carflo.app</a> sa subject-om <strong>"Delete carFlo Account"</strong> i email adresom naloga.',
                 account_deleted_title: "Šta brišemo u roku od 7 dana:",
                 account_deleted_intro: "Nakon vašeg zahteva za brisanje, sledeće informacije će biti trajno uklonjene iz naših baza podataka:",
                 account_deleted_list_1: "Email adresa i korisnički ID (user ID)",
