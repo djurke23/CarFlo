@@ -212,7 +212,23 @@
         }
         .lang-option:hover { background: var(--color-surface-offset); }
         .lang-option.active { color: var(--color-primary); font-weight: 600; }
-        .lang-option .flag { font-size: 1.2rem; line-height: 1; }
+        
+        /* --- Flag SVG Icon --- */
+        .lang-flag-svg {
+            width: 20px;
+            height: 15px;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+        #lang-flag, .lang-option .flag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
 
         /* Changelog Accordion */
         .changelog-container { padding: 60px 0 80px; }
@@ -509,16 +525,16 @@
             <div style="display: flex; align-items: center; gap: 1rem;">
                 <div class="lang-dropdown" id="langDropdown">
                     <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select Language">
-                        <span id="lang-flag" style="font-size:1.1rem;line-height:1;">&#127468;&#127463;</span>
+                        <span id="lang-flag"><svg class="lang-flag-svg" width="20" height="15" viewBox="0 0 640 480" aria-hidden="true"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/><path fill="#C8102E" d="m424 288 216 153v39h-40L380 326l44-38zM640 0v10L446 154l44 31L640 40V0zM0 480v-10l194-144-44-31L0 440v40zM216 192 0 39V0h40l220 154-44 38z"/><path fill="#FFF" d="M240 0h160v480H240zM0 160h640v160H0z"/><path fill="#C8102E" d="M280 0h80v480h-80zM0 200h640v80H0z"/></svg></span>
                         <span id="lang-code">EN</span>
                         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                     </button>
                     <div class="lang-dropdown-menu" id="langMenu">
                         <button class="lang-option active" id="opt-en" onclick="selectLanguage('en')">
-                            <span class="flag">&#127468;&#127463;</span> English
+                            <span class="flag"><svg class="lang-flag-svg" width="20" height="15" viewBox="0 0 640 480" aria-hidden="true"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/><path fill="#C8102E" d="m424 288 216 153v39h-40L380 326l44-38zM640 0v10L446 154l44 31L640 40V0zM0 480v-10l194-144-44-31L0 440v40zM216 192 0 39V0h40l220 154-44 38z"/><path fill="#FFF" d="M240 0h160v480H240zM0 160h640v160H0z"/><path fill="#C8102E" d="M280 0h80v480h-80zM0 200h640v80H0z"/></svg></span> English
                         </button>
                         <button class="lang-option" id="opt-sr" onclick="selectLanguage('sr')">
-                            <span class="flag">&#127479;&#127480;</span> Srpski
+                            <span class="flag"><svg class="lang-flag-svg" width="20" height="15" viewBox="0 0 640 480" aria-hidden="true"><path fill="#c6363c" d="M0 0h640v160H0z"/><path fill="#0c4076" d="M0 160h640v160H0z"/><path fill="#ffffff" d="M0 320h640v160H0z"/><g transform="translate(140, 80) scale(0.7)"><path fill="#c6363c" stroke="#ffffff" stroke-width="8" d="M50 70c0 110 90 160 90 160s90-50 90-160V20H50v50z"/><path stroke="#ffffff" stroke-width="14" d="M140 40v130M95 100h90"/><circle cx="115" cy="75" r="8" fill="#ffd700"/><circle cx="165" cy="75" r="8" fill="#ffd700"/><circle cx="115" cy="125" r="8" fill="#ffd700"/><circle cx="165" cy="125" r="8" fill="#ffd700"/><path fill="#ffd700" d="M110 0h60l-10 25h-40z"/></g></svg></span> Srpski
                         </button>
                     </div>
                 </div>
@@ -696,6 +712,9 @@
             }
         };
 
+        const flagSvgEn = '<svg class="lang-flag-svg" width="20" height="15" viewBox="0 0 640 480" aria-hidden="true"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/><path fill="#C8102E" d="m424 288 216 153v39h-40L380 326l44-38zM640 0v10L446 154l44 31L640 40V0zM0 480v-10l194-144-44-31L0 440v40zM216 192 0 39V0h40l220 154-44 38z"/><path fill="#FFF" d="M240 0h160v480H240zM0 160h640v160H0z"/><path fill="#C8102E" d="M280 0h80v480h-80zM0 200h640v80H0z"/></svg>';
+        const flagSvgSr = '<svg class="lang-flag-svg" width="20" height="15" viewBox="0 0 640 480" aria-hidden="true"><path fill="#c6363c" d="M0 0h640v160H0z"/><path fill="#0c4076" d="M0 160h640v160H0z"/><path fill="#ffffff" d="M0 320h640v160H0z"/><g transform="translate(140, 80) scale(0.7)"><path fill="#c6363c" stroke="#ffffff" stroke-width="8" d="M50 70c0 110 90 160 90 160s90-50 90-160V20H50v50z"/><path stroke="#ffffff" stroke-width="14" d="M140 40v130M95 100h90"/><circle cx="115" cy="75" r="8" fill="#ffd700"/><circle cx="165" cy="75" r="8" fill="#ffd700"/><circle cx="115" cy="125" r="8" fill="#ffd700"/><circle cx="165" cy="125" r="8" fill="#ffd700"/><path fill="#ffd700" d="M110 0h60l-10 25h-40z"/></g></svg>';
+
         let currentLang = localStorage.getItem('preferredLang') || 'en';
         let changelogData = [];
 
@@ -711,7 +730,7 @@
             // Update dropdown UI
             const flagEl = document.getElementById('lang-flag');
             const codeEl = document.getElementById('lang-code');
-            if (flagEl) flagEl.innerHTML = lang === 'en' ? '&#127468;&#127463;' : '&#127479;&#127480;';
+            if (flagEl) flagEl.innerHTML = lang === 'en' ? flagSvgEn : flagSvgSr;
             if (codeEl) codeEl.textContent = lang.toUpperCase();
             document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
             const activeOpt = document.getElementById('opt-' + lang);

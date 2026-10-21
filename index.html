@@ -2935,321 +2935,21 @@
             border-radius: 10px;
         }
 
-        /* --- Interactive SMS Parking Demo Widget --- */
-        .parking-demo-card {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 28px;
-            padding: 2.5rem;
-            box-shadow: var(--shadow-lg);
-            display: grid;
-            grid-template-columns: 1.15fr 1fr;
-            gap: 2.5rem;
-            position: relative;
-        }
-        @media (max-width: 920px) {
-            .parking-demo-card {
-                grid-template-columns: 1fr;
-                padding: 1.75rem;
-                gap: 2rem;
-            }
-        }
-        .parking-demo-controls {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-        .parking-demo-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            font-size: 0.78rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: #10b981;
-            background: rgba(16, 185, 129, 0.12);
-            padding: 0.3rem 0.85rem;
-            border-radius: 999px;
-            border: 1px solid rgba(16, 185, 129, 0.25);
-            width: fit-content;
-        }
-        .parking-demo-title {
-            font-size: clamp(1.6rem, 2.8vw, 2.2rem);
-            line-height: 1.2;
-            margin: 0;
-        }
-        .parking-demo-desc {
-            color: var(--color-text-muted);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin: 0;
-        }
-        .parking-select-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .parking-select-label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--color-text);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-        .parking-city-select {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border-radius: 14px;
-            border: 1px solid var(--color-border);
-            background: var(--color-surface-2);
-            color: var(--color-text);
-            font-size: 0.95rem;
-            font-weight: 600;
-            outline: none;
-            font-family: inherit;
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-        .parking-city-select:focus {
-            border-color: var(--color-primary);
-        }
-        .parking-zones-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 0.65rem;
-        }
-        .parking-zone-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 0.75rem 0.9rem;
-            border-radius: 14px;
-            border: 1px solid var(--color-border);
-            background: var(--color-surface-2);
-            color: var(--color-text);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: left;
-            font-family: inherit;
-        }
-        .parking-zone-btn:hover {
-            border-color: var(--color-primary);
-            transform: translateY(-2px);
-        }
-        .parking-zone-btn.active {
-            border-color: var(--color-primary);
-            background: var(--color-primary-transparent);
-            box-shadow: 0 4px 14px rgba(42, 184, 200, 0.18);
-        }
-        .zone-name {
-            font-weight: 600;
-            font-size: 0.88rem;
-            display: flex;
-            align-items: center;
-            gap: 0.45rem;
-        }
-        .zone-color-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
+        /* --- Flag SVG Icon --- */
+        .lang-flag-svg {
+            width: 20px;
+            height: 15px;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
             display: inline-block;
+            vertical-align: middle;
             flex-shrink: 0;
         }
-        .zone-details {
-            font-size: 0.76rem;
-            color: var(--color-text-muted);
-            margin-top: 0.25rem;
-        }
-        .parking-plate-badge-row {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-top: 0.25rem;
-        }
-        .sim-license-plate {
-            display: inline-flex;
-            align-items: center;
-            background: #ffffff;
-            color: #111827;
-            border: 2px solid #1e293b;
-            border-radius: 8px;
-            padding: 0.35rem 0.75rem;
-            font-family: 'Clash Display', monospace, sans-serif;
-            font-weight: 700;
-            font-size: 1.05rem;
-            letter-spacing: 0.1em;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-        }
-        .plate-country-badge {
-            background: #1e40af;
-            color: #ffffff;
-            font-size: 0.65rem;
-            padding: 0.2rem 0.35rem;
-            border-radius: 4px;
-            margin-right: 0.5rem;
-            letter-spacing: 0;
-            font-weight: 700;
-        }
-        .btn-send-sms-demo {
+        #lang-flag, .lang-option .flag {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.6rem;
-            padding: 0.9rem 1.4rem;
-            border-radius: 14px;
-            background: var(--color-primary);
-            color: #ffffff;
-            font-weight: 600;
-            font-size: 0.95rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: inherit;
-            box-shadow: 0 4px 16px var(--color-primary-transparent);
-        }
-        .btn-send-sms-demo:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.08);
-        }
-        .parking-live-card {
-            background: var(--color-surface-2);
-            border: 1px solid var(--color-border);
-            border-radius: 22px;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            position: relative;
-        }
-        .parking-live-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.25rem;
-        }
-        .parking-status-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #10b981;
-        }
-        .parking-pulse-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #10b981;
-            box-shadow: 0 0 10px #10b981;
-            animation: pulseGlow 1.8s infinite;
-        }
-        .parking-live-zone-code {
-            font-size: 0.82rem;
-            color: var(--color-text-muted);
-            font-family: monospace;
-            background: var(--color-surface);
-            padding: 0.25rem 0.6rem;
-            border-radius: 6px;
-            border: 1px solid var(--color-border);
-        }
-        .parking-timer-big {
-            font-size: clamp(3.2rem, 5.5vw, 4.2rem);
-            font-family: 'Clash Display', sans-serif;
-            font-weight: 700;
-            color: var(--color-text);
-            text-align: center;
             line-height: 1;
-            margin: 0.5rem 0 0.85rem 0;
-            letter-spacing: 0.02em;
-        }
-        .parking-progress-bar-wrap {
-            width: 100%;
-            height: 8px;
-            background: var(--color-surface-offset);
-            border-radius: 999px;
-            overflow: hidden;
-            margin-bottom: 1.25rem;
-        }
-        .parking-progress-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #10b981, #2ab8c8);
-            width: 97%;
-            border-radius: 999px;
-            transition: width 1s linear;
-        }
-        .parking-notifs-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 14px;
-            padding: 0.85rem 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .parking-notif-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.82rem;
-            color: var(--color-text-muted);
-        }
-        .parking-notif-item i {
-            color: var(--color-primary);
-            flex-shrink: 0;
-        }
-        .parking-sim-actions {
-            display: flex;
-            gap: 0.75rem;
-        }
-        @media (max-width: 500px) {
-            .parking-sim-actions {
-                flex-direction: column;
-            }
-        }
-        .btn-parking-extend {
-            flex: 1;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
-            border: 1px solid var(--color-primary);
-            background: var(--color-primary-transparent);
-            color: var(--color-primary);
-            font-weight: 600;
-            font-size: 0.88rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-        .btn-parking-extend:hover {
-            background: var(--color-primary);
-            color: #fff;
-        }
-        .btn-parking-stop {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
-            border: 1px solid var(--color-border);
-            background: transparent;
-            color: var(--color-text-muted);
-            font-weight: 500;
-            font-size: 0.88rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-        .btn-parking-stop:hover {
-            border-color: #ef4444;
-            color: #ef4444;
         }
 
         /* --- FAQ Category Filter Tabs --- */
@@ -3755,16 +3455,16 @@
                 <div class="nav-actions">
                     <div class="lang-dropdown" id="langDropdown">
                         <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select Language">
-                            <span id="lang-flag" style="font-size:1.1rem;line-height:1;">&#127468;&#127463;</span>
+                            <span id="lang-flag"><svg class="lang-flag-svg" width="20" height="15" viewBox="0 0 640 480" aria-hidden="true"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/><path fill="#C8102E" d="m424 288 216 153v39h-40L380 326l44-38zM640 0v10L446 154l44 31L640 40V0zM0 480v-10l194-144-44-31L0 440v40zM216 192 0 39V0h40l220 154-44 38z"/><path fill="#FFF" d="M240 0h160v480H240zM0 160h640v160H0z"/><path fill="#C8102E" d="M280 0h80v480h-80zM0 200h640v80H0z"/></svg></span>
                             <span id="lang-code">EN</span>
                             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                         </button>
                         <div class="lang-dropdown-menu" id="langMenu">
                             <button class="lang-option active" id="opt-en" onclick="selectLanguage('en')">
-                                <span class="flag">&#127468;&#127463;</span> English
+                                <span class="flag"><svg class="lang-flag-svg" width="20" height="15" viewBox="0 0 640 480" aria-hidden="true"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/><path fill="#C8102E" d="m424 288 216 153v39h-40L380 326l44-38zM640 0v10L446 154l44 31L640 40V0zM0 480v-10l194-144-44-31L0 440v40zM216 192 0 39V0h40l220 154-44 38z"/><path fill="#FFF" d="M240 0h160v480H240zM0 160h640v160H0z"/><path fill="#C8102E" d="M280 0h80v480h-80zM0 200h640v80H0z"/></svg></span> English
                             </button>
                             <button class="lang-option" id="opt-sr" onclick="selectLanguage('sr')">
-                                <span class="flag">&#127479;&#127480;</span> Srpski
+                                <span class="flag"><svg class="lang-flag-svg" width="20" height="15" viewBox="0 0 640 480" aria-hidden="true"><path fill="#c6363c" d="M0 0h640v160H0z"/><path fill="#0c4076" d="M0 160h640v160H0z"/><path fill="#ffffff" d="M0 320h640v160H0z"/><g transform="translate(140, 80) scale(0.7)"><path fill="#c6363c" stroke="#ffffff" stroke-width="8" d="M50 70c0 110 90 160 90 160s90-50 90-160V20H50v50z"/><path stroke="#ffffff" stroke-width="14" d="M140 40v130M95 100h90"/><circle cx="115" cy="75" r="8" fill="#ffd700"/><circle cx="165" cy="75" r="8" fill="#ffd700"/><circle cx="115" cy="125" r="8" fill="#ffd700"/><circle cx="165" cy="125" r="8" fill="#ffd700"/><path fill="#ffd700" d="M110 0h60l-10 25h-40z"/></g></svg></span> Srpski
                             </button>
                         </div>
                     </div>
@@ -3844,7 +3544,6 @@
                         </div>
                         <span class="trust-divider">•</span>
                         <div class="trust-item">
-                            <i data-lucide="sparkles" size="14"></i>
                             <span data-i18n="trust_noads">Zero Ads</span>
                         </div>
                     </div>
@@ -4255,108 +3954,6 @@
                             <h4 data-i18n="chip_expenses_title">General Expenses</h4>
                             <p data-i18n="chip_expenses_desc">Registration fees, car cosmetics, accessories</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Interactive SMS Parking Serbia Simulator -->
-        <section id="parking-simulator" class="container section-padding" style="padding-top: 2rem; padding-bottom: 2rem;">
-            <div class="parking-demo-card reveal">
-                <div class="parking-demo-controls">
-                    <span class="parking-demo-badge"><i data-lucide="sparkles" size="14"></i> <span data-i18n="parking_sim_badge">Interactive Demo</span></span>
-                    <h2 class="clash parking-demo-title" data-i18n="parking_sim_title">Test 1-Tap SMS Parking Serbia</h2>
-                    <p class="parking-demo-desc" data-i18n="parking_sim_desc">Choose any Serbian city and parking zone to experience how carFlo simplifies parking, eliminates typing mistakes, and alerts you before expiration.</p>
-
-                    <!-- City Selector -->
-                    <div class="parking-select-group">
-                        <label for="parkingCitySelect" class="parking-select-label">
-                            <i data-lucide="map-pin" size="16"></i>
-                            <span data-i18n="parking_sim_city_label">Select City:</span>
-                        </label>
-                        <select id="parkingCitySelect" class="parking-city-select" onchange="onParkingCityChange(this.value)">
-                            <option value="beograd">Beograd (Belgrade)</option>
-                            <option value="novisad">Novi Sad</option>
-                            <option value="nis">Niš</option>
-                            <option value="kragujevac">Kragujevac</option>
-                            <option value="subotica">Subotica</option>
-                            <option value="cacak">Čačak</option>
-                            <option value="pancevo">Pančevo</option>
-                            <option value="zrenjanin">Zrenjanin</option>
-                            <option value="krusevac">Kruševac</option>
-                        </select>
-                    </div>
-
-                    <!-- Zones Grid -->
-                    <div class="parking-select-group">
-                        <span class="parking-select-label">
-                            <i data-lucide="grid" size="16"></i>
-                            <span data-i18n="parking_sim_zone_label">Select Parking Zone:</span>
-                        </span>
-                        <div class="parking-zones-grid" id="parkingZonesContainer">
-                            <!-- Populated dynamically via JS -->
-                        </div>
-                    </div>
-
-                    <!-- Simulated License Plate Row -->
-                    <div class="parking-select-group">
-                        <span class="parking-select-label">
-                            <i data-lucide="car" size="16"></i>
-                            <span data-i18n="parking_sim_plate_label">Simulated Vehicle:</span>
-                        </span>
-                        <div class="parking-plate-badge-row">
-                            <div class="sim-license-plate">
-                                <span class="plate-country-badge">SRB</span>
-                                <span id="simPlateText">BG • 742-CF</span>
-                            </div>
-                            <button type="button" class="btn-send-sms-demo" id="btnSendDemoSms" onclick="startParkingDemo()">
-                                <i data-lucide="send" size="16"></i>
-                                <span data-i18n="parking_sim_btn_send">Send SMS & Start Timer</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Simulated Live Phone / Parking Ticket -->
-                <div class="parking-live-card">
-                    <div>
-                        <div class="parking-live-header">
-                            <span class="parking-status-tag">
-                                <span class="parking-pulse-dot"></span>
-                                <span id="parkingStatusText" data-i18n="parking_sim_active_status">Active Parking</span>
-                            </span>
-                            <span class="parking-live-zone-code" id="parkingLiveCode">SMS: 9111 • Zona 1</span>
-                        </div>
-
-                        <div class="text-center">
-                            <span class="text-muted" style="font-size: 0.85rem;" data-i18n="parking_sim_time_left">Time Remaining</span>
-                            <div class="parking-timer-big" id="parkingTimerDisplay">59:45</div>
-                        </div>
-
-                        <div class="parking-progress-bar-wrap">
-                            <div class="parking-progress-bar-fill" id="parkingProgressFill"></div>
-                        </div>
-
-                        <div class="parking-notifs-info">
-                            <div class="parking-notif-item">
-                                <i data-lucide="bell" size="16"></i>
-                                <span data-i18n="parking_sim_notif_15">Smart reminder scheduled for 15 minutes prior</span>
-                            </div>
-                            <div class="parking-notif-item">
-                                <i data-lucide="alert-circle" size="16"></i>
-                                <span data-i18n="parking_sim_notif_5">Urgent alarm scheduled for 5 minutes prior</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="parking-sim-actions">
-                        <button type="button" class="btn-parking-extend" onclick="extendParkingDemo()">
-                            <i data-lucide="plus-circle" size="16"></i>
-                            <span data-i18n="parking_sim_btn_extend">+1h Extend Parking</span>
-                        </button>
-                        <button type="button" class="btn-parking-stop" onclick="stopParkingDemo()">
-                            <span data-i18n="parking_sim_btn_stop">End Parking</span>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -5656,21 +5253,6 @@
                 calc_preset_diesel: "Eurodiesel",
                 calc_preset_ev: "EV / Hybrid",
 
-                // SMS Parking Simulator
-                parking_sim_badge: "Interactive Demo",
-                parking_sim_title: "Test 1-Tap SMS Parking Serbia",
-                parking_sim_desc: "Choose any Serbian city and parking zone to experience how carFlo simplifies parking, eliminates typing mistakes, and alerts you before expiration.",
-                parking_sim_city_label: "Select City:",
-                parking_sim_zone_label: "Select Parking Zone:",
-                parking_sim_plate_label: "Simulated Vehicle:",
-                parking_sim_active_status: "Active Parking",
-                parking_sim_time_left: "Time Remaining",
-                parking_sim_notif_15: "Smart reminder scheduled for 15 minutes prior",
-                parking_sim_notif_5: "Urgent alarm scheduled for 5 minutes prior",
-                parking_sim_btn_send: "Send SMS & Start Timer",
-                parking_sim_btn_extend: "+1h Extend Parking",
-                parking_sim_btn_stop: "End Parking",
-
                 // Android Waitlist Modal
                 android_modal_title: "carFlo for Android is Coming!",
                 android_modal_desc: "We are finalizing the native Google Play release. Join our early driver beta waitlist to get notified the minute it goes live.",
@@ -5995,21 +5577,6 @@
                 calc_preset_diesel: "Evrodizel",
                 calc_preset_ev: "Hibrid / EV",
 
-                // SMS Parking Simulator
-                parking_sim_badge: "Interaktivni Demo",
-                parking_sim_title: "Isprobaj SMS parking u Srbiji",
-                parking_sim_desc: "Izaberi grad i parking zonu i doživi kako carFlo eliminiše pogrešno kucanje tablica, pamti zone i javlja ti pre isteka.",
-                parking_sim_city_label: "Izaberi grad:",
-                parking_sim_zone_label: "Izaberi parking zonu:",
-                parking_sim_plate_label: "Vozilo za simulaciju:",
-                parking_sim_active_status: "Parking je aktivan",
-                parking_sim_time_left: "Preostalo vreme",
-                parking_sim_notif_15: "Pametno upozorenje zakazano 15 min pre isteka",
-                parking_sim_notif_5: "Hitno obaveštenje zakazano 5 min pre isteka",
-                parking_sim_btn_send: "Pošalji SMS & Pokreni tajmer",
-                parking_sim_btn_extend: "+1h Produži parking",
-                parking_sim_btn_stop: "Završi parking",
-
                 // Android Modal
                 android_modal_title: "carFlo za Android stiže uskoro!",
                 android_modal_desc: "Završavamo rad na zvaničnoj Google Play verziji. Upiši svoj email i javićemo ti čim zatvorena beta bude spremna za preuzimanje.",
@@ -6072,6 +5639,9 @@
             }
         };
 
+        const flagSvgEn = '<svg class="lang-flag-svg" width="20" height="15" viewBox="0 0 640 480" aria-hidden="true"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/><path fill="#C8102E" d="m424 288 216 153v39h-40L380 326l44-38zM640 0v10L446 154l44 31L640 40V0zM0 480v-10l194-144-44-31L0 440v40zM216 192 0 39V0h40l220 154-44 38z"/><path fill="#FFF" d="M240 0h160v480H240zM0 160h640v160H0z"/><path fill="#C8102E" d="M280 0h80v480h-80zM0 200h640v80H0z"/></svg>';
+        const flagSvgSr = '<svg class="lang-flag-svg" width="20" height="15" viewBox="0 0 640 480" aria-hidden="true"><path fill="#c6363c" d="M0 0h640v160H0z"/><path fill="#0c4076" d="M0 160h640v160H0z"/><path fill="#ffffff" d="M0 320h640v160H0z"/><g transform="translate(140, 80) scale(0.7)"><path fill="#c6363c" stroke="#ffffff" stroke-width="8" d="M50 70c0 110 90 160 90 160s90-50 90-160V20H50v50z"/><path stroke="#ffffff" stroke-width="14" d="M140 40v130M95 100h90"/><circle cx="115" cy="75" r="8" fill="#ffd700"/><circle cx="165" cy="75" r="8" fill="#ffd700"/><circle cx="115" cy="125" r="8" fill="#ffd700"/><circle cx="165" cy="125" r="8" fill="#ffd700"/><path fill="#ffd700" d="M110 0h60l-10 25h-40z"/></g></svg>';
+
         let currentLang = localStorage.getItem('preferredLang') || 'en';
 
         function updateLanguage(lang) {
@@ -6090,7 +5660,7 @@
             // Update dropdown UI
             const flagEl = document.getElementById('lang-flag');
             const codeEl = document.getElementById('lang-code');
-            if (flagEl) flagEl.innerHTML = lang === 'en' ? '&#127468;&#127463;' : '&#127479;&#127480;';
+            if (flagEl) flagEl.innerHTML = lang === 'en' ? flagSvgEn : flagSvgSr;
             if (codeEl) codeEl.textContent = lang.toUpperCase();
             document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
             const activeOpt = document.getElementById('opt-' + lang);
@@ -6099,9 +5669,6 @@
             // Sync calculator language and currency
             if (window.syncCalculatorLanguage) {
                 window.syncCalculatorLanguage();
-            }
-            if (typeof updateParkingDisplay === 'function') {
-                updateParkingDisplay();
             }
             lucide.createIcons();
         }
@@ -6355,145 +5922,6 @@
             }
         });
 
-        // --- Interactive SMS Parking Serbia Simulator Logic ---
-        const parkingData = {
-            beograd: [
-                { name: "Zona A", code: "9114", time: "30 min", price: "100 RSD", dot: "#a855f7", durationSec: 1800 },
-                { name: "Zona 1 (Crvena)", code: "9111", time: "60 min", price: "65 RSD", dot: "#ef4444", durationSec: 3600 },
-                { name: "Zona 2 (Žuta)", code: "9112", time: "120 min", price: "53 RSD", dot: "#f59e0b", durationSec: 7200 },
-                { name: "Zona 3 (Zelena)", code: "9113", time: "180 min", price: "45 RSD", dot: "#10b981", durationSec: 10800 },
-                { name: "Opšta (Plava)", code: "9119", time: "Bez limita", price: "35 RSD/h", dot: "#3b82f6", durationSec: 3600 }
-            ],
-            novisad: [
-                { name: "Crvena Zona", code: "8211", time: "120 min", price: "60 RSD", dot: "#ef4444", durationSec: 7200 },
-                { name: "Plava Zona", code: "8212", time: "Bez limita", price: "50 RSD/h", dot: "#3b82f6", durationSec: 3600 },
-                { name: "Bela Zona", code: "8218", time: "Dnevna", price: "100 RSD", dot: "#94a3b8", durationSec: 28800 }
-            ],
-            nis: [
-                { name: "Ekstra Zona", code: "9180", time: "60 min", price: "90 RSD", dot: "#a855f7", durationSec: 3600 },
-                { name: "Zona 1 (Crvena)", code: "9181", time: "120 min", price: "60 RSD", dot: "#ef4444", durationSec: 7200 },
-                { name: "Zona 2 (Zelena)", code: "9182", time: "180 min", price: "45 RSD", dot: "#10b981", durationSec: 10800 }
-            ],
-            kragujevac: [
-                { name: "Zona 0", code: "8340", time: "180 min", price: "60 RSD", dot: "#a855f7", durationSec: 10800 },
-                { name: "Zona 1", code: "8341", time: "120 min", price: "50 RSD", dot: "#ef4444", durationSec: 7200 },
-                { name: "Zona 2", code: "8342", time: "Bez limita", price: "40 RSD/h", dot: "#10b981", durationSec: 3600 }
-            ],
-            subotica: [
-                { name: "Crvena Zona", code: "9241", time: "120 min", price: "55 RSD", dot: "#ef4444", durationSec: 7200 },
-                { name: "Žuta Zona", code: "9242", time: "180 min", price: "45 RSD", dot: "#f59e0b", durationSec: 10800 },
-                { name: "Zelena Zona", code: "9243", time: "Bez limita", price: "35 RSD/h", dot: "#10b981", durationSec: 3600 }
-            ],
-            cacak: [
-                { name: "Zona 1", code: "8321", time: "120 min", price: "50 RSD", dot: "#ef4444", durationSec: 7200 },
-                { name: "Zona 2", code: "8322", time: "Bez limita", price: "40 RSD/h", dot: "#10b981", durationSec: 3600 }
-            ],
-            pancevo: [
-                { name: "Zona 1", code: "8131", time: "120 min", price: "50 RSD", dot: "#ef4444", durationSec: 7200 },
-                { name: "Zona 2", code: "8132", time: "Bez limita", price: "40 RSD/h", dot: "#10b981", durationSec: 3600 }
-            ],
-            zrenjanin: [
-                { name: "Crvena Zona", code: "8231", time: "120 min", price: "50 RSD", dot: "#ef4444", durationSec: 7200 },
-                { name: "Žuta Zona", code: "8232", time: "Bez limita", price: "40 RSD/h", dot: "#f59e0b", durationSec: 3600 }
-            ],
-            krusevac: [
-                { name: "Zona 1", code: "8371", time: "120 min", price: "50 RSD", dot: "#ef4444", durationSec: 7200 },
-                { name: "Zona 2", code: "8372", time: "Bez limita", price: "40 RSD/h", dot: "#10b981", durationSec: 3600 }
-            ]
-        };
-
-        let selectedCity = 'beograd';
-        let selectedZoneIndex = 1; // Default Zona 1 (9111)
-        let parkingRemainingSeconds = 3585; // 59m 45s default
-        let parkingTotalSeconds = 3600;
-        let parkingTimerInterval = null;
-
-        function renderParkingZones() {
-            const container = document.getElementById('parkingZonesContainer');
-            if (!container) return;
-            const zones = parkingData[selectedCity] || [];
-            container.innerHTML = zones.map((z, idx) => `
-                <button type="button" class="parking-zone-btn ${idx === selectedZoneIndex ? 'active' : ''}" onclick="selectParkingZone(${idx})">
-                    <span class="zone-name">
-                        <span class="zone-color-dot" style="background: ${z.dot};"></span>
-                        ${z.name}
-                    </span>
-                    <span class="zone-details">SMS: ${z.code} • ${z.price}</span>
-                </button>
-            `).join('');
-            updateParkingDisplay();
-        }
-
-        function onParkingCityChange(city) {
-            selectedCity = city;
-            selectedZoneIndex = 0;
-            renderParkingZones();
-        }
-
-        function selectParkingZone(idx) {
-            selectedZoneIndex = idx;
-            document.querySelectorAll('.parking-zone-btn').forEach((btn, i) => {
-                btn.classList.toggle('active', i === idx);
-            });
-            updateParkingDisplay();
-        }
-
-        function updateParkingDisplay() {
-            const zone = (parkingData[selectedCity] || [])[selectedZoneIndex];
-            if (!zone) return;
-            const liveCode = document.getElementById('parkingLiveCode');
-            if (liveCode) liveCode.textContent = `SMS: ${zone.code} • ${zone.name}`;
-        }
-
-        function formatTimer(sec) {
-            const m = Math.floor(sec / 60);
-            const s = sec % 60;
-            return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-        }
-
-        function startParkingDemo() {
-            const zone = (parkingData[selectedCity] || [])[selectedZoneIndex];
-            if (!zone) return;
-            parkingTotalSeconds = zone.durationSec;
-            parkingRemainingSeconds = zone.durationSec;
-            clearInterval(parkingTimerInterval);
-            updateTimerUI();
-            showToast(currentLang === 'sr' ? `SMS poslat na ${zone.code}! Tajmer pokrenut.` : `SMS sent to ${zone.code}! Timer started.`);
-            parkingTimerInterval = setInterval(() => {
-                if (parkingRemainingSeconds > 0) {
-                    parkingRemainingSeconds--;
-                    updateTimerUI();
-                } else {
-                    clearInterval(parkingTimerInterval);
-                }
-            }, 1000);
-        }
-
-        function extendParkingDemo() {
-            parkingRemainingSeconds += 3600;
-            parkingTotalSeconds += 3600;
-            updateTimerUI();
-            showToast(currentLang === 'sr' ? '+1 sat dodat parking tajmeru!' : '+1 hour added to parking timer!');
-        }
-
-        function stopParkingDemo() {
-            clearInterval(parkingTimerInterval);
-            parkingRemainingSeconds = 0;
-            updateTimerUI();
-            showToast(currentLang === 'sr' ? 'Parking završen.' : 'Parking ended.');
-        }
-
-        function updateTimerUI() {
-            const timerDisplay = document.getElementById('parkingTimerDisplay');
-            const fill = document.getElementById('parkingProgressFill');
-            if (timerDisplay) timerDisplay.textContent = formatTimer(parkingRemainingSeconds);
-            if (fill) {
-                const pct = Math.max(0, Math.min(100, (parkingRemainingSeconds / parkingTotalSeconds) * 100));
-                fill.style.width = `${pct}%`;
-                fill.style.background = pct < 25 ? 'linear-gradient(90deg, #ef4444, #f59e0b)' : 'linear-gradient(90deg, #10b981, #2ab8c8)';
-            }
-        }
-
         // --- Fuel Calculator Presets ---
         const fuelPresets = {
             bmb95: { sr: { price: 192, consumption: 7.2 }, en: { price: 1.63, consumption: 7.2 } },
@@ -6681,9 +6109,6 @@
 
         // Initialize calculator
         initFuelCalculator();
-
-        // Initialize parking simulator
-        renderParkingZones();
 
         // Initialize privacy pill
         initPrivacyPill();
