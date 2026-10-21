@@ -112,6 +112,7 @@
     <link rel="icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" href="./favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="manifest" href="./site.webmanifest">
 
     <!-- Preconnect to Fontshare -->
     <link rel="preconnect" href="https://api.fontshare.com">
@@ -527,13 +528,38 @@
             padding: 0 1rem;
             box-sizing: border-box;
             user-select: none;
-            cursor: default;
+            cursor: pointer;
             transition: var(--transition);
         }
 
         .google-play-badge-custom:hover {
-            border-color: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.5);
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .btn-share-hero {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            height: 52px;
+            padding: 0 1.25rem;
+            border-radius: 10px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-text);
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .btn-share-hero:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--color-primary-transparent);
         }
 
         .google-play-svg {
@@ -737,6 +763,90 @@
 
         .hero-phone-wrap .phone-frame:hover {
             transform: translateY(-6px);
+        }
+
+        #heroPhoneImg {
+            transition: opacity 0.22s ease-in-out;
+        }
+
+        /* Hero Screen Switcher */
+        .hero-screen-switcher-wrap {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 1.4rem;
+            position: relative;
+            z-index: 6;
+        }
+
+        .hero-screen-switcher {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px;
+            background: rgba(22, 23, 27, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+            max-width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .hero-screen-switcher::-webkit-scrollbar {
+            display: none;
+        }
+
+        [data-theme="light"] .hero-screen-switcher {
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .hero-screen-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.45rem 0.95rem;
+            border-radius: 999px;
+            border: none;
+            background: transparent;
+            color: var(--color-text-muted);
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .hero-screen-tab:hover {
+            color: var(--color-text);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        [data-theme="light"] .hero-screen-tab:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .hero-screen-tab.active {
+            background: var(--color-primary);
+            color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 2px 10px var(--color-primary-transparent);
+        }
+
+        .hero-screen-tab i {
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 600px) {
+            .hero-screen-tab {
+                padding: 0.38rem 0.65rem;
+                font-size: 0.74rem;
+                gap: 4px;
+            }
         }
 
         /* Floating Cards */
@@ -2593,6 +2703,673 @@
             text-decoration: underline;
         }
 
+        /* --- Android Waitlist Modal --- */
+        .android-modal-card {
+            max-width: 440px;
+        }
+        .android-modal-badge-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+        .modal-input-group {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        .modal-input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-muted);
+            pointer-events: none;
+        }
+        .modal-text-input {
+            width: 100%;
+            padding: 0.85rem 1rem 0.85rem 2.85rem;
+            border-radius: 14px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-text);
+            font-size: 0.95rem;
+            outline: none;
+            box-sizing: border-box;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .modal-text-input:focus {
+            border-color: var(--color-primary);
+        }
+        .modal-submit-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 0.85rem 1.5rem;
+            font-size: 0.95rem;
+        }
+        .modal-success-box {
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            color: #10b981;
+            padding: 1rem 1.25rem;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-align: left;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-top: 1rem;
+        }
+        .modal-micro-trust {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            margin-top: 1rem;
+        }
+
+        /* --- PDF Service Book Preview Modal & Button --- */
+        .btn-sample-pdf {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface-2);
+            color: var(--color-text);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+        .btn-sample-pdf:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            transform: translateY(-1px);
+        }
+        .pdf-table-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-decoration: none;
+            margin-left: 0.5rem;
+        }
+        .pdf-table-link:hover {
+            text-decoration: underline;
+        }
+        .pdf-modal-card {
+            max-width: 680px;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: left;
+            padding: 2.25rem;
+        }
+        .pdf-doc-sheet {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.05);
+            margin: 1.25rem 0;
+        }
+        .pdf-sheet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px dashed var(--color-border);
+            margin-bottom: 1.25rem;
+            gap: 1rem;
+        }
+        .pdf-sheet-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--color-text);
+        }
+        .pdf-verified-stamp {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            border: 1.5px solid #10b981;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+            padding: 0.3rem 0.7rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .pdf-vehicle-card {
+            background: var(--color-surface-2);
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.85rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--color-border);
+        }
+        .pdf-v-field {
+            display: flex;
+            flex-direction: column;
+        }
+        .pdf-v-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--color-text-muted);
+        }
+        .pdf-v-val {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-top: 0.15rem;
+        }
+        .pdf-table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+        }
+        .pdf-entries-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+        .pdf-entries-table th {
+            text-align: left;
+            padding: 0.7rem 0.85rem;
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            font-weight: 600;
+            border-bottom: 1px solid var(--color-border);
+            white-space: nowrap;
+        }
+        .pdf-entries-table td {
+            padding: 0.75rem 0.85rem;
+            border-bottom: 1px solid var(--color-border);
+            color: var(--color-text);
+            vertical-align: middle;
+        }
+        .pdf-entries-table tr:last-child td {
+            border-bottom: none;
+        }
+        .pdf-doc-footer-metrics {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px dashed var(--color-border);
+        }
+        .pdf-metric-item {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+        .pdf-metric-val {
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        .pdf-seal-box {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-size: 0.76rem;
+            color: var(--color-text-muted);
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            background: var(--color-surface-2);
+            border-radius: 10px;
+        }
+
+        /* --- Interactive SMS Parking Demo Widget --- */
+        .parking-demo-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 28px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 2.5rem;
+            position: relative;
+        }
+        @media (max-width: 920px) {
+            .parking-demo-card {
+                grid-template-columns: 1fr;
+                padding: 1.75rem;
+                gap: 2rem;
+            }
+        }
+        .parking-demo-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        .parking-demo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.12);
+            padding: 0.3rem 0.85rem;
+            border-radius: 999px;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            width: fit-content;
+        }
+        .parking-demo-title {
+            font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+            line-height: 1.2;
+            margin: 0;
+        }
+        .parking-demo-desc {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .parking-select-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .parking-select-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-text);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .parking-city-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 14px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface-2);
+            color: var(--color-text);
+            font-size: 0.95rem;
+            font-weight: 600;
+            outline: none;
+            font-family: inherit;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .parking-city-select:focus {
+            border-color: var(--color-primary);
+        }
+        .parking-zones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.65rem;
+        }
+        .parking-zone-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0.75rem 0.9rem;
+            border-radius: 14px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface-2);
+            color: var(--color-text);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-family: inherit;
+        }
+        .parking-zone-btn:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+        .parking-zone-btn.active {
+            border-color: var(--color-primary);
+            background: var(--color-primary-transparent);
+            box-shadow: 0 4px 14px rgba(42, 184, 200, 0.18);
+        }
+        .zone-name {
+            font-weight: 600;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+        .zone-color-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        .zone-details {
+            font-size: 0.76rem;
+            color: var(--color-text-muted);
+            margin-top: 0.25rem;
+        }
+        .parking-plate-badge-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.25rem;
+        }
+        .sim-license-plate {
+            display: inline-flex;
+            align-items: center;
+            background: #ffffff;
+            color: #111827;
+            border: 2px solid #1e293b;
+            border-radius: 8px;
+            padding: 0.35rem 0.75rem;
+            font-family: 'Clash Display', monospace, sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0.1em;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+        .plate-country-badge {
+            background: #1e40af;
+            color: #ffffff;
+            font-size: 0.65rem;
+            padding: 0.2rem 0.35rem;
+            border-radius: 4px;
+            margin-right: 0.5rem;
+            letter-spacing: 0;
+            font-weight: 700;
+        }
+        .btn-send-sms-demo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.9rem 1.4rem;
+            border-radius: 14px;
+            background: var(--color-primary);
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            box-shadow: 0 4px 16px var(--color-primary-transparent);
+        }
+        .btn-send-sms-demo:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.08);
+        }
+        .parking-live-card {
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 22px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        .parking-live-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+        .parking-status-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #10b981;
+        }
+        .parking-pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+            animation: pulseGlow 1.8s infinite;
+        }
+        .parking-live-zone-code {
+            font-size: 0.82rem;
+            color: var(--color-text-muted);
+            font-family: monospace;
+            background: var(--color-surface);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            border: 1px solid var(--color-border);
+        }
+        .parking-timer-big {
+            font-size: clamp(3.2rem, 5.5vw, 4.2rem);
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 700;
+            color: var(--color-text);
+            text-align: center;
+            line-height: 1;
+            margin: 0.5rem 0 0.85rem 0;
+            letter-spacing: 0.02em;
+        }
+        .parking-progress-bar-wrap {
+            width: 100%;
+            height: 8px;
+            background: var(--color-surface-offset);
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+        }
+        .parking-progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #2ab8c8);
+            width: 97%;
+            border-radius: 999px;
+            transition: width 1s linear;
+        }
+        .parking-notifs-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            padding: 0.85rem 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .parking-notif-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            color: var(--color-text-muted);
+        }
+        .parking-notif-item i {
+            color: var(--color-primary);
+            flex-shrink: 0;
+        }
+        .parking-sim-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        @media (max-width: 500px) {
+            .parking-sim-actions {
+                flex-direction: column;
+            }
+        }
+        .btn-parking-extend {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--color-primary);
+            background: var(--color-primary-transparent);
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-parking-extend:hover {
+            background: var(--color-primary);
+            color: #fff;
+        }
+        .btn-parking-stop {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            background: transparent;
+            color: var(--color-text-muted);
+            font-weight: 500;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-parking-stop:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        /* --- FAQ Category Filter Tabs --- */
+        .faq-filter-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .faq-filter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.5rem 1.15rem;
+            border-radius: 999px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-text-muted);
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .faq-filter-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-text);
+        }
+        .faq-filter-btn.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 2px 10px var(--color-primary-transparent);
+        }
+        .faq-item.faq-hidden {
+            display: none !important;
+        }
+
+        /* --- Toast Notification --- */
+        .carflo-toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #111827;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 999px;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 3000;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .carflo-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* --- Privacy Floating Pill --- */
+        .privacy-floating-pill {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 1500;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        @media (max-width: 600px) {
+            .privacy-floating-pill {
+                display: none;
+            }
+        }
+        .privacy-pill-inner {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.5rem 0.9rem;
+            background: rgba(22, 23, 27, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+            color: var(--color-text);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        [data-theme="light"] .privacy-pill-inner {
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+        .privacy-shield-icon {
+            color: #10b981;
+            display: flex;
+            align-items: center;
+        }
+        .privacy-pill-dismiss {
+            background: transparent;
+            border: none;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            margin-left: 0.25rem;
+            transition: color 0.15s;
+        }
+        .privacy-pill-dismiss:hover {
+            color: var(--color-text);
+        }
+
         /* --- Calculator Section --- */
         .calc-section {
             position: relative;
@@ -2643,8 +3420,60 @@
         .calc-controls {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.25rem;
             justify-content: center;
+        }
+        .calc-presets-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-bottom: 0.25rem;
+            padding: 0.85rem 1.15rem;
+            background: var(--color-surface-2);
+            border: 1px dashed var(--color-border);
+            border-radius: 16px;
+        }
+        .calc-presets-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .calc-presets-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }
+        .calc-preset-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-text-muted);
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .calc-preset-chip:hover {
+            border-color: var(--color-primary);
+            color: var(--color-text);
+            transform: translateY(-1px);
+        }
+        .calc-preset-chip.active {
+            background: var(--color-primary-transparent);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            font-weight: 600;
         }
         .calc-control-group {
             background: var(--color-surface-2);
@@ -2970,7 +3799,7 @@
                             <i data-lucide="qr-code" size="18"></i>
                             <span data-i18n="btn_qr_code">Scan for iPhone</span>
                         </button>
-                        <div class="google-play-badge-custom" aria-label="Google Play Coming Soon">
+                        <div class="google-play-badge-custom" role="button" tabindex="0" onclick="openAndroidModal()" onkeydown="if(event.key==='Enter')openAndroidModal()" aria-label="Google Play Coming Soon - Join Beta Waitlist">
                             <svg class="google-play-svg" width="22" height="24" viewBox="0 0 22 24" fill="none">
                                 <path d="M1.3 0.6C1 0.9 0.8 1.4 0.8 2.1V21.9C0.8 22.6 1 23.1 1.3 23.4L1.4 23.5L12.5 12.4V12.1L1.4 0.5L1.3 0.6Z" fill="url(#gp_g1)"/>
                                 <path d="M16.2 16.1L12.5 12.4V12.1L16.2 8.4L16.3 8.5L20.7 11C22 11.7 22 12.8 20.7 13.5L16.3 16L16.2 16.1Z" fill="url(#gp_g2)"/>
@@ -2989,6 +3818,10 @@
                             </div>
                             <span class="gp-pill" data-i18n="badge_googleplay_span">Coming Soon</span>
                         </div>
+                        <button type="button" class="btn-share-hero" onclick="shareCarFlo()" aria-label="Share carFlo">
+                            <i data-lucide="share-2" size="18"></i>
+                            <span data-i18n="btn_share_hero">Share</span>
+                        </button>
                     </div>
 
                     <!-- Trust Bar / Social Proof -->
@@ -3041,13 +3874,35 @@
                             <span class="phone-btn phone-btn-power" aria-hidden="true"></span>
                             <span class="phone-speaker" aria-hidden="true"></span>
                             <div class="phone-screen">
-                                <img src="./screen-dashboard-new.png" alt="carFlo App Dashboard" loading="eager">
+                                <img src="./screen-dashboard-new.png" id="heroPhoneImg" alt="carFlo App Dashboard" loading="eager">
                                 <div class="dynamic-island" aria-hidden="true">
                                     <span class="island-sensor"></span>
                                     <span class="island-camera"></span>
                                 </div>
                                 <div class="phone-glass-glare" aria-hidden="true"></div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Screen Switcher Controls -->
+                    <div class="hero-screen-switcher-wrap">
+                        <div class="hero-screen-switcher" role="tablist" aria-label="Interactive App Screen Switcher">
+                            <button type="button" class="hero-screen-tab active" data-screen="dashboard" onclick="switchHeroScreen('dashboard', this)" role="tab" aria-selected="true">
+                                <i data-lucide="layout-dashboard" size="14"></i>
+                                <span data-i18n="hero_tab_dashboard">Dashboard</span>
+                            </button>
+                            <button type="button" class="hero-screen-tab" data-screen="logbook" onclick="switchHeroScreen('logbook', this)" role="tab" aria-selected="false">
+                                <i data-lucide="book-open" size="14"></i>
+                                <span data-i18n="hero_tab_logbook">Logbook</span>
+                            </button>
+                            <button type="button" class="hero-screen-tab" data-screen="stats" onclick="switchHeroScreen('stats', this)" role="tab" aria-selected="false">
+                                <i data-lucide="bar-chart-2" size="14"></i>
+                                <span data-i18n="hero_tab_stats">Statistics</span>
+                            </button>
+                            <button type="button" class="hero-screen-tab" data-screen="reminders" onclick="switchHeroScreen('reminders', this)" role="tab" aria-selected="false">
+                                <i data-lucide="bell" size="14"></i>
+                                <span data-i18n="hero_tab_reminders">Reminders</span>
+                            </button>
                         </div>
                     </div>
 
@@ -3105,6 +3960,10 @@
                     </div>
                     <h3 data-i18n="vp1_title">Never Lose an Invoice or Miss a Service</h3>
                     <p data-i18n="vp1_text">Your entire vehicle service history in one verified place. When selling your car, generate a certified PDF service book with a single tap to boost resale value.</p>
+                    <button type="button" class="btn-sample-pdf" onclick="openPdfPreviewModal()" style="margin-top: 1.1rem;">
+                        <i data-lucide="file-text" size="14"></i>
+                        <span data-i18n="btn_preview_pdf">View Sample Service Book</span>
+                    </button>
                 </div>
 
                 <div class="value-prop-card reveal">
@@ -3267,6 +4126,10 @@
                     <i data-lucide="file-check-2" class="feature-icon" size="28"></i>
                     <h3 data-i18n="feat_export_title">PDF Service Book & Excel Export</h3>
                     <p data-i18n="feat_export_text">Generate a certified PDF maintenance report that increases your car's resale value, plus full Excel (.XLSX) and CSV exports.</p>
+                    <button type="button" class="btn-sample-pdf" onclick="openPdfPreviewModal()" style="margin-top: 1.15rem;">
+                        <i data-lucide="eye" size="14"></i>
+                        <span data-i18n="btn_preview_pdf">View Sample Service Book</span>
+                    </button>
                 </div>
                 <div class="feature-card card-lg reveal">
                     <i data-lucide="cloud" class="feature-icon" size="28"></i>
@@ -3397,6 +4260,108 @@
             </div>
         </section>
 
+        <!-- Interactive SMS Parking Serbia Simulator -->
+        <section id="parking-simulator" class="container section-padding" style="padding-top: 2rem; padding-bottom: 2rem;">
+            <div class="parking-demo-card reveal">
+                <div class="parking-demo-controls">
+                    <span class="parking-demo-badge"><i data-lucide="sparkles" size="14"></i> <span data-i18n="parking_sim_badge">Interactive Demo</span></span>
+                    <h2 class="clash parking-demo-title" data-i18n="parking_sim_title">Test 1-Tap SMS Parking Serbia</h2>
+                    <p class="parking-demo-desc" data-i18n="parking_sim_desc">Choose any Serbian city and parking zone to experience how carFlo simplifies parking, eliminates typing mistakes, and alerts you before expiration.</p>
+
+                    <!-- City Selector -->
+                    <div class="parking-select-group">
+                        <label for="parkingCitySelect" class="parking-select-label">
+                            <i data-lucide="map-pin" size="16"></i>
+                            <span data-i18n="parking_sim_city_label">Select City:</span>
+                        </label>
+                        <select id="parkingCitySelect" class="parking-city-select" onchange="onParkingCityChange(this.value)">
+                            <option value="beograd">Beograd (Belgrade)</option>
+                            <option value="novisad">Novi Sad</option>
+                            <option value="nis">Niš</option>
+                            <option value="kragujevac">Kragujevac</option>
+                            <option value="subotica">Subotica</option>
+                            <option value="cacak">Čačak</option>
+                            <option value="pancevo">Pančevo</option>
+                            <option value="zrenjanin">Zrenjanin</option>
+                            <option value="krusevac">Kruševac</option>
+                        </select>
+                    </div>
+
+                    <!-- Zones Grid -->
+                    <div class="parking-select-group">
+                        <span class="parking-select-label">
+                            <i data-lucide="grid" size="16"></i>
+                            <span data-i18n="parking_sim_zone_label">Select Parking Zone:</span>
+                        </span>
+                        <div class="parking-zones-grid" id="parkingZonesContainer">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Simulated License Plate Row -->
+                    <div class="parking-select-group">
+                        <span class="parking-select-label">
+                            <i data-lucide="car" size="16"></i>
+                            <span data-i18n="parking_sim_plate_label">Simulated Vehicle:</span>
+                        </span>
+                        <div class="parking-plate-badge-row">
+                            <div class="sim-license-plate">
+                                <span class="plate-country-badge">SRB</span>
+                                <span id="simPlateText">BG • 742-CF</span>
+                            </div>
+                            <button type="button" class="btn-send-sms-demo" id="btnSendDemoSms" onclick="startParkingDemo()">
+                                <i data-lucide="send" size="16"></i>
+                                <span data-i18n="parking_sim_btn_send">Send SMS & Start Timer</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulated Live Phone / Parking Ticket -->
+                <div class="parking-live-card">
+                    <div>
+                        <div class="parking-live-header">
+                            <span class="parking-status-tag">
+                                <span class="parking-pulse-dot"></span>
+                                <span id="parkingStatusText" data-i18n="parking_sim_active_status">Active Parking</span>
+                            </span>
+                            <span class="parking-live-zone-code" id="parkingLiveCode">SMS: 9111 • Zona 1</span>
+                        </div>
+
+                        <div class="text-center">
+                            <span class="text-muted" style="font-size: 0.85rem;" data-i18n="parking_sim_time_left">Time Remaining</span>
+                            <div class="parking-timer-big" id="parkingTimerDisplay">59:45</div>
+                        </div>
+
+                        <div class="parking-progress-bar-wrap">
+                            <div class="parking-progress-bar-fill" id="parkingProgressFill"></div>
+                        </div>
+
+                        <div class="parking-notifs-info">
+                            <div class="parking-notif-item">
+                                <i data-lucide="bell" size="16"></i>
+                                <span data-i18n="parking_sim_notif_15">Smart reminder scheduled for 15 minutes prior</span>
+                            </div>
+                            <div class="parking-notif-item">
+                                <i data-lucide="alert-circle" size="16"></i>
+                                <span data-i18n="parking_sim_notif_5">Urgent alarm scheduled for 5 minutes prior</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="parking-sim-actions">
+                        <button type="button" class="btn-parking-extend" onclick="extendParkingDemo()">
+                            <i data-lucide="plus-circle" size="16"></i>
+                            <span data-i18n="parking_sim_btn_extend">+1h Extend Parking</span>
+                        </button>
+                        <button type="button" class="btn-parking-stop" onclick="stopParkingDemo()">
+                            <span data-i18n="parking_sim_btn_stop">End Parking</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="fuel-calculator" class="calc-section container section-padding">
             <div class="calc-header text-center reveal">
                 <span class="calc-pill" data-i18n="calc_pill">Live Simulator</span>
@@ -3406,6 +4371,28 @@
 
             <div class="calc-card-container reveal">
                 <div class="calc-controls">
+                    <!-- Fuel Presets Quick Picker -->
+                    <div class="calc-presets-container">
+                        <span class="calc-presets-title"><i data-lucide="sparkles" size="14"></i> <span data-i18n="calc_presets_title">Fuel Presets:</span></span>
+                        <div class="calc-presets-chips">
+                            <button type="button" class="calc-preset-chip active" data-preset="bmb95" onclick="applyFuelPreset('bmb95', this)">
+                                <i data-lucide="fuel" size="13"></i>
+                                <span>BMB 95</span>
+                            </button>
+                            <button type="button" class="calc-preset-chip" data-preset="diesel" onclick="applyFuelPreset('diesel', this)">
+                                <i data-lucide="fuel" size="13"></i>
+                                <span data-i18n="calc_preset_diesel">Eurodiesel</span>
+                            </button>
+                            <button type="button" class="calc-preset-chip" data-preset="lpg" onclick="applyFuelPreset('lpg', this)">
+                                <i data-lucide="flame" size="13"></i>
+                                <span>LPG / TNG</span>
+                            </button>
+                            <button type="button" class="calc-preset-chip" data-preset="ev" onclick="applyFuelPreset('ev', this)">
+                                <i data-lucide="zap" size="13"></i>
+                                <span data-i18n="calc_preset_ev">EV / Hybrid</span>
+                            </button>
+                        </div>
+                    </div>
                     <!-- Slider 1: Annual Mileage -->
                     <div class="calc-control-group">
                         <div class="calc-label-row">
@@ -3700,7 +4687,7 @@
                             <tr>
                                 <td><span class="table-feat-name"><i data-lucide="file-check-2" size="18"></i> <span data-i18n="t_row_pdf">PDF Service Book (for car sale)</span></span></td>
                                 <td><span class="table-status-cross">✕</span></td>
-                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_pdf_pro">Professional PDF Report</span></span></td>
+                                <td><span class="table-status-check"><i data-lucide="check" size="16"></i> <span data-i18n="t_val_pdf_pro">Professional PDF Report</span></span> <a href="javascript:void(0)" onclick="openPdfPreviewModal()" class="pdf-table-link"><i data-lucide="eye" size="13"></i> <span data-i18n="btn_preview_pdf">View Sample</span></a></td>
                             </tr>
                             <tr>
                                 <td><span class="table-feat-name"><i data-lucide="file-spreadsheet" size="18"></i> <span data-i18n="t_row_excel">Excel (.XLSX) Export</span></span></td>
@@ -3795,8 +4782,26 @@
                     <p class="text-muted" data-i18n="faq_subtext">Everything you need to know about carFlo.</p>
                 </div>
 
+                <div class="faq-filter-tabs" role="tablist" aria-label="FAQ Category Filters">
+                    <button type="button" class="faq-filter-btn active" data-filter="all" onclick="filterFaq('all', this)" role="tab" aria-selected="true">
+                        <span data-i18n="faq_cat_all">All</span>
+                    </button>
+                    <button type="button" class="faq-filter-btn" data-filter="parking" onclick="filterFaq('parking', this)" role="tab" aria-selected="false">
+                        <i data-lucide="message-square" size="14"></i>
+                        <span data-i18n="faq_cat_parking">SMS Parking</span>
+                    </button>
+                    <button type="button" class="faq-filter-btn" data-filter="maintenance" onclick="filterFaq('maintenance', this)" role="tab" aria-selected="false">
+                        <i data-lucide="wrench" size="14"></i>
+                        <span data-i18n="faq_cat_maintenance">Maintenance & Fuel</span>
+                    </button>
+                    <button type="button" class="faq-filter-btn" data-filter="pro" onclick="filterFaq('pro', this)" role="tab" aria-selected="false">
+                        <i data-lucide="shield-check" size="14"></i>
+                        <span data-i18n="faq_cat_pro">PRO & Account</span>
+                    </button>
+                </div>
+
                 <div class="faq-container">
-                    <div class="faq-item">
+                    <div class="faq-item" data-category="pro">
                         <button class="faq-question">
                             <span data-i18n="faq_q_offline">Does the app work without internet?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
@@ -3806,7 +4811,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-category="parking">
                         <button class="faq-question">
                             <span data-i18n="faq_q_parking">Which cities are supported for SMS parking?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
@@ -3816,7 +4821,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-category="pro">
                         <button class="faq-question">
                             <span data-i18n="faq_q_newphone">Can I transfer my data to a new phone?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
@@ -3826,7 +4831,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-category="pro">
                         <button class="faq-question">
                             <span data-i18n="faq_q_multicar">What if I own more than one vehicle?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
@@ -3836,7 +4841,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-category="maintenance">
                         <button class="faq-question">
                             <span data-i18n="faq_q_ocr">How does the AI receipt scanner work?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
@@ -3846,13 +4851,33 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-category="maintenance">
                         <button class="faq-question">
                             <span data-i18n="faq_q_reminders">How do dual reminders work?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
                         </button>
                         <div class="faq-answer">
                             <p data-i18n="faq_a_reminders">You can set maintenance reminders by date OR mileage (e.g. oil change in 1 year OR after 10,000 km). carFlo monitors both simultaneously and notifies you whichever threshold comes first.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="maintenance">
+                        <button class="faq-question">
+                            <span data-i18n="faq_q_pdf">How does the PDF service book increase car resale value?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p data-i18n="faq_a_pdf">Buyers value documented maintenance. carFlo compiles your entire service history into a clean, certified PDF report with dates, mileage, parts replaced, and attached invoices, eliminating doubt and giving you negotiating power.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="pro">
+                        <button class="faq-question">
+                            <span data-i18n="faq_q_privacy">Are my driving habits, locations, or speed tracked?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p data-i18n="faq_a_privacy">Never. carFlo is 100% privacy-first. We do not track GPS locations, driving habits, or speed. Your vehicle data belongs to you alone, and no data is ever sold to third parties or advertisers.</p>
                         </div>
                     </div>
                 </div>
@@ -3876,7 +4901,7 @@
                         <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
                              alt="Download on the App Store" loading="lazy">
                     </a>
-                    <div class="google-play-badge-custom" aria-label="Google Play Coming Soon">
+                    <div class="google-play-badge-custom" role="button" tabindex="0" onclick="openAndroidModal()" onkeydown="if(event.key==='Enter')openAndroidModal()" aria-label="Google Play Coming Soon - Join Beta Waitlist">
                         <svg class="google-play-svg" width="22" height="24" viewBox="0 0 22 24" fill="none">
                             <path d="M1.3 0.6C1 0.9 0.8 1.4 0.8 2.1V21.9C0.8 22.6 1 23.1 1.3 23.4L1.4 23.5L12.5 12.4V12.1L1.4 0.5L1.3 0.6Z" fill="url(#gp_g1_dl)"/>
                             <path d="M16.2 16.1L12.5 12.4V12.1L16.2 8.4L16.3 8.5L20.7 11C22 11.7 22 12.8 20.7 13.5L16.3 16L16.2 16.1Z" fill="url(#gp_g2_dl)"/>
@@ -3986,6 +5011,185 @@
             <h3 class="clash qr-modal-title" data-i18n="qr_modal_title">Download on iPhone</h3>
             <p class="qr-modal-desc" data-i18n="qr_modal_desc">Point your iPhone camera at the QR code to open carFlo directly on the App Store.</p>
             <a href="https://apps.apple.com/us/app/carflo-car-expense-tracker/id6778638970" target="_blank" class="qr-direct-link" data-i18n="qr_modal_link">Or open directly on the App Store →</a>
+        </div>
+    </div>
+
+    <!-- Android Waitlist Modal -->
+    <div class="qr-modal-overlay" id="androidModalOverlay" onclick="closeAndroidModal(event)">
+        <div class="qr-modal-card android-modal-card" onclick="event.stopPropagation()">
+            <button type="button" class="qr-modal-close" onclick="closeAndroidModal()" aria-label="Close Modal">
+                <i data-lucide="x" size="20"></i>
+            </button>
+            <div class="android-modal-badge-icon">
+                <svg class="google-play-svg" width="36" height="40" viewBox="0 0 22 24" fill="none">
+                    <path d="M1.3 0.6C1 0.9 0.8 1.4 0.8 2.1V21.9C0.8 22.6 1 23.1 1.3 23.4L1.4 23.5L12.5 12.4V12.1L1.4 0.5L1.3 0.6Z" fill="url(#gp_g1_modal)"/>
+                    <path d="M16.2 16.1L12.5 12.4V12.1L16.2 8.4L16.3 8.5L20.7 11C22 11.7 22 12.8 20.7 13.5L16.3 16L16.2 16.1Z" fill="url(#gp_g2_modal)"/>
+                    <path d="M16.3 16L12.5 12.2L1.3 23.4C1.7 23.8 2.5 23.9 3.3 23.4L16.3 16Z" fill="url(#gp_g3_modal)"/>
+                    <path d="M16.3 8.5L3.3 1.1C2.5 0.6 1.7 0.7 1.3 1.1L12.5 12.3L16.3 8.5Z" fill="url(#gp_g4_modal)"/>
+                    <defs>
+                        <linearGradient id="gp_g1_modal" x1="11.4" y1="1.7" x2="-4.2" y2="17.3" gradientUnits="userSpaceOnUse"><stop stop-color="#00A0FF"/><stop offset="0.007" stop-color="#00A1FF"/><stop offset="0.26" stop-color="#00BEFF"/><stop offset="0.51" stop-color="#00D2FF"/><stop offset="0.76" stop-color="#00DFFF"/><stop offset="1" stop-color="#00E3FF"/></linearGradient>
+                        <linearGradient id="gp_g2_modal" x1="22.5" y1="12.2" x2="-0.4" y2="12.2" gradientUnits="userSpaceOnUse"><stop stop-color="#FFE000"/><stop offset="0.41" stop-color="#FFBD00"/><stop offset="0.78" stop-color="#FFA500"/><stop offset="1" stop-color="#FF9C00"/></linearGradient>
+                        <linearGradient id="gp_g3_modal" x1="14.4" y1="14.2" x2="-7.6" y2="36.2" gradientUnits="userSpaceOnUse"><stop stop-color="#FF3A44"/><stop offset="1" stop-color="#C31162"/></linearGradient>
+                        <linearGradient id="gp_g4_modal" x1="-2.4" y1="-8.4" x2="7.8" y2="1.8" gradientUnits="userSpaceOnUse"><stop stop-color="#00E676"/><stop offset="1" stop-color="#00B0FF"/></linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <h3 class="clash qr-modal-title" data-i18n="android_modal_title">carFlo for Android is Coming!</h3>
+            <p class="qr-modal-desc" data-i18n="android_modal_desc">We are finalizing the native Google Play release. Join our early driver beta waitlist to get notified the minute it goes live.</p>
+
+            <form id="androidWaitlistForm" onsubmit="submitAndroidWaitlist(event)">
+                <div class="modal-input-group">
+                    <i data-lucide="mail" size="18" class="modal-input-icon"></i>
+                    <input type="email" id="androidEmailInput" required placeholder="your.email@example.com" class="modal-text-input">
+                </div>
+                <button type="submit" class="btn btn-primary modal-submit-btn">
+                    <span data-i18n="android_modal_btn">Join Beta Waitlist</span>
+                    <i data-lucide="arrow-right" size="16"></i>
+                </button>
+            </form>
+            <div id="androidSuccessMsg" class="modal-success-box" style="display: none;">
+                <i data-lucide="check-circle-2" size="24"></i>
+                <span data-i18n="android_modal_success">You're on the waitlist! We'll notify you as soon as the Android beta launches.</span>
+            </div>
+            <div class="modal-micro-trust">
+                <i data-lucide="shield-check" size="13"></i>
+                <span data-i18n="android_modal_privacy">Zero spam. Only 1 launch notification.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certified PDF Service Book Sample Preview Modal -->
+    <div class="qr-modal-overlay" id="pdfModalOverlay" onclick="closePdfPreviewModal(event)">
+        <div class="qr-modal-card pdf-modal-card" onclick="event.stopPropagation()">
+            <button type="button" class="qr-modal-close" onclick="closePdfPreviewModal()" aria-label="Close PDF Modal">
+                <i data-lucide="x" size="20"></i>
+            </button>
+
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <span class="calc-pill" data-i18n="pdf_doc_badge">Verified by carFlo</span>
+                <h3 class="clash qr-modal-title" data-i18n="pdf_modal_title" style="margin-top: 0.5rem;">Certified Digital Service Book</h3>
+                <p class="qr-modal-desc" data-i18n="pdf_modal_desc" style="margin-bottom: 0;">This is a real sample of the certified maintenance report generated by carFlo PRO. Boost buyer confidence and resale value.</p>
+            </div>
+
+            <!-- Authentic PDF Document Specimen -->
+            <div class="pdf-doc-sheet">
+                <div class="pdf-sheet-header">
+                    <div class="pdf-sheet-logo">
+                        <img src="./favicon.png" alt="carFlo logo" width="28" height="28">
+                        <span>carFlo <span style="font-weight: 400; font-size: 0.85rem; color: var(--color-text-muted);">| Service Book #CF-2026-9812</span></span>
+                    </div>
+                    <span class="pdf-verified-stamp">
+                        <i data-lucide="check-circle" size="13"></i>
+                        <span>VERIFIED REPORT</span>
+                    </span>
+                </div>
+
+                <div class="pdf-vehicle-card">
+                    <div class="pdf-v-field">
+                        <span class="pdf-v-label" data-i18n="pdf_v_make">Vehicle</span>
+                        <span class="pdf-v-val">VW Golf 7 2.0 TDI</span>
+                    </div>
+                    <div class="pdf-v-field">
+                        <span class="pdf-v-label" data-i18n="pdf_v_year">Year</span>
+                        <span class="pdf-v-val">2018</span>
+                    </div>
+                    <div class="pdf-v-field">
+                        <span class="pdf-v-label" data-i18n="pdf_v_vin">VIN / Chassis</span>
+                        <span class="pdf-v-val">WVWZZZAUZJP0*****</span>
+                    </div>
+                    <div class="pdf-v-field">
+                        <span class="pdf-v-label" data-i18n="pdf_v_mileage">Mileage</span>
+                        <span class="pdf-v-val">148.250 km</span>
+                    </div>
+                </div>
+
+                <div class="pdf-table-responsive">
+                    <table class="pdf-entries-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="pdf_th_date">Date</th>
+                                <th data-i18n="pdf_th_mileage">Mileage</th>
+                                <th data-i18n="pdf_th_service">Service & Maintenance</th>
+                                <th data-i18n="pdf_th_shop">Service Center</th>
+                                <th data-i18n="pdf_th_cost">Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>15.09.2026</td>
+                                <td><strong>142.500 km</strong></td>
+                                <td>Mali servis (Castrol 5W-30, filter ulja, vazduha, kabine)</td>
+                                <td>Auto Servis Novaković</td>
+                                <td><strong>14.800 RSD</strong></td>
+                            </tr>
+                            <tr>
+                                <td>10.05.2026</td>
+                                <td><strong>138.200 km</strong></td>
+                                <td>Kočioni sistem (Prednje i zadnje kočione pločice Brembo)</td>
+                                <td>AC Goran</td>
+                                <td><strong>12.400 RSD</strong></td>
+                            </tr>
+                            <tr>
+                                <td>14.11.2025</td>
+                                <td><strong>120.000 km</strong></td>
+                                <td>Veliki servis (Continental set zupčastog kaiša, pumpa)</td>
+                                <td>Ovlašćeni servis</td>
+                                <td><strong>48.500 RSD</strong></td>
+                            </tr>
+                            <tr>
+                                <td>20.04.2025</td>
+                                <td><strong>112.300 km</strong></td>
+                                <td>Sezonska zamena guma (Michelin Pilot Sport 4)</td>
+                                <td>Vulkanizer Dule</td>
+                                <td><strong>4.200 RSD</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pdf-doc-footer-metrics">
+                    <div class="pdf-metric-item">
+                        <span data-i18n="pdf_v_records">Total Records:</span>
+                        <span class="pdf-metric-val">4 evidentirana servisa</span>
+                    </div>
+                    <div class="pdf-metric-item">
+                        <span data-i18n="pdf_v_invested">Total Invested:</span>
+                        <span class="pdf-metric-val" style="color: #10b981;">79.900 RSD</span>
+                    </div>
+                </div>
+
+                <div class="pdf-seal-box">
+                    <i data-lucide="shield-check" size="18" style="color: #10b981; flex-shrink: 0;"></i>
+                    <span data-i18n="pdf_seal_text">Digitally certified vehicle record. All service invoices and odometers verified.</span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.25rem;">
+                <button type="button" class="btn btn-outline" onclick="closePdfPreviewModal()">
+                    <span data-i18n="btn_close">Close</span>
+                </button>
+                <button type="button" class="btn btn-primary" onclick="closePdfPreviewModal(); handleProCta();">
+                    <span data-i18n="pdf_btn_get_app">Get carFlo for Your Car</span>
+                    <i data-lucide="arrow-right" size="16"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Share / Generic Toast Notification -->
+    <div class="carflo-toast" id="carfloToast" role="alert" aria-live="polite">
+        <i data-lucide="check" size="16"></i>
+        <span id="carfloToastMsg">Link copied to clipboard!</span>
+    </div>
+
+    <!-- Privacy-First Floating Pill -->
+    <div class="privacy-floating-pill" id="privacyPill">
+        <div class="privacy-pill-inner">
+            <span class="privacy-shield-icon"><i data-lucide="shield-check" size="16"></i></span>
+            <span class="privacy-pill-text" data-i18n="privacy_pill_text">100% Offline • Zero Tracking • No Ads</span>
+            <button type="button" class="privacy-pill-dismiss" onclick="dismissPrivacyPill()" aria-label="Dismiss privacy badge">
+                <i data-lucide="x" size="14"></i>
+            </button>
         </div>
     </div>
 
@@ -4439,7 +5643,77 @@
                 footer_delete: "Delete Account",
                 footer_copyright: "© 2026 carFlo. All rights reserved.",
                 footer_made_by: 'Made by <a href="https://djurke23.github.io/portfolio/" target="_blank" class="footer-credit-link">Djurke23</a>',
-                footer_socials: "Follow us:"
+                footer_socials: "Follow us:",
+
+                // Hero Screen Switcher
+                hero_tab_dashboard: "Dashboard",
+                hero_tab_logbook: "Logbook",
+                hero_tab_stats: "Statistics",
+                hero_tab_reminders: "Reminders",
+
+                // Calculator Presets
+                calc_presets_title: "Fuel Presets:",
+                calc_preset_diesel: "Eurodiesel",
+                calc_preset_ev: "EV / Hybrid",
+
+                // SMS Parking Simulator
+                parking_sim_badge: "Interactive Demo",
+                parking_sim_title: "Test 1-Tap SMS Parking Serbia",
+                parking_sim_desc: "Choose any Serbian city and parking zone to experience how carFlo simplifies parking, eliminates typing mistakes, and alerts you before expiration.",
+                parking_sim_city_label: "Select City:",
+                parking_sim_zone_label: "Select Parking Zone:",
+                parking_sim_plate_label: "Simulated Vehicle:",
+                parking_sim_active_status: "Active Parking",
+                parking_sim_time_left: "Time Remaining",
+                parking_sim_notif_15: "Smart reminder scheduled for 15 minutes prior",
+                parking_sim_notif_5: "Urgent alarm scheduled for 5 minutes prior",
+                parking_sim_btn_send: "Send SMS & Start Timer",
+                parking_sim_btn_extend: "+1h Extend Parking",
+                parking_sim_btn_stop: "End Parking",
+
+                // Android Waitlist Modal
+                android_modal_title: "carFlo for Android is Coming!",
+                android_modal_desc: "We are finalizing the native Google Play release. Join our early driver beta waitlist to get notified the minute it goes live.",
+                android_modal_btn: "Join Beta Waitlist",
+                android_modal_success: "You're on the waitlist! We'll notify you as soon as the Android beta launches.",
+                android_modal_privacy: "Zero spam. Only 1 launch notification.",
+
+                // PDF Service Book Modal & Buttons
+                btn_preview_pdf: "View Sample Service Book",
+                pdf_modal_title: "Certified Digital Service Book",
+                pdf_modal_desc: "This is a real sample of the certified maintenance report generated by carFlo PRO. Boost buyer confidence and resale value.",
+                pdf_doc_badge: "Verified by carFlo",
+                pdf_v_make: "Vehicle",
+                pdf_v_year: "Year",
+                pdf_v_vin: "VIN / Chassis",
+                pdf_v_mileage: "Mileage",
+                pdf_v_records: "Total Records:",
+                pdf_v_invested: "Total Invested:",
+                pdf_th_date: "Date",
+                pdf_th_mileage: "Mileage",
+                pdf_th_service: "Service & Maintenance",
+                pdf_th_shop: "Service Center",
+                pdf_th_cost: "Cost",
+                pdf_seal_text: "Digitally certified vehicle record. All service invoices and odometers verified.",
+                pdf_btn_get_app: "Get carFlo for Your Car",
+                btn_close: "Close",
+
+                // FAQ Filter Categories & New FAQs
+                faq_cat_all: "All",
+                faq_cat_parking: "SMS Parking",
+                faq_cat_maintenance: "Maintenance & Fuel",
+                faq_cat_pro: "PRO & Account",
+                faq_q_pdf: "How does the PDF service book increase car resale value?",
+                faq_a_pdf: "Buyers value documented maintenance. carFlo compiles your entire service history into a clean, certified PDF report with dates, mileage, parts replaced, and attached invoices, eliminating doubt and giving you negotiating power.",
+                faq_q_privacy: "Are my driving habits, locations, or speed tracked?",
+                faq_a_privacy: "Never. carFlo is 100% privacy-first. We do not track GPS locations, driving habits, or speed. Your vehicle data belongs to you alone, and no data is ever sold to third parties or advertisers.",
+
+                // Native Share & Toast
+                btn_share_hero: "Share",
+                share_toast_copied: "Link copied to clipboard!",
+
+                // Privacy Floating Pill
+                privacy_pill_text: "100% Offline • Zero Tracking • No Ads"
             },
             sr: {
                 nav_features: "Funkcije",
@@ -4692,7 +5966,77 @@
                 footer_delete: "Brisanje naloga",
                 footer_copyright: "© 2026 carFlo. Sva prava zadržana.",
                 footer_made_by: 'Autor: <a href="https://djurke23.github.io/portfolio/" target="_blank" class="footer-credit-link">Djurke23</a>',
-                footer_socials: "Zapratite nas:"
+                footer_socials: "Zapratite nas:",
+
+                // Hero Screen Switcher
+                hero_tab_dashboard: "Kontrolna tabla",
+                hero_tab_logbook: "Dnevnik",
+                hero_tab_stats: "Statistika",
+                hero_tab_reminders: "Podsetnici",
+
+                // Calculator Presets
+                calc_presets_title: "Brzi izbor goriva:",
+                calc_preset_diesel: "Evrodizel",
+                calc_preset_ev: "Hibrid / EV",
+
+                // SMS Parking Simulator
+                parking_sim_badge: "Interaktivni Demo",
+                parking_sim_title: "Isprobaj SMS parking u Srbiji",
+                parking_sim_desc: "Izaberi grad i parking zonu i doživi kako carFlo eliminiše pogrešno kucanje tablica, pamti zone i javlja ti pre isteka.",
+                parking_sim_city_label: "Izaberi grad:",
+                parking_sim_zone_label: "Izaberi parking zonu:",
+                parking_sim_plate_label: "Vozilo za simulaciju:",
+                parking_sim_active_status: "Parking je aktivan",
+                parking_sim_time_left: "Preostalo vreme",
+                parking_sim_notif_15: "Pametno upozorenje zakazano 15 min pre isteka",
+                parking_sim_notif_5: "Hitno obaveštenje zakazano 5 min pre isteka",
+                parking_sim_btn_send: "Pošalji SMS & Pokreni tajmer",
+                parking_sim_btn_extend: "+1h Produži parking",
+                parking_sim_btn_stop: "Završi parking",
+
+                // Android Modal
+                android_modal_title: "carFlo za Android stiže uskoro!",
+                android_modal_desc: "Završavamo rad na zvaničnoj Google Play verziji. Upiši svoj email i javićemo ti čim zatvorena beta bude spremna za preuzimanje.",
+                android_modal_btn: "Prijavi se na listu čekanja",
+                android_modal_success: "Uspešno si na listi čekanja! Poslaćemo ti email čim Android beta verzija krene.",
+                android_modal_privacy: "Bez spama. Samo jedno obaveštenje o lansiranju.",
+
+                // PDF Service Book Modal & Buttons
+                btn_preview_pdf: "Pogledaj primer servisne knjižice",
+                pdf_modal_title: "Sertifikovana digitalna servisna knjižica",
+                pdf_modal_desc: "Ovo je realan primer profesionalnog izveštaja o održavanju koji generiše carFlo PRO. Povećaj poverenje kupca i postigni višu cenu.",
+                pdf_doc_badge: "Verifikovao carFlo",
+                pdf_v_make: "Vozilo",
+                pdf_v_year: "Godište",
+                pdf_v_vin: "Broj šasije",
+                pdf_v_mileage: "Kilometraža",
+                pdf_v_records: "Broj servisa:",
+                pdf_v_invested: "Ukupno uloženo:",
+                pdf_th_date: "Datum",
+                pdf_th_mileage: "Kilometraža",
+                pdf_th_service: "Servis i ugrađeni delovi",
+                pdf_th_shop: "Servisni centar",
+                pdf_th_cost: "Iznos",
+                pdf_seal_text: "Digitalno overena istorija vozila. Svi servisi, kilometraže i fiskalni računi evidentirani.",
+                pdf_btn_get_app: "Preuzmi carFlo za tvoj auto",
+                btn_close: "Zatvori",
+
+                // FAQ Filter Categories & New FAQs
+                faq_cat_all: "Sve",
+                faq_cat_parking: "SMS Parking",
+                faq_cat_maintenance: "Servis i gorivo",
+                faq_cat_pro: "PRO i nalog",
+                faq_q_pdf: "Kako PDF servisna knjižica podiže cenu auta pri prodaji?",
+                faq_a_pdf: "Kupci polovnih automobila najviše cene dokazanu istoriju održavanja. Umesto izgubljenih papirića i nečitkih beleški, carFlo kreira čist, overen PDF sa datumima, kilometražama, opisom radova i slikama računa, što uliva maksimalno poverenje i eliminiše spuštanje cene.",
+                faq_q_privacy: "Da li se prate moje rute kretanja, GPS lokacija ili brzina?",
+                faq_a_privacy: "Nikada. carFlo je 100% privacy-first aplikacija. Ne pratimo vašu lokaciju, rute, navike u vožnji niti brzinu. Svi vaši podaci pripadaju isključivo vama i nikada se ne dele sa trećim licima niti oglašivačima.",
+
+                // Native Share & Toast
+                btn_share_hero: "Preporuči",
+                share_toast_copied: "Link je kopiran u privremenu memoriju!",
+
+                // Privacy Floating Pill
+                privacy_pill_text: "100% Offline • Bez praćenja • Nema reklama"
             }
         };
 
@@ -4723,6 +6067,9 @@
             // Sync calculator language and currency
             if (window.syncCalculatorLanguage) {
                 window.syncCalculatorLanguage();
+            }
+            if (typeof updateParkingDisplay === 'function') {
+                updateParkingDisplay();
             }
             lucide.createIcons();
         }
@@ -4765,6 +6112,116 @@
             });
         });
 
+        // --- Hero Screen Switcher ---
+        const heroScreens = {
+            dashboard: './screen-dashboard-new.png',
+            logbook: './screen-logbook-new.png',
+            stats: './screen-stats-new.png',
+            reminders: './screen-reminders-new.png'
+        };
+
+        function switchHeroScreen(screen, btn) {
+            const img = document.getElementById('heroPhoneImg');
+            if (!img || !heroScreens[screen]) return;
+            document.querySelectorAll('.hero-screen-tab').forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            if (btn) {
+                btn.classList.add('active');
+                btn.setAttribute('aria-selected', 'true');
+            }
+            img.style.opacity = '0.35';
+            const nextSrc = heroScreens[screen];
+            const preloader = new Image();
+            preloader.src = nextSrc;
+            preloader.onload = () => {
+                img.src = nextSrc;
+                img.style.opacity = '1';
+            };
+            preloader.onerror = () => {
+                img.src = nextSrc;
+                img.style.opacity = '1';
+            };
+        }
+
+        // --- FAQ Category Filter ---
+        function filterFaq(category, btn) {
+            document.querySelectorAll('.faq-filter-btn').forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            if (btn) {
+                btn.classList.add('active');
+                btn.setAttribute('aria-selected', 'true');
+            }
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const itemCat = item.getAttribute('data-category');
+                if (category === 'all' || itemCat === category) {
+                    item.classList.remove('faq-hidden');
+                } else {
+                    item.classList.add('faq-hidden');
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        // --- Native Share & Toast ---
+        async function shareCarFlo() {
+            const shareData = {
+                title: 'carFlo — Vehicle Logbook & SMS Parking',
+                text: currentLang === 'sr'
+                    ? 'Preporučujem ti carFlo — najbolja aplikacija za evidenciju auta, potrošnju goriva i SMS parking u Srbiji!'
+                    : 'Check out carFlo — the ultimate vehicle logbook, fuel tracker & SMS parking app!',
+                url: 'https://carflo.app/'
+            };
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {}
+            } else {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText('https://carflo.app/').then(() => {
+                        showToast(translations[currentLang].share_toast_copied || 'Link copied to clipboard!');
+                    }).catch(() => {
+                        showToast('https://carflo.app/');
+                    });
+                }
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('carfloToast');
+            const toastMsg = document.getElementById('carfloToastMsg');
+            if (!toast || !toastMsg) return;
+            toastMsg.textContent = msg;
+            toast.classList.add('show');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2800);
+        }
+
+        // --- Privacy Floating Pill ---
+        function initPrivacyPill() {
+            try {
+                if (localStorage.getItem('carflo_privacy_dismissed') === 'true') {
+                    const pill = document.getElementById('privacyPill');
+                    if (pill) pill.style.display = 'none';
+                }
+            } catch (e) {}
+        }
+
+        function dismissPrivacyPill() {
+            const pill = document.getElementById('privacyPill');
+            if (pill) {
+                pill.style.opacity = '0';
+                pill.style.transform = 'translateY(20px)';
+                setTimeout(() => pill.style.display = 'none', 300);
+            }
+            try { localStorage.setItem('carflo_privacy_dismissed', 'true'); } catch (e) {}
+        }
+
         // --- QR Modal Logic & Pro CTA ---
         function openQrModal() {
             const modal = document.getElementById('qrModalOverlay');
@@ -4783,6 +6240,67 @@
             }
         }
 
+        // --- Android Waitlist Modal Logic ---
+        function openAndroidModal() {
+            const modal = document.getElementById('androidModalOverlay');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => {
+                    const input = document.getElementById('androidEmailInput');
+                    if (input) input.focus();
+                }, 150);
+            }
+        }
+
+        function closeAndroidModal(e) {
+            if (e && e.target && e.target.id !== 'androidModalOverlay' && !e.target.closest('.qr-modal-close')) return;
+            const modal = document.getElementById('androidModalOverlay');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function submitAndroidWaitlist(e) {
+            e.preventDefault();
+            const input = document.getElementById('androidEmailInput');
+            if (!input || !input.value) return;
+            const email = input.value.trim();
+            try {
+                const existing = JSON.parse(localStorage.getItem('carflo_android_waitlist') || '[]');
+                if (!existing.includes(email)) {
+                    existing.push(email);
+                    localStorage.setItem('carflo_android_waitlist', JSON.stringify(existing));
+                }
+            } catch (err) {}
+            const form = document.getElementById('androidWaitlistForm');
+            const msg = document.getElementById('androidSuccessMsg');
+            if (form) form.style.display = 'none';
+            if (msg) msg.style.display = 'flex';
+            lucide.createIcons();
+            showToast(currentLang === 'sr' ? 'Uspešno si na listi čekanja!' : "You're on the waitlist!");
+        }
+
+        // --- PDF Service Book Preview Modal Logic ---
+        function openPdfPreviewModal() {
+            const modal = document.getElementById('pdfModalOverlay');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                lucide.createIcons();
+            }
+        }
+
+        function closePdfPreviewModal(e) {
+            if (e && e.target && e.target.id !== 'pdfModalOverlay' && !e.target.closest('.qr-modal-close') && !(e && !e.target)) return;
+            const modal = document.getElementById('pdfModalOverlay');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
         function handleProCta() {
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
             if (isIOS) {
@@ -4794,12 +6312,179 @@
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                const modal = document.getElementById('qrModalOverlay');
-                if (modal && modal.classList.contains('active')) {
-                    closeQrModal();
-                }
+                ['qrModalOverlay', 'androidModalOverlay', 'pdfModalOverlay'].forEach(id => {
+                    const modal = document.getElementById(id);
+                    if (modal && modal.classList.contains('active')) {
+                        modal.classList.remove('active');
+                    }
+                });
+                document.body.style.overflow = '';
             }
         });
+
+        // --- Interactive SMS Parking Serbia Simulator Logic ---
+        const parkingData = {
+            beograd: [
+                { name: "Zona A", code: "9114", time: "30 min", price: "100 RSD", dot: "#a855f7", durationSec: 1800 },
+                { name: "Zona 1 (Crvena)", code: "9111", time: "60 min", price: "65 RSD", dot: "#ef4444", durationSec: 3600 },
+                { name: "Zona 2 (Žuta)", code: "9112", time: "120 min", price: "53 RSD", dot: "#f59e0b", durationSec: 7200 },
+                { name: "Zona 3 (Zelena)", code: "9113", time: "180 min", price: "45 RSD", dot: "#10b981", durationSec: 10800 },
+                { name: "Opšta (Plava)", code: "9119", time: "Bez limita", price: "35 RSD/h", dot: "#3b82f6", durationSec: 3600 }
+            ],
+            novisad: [
+                { name: "Crvena Zona", code: "8211", time: "120 min", price: "60 RSD", dot: "#ef4444", durationSec: 7200 },
+                { name: "Plava Zona", code: "8212", time: "Bez limita", price: "50 RSD/h", dot: "#3b82f6", durationSec: 3600 },
+                { name: "Bela Zona", code: "8218", time: "Dnevna", price: "100 RSD", dot: "#94a3b8", durationSec: 28800 }
+            ],
+            nis: [
+                { name: "Ekstra Zona", code: "9180", time: "60 min", price: "90 RSD", dot: "#a855f7", durationSec: 3600 },
+                { name: "Zona 1 (Crvena)", code: "9181", time: "120 min", price: "60 RSD", dot: "#ef4444", durationSec: 7200 },
+                { name: "Zona 2 (Zelena)", code: "9182", time: "180 min", price: "45 RSD", dot: "#10b981", durationSec: 10800 }
+            ],
+            kragujevac: [
+                { name: "Zona 0", code: "8340", time: "180 min", price: "60 RSD", dot: "#a855f7", durationSec: 10800 },
+                { name: "Zona 1", code: "8341", time: "120 min", price: "50 RSD", dot: "#ef4444", durationSec: 7200 },
+                { name: "Zona 2", code: "8342", time: "Bez limita", price: "40 RSD/h", dot: "#10b981", durationSec: 3600 }
+            ],
+            subotica: [
+                { name: "Crvena Zona", code: "9241", time: "120 min", price: "55 RSD", dot: "#ef4444", durationSec: 7200 },
+                { name: "Žuta Zona", code: "9242", time: "180 min", price: "45 RSD", dot: "#f59e0b", durationSec: 10800 },
+                { name: "Zelena Zona", code: "9243", time: "Bez limita", price: "35 RSD/h", dot: "#10b981", durationSec: 3600 }
+            ],
+            cacak: [
+                { name: "Zona 1", code: "8321", time: "120 min", price: "50 RSD", dot: "#ef4444", durationSec: 7200 },
+                { name: "Zona 2", code: "8322", time: "Bez limita", price: "40 RSD/h", dot: "#10b981", durationSec: 3600 }
+            ],
+            pancevo: [
+                { name: "Zona 1", code: "8131", time: "120 min", price: "50 RSD", dot: "#ef4444", durationSec: 7200 },
+                { name: "Zona 2", code: "8132", time: "Bez limita", price: "40 RSD/h", dot: "#10b981", durationSec: 3600 }
+            ],
+            zrenjanin: [
+                { name: "Crvena Zona", code: "8231", time: "120 min", price: "50 RSD", dot: "#ef4444", durationSec: 7200 },
+                { name: "Žuta Zona", code: "8232", time: "Bez limita", price: "40 RSD/h", dot: "#f59e0b", durationSec: 3600 }
+            ],
+            krusevac: [
+                { name: "Zona 1", code: "8371", time: "120 min", price: "50 RSD", dot: "#ef4444", durationSec: 7200 },
+                { name: "Zona 2", code: "8372", time: "Bez limita", price: "40 RSD/h", dot: "#10b981", durationSec: 3600 }
+            ]
+        };
+
+        let selectedCity = 'beograd';
+        let selectedZoneIndex = 1; // Default Zona 1 (9111)
+        let parkingRemainingSeconds = 3585; // 59m 45s default
+        let parkingTotalSeconds = 3600;
+        let parkingTimerInterval = null;
+
+        function renderParkingZones() {
+            const container = document.getElementById('parkingZonesContainer');
+            if (!container) return;
+            const zones = parkingData[selectedCity] || [];
+            container.innerHTML = zones.map((z, idx) => `
+                <button type="button" class="parking-zone-btn ${idx === selectedZoneIndex ? 'active' : ''}" onclick="selectParkingZone(${idx})">
+                    <span class="zone-name">
+                        <span class="zone-color-dot" style="background: ${z.dot};"></span>
+                        ${z.name}
+                    </span>
+                    <span class="zone-details">SMS: ${z.code} • ${z.price}</span>
+                </button>
+            `).join('');
+            updateParkingDisplay();
+        }
+
+        function onParkingCityChange(city) {
+            selectedCity = city;
+            selectedZoneIndex = 0;
+            renderParkingZones();
+        }
+
+        function selectParkingZone(idx) {
+            selectedZoneIndex = idx;
+            document.querySelectorAll('.parking-zone-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === idx);
+            });
+            updateParkingDisplay();
+        }
+
+        function updateParkingDisplay() {
+            const zone = (parkingData[selectedCity] || [])[selectedZoneIndex];
+            if (!zone) return;
+            const liveCode = document.getElementById('parkingLiveCode');
+            if (liveCode) liveCode.textContent = `SMS: ${zone.code} • ${zone.name}`;
+        }
+
+        function formatTimer(sec) {
+            const m = Math.floor(sec / 60);
+            const s = sec % 60;
+            return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+
+        function startParkingDemo() {
+            const zone = (parkingData[selectedCity] || [])[selectedZoneIndex];
+            if (!zone) return;
+            parkingTotalSeconds = zone.durationSec;
+            parkingRemainingSeconds = zone.durationSec;
+            clearInterval(parkingTimerInterval);
+            updateTimerUI();
+            showToast(currentLang === 'sr' ? `SMS poslat na ${zone.code}! Tajmer pokrenut.` : `SMS sent to ${zone.code}! Timer started.`);
+            parkingTimerInterval = setInterval(() => {
+                if (parkingRemainingSeconds > 0) {
+                    parkingRemainingSeconds--;
+                    updateTimerUI();
+                } else {
+                    clearInterval(parkingTimerInterval);
+                }
+            }, 1000);
+        }
+
+        function extendParkingDemo() {
+            parkingRemainingSeconds += 3600;
+            parkingTotalSeconds += 3600;
+            updateTimerUI();
+            showToast(currentLang === 'sr' ? '+1 sat dodat parking tajmeru!' : '+1 hour added to parking timer!');
+        }
+
+        function stopParkingDemo() {
+            clearInterval(parkingTimerInterval);
+            parkingRemainingSeconds = 0;
+            updateTimerUI();
+            showToast(currentLang === 'sr' ? 'Parking završen.' : 'Parking ended.');
+        }
+
+        function updateTimerUI() {
+            const timerDisplay = document.getElementById('parkingTimerDisplay');
+            const fill = document.getElementById('parkingProgressFill');
+            if (timerDisplay) timerDisplay.textContent = formatTimer(parkingRemainingSeconds);
+            if (fill) {
+                const pct = Math.max(0, Math.min(100, (parkingRemainingSeconds / parkingTotalSeconds) * 100));
+                fill.style.width = `${pct}%`;
+                fill.style.background = pct < 25 ? 'linear-gradient(90deg, #ef4444, #f59e0b)' : 'linear-gradient(90deg, #10b981, #2ab8c8)';
+            }
+        }
+
+        // --- Fuel Calculator Presets ---
+        const fuelPresets = {
+            bmb95: { sr: { price: 192, consumption: 7.2 }, en: { price: 1.63, consumption: 7.2 } },
+            diesel: { sr: { price: 205, consumption: 6.2 }, en: { price: 1.75, consumption: 6.2 } },
+            lpg: { sr: { price: 102, consumption: 8.8 }, en: { price: 0.88, consumption: 8.8 } },
+            ev: { sr: { price: 125, consumption: 4.2 }, en: { price: 1.10, consumption: 4.2 } }
+        };
+        let currentFuelPreset = 'bmb95';
+
+        function applyFuelPreset(presetKey, btn) {
+            currentFuelPreset = presetKey;
+            document.querySelectorAll('.calc-preset-chip').forEach(c => c.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            const sliderPrice = document.getElementById('sliderPrice');
+            const sliderConsumption = document.getElementById('sliderConsumption');
+            if (!sliderPrice || !sliderConsumption) return;
+            const isSr = currentLang === 'sr';
+            const cfg = fuelPresets[presetKey][isSr ? 'sr' : 'en'];
+            sliderPrice.value = cfg.price;
+            sliderConsumption.value = cfg.consumption;
+            const evt = new Event('input');
+            sliderPrice.dispatchEvent(evt);
+            sliderConsumption.dispatchEvent(evt);
+        }
 
         // --- Interactive Fuel Calculator Logic ---
         function initFuelCalculator() {
@@ -4881,19 +6566,31 @@
                 const maxScale = document.getElementById('scalePriceMax');
 
                 if (isSr) {
-                    sliderPrice.min = "120";
+                    sliderPrice.min = "100";
                     sliderPrice.max = "260";
                     sliderPrice.step = "1";
-                    if (parseFloat(sliderPrice.value) < 50) sliderPrice.value = "185";
-                    if (minScale) minScale.textContent = "120 RSD";
+                    const preset = fuelPresets[currentFuelPreset]?.sr;
+                    if (preset) {
+                        sliderPrice.value = preset.price;
+                        sliderConsumption.value = preset.consumption;
+                    } else if (parseFloat(sliderPrice.value) < 50) {
+                        sliderPrice.value = "185";
+                    }
+                    if (minScale) minScale.textContent = "100 RSD";
                     if (midScale) midScale.textContent = "185 RSD";
                     if (maxScale) maxScale.textContent = "260 RSD";
                 } else {
-                    sliderPrice.min = "1.00";
+                    sliderPrice.min = "0.80";
                     sliderPrice.max = "2.50";
                     sliderPrice.step = "0.05";
-                    if (parseFloat(sliderPrice.value) > 10) sliderPrice.value = "1.65";
-                    if (minScale) minScale.textContent = "1.00 €";
+                    const preset = fuelPresets[currentFuelPreset]?.en;
+                    if (preset) {
+                        sliderPrice.value = preset.price;
+                        sliderConsumption.value = preset.consumption;
+                    } else if (parseFloat(sliderPrice.value) > 10) {
+                        sliderPrice.value = "1.65";
+                    }
+                    if (minScale) minScale.textContent = "0.80 €";
                     if (midScale) midScale.textContent = "1.65 €";
                     if (maxScale) maxScale.textContent = "2.50 €";
                 }
@@ -4951,6 +6648,12 @@
 
         // Initialize calculator
         initFuelCalculator();
+
+        // Initialize parking simulator
+        renderParkingZones();
+
+        // Initialize privacy pill
+        initPrivacyPill();
 
         // Initialize scrollspy
         initScrollSpy();
